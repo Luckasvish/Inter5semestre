@@ -5,18 +5,29 @@ using UnityEngine;
 public class Itens : MonoBehaviour
 {
     Vector3 currentPosition;
+    
+    internal Chef chef; 
+
+    void Awake()
+    {
+
+        chef = FindObjectOfType<Chef>();
 
 
+    }
 
     void Update()
     {
-        transform.position = currentPosition;
+        if (Chef.ItenInHand == this)
+        {
+            transform.position = chef.chefsHands.position;
+        }
     }
 
-    public void SetPosition(Transform nextPosition)
+    public void SetPosition(Vector3 position)
     {
         
-        currentPosition = nextPosition.position;
+        transform.position = position;
 
     }
 }

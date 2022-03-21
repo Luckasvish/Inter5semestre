@@ -5,61 +5,83 @@ using UnityEngine;
 public class Storers : MonoBehaviour
 {
     public char code;
-    public Transform chefsHands;
+   
     
-    public void GiveIngredient(char code)
+    public Itens GiveIngredient(char code)
     {
         int counter = 0;
 
         switch(code)
         {   
-
-            case 'A':   foreach( Itens rice in MacroSistema.sistema.rice)
-            {
+            case 'A':   
+                Debug.Log("Chegooou!!A");///
+                foreach( Itens rice in MacroSistema.sistema.rice)
+                {
                  
-                 if (rice.gameObject.activeInHierarchy)
-                 { counter ++;}
+                    if (rice.gameObject.activeInHierarchy)
+                    { 
+                        counter ++;
+                    }
 
-            }
-                MacroSistema.sistema.rice[counter].gameObject.SetActive(true);
+                }
+             
+                Itens Rice =  MacroSistema.sistema.rice[counter];
+                Debug.Log(Rice);///
+                Rice.gameObject.SetActive(true);
+                return Rice;    
+            
 
-                MacroSistema.sistema.rice[counter].SetPosition(chefsHands);
+
+            case 'F':   
+                Debug.Log("Chegooou!!F");///
                 
-            break;
-
-
-
-            case 'F':   foreach( Itens beans in MacroSistema.sistema.beans)
-            {
+                foreach( Itens beans in MacroSistema.sistema.beans)
+                {
                  
-                 if (beans.gameObject.activeInHierarchy)
-                 { counter ++;}
+                    if (beans.gameObject.activeInHierarchy)
+                    { 
+                        counter ++;
+                    }
 
-            }
-                MacroSistema.sistema.beans[counter].gameObject.SetActive(true);
-
-                MacroSistema.sistema.beans[counter].SetPosition(chefsHands);
-
-            break;
-
-
-
-            case 'C':   foreach( Itens meat in MacroSistema.sistema.meat)
-            {
+                }
+                
+                Itens Beans =  MacroSistema.sistema.beans[counter];
+                Debug.Log(Beans);///
+                
+                Beans.gameObject.SetActive(true);
+                
+                return Beans;    
+            
+            case 'C':    
+                Debug.Log("Chegooou!!C");///
+                
+                foreach( Itens meat in MacroSistema.sistema.meat)
+                {
                  
-                 if (meat.gameObject.activeInHierarchy)
-                 { counter ++;}
+                    if (meat.gameObject.activeInHierarchy)
+                    { 
+                        counter ++;
+                    }
 
-            }
-                MacroSistema.sistema.meat[counter].gameObject.SetActive(true);
-                MacroSistema.sistema.meat[counter].SetPosition(chefsHands);
-
-            break;
-
-
-
-
-
+                }
+                
+                Itens Meat =  MacroSistema.sistema.meat[counter];
+                Debug.Log(Meat);///
+                
+                Meat.gameObject.SetActive(true);
+                
+                return Meat;   
+        
+            
+            default : 
+                Debug.Log("Chegooou!!!NoDefault");///
+                
+                return null;
+        
         }
+
+        
+
+
     }
 }

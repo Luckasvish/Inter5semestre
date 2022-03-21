@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controlador : MonoBehaviour
+public class MainPlayer : MonoBehaviour
 {
     CharacterController controller;
     public float speed;
@@ -30,7 +30,7 @@ public class Controlador : MonoBehaviour
     {
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
 
-        controller.Move(direction * speed);
+        controller.Move(direction * speed * Time.deltaTime );
 
 
     }

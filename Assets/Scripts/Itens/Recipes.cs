@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Recipes : Itens
 {
-   public string name;
+   public string _name;
    public int price;
    
 }

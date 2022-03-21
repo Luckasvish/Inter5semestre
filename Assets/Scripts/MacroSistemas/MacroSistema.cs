@@ -15,5 +15,20 @@ public class MacroSistema : MonoBehaviour
         {
             sistema = this;
         }
+
+        foreach(Itens i in beans)
+        {
+            i.gameObject.SetActive(false);
+        }
+         foreach(Itens i in rice)
+        {
+            i.gameObject.SetActive(false);
+        }
+         foreach(Itens i in meat)
+        {
+            i.gameObject.SetActive(false);
+        }
+
+
     }
 }
