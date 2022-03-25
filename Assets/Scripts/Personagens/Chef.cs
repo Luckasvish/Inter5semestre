@@ -8,6 +8,9 @@ public class Chef : MonoBehaviour
     internal MainPlayer main;
 
     internal bool canRetriveIngredient;
+    internal bool canTryToPutIngredient;
+    [SerializeField]
+    internal bool canStartCutting;
 
     public static bool hasItem;
     public static Itens ItenInHand;
@@ -32,6 +35,25 @@ public class Chef : MonoBehaviour
         }
         if(cd > 0) cd -= Time.deltaTime;
 
+        
+        if(canTryToPutIngredient == true && Input.GetKeyDown(KeyCode.E))
+        {
+            CookIngredient(CollisionsManager.Oven);
+        }
+       
+        if(canStartCutting == true && Input.GetKeyDown(KeyCode.E))
+        {
+            if (CollisionsManager._Board.hasMeat == false)
+            {
+                CollisionsManager._Board.hasMeat = true;
+                CollisionsManager._Board._ingre = ItenInHand;
+                ItenInHand = null;
+            }
+            else if (CollisionsManager._Board.hasMeat == true && CollisionsManager._Board.canGetPreparedMeat == true)
+            {
+                ItenInHand = CollisionsManager._Board.GetPreparedMeat();
+            }
+        }
 
     }
 
@@ -73,6 +95,32 @@ public class Chef : MonoBehaviour
                 hasItem = true;
 
             }
+
+    }
+
+    public void CookIngredient(Oven oven)
+    {
+
+        if(oven.cooking_Ingredients < 3)
+        {
+            Ingredientes ingre = ItenInHand.GetComponent<Ingredientes>();
+            
+            if(ingre.prepared == true)
+            {
+                oven.ReceiveIngredients(ingre);
+                ItenInHand.gameObject.SetActive(false);
+                ItenInHand = null;
+            }
+            else 
+            {
+                Debug.Log("O ingrediente não está preparado");
+            }
+        }
+        
+        else 
+        {
+            Debug.Log("A panela está cheia !!!");
+        }
 
     }
 

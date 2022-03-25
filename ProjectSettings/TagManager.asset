@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Store
   - Balcon
+  - Oven
+  - CtBoard
   layers:
   - Default
   - TransparentFX

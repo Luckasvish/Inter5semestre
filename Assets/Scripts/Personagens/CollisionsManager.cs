@@ -9,6 +9,9 @@ public class CollisionsManager : MonoBehaviour
 
     internal static Storers Storer;
     internal static Balcon _Balcon;
+    internal static CuttingBoard _Board;
+    internal static Oven Oven;
+
     internal static GameObject trigger;
     internal string trigger_name;
     void OnTriggerEnter(Collider coli)
@@ -31,6 +34,17 @@ public class CollisionsManager : MonoBehaviour
 
         }
 
+        if(trigger_name == "Oven")
+        {
+            Oven = trigger.GetComponent<Oven>();
+            main.chef.canTryToPutIngredient = true;
+        }
+        if(trigger_name == "CtBoard")
+        {
+            _Board= trigger.GetComponent<CuttingBoard>();
+            main.chef.canStartCutting = true;
+        }
+
     }
     
     void OnTriggerExit(Collider coli)
@@ -49,6 +63,24 @@ public class CollisionsManager : MonoBehaviour
             main.chef.nextToBalcon = false;
             trigger_name = "";
             _Balcon = null;
+            trigger = null;
+        }
+         
+        if(trigger_name == "Oven")
+        {
+
+            main.chef.canTryToPutIngredient = false;
+            trigger_name = "";
+            Oven = null;
+            trigger = null;
+        }
+
+        if(trigger_name == "CtBoard")
+        {
+    
+            main.chef.canStartCutting = false;
+            trigger_name = "";
+            _Board = null;
             trigger = null;
         }
 

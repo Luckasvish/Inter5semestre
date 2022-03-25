@@ -8,6 +8,11 @@ public class MacroSistema : MonoBehaviour
    public Itens[] beans = new Itens[5];
    public Itens[] rice = new Itens[5];
    public Itens[] meat = new Itens[5];
+   public Itens[] feijoada = new Itens[5];
+   public Itens[] PFs = new Itens[5];
+   public Itens[] Farofa =  new Itens[5];
+
+
 
     void Awake()
     {

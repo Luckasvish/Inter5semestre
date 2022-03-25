@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ingredientes : Itens
 {
     
-    public char code;
+    public string code;
     public float cookingTime;
     public bool prepared;
     
