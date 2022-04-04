@@ -4,125 +4,155 @@ using UnityEngine;
 
 public class Chef : MonoBehaviour
 {
+    ///COMPONENTES DE PLAYER///
+    internal Movement_Manager movement_Manager;
+    internal Input_Manager input_Manager;
+
     [SerializeField]
-    internal MainPlayer main;
+    internal Detection_Manager detector;
+    ///--------------------///
 
-    internal bool canRetriveIngredient;
-    internal bool canTryToPutIngredient;
-    [SerializeField]
-    internal bool canStartCutting;
 
-    public static bool hasItem;
-    public static Itens ItenInHand;
+    ///CHEF ---
+    public Itens itenInHand;
+    bool hasItem;
+    public Transform itenPosition;
 
-    public  Transform chefsHands;
 
-    public bool nextToBalcon;
 
-    float cd =2f;
+    void Awake()
+    {
+        input_Manager = MacroSistema.sistema.input_Manager;
+        movement_Manager = GetComponent<Movement_Manager>();
+    }
+
+
     void Update()
     {
-        if(canRetriveIngredient && Input.GetKeyDown(KeyCode.E))
+        bool actionButon = input_Manager.pressedE;
+    
+        if(actionButon)
         {
-            
-            GetIngredient();
-          
-        }
-      
-        if(nextToBalcon == true && Input.GetKeyDown(KeyCode.E) && cd <=0)
-        {
-            GetPlaceIten();
-        }
-        if(cd > 0) cd -= Time.deltaTime;
 
-        
-        if(canTryToPutIngredient == true && Input.GetKeyDown(KeyCode.E))
-        {
-            CookIngredient(CollisionsManager.Oven);
+
+                if(detector.storerOnRange)
+                {
+                   
+                    ReceiveItens(detector.closestStorer.GiveIngredient(), hasItem);
+                }
+
+                else if (detector.ovenOnRange)
+                {
+                    if (detector.closestOven.hasPan == true)
+                    {
+                        
+                        if(hasItem == false)
+                        {
+                            if(detector.closestOven.Pan.recipeReady == true)
+                            {
+                                ReceiveItens(detector.closestOven.Pan.GiveRecipe());
+                            }
+                            else
+                            {
+                                ReceiveItens(detector.closestOven.GivePan(detector.closestOven.Pan));
+                            }
+                        
+                        }
+                        
+                        else
+                        {
+                            detector.closestOven.Pan.ReciveIngredient(GiveIten());
+                            hasItem = false;
+                        }
+                    }
+
+                    else 
+                    {
+                        if(hasItem == false){ Debug.Log("Não tem panela aqui!");}
+                        else if (hasItem == true)
+                        {
+                            detector.closestOven.ReceivePan(GiveIten());
+                            hasItem = false ;
+                        }
+                    }
+                }
+                else if (detector.preparerOnRange)
+                {
+                    
+                    if(detector.closestPreparer.hasIngredientOnIt == false)
+                    {
+
+                        detector.closestPreparer.ReceiveIngredients(GiveIten());
+                        hasItem = false;
+                    }
+                    else
+                    {
+                        ReceiveItens(detector.closestPreparer.GivePreparedIngredient(itenInHand));
+                    }
+
+                }
+                else if (detector.balconOnRange)
+                {
+                    if(detector.closestBalcon.hasItemOnIt == true)
+                    {
+                        ReceiveItens(detector.closestBalcon.GivesIten(itenInHand));
+                    }
+                    else 
+                    {
+                        detector.closestBalcon.ReceivesItens(GiveIten());
+                        hasItem = false;
+                    }
+                }
+
+                else 
+                {
+                    Debug.Log("No Action!!!");
+                }
         }
-       
-        if(canStartCutting == true && Input.GetKeyDown(KeyCode.E))
+    
+        if(hasItem == true)
         {
-            if (CollisionsManager._Board.hasMeat == false)
-            {
-                CollisionsManager._Board.hasMeat = true;
-                CollisionsManager._Board._ingre = ItenInHand;
-                ItenInHand = null;
-            }
-            else if (CollisionsManager._Board.hasMeat == true && CollisionsManager._Board.canGetPreparedMeat == true)
-            {
-                ItenInHand = CollisionsManager._Board.GetPreparedMeat();
-            }
+            itenInHand.transform.position = itenPosition.position;
+        }
+        else
+        {
+            itenInHand = null;
         }
 
+        Debug.Log(hasItem);    
+    }
+
+    void FixedUpdate()
+    {
+        movement_Manager.Move(input_Manager.moveInput);
     }
 
 
 
-    public void GetPlaceIten()
+    Itens GiveIten()//Função de dar Item.
+    {   
+        return itenInHand;
+    }
+
+    void ReceiveItens(Itens itensReceived)//Função de receber itens, recebendo o item como parâmetro.
     {
-        if(hasItem && CollisionsManager._Balcon.hasItem == false)
-        {   
-
-            ItenInHand.SetPosition(CollisionsManager._Balcon.SetItemPosition());
-            CollisionsManager._Balcon.iten = ItenInHand;
-            CollisionsManager._Balcon.hasItem = true;
-            hasItem = false;
-            ItenInHand = null;
-            cd =2f;
-        }
-
-        else if(!hasItem && CollisionsManager._Balcon.hasItem == true)
-        {
-            ItenInHand = CollisionsManager._Balcon.iten; 
-            CollisionsManager._Balcon.hasItem = false;
             hasItem = true;
-            cd =2f;
-
-        }
-        
-
+            itenInHand = itensReceived;
+    
     }
-
-    public void GetIngredient()
+     void ReceiveItens(Ingredientes ingredientesReceived, bool _hasItem)//Função de receber itens, recebendo o item como parâmetro.
     {
-
-        if(hasItem == false)
-            {
-
-                ItenInHand = CollisionsManager.Storer.GiveIngredient(CollisionsManager.Storer.code);
-                Debug.Log(ItenInHand);
-                hasItem = true;
-
-            }
-
-    }
-
-    public void CookIngredient(Oven oven)
-    {
-
-        if(oven.cooking_Ingredients < 3)
+        if(_hasItem == true)
         {
-            Ingredientes ingre = ItenInHand.GetComponent<Ingredientes>();
-            
-            if(ingre.prepared == true)
-            {
-                oven.ReceiveIngredients(ingre);
-                ItenInHand.gameObject.SetActive(false);
-                ItenInHand = null;
-            }
-            else 
-            {
-                Debug.Log("O ingrediente não está preparado");
-            }
+            Debug.Log("Já possui item na mão : " + itenInHand);
         }
-        
+
         else 
         {
-            Debug.Log("A panela está cheia !!!");
+            itenInHand = ingredientesReceived;
+            hasItem = true;
         }
-
     }
 
-
+    
 }

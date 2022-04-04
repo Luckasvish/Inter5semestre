@@ -4,14 +4,32 @@ using UnityEngine;
 
 public class Balcon : MonoBehaviour
 {
-    
-    public Transform targetPosition;
-    internal bool hasItem;
+    public Transform itemPosition;
+    internal bool hasItemOnIt;
+    public Itens itenOnIt;
 
-    internal Itens iten;
-    public Vector3 SetItemPosition()
-    {   
-        return targetPosition.position;
+    void Update()
+    {
+        if(hasItemOnIt)
+        {
+            itenOnIt.transform.position = itemPosition.position;
+        }
+    }
+
+
+    public void ReceivesItens(Itens itenInHand)
+    {
+        itenOnIt = itenInHand;
+        itenOnIt.transform.position = itemPosition.position;
+        hasItemOnIt = true;
+    }
+
+    public Itens GivesIten(Itens buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
+    {
+        buffer = itenOnIt;
+        itenOnIt = null;
+        hasItemOnIt = false;
+        return buffer;
     }
 
 }

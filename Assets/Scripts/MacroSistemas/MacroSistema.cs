@@ -5,12 +5,11 @@ using UnityEngine;
 public class MacroSistema : MonoBehaviour
 {
    public static MacroSistema sistema;
-   public Itens[] beans = new Itens[5];
-   public Itens[] rice = new Itens[5];
-   public Itens[] meat = new Itens[5];
-   public Itens[] feijoada = new Itens[5];
-   public Itens[] PFs = new Itens[5];
-   public Itens[] Farofa =  new Itens[5];
+   public Ingredientes[] Ingredientes = new Ingredientes[5];
+   public Recipes[] Recipes = new Recipes[5];
+
+   [SerializeField] internal Input_Manager input_Manager; ///Sistema de Inputs.
+  
 
 
 
@@ -21,19 +20,15 @@ public class MacroSistema : MonoBehaviour
             sistema = this;
         }
 
-        foreach(Itens i in beans)
+        foreach(Itens i in Ingredientes)
         {
             i.gameObject.SetActive(false);
         }
-         foreach(Itens i in rice)
+      
+         foreach(Itens i in Recipes)
         {
             i.gameObject.SetActive(false);
         }
-         foreach(Itens i in meat)
-        {
-            i.gameObject.SetActive(false);
-        }
-
-
+      
     }
 }
