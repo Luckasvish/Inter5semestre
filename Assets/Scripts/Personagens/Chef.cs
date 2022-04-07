@@ -30,86 +30,16 @@ public class Chef : MonoBehaviour
     void Update()
     {
         bool actionButon = input_Manager.pressedE;
+        Debug.Log(itenInHand);///
     
         if(actionButon)
-        {
-
-
-                if(detector.storerOnRange)
-                {
-                   
-                    ReceiveItens(detector.closestStorer.GiveIngredient(), hasItem);
-                }
-
-                else if (detector.ovenOnRange)
-                {
-                    if (detector.closestOven.hasPan == true)
-                    {
-                        
-                        if(hasItem == false)
-                        {
-                            if(detector.closestOven.Pan.recipeReady == true)
-                            {
-                                ReceiveItens(detector.closestOven.Pan.GiveRecipe());
-                            }
-                            else
-                            {
-                                ReceiveItens(detector.closestOven.GivePan(detector.closestOven.Pan));
-                            }
-                        
-                        }
-                        
-                        else
-                        {
-                            detector.closestOven.Pan.ReciveIngredient(GiveIten());
-                            hasItem = false;
-                        }
-                    }
-
-                    else 
-                    {
-                        if(hasItem == false){ Debug.Log("Não tem panela aqui!");}
-                        else if (hasItem == true)
-                        {
-                            detector.closestOven.ReceivePan(GiveIten());
-                            hasItem = false ;
-                        }
-                    }
-                }
-                else if (detector.preparerOnRange)
-                {
-                    
-                    if(detector.closestPreparer.hasIngredientOnIt == false)
-                    {
-
-                        detector.closestPreparer.ReceiveIngredients(GiveIten());
-                        hasItem = false;
-                    }
-                    else
-                    {
-                        ReceiveItens(detector.closestPreparer.GivePreparedIngredient(itenInHand));
-                    }
-
-                }
-                else if (detector.balconOnRange)
-                {
-                    if(detector.closestBalcon.hasItemOnIt == true)
-                    {
-                        ReceiveItens(detector.closestBalcon.GivesIten(itenInHand));
-                    }
-                    else 
-                    {
-                        detector.closestBalcon.ReceivesItens(GiveIten());
-                        hasItem = false;
-                    }
-                }
-
-                else 
-                {
-                    Debug.Log("No Action!!!");
-                }
+        {      
+            if (detector.canInteract)
+            {
+                HandleInteraction(detector.interagible);
+            }                    
         }
-    
+        
         if(hasItem == true)
         {
             itenInHand.transform.position = itenPosition.position;
@@ -118,8 +48,7 @@ public class Chef : MonoBehaviour
         {
             itenInHand = null;
         }
-
-        Debug.Log(hasItem);    
+ 
     }
 
     void FixedUpdate()
@@ -129,30 +58,154 @@ public class Chef : MonoBehaviour
 
 
 
-    Itens GiveIten()//Função de dar Item.
+    Itens GiveIten(Itens Buffer)//Função de dar Item.
     {   
-        return itenInHand;
+        Buffer = itenInHand;
+        itenInHand = null; 
+        hasItem = false;
+        return Buffer;
     }
 
-    void ReceiveItens(Itens itensReceived)//Função de receber itens, recebendo o item como parâmetro.
+    void ReceiveItens(Interagibles interactedObj)//Função de receber itens, recebendo o item como parâmetro.
     {
+
+            itenInHand = interactedObj.GiveItens(interactedObj.itenItHas);
             hasItem = true;
-            itenInHand = itensReceived;
-    
+       
     }
-     void ReceiveItens(Ingredientes ingredientesReceived, bool _hasItem)//Função de receber itens, recebendo o item como parâmetro.
+
+
+    void HandleInteraction(Interagibles interaction)
     {
-        if(_hasItem == true)
+
+
+        if(hasItem == false)
         {
-            Debug.Log("Já possui item na mão : " + itenInHand);
+            if(interaction.hasItemOnIt ==  true)
+            {
+                switch (interaction.type)
+                {
+                    case  InteragibleType._Storer :
+                    interaction.GetComponent<Storers>().CountItenToSpawn();
+                    ReceiveItens(interaction);
+                    break;
+
+                    case  InteragibleType._Preparer :
+                        
+                        if(interaction.GetComponent<Preparer>().prepared == true)
+                        {
+                            ReceiveItens(interaction);
+                        }
+                        else 
+                        {
+                            PrepareIngredient();
+                        }
+    
+                    break;
+
+                    case InteragibleType._Oven :
+
+                        if(interaction.GetComponent<Oven>().cooked == false)
+                        {
+                            ReceiveItens(interaction);
+                        }
+                        else 
+                        {
+                           itenInHand = interaction.itenItHas.GetComponent<Pan>().GiveRecipe();
+                        }
+
+                    break;
+
+
+                    default: ReceiveItens(interaction);
+
+                    break;
+                }
+            }
+
+            else 
+            {
+                Debug.Log("Não tem itens aqui!!!");
+            }
+        
         }
 
-        else 
+        else
         {
-            itenInHand = ingredientesReceived;
-            hasItem = true;
+            switch(interaction.type)
+            {
+                case InteragibleType._Balcon : 
+                
+                    if(interaction.hasItemOnIt)
+                    {
+                        Debug.Log("Já há um item nesse balcão");
+                    }
+                    else
+                    {
+                        interaction.ReceiveItens(GiveIten(itenInHand));
+                    }
+                break;
+
+                case InteragibleType._Storer : 
+                
+                Debug.Log("Você já está carregando outro item!");///
+            
+                break;
+
+                case InteragibleType._Preparer :
+
+                    if(interaction.hasItemOnIt)
+                    {
+                        Debug.Log("Já há um item nesse preparador");
+                    }
+                    else
+                    {
+                        interaction.ReceiveItens(GiveIten(itenInHand));
+                    }  
+            
+                break;
+
+                case InteragibleType._Oven :
+
+                    if(interaction.hasItemOnIt)
+                    {
+                        if(itenInHand.type != ItenType._PreparedIngredient)
+                        {
+                            Debug.Log("Esse item não está preparado!");///
+                        }
+                    
+                        else
+                        {
+                            interaction.GetComponent<Oven>().PutIngredient(GiveIten(itenInHand));
+                        }
+                    }
+
+                    else 
+                    {
+                        if(itenInHand.type != ItenType._Pan)
+                        {
+                            Debug.Log("Aí não é lugar pra isso aí!");///
+                        }
+                        else 
+                        {
+                            interaction.ReceiveItens(GiveIten(itenInHand));
+                        }
+                    }
+                
+                break;
+
+            }
+
         }
+
     }
 
-    
+    void PrepareIngredient()
+    {
+
+
+    }
+
+
+
 }

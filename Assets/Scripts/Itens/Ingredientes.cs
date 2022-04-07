@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class Ingredientes : Itens
 {
-    public string code;
+    public override string itemName { get; set;}
+    public override ItenType type { get; set;}
     public float FcookingTime;
     public float AcookingTime;
     public float CcookingTime;
     internal float cookingTime;
     public bool prepared = true;
 
-
     public GameObject[] ingredients_Mesh;
 
+
+    void Awake()
+    {
+        type = ItenType._UnpreparedIngredient;
+    }
     public void SetIngredient(string ingredientCode)
     {
 
@@ -24,7 +29,8 @@ public class Ingredientes : Itens
                ingredients_Mesh[0].SetActive(true);
                ingredients_Mesh[1].SetActive(false);
                ingredients_Mesh[2].SetActive(false);
-               cookingTime = FcookingTime;    
+               cookingTime = FcookingTime;
+               type = ItenType._PreparedIngredient;    
                prepared = true;
                       
             break;
@@ -36,6 +42,7 @@ public class Ingredientes : Itens
                 ingredients_Mesh[1].SetActive(true);
                 ingredients_Mesh[2].SetActive(false); 
                 cookingTime = AcookingTime;
+                type = ItenType._PreparedIngredient;
                 prepared = true;
                                 
             break;
@@ -47,19 +54,16 @@ public class Ingredientes : Itens
                 ingredients_Mesh[1].SetActive(false);
                 ingredients_Mesh[2].SetActive(true); 
                 cookingTime = CcookingTime;
+                type = ItenType._UnpreparedIngredient;
                 prepared = false;
 
             break;
 
 
-            default : Debug.Log("Não identificou o código de Ingrediente ou código não é válido : " + code);
+            default :
             break;
         }
-
-        code = ingredientCode;
-
-
-
+        itemName = ingredientCode;
     }
     
 }

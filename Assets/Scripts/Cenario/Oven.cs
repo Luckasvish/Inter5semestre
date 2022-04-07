@@ -2,48 +2,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Oven : MonoBehaviour
+public class Oven : Interagibles
 {
-    public Pan Pan;
-    public bool hasPan = true;
+    public override InteragibleType type { get; set;}
+    
+    public override Itens itenItHas { get; set; }
+    public override bool hasItemOnIt {get; set;}
 
+    internal bool cooked;
     public Transform PanPosition;
 
     void Awake()
     {
-        Pan.transform.position = PanPosition.position;
-        hasPan = true;
+        type = InteragibleType._Oven;
     }
 
-    public Itens GivePan(Itens _Pan)
+    void Start()
     {
-        if(hasPan)
-        {
-            _Pan = Pan;
-            Pan = null;
-            hasPan = false;
-            return _Pan;
-        }
-        else 
-        {
-            Debug.Log("Ta sem a panela!");///
-            return null;
-        }
+        itenItHas  = GetComponentInChildren<Pan>();
+        itenItHas.transform.position = PanPosition.position;
+        hasItemOnIt = true;
+       
+    }
+
+    public override Itens GiveItens(Itens Buffer)
+    {
+       if(cooked == false)
+       {
+            Buffer = itenItHas;
+            itenItHas = null;
+            hasItemOnIt = false;
+            return Buffer;
+       }
+       
+       else
+       {
+           return itenItHas.GetComponent<Pan>().GiveRecipe();
+       }
 
     }
-    public void ReceivePan(Itens _Pan)
+    public override void ReceiveItens(Itens _Pan)
     {
-        Pan = _Pan.GetComponent<Pan>();
+            
+                itenItHas = _Pan;
+                itenItHas.transform.position = PanPosition.position;
+                hasItemOnIt = true;
+       
+    }
+    
+    public void PutIngredient(Itens itenInHand)
+    {
+        Pan _Pan = itenItHas.GetComponent<Pan>();
 
-        if(Pan != null)
+        if(_Pan != null)
         {
-            Pan.transform.position = PanPosition.position;
-            hasPan = true;
+            _Pan.ReciveIngredient(itenInHand);
         }
-        else 
+        else
         {
-            Debug.Log("Isso não é uma panela : " + _Pan);///
-        }
-
+            Debug.Log("Pan não está aqui"); ///
+        } 
     }
 }

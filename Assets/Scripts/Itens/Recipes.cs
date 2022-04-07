@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Recipes : Itens
+
 {
-   public string _name;
+   public  override ItenType type { get; set; }
+   public  override string itemName { get; set; }
+   
    public int price;
 
    public GameObject[] recipes_Mesh;
-
+   void Awake()
+   {
+         type = ItenType._Recipe;
+   }
    public void SetRecipe(string recipeCode)
    {  
    
@@ -21,6 +27,7 @@ public class Recipes : Itens
                   recipes_Mesh[0].SetActive(true);    
                   recipes_Mesh[1].SetActive(false);
                   recipes_Mesh[2].SetActive(false);
+                  itemName = "Feijoada";
             break;
                 
          
@@ -34,6 +41,7 @@ public class Recipes : Itens
                   recipes_Mesh[0].SetActive(false);    
                   recipes_Mesh[1].SetActive(true);
                   recipes_Mesh[2].SetActive(false);  
+                  itemName = "PratoFeito";
                                 
             break;
 
@@ -44,12 +52,13 @@ public class Recipes : Itens
 
                   recipes_Mesh[0].SetActive(false);    
                   recipes_Mesh[1].SetActive(false);
-                  recipes_Mesh[2].SetActive(true);  
+                  recipes_Mesh[2].SetActive(true); 
+                  itemName = "Buchada"; 
 
             break;
 
 
-            default : Debug.Log("Deu ruim");
+            default:
             break;
       }
 

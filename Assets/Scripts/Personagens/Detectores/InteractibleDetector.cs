@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StorersDetector : MonoBehaviour
+public class InteractibleDetector : MonoBehaviour
 {
     private Detection_Manager manager;
-    public LayerMask StorerLayer;
+    public LayerMask InteragibleLayer;
+    
 
     void Awake()
     {
-       // StorerLayer = LayerMask.GetMask("Storer");
         manager = GetComponent<Detection_Manager>();
     }
     void FixedUpdate()
     {
-        StorerDetection();
+        InteractionDetection();
     }
 
-    void StorerDetection()
+     void InteractionDetection()
     {
-        Collider[] detection = Physics.OverlapSphere(transform.position,manager.detectorRadius,StorerLayer); //Juntando as detecções em um Collider[]
+        Collider[] detection = Physics.OverlapSphere(transform.position,manager.detectorRadius,InteragibleLayer); //Juntando as detecções em um Collider[]
         List<GameObject> objDetected = new List<GameObject>();  //Criando uma lista de GameObjects
         int closestDetectionIndex = 0; //Detector por index
 
@@ -40,14 +40,15 @@ public class StorersDetector : MonoBehaviour
                         }
                     }
                     
-                    manager.storerOnRange = true;
-                    manager.closestStorer = objDetected[closestDetectionIndex].GetComponent<Storers>();
+                    manager.canInteract= true;
+                    manager.interagible = objDetected[closestDetectionIndex].GetComponent<Interagibles>();
+                 
                 }
 
                 else 
                 {   
-                    manager.storerOnRange = false;
-                    manager.closestStorer  = null;
-                }   
-    }
+                    manager.canInteract = false;
+                    manager.interagible = null;
+                } 
+    }  
 }
