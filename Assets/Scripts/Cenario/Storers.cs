@@ -2,46 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Storers : Interagibles
+public class Storers : Interactable
 {
-    public override InteragibleType type { get; set;}
+    public override InteractableType type { get; set;}
+    public override FeedBackManager feedback {get;set;}
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-   Ingredientes[] ingredientes;
-   public string ingredientCode;
-   int counter; 
-
+    public string ingredientCode;
 
    void Awake()
    {   
-       type = InteragibleType._Storer;
-       ingredientes = MacroSistema.sistema.Ingredientes;
-    
+       type = InteractableType._Storer;
        hasItemOnIt = true;
    }
 
     
-    public override Itens GiveItens(Itens itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
+    public override Itens GiveItens(Itens Buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {
-        ingredientes[counter].gameObject.SetActive(true);
-        ingredientes[counter].SetIngredient(ingredientCode);
-        itenItHas = ingredientes[counter];
-        itenToGive = itenItHas;
+        itenItHas = MacroSistema.sistema.SpawnIngredient(this);
+        Buffer = itenItHas;
         itenItHas = null;
-        return itenToGive;
+        return Buffer;
     }
+    
 
-    public void CountItenToSpawn()
-    {
-        counter = 0;
-        foreach( Ingredientes ing in ingredientes)
-        {
-            if(ing.gameObject.activeInHierarchy)
-            {
-                counter ++;
-            }
-        }
-    }
     public override void ReceiveItens(Itens itens){}
 
 }

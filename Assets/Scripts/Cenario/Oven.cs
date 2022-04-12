@@ -2,65 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Oven : Interagibles
+public class Oven : Interactable
 {
-    public override InteragibleType type { get; set;}
+    public override InteractableType type { get; set;}
+    public override FeedBackManager feedback {get;set;}
     
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
 
-    internal bool cooked;
     public Transform PanPosition;
+
+    public Pan _Pan;
 
     void Awake()
     {
-        type = InteragibleType._Oven;
+        type = InteractableType._Oven;
     }
 
     void Start()
     {
-        itenItHas  = GetComponentInChildren<Pan>();
+        _Pan  = GetComponentInChildren<Pan>();
+        itenItHas = _Pan;
         itenItHas.transform.position = PanPosition.position;
         hasItemOnIt = true;
-       
     }
+
 
     public override Itens GiveItens(Itens Buffer)
     {
-       if(cooked == false)
-       {
+       
             Buffer = itenItHas;
             itenItHas = null;
             hasItemOnIt = false;
+            if(_Pan.cooking == true)
+            {
+                _Pan.cooking = false;
+                _Pan.feedBack.ToogleHighLight();
+            }
+            _Pan = null;
             return Buffer;
-       }
        
-       else
-       {
-           return itenItHas.GetComponent<Pan>().GiveRecipe();
-       }
-
     }
-    public override void ReceiveItens(Itens _Pan)
+
+    public override void ReceiveItens(Itens Pan)
     {
-            
+                _Pan = Pan.GetComponent<Pan>();
                 itenItHas = _Pan;
+                if(_Pan.ingreIn > 0)
+                {
+                    _Pan.cooking = true;
+                    _Pan.feedBack.ToogleHighLight();
+                }
+                
                 itenItHas.transform.position = PanPosition.position;
                 hasItemOnIt = true;
        
     }
     
-    public void PutIngredient(Itens itenInHand)
-    {
-        Pan _Pan = itenItHas.GetComponent<Pan>();
-
-        if(_Pan != null)
-        {
-            _Pan.ReciveIngredient(itenInHand);
-        }
-        else
-        {
-            Debug.Log("Pan não está aqui"); ///
-        } 
-    }
 }

@@ -34,21 +34,22 @@ public class InteractibleDetector : MonoBehaviour
 
                     for(int i = 0; i < objDetected.Count ; i ++)// Pra toda a contagem de Colliders na lista
                     {
-                        if(Vector3.Distance(transform.position, objDetected[0].transform.position) < closeItemDistance)//SE a distancia for menor que a distância do item mais próximo
+                        if(Vector3.Distance(transform.position, objDetected[i].transform.position) < closeItemDistance)//SE a distancia for menor que a distância do item mais próximo
                         {
                             closestDetectionIndex = i; // O index do item mais próximo se torna i
                         }
                     }
-                    
                     manager.canInteract= true;
-                    manager.interagible = objDetected[closestDetectionIndex].GetComponent<Interagibles>();
+                    manager.interactable = objDetected[closestDetectionIndex].GetComponent<Interactable>();
+                    manager.type = manager.interactable.type;
                  
                 }
 
                 else 
                 {   
                     manager.canInteract = false;
-                    manager.interagible = null;
+                    manager.interactable = null;
+                    manager.type = InteractableType._Null;
                 } 
     }  
 }

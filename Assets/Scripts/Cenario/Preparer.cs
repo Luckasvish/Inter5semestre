@@ -2,77 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Preparer : Interagibles
+
+public class Preparer : Interactable
 {
-    
-    public override InteragibleType type { get; set;}
+    public override InteractableType type { get; set;}
+    public override FeedBackManager feedback {get;set;}
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public Transform ingredientPosition;
-
-
     public float preparationTime;
-    float preparationTimer;
+    internal float preparationTimer;
 
-    internal bool prepared;
+    bool preparing;
+
     void Awake()
     {
-        type = InteragibleType._Preparer;
+        feedback = GetComponent<FeedBackManager>();
+        type = InteractableType._Preparer;
         itenItHas = null;
+        
     }
-
+    
     void Update()
     {
-        if(hasItemOnIt)
+        if(preparing)
         {
-            PrepareIngredient();
-        }
-
-        Debug.Log(preparationTimer);///
-        Debug.Log(prepared);///
-
+            Prepare();
+        }   
     }
-    public override void ReceiveItens(Itens itenInHand)
+    
+    public override void ReceiveItens(Itens itenInHand) // RECEBE O INGREDIENTE 
     {  
-            itenItHas = itenInHand;
-
-            itenItHas.transform.position = ingredientPosition.position;
-
-            preparationTimer = preparationTime;
-
-            hasItemOnIt = true;
-            
-            prepared = false;
+            itenItHas = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
+            itenItHas.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
+            preparationTimer = 0;                                       // O TIMER É ZERADO
+            feedback.ToogleHUD();                                       //  A HUD INICIA 
+            hasItemOnIt = true;                                         //TEM UM ITEM 
     }
 
 
-    public void PrepareIngredient()
+    void Prepare()
     {
-            preparationTimer -= Time.deltaTime;
-            if(preparationTimer <= 0)
-            {
-                prepared = true;
-                itenItHas.GetComponent<Ingredientes>().type = ItenType._PreparedIngredient;
-            }
+        preparationTimer += Time.deltaTime;
+        float _hudBar = preparationTimer / preparationTime;
+        feedback.Run(_hudBar);
+        if(preparationTimer >= preparationTime)
+        {
+            itenItHas.type = ItenType._PreparedIngredient;
+            preparing = false;
+        }
     }
 
-
+    public void TooglePreparer()
+    {   
+        preparing = !preparing;
+    }
 
 
      public override Itens GiveItens(Itens itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
-    {   if(itenItHas.type == ItenType._PreparedIngredient)
-        {   
+    {    
             itenToGive = itenItHas;
             itenItHas = null;
             hasItemOnIt = false;
+            feedback.ToogleHUD();
             return itenToGive;
-        }
-        else 
-        {
-            Debug.Log("Não foi preparado ainda !");///
-            return null;
-        }
-
     }
     
    

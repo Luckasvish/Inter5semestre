@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Balcon : Interagibles
+public class Balcon : Interactable
 {
-    public override InteragibleType type { get; set;}
+    public override InteractableType type { get; set;}
+    public override FeedBackManager feedback {get;set;}
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public Transform itemPosition;
     void Awake()
     {
-        type = InteragibleType._Balcon;
-        itenItHas = null;
+        type = InteractableType._Balcon;
+        if(GetComponentInChildren<Plates>() == null)
+        {
+            itenItHas = null;
+        }
     }
 
     void Update()
