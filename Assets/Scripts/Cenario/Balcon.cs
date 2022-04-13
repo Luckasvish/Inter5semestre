@@ -8,6 +8,7 @@ public class Balcon : Interactable
     public override FeedBackManager feedback {get;set;}
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
+    public override GameObject highLight { get ; set ; }
     public Transform itemPosition;
     void Awake()
     {
@@ -16,6 +17,10 @@ public class Balcon : Interactable
         {
             itenItHas = null;
         }
+    }
+    public override void TurnHighLightOn()
+    {
+      highLight.SetActive(true);
     }
 
     void Update()

@@ -8,7 +8,9 @@ public abstract class Interactable : MonoBehaviour
     public abstract Itens itenItHas {get;set;}
     public abstract FeedBackManager feedback {get;set;}
     public abstract bool hasItemOnIt {get;set;}
+    public abstract  GameObject highLight{get;set;}
 
+    public abstract void TurnHighLightOn();
     public abstract Itens GiveItens(Itens itenToGive);
     public abstract void ReceiveItens(Itens itenReceived);
     

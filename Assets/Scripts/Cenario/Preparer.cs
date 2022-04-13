@@ -9,6 +9,7 @@ public class Preparer : Interactable
     public override FeedBackManager feedback {get;set;}
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
+    public override GameObject highLight { get ; set ; }
     public Transform ingredientPosition;
     public float preparationTime;
     internal float preparationTimer;
@@ -29,6 +30,10 @@ public class Preparer : Interactable
         {
             Prepare();
         }   
+    }
+    public override void TurnHighLightOn()
+    {
+      highLight.SetActive(true);
     }
     
     public override void ReceiveItens(Itens itenInHand) // RECEBE O INGREDIENTE 

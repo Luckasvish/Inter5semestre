@@ -9,6 +9,7 @@ public class Oven : Interactable
     
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
+    public override GameObject highLight { get ; set ; }
 
     public Transform PanPosition;
 
@@ -19,6 +20,10 @@ public class Oven : Interactable
         type = InteractableType._Oven;
     }
 
+    public override void TurnHighLightOn()
+    {
+      highLight.SetActive(true);
+    }
     void Start()
     {
         _Pan  = GetComponentInChildren<Pan>();
