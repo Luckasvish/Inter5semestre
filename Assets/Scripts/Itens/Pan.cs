@@ -44,8 +44,6 @@ public class Pan : Itens
             Cook();
         }
 
-        Debug.Log("Cooking : " + cooking);///
-        
     }
 
 
@@ -85,7 +83,6 @@ public class Pan : Itens
                 maxTime = stage00;  
                 ingreIn ++;
                 feedBack.ToogleHUD();
-                feedBack.ToogleHighLight();
                 cooking = true;
                 Debug.Log("Chegou 00!!");//////////////
             break;
@@ -109,7 +106,6 @@ public class Pan : Itens
         {
             feedBack.ToogleHUD();
             cooking = false;
-            feedBack.ToogleHighLight();
             return MacroSistema.sistema.SpawnRecipe(plate);
         }
 
@@ -117,7 +113,6 @@ public class Pan : Itens
         {
             feedBack.ToogleHUD();
             cooking = false;
-            feedBack.ToogleHighLight();
             return null;
         }
     }

@@ -4,21 +4,41 @@ using UnityEngine;
 
 public class Detection_Manager : MonoBehaviour
 {
-    public float detectorRadius;
-    internal Interactable interactable;
-    internal bool canInteract;  
-    internal InteractableType type;
+    ////////////////////////////////////////////////////////////////////////////
+    /// Detection_Manager /////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    /// Interação
+    internal Interactable interactable {get; set;}
 
-    void OnDrawGizmos()
+
+    ////////////////////////////////////////////////////////////////////////////
+    /// Permição para interagir
+    internal bool canInteract {get; set;}
+    
+    
+    ////////////////////////////////////////////////////////////////////////////
+    /// Detector
+    public Transform detectorPosition;  /// Posição.y do detector
+    [SerializeField] internal float detectionDistance;  /// Distancia de detecção
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+    public void SetDetection(Interactable interaction)  /// Atribuir detecção  >>> chamada em InteractableDetector
     {
-        
-        if (canInteract)
-        {
-            Gizmos.color = Color.blue;
-            interactable.feedback.ToogleHighLight();
-        }
-        else Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position,detectorRadius);
+            interactable = interaction;     /// recebe a interação do detector e aloca aqui no manager;
+            interactable.highLightOn = true;       /// liga o highlight do interagível;
+            canInteract = true;     /// permite interagir;
     }
+
+    public void ClearDetection()    /// Limpar detecção  >>> chamada em InteractableDetector
+    {
+        canInteract = false;    /// tira a permição para interagir
+        interactable.highLightOn = false;   /// desliga o highlight do interagível;
+        interactable = null;    /// anula a referência de interaagível;
+    }
+
 }
 

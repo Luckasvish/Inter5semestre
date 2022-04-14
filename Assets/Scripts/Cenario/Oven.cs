@@ -5,11 +5,12 @@ using UnityEngine;
 public class Oven : Interactable
 {
     public override InteractableType type { get; set;}
-    public override FeedBackManager feedback {get;set;}
+    FeedBackManager feedback {get;set;}
     
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
+    public override bool highLightOn {get; set;}
 
     public Transform PanPosition;
 
@@ -18,12 +19,23 @@ public class Oven : Interactable
     void Awake()
     {
         type = InteractableType._Oven;
+         highLight = GetComponentInChildren<Light>().gameObject;
+        highLight.SetActive(false);
+        
     }
 
-    public override void TurnHighLightOn()
+    void Update()
     {
-      highLight.SetActive(true);
+        if(highLightOn)
+      {
+        highLight.SetActive(true);
+      }
+      else 
+      {
+        highLight.SetActive(false);
+      }
     }
+    
     void Start()
     {
         _Pan  = GetComponentInChildren<Pan>();
@@ -42,7 +54,6 @@ public class Oven : Interactable
             if(_Pan.cooking == true)
             {
                 _Pan.cooking = false;
-                _Pan.feedBack.ToogleHighLight();
             }
             _Pan = null;
             return Buffer;
@@ -56,7 +67,6 @@ public class Oven : Interactable
                 if(_Pan.ingreIn > 0)
                 {
                     _Pan.cooking = true;
-                    _Pan.feedBack.ToogleHighLight();
                 }
                 
                 itenItHas.transform.position = PanPosition.position;

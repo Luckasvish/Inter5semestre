@@ -6,10 +6,11 @@ using UnityEngine;
 public class Preparer : Interactable
 {
     public override InteractableType type { get; set;}
-    public override FeedBackManager feedback {get;set;}
+     FeedBackManager feedback {get;set;}
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
+    public override bool highLightOn {get; set;}
     public Transform ingredientPosition;
     public float preparationTime;
     internal float preparationTimer;
@@ -21,7 +22,8 @@ public class Preparer : Interactable
         feedback = GetComponent<FeedBackManager>();
         type = InteractableType._Preparer;
         itenItHas = null;
-        
+        highLight = GetComponentInChildren<Light>().gameObject;
+        highLight.SetActive(false);   
     }
     
     void Update()
@@ -29,11 +31,15 @@ public class Preparer : Interactable
         if(preparing)
         {
             Prepare();
-        }   
-    }
-    public override void TurnHighLightOn()
-    {
-      highLight.SetActive(true);
+        }
+        if(highLightOn)
+      {
+        highLight.SetActive(true);
+      }
+      else 
+      {
+        highLight.SetActive(false);
+      }   
     }
     
     public override void ReceiveItens(Itens itenInHand) // RECEBE O INGREDIENTE 

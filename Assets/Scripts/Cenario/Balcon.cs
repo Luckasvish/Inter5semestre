@@ -5,10 +5,11 @@ using UnityEngine;
 public class Balcon : Interactable
 {
     public override InteractableType type { get; set;}
-    public override FeedBackManager feedback {get;set;}
+
     public override Itens itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
+    public override bool highLightOn {get; set;}
     public Transform itemPosition;
     void Awake()
     {
@@ -17,10 +18,8 @@ public class Balcon : Interactable
         {
             itenItHas = null;
         }
-    }
-    public override void TurnHighLightOn()
-    {
-      highLight.SetActive(true);
+         highLight = GetComponentInChildren<Light>().gameObject;
+        highLight.SetActive(false);
     }
 
     void Update()
@@ -29,6 +28,14 @@ public class Balcon : Interactable
         {
             itenItHas.transform.position = itemPosition.position;
         }
+        if(highLightOn)
+      {
+        highLight.SetActive(true);
+      }
+      else 
+      {
+        highLight.SetActive(false);
+      }
     }
 
 

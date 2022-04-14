@@ -5,8 +5,6 @@ using UnityEngine;
 public class FeedBackManager : MonoBehaviour
 {
     public FeedBackHUD HUD;
-    public GameObject highLight;
-    internal bool highLightOn;
     internal bool hudOn;
     internal float barMax;
     internal float currentBar;
@@ -31,27 +29,12 @@ public class FeedBackManager : MonoBehaviour
         {
             HUD.gameObject.SetActive(false);
         }
-        highLight.SetActive(false);
         hudOn = false;
     }
     internal void Run(float barSet)
     {
         HUD.SetBar(barSet);
     }
-    internal void ToogleHighLight()
-    {
-            if(highLightOn)
-            {
-                highLight.SetActive(false);
-                highLightOn = false;
-            }
-            else 
-            {
-                highLight.SetActive(true);
-                highLightOn = true;
-            }
-    }
-
     internal void ToogleHUD()
     {
         if(hudOn)
