@@ -2,57 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredients : Itens
+public class Ingredients : Item
 {
     public override string itemName { get; set;}
-    public override ItenType type { get; set;}
-
+    public override ItemType type { get; set;}
     public GameObject[] ingredients_Mesh;
 
-
-    void Awake()
+    public void SpawnBeans()
     {
-        type = ItenType._UnpreparedIngredient;
-    }
-    public void SetIngredient(string ingredientCode)
-    {
-
-        switch(ingredientCode)
-        {
-            case "F":
 
                ingredients_Mesh[0].SetActive(true);
                ingredients_Mesh[1].SetActive(false);
                ingredients_Mesh[2].SetActive(false);
-               type = ItenType._PreparedIngredient;    
-                     
-            break;
+               type = ItemType._PreparedIngredient;
+               itemName = "Beans";
+    }
+
+
                 
-         
-            case "A":
+    public void SpawnRice(){
 
                 ingredients_Mesh[0].SetActive(false);
                 ingredients_Mesh[1].SetActive(true);
                 ingredients_Mesh[2].SetActive(false); 
-                type = ItenType._PreparedIngredient;
-                                
-            break;
+                type = ItemType._PreparedIngredient;
+                itemName = "Rice";
+    }
+    
 
-
-            case "C":
+    public void SpawnMeat(){
 
                 ingredients_Mesh[0].SetActive(false);
                 ingredients_Mesh[1].SetActive(false);
                 ingredients_Mesh[2].SetActive(true); 
-                type = ItenType._UnpreparedIngredient;
-
-            break;
-
-
-            default :Debug.Log("INGREDIENT: Código Inválido");///
-            break;
-        }
-        itemName = ingredientCode;
+                type = ItemType._UnpreparedIngredient;
+                itemName = "Meat";
     }
     
 }

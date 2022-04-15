@@ -86,7 +86,7 @@ public class Interaction_Manager : MonoBehaviour
            if(preparer.hasItemOnIt == false) //001 SEGUNDA CHECAGEM: SE O PREPARADOR TEM ITEM 
             {
                 
-                if(chef.itenInHand.type == ItenType._UnpreparedIngredient)
+                if(chef.itenInHand.type == ItemType._UnpreparedIngredient)
                 {
                     preparer.ReceiveItens(chef.GiveIten(chef.itenInHand));
                 }
@@ -105,7 +105,7 @@ public class Interaction_Manager : MonoBehaviour
         {
             if(preparer.hasItemOnIt)     //001 SEGUNDA CHECAGEM: SE O PREPARADOR TEM ITEM 
             {
-                if(preparer.itenItHas.type != ItenType._PreparedIngredient)  //002 TERCEIRA CHECAGEM: SE O ITEM ESTÁ PRONTO 
+                if(preparer.itenItHas.type != ItemType._PreparedIngredient)  //002 TERCEIRA CHECAGEM: SE O ITEM ESTÁ PRONTO 
                 {
                     preparer.TooglePreparer();
                 }
@@ -130,12 +130,12 @@ public class Interaction_Manager : MonoBehaviour
 
         
         if (chef.hasItem)
-        {    ItenType itenType = chef.itenInHand.type;
+        {    ItemType itenType = chef.itenInHand.type;
             
             switch(itenType)
             {
 
-                case ItenType._PreparedIngredient:
+                case ItemType._PreparedIngredient:
 
                     if(pan.ingreIn < 3)
                     {
@@ -148,7 +148,7 @@ public class Interaction_Manager : MonoBehaviour
 
                 break;
 
-                case ItenType._Pan: 
+                case ItemType._Pan: 
                     
                     if(oven.hasItemOnIt == false)
                     {
@@ -160,7 +160,7 @@ public class Interaction_Manager : MonoBehaviour
                     }
                 break;
 
-                case ItenType._Plate:
+                case ItemType._Plate:
                     Plates plate = chef.itenInHand.GetComponent<Plates>();
 
                     if(pan.recipe)

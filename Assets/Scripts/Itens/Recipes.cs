@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recipes : Itens
+public class Recipes : Item
 
 {
-   public  override ItenType type { get; set; }
+   public  override ItemType type { get; set; }
    public  override string itemName { get; set; }
    
    public int price;
@@ -13,7 +13,7 @@ public class Recipes : Itens
    public GameObject[] recipes_Mesh;
    void Awake()
    {
-         type = ItenType._Recipe;
+         type = ItemType._Recipe;
    }
    public void SetRecipe(string recipeCode)
    {  

@@ -7,7 +7,7 @@ public class Preparer : Interactable
 {
     public override InteractableType type { get; set;}
      FeedBackManager feedback {get;set;}
-    public override Itens itenItHas { get; set; }
+    public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
     public override bool highLightOn {get; set;}
@@ -42,7 +42,7 @@ public class Preparer : Interactable
       }   
     }
     
-    public override void ReceiveItens(Itens itenInHand) // RECEBE O INGREDIENTE 
+    public override void ReceiveItens(Item itenInHand) // RECEBE O INGREDIENTE 
     {  
             itenItHas = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
             itenItHas.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
@@ -59,7 +59,7 @@ public class Preparer : Interactable
         feedback.Run(_hudBar);
         if(preparationTimer >= preparationTime)
         {
-            itenItHas.type = ItenType._PreparedIngredient;
+            itenItHas.type = ItemType._PreparedIngredient;
             preparing = false;
         }
     }
@@ -70,7 +70,7 @@ public class Preparer : Interactable
     }
 
 
-     public override Itens GiveItens(Itens itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
+     public override Item GiveItens(Item itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {    
             itenToGive = itenItHas;
             itenItHas = null;

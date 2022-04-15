@@ -7,7 +7,7 @@ public class Oven : Interactable
     public override InteractableType type { get; set;}
     FeedBackManager feedback {get;set;}
     
-    public override Itens itenItHas { get; set; }
+    public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
     public override bool highLightOn {get; set;}
@@ -45,7 +45,7 @@ public class Oven : Interactable
     }
 
 
-    public override Itens GiveItens(Itens Buffer)
+    public override Item GiveItens(Item Buffer)
     {
        
             Buffer = itenItHas;
@@ -60,7 +60,7 @@ public class Oven : Interactable
        
     }
 
-    public override void ReceiveItens(Itens Pan)
+    public override void ReceiveItens(Item Pan)
     {
                 _Pan = Pan.GetComponent<Pan>();
                 itenItHas = _Pan;

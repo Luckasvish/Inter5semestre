@@ -17,22 +17,21 @@ public class MacroSistema : MonoBehaviour
             sistema = this;
         }
 
-        foreach(Itens i in Ingredients)
+        foreach(Item i in Ingredients)
         {
             i.gameObject.SetActive(false);
         }
       
-         foreach(Itens i in Recipes)
+         foreach(Item i in Recipes)
         {
             i.gameObject.SetActive(false);
         }      
     }
 
 
-    public Itens SpawnIngredient(Storers interaction)
+    public Item SpawnIngredient(string code)
     {
         int counter = 0;
-
         foreach( Ingredients ing in Ingredients)
         {
             if(ing.gameObject.activeInHierarchy)
@@ -40,13 +39,25 @@ public class MacroSistema : MonoBehaviour
                 counter ++;
             }
         }
+        
         Ingredients[counter].gameObject.SetActive(true);
-        Ingredients[counter].SetIngredient(interaction.ingredientCode);
+        switch(code)
+        {
+            case "Beans":    Ingredients[counter].SpawnBeans();
+            break;
+            case "Rice":    Ingredients[counter].SpawnRice();
+            break;   
+            case "Meat":    Ingredients[counter].SpawnMeat();
+            break;
+            default: Debug.Log("Deu ruim no código de ingrediente !: " + code);
+            break;
+        }
+        
         return Ingredients[counter];
 
     }
 
-    public Itens SpawnRecipe(Plates plate)
+    public Item SpawnRecipe(Plates plate)
     {
         int counter = 0;
 

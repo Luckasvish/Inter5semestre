@@ -5,12 +5,12 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     public  abstract InteractableType type { get; set; }
-    public abstract Itens itenItHas {get;set;}
+    public abstract Item itenItHas {get;set;}
     public abstract bool hasItemOnIt {get;set;}
     public abstract  GameObject highLight{get;set;}
     public abstract bool highLightOn{get; set;}
-    public abstract Itens GiveItens(Itens itenToGive);
-    public abstract void ReceiveItens(Itens itenReceived);
+    public abstract Item GiveItens(Item itenToGive);
+    public abstract void ReceiveItens(Item itenReceived);
     
 }
 

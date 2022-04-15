@@ -6,7 +6,7 @@ public class Balcon : Interactable
 {
     public override InteractableType type { get; set;}
 
-    public override Itens itenItHas { get; set; }
+    public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
     public override bool highLightOn {get; set;}
@@ -39,14 +39,14 @@ public class Balcon : Interactable
     }
 
 
-    public override void ReceiveItens(Itens itenInHand)
+    public override void ReceiveItens(Item itenInHand)
     {
         itenItHas = itenInHand;
         itenItHas.transform.position = itemPosition.position;
         hasItemOnIt = true;
     }
 
-    public override Itens GiveItens(Itens itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
+    public override Item GiveItens(Item itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {
         itenToGive = itenItHas;
         itenItHas = null;

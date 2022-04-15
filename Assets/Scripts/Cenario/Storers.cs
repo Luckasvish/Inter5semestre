@@ -6,7 +6,7 @@ public class Storers : Interactable
 {
     public override InteractableType type { get; set;}
 
-    public override Itens itenItHas { get; set; }
+    public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
     public override GameObject highLight { get ; set ; }
     public override bool highLightOn {get; set;}
@@ -31,15 +31,15 @@ public class Storers : Interactable
         highLight.SetActive(false);
       }
     }
-    public override Itens GiveItens(Itens Buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
+    public override Item GiveItens(Item Buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {
-        itenItHas = MacroSistema.sistema.SpawnIngredient(this);
+        itenItHas = MacroSistema.sistema.SpawnIngredient(ingredientCode);
         Buffer = itenItHas;
-        itenItHas = null;
+        itenItHas = null;        
         return Buffer;
     }
     
 
-    public override void ReceiveItens(Itens itens){}
+    public override void ReceiveItens(Item itens){}
 
 }

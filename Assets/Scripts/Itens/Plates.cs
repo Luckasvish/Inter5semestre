@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
- public class Plates : Itens
+ public class Plates : Item
  
  {
 
-    public  override ItenType type { get; set; }
+    public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
     public Transform pl_FoodPosition;
 
     internal bool hasItem;
-    internal Itens itenItHas;
+    internal Item itenItHas;
 
 
     void Awake()
@@ -25,7 +25,7 @@ using UnityEngine;
         }
         
        
-        type = ItenType._Plate;
+        type = ItemType._Plate;
     }
 
     public void ReceiveRecipe(Recipes recipeForPlate)

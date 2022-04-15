@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pan : Itens
+public class Pan : Item
 {
-    public  override ItenType type { get; set; }
+    public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
     //////////////////////////////////////////////////////
     public FeedBackManager feedBack;
   
     //////////////////////////////////////////////////////
-    //////////////////COZINHA////////////////////////////
+    ////////////////// COZINHAR ////////////////////////////
     /////////////////////////////////////////////////////
 
     internal bool cooking; // Cozinhando.
@@ -27,13 +27,16 @@ public class Pan : Itens
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
-    
+    /// Itens ////////
+    Item item00;
+    Item item01;
+    Item item02;
 
     void Awake()    //INICIALIZANDO A PAN
     {
         feedBack = GetComponent<FeedBackManager>();
         itemName = "";
-        type = ItenType._Pan;
+        type = ItemType._Pan;
     }
 
     
@@ -44,11 +47,38 @@ public class Pan : Itens
             Cook();
         }
 
+        if(item00 != null) Debug.Log(item00.itemName); ///
+        if(item01 != null) Debug.Log(item01.itemName); ///
+        if(item02 != null) Debug.Log(item02.itemName); ///
     }
 
 
-    public void CheckIngredient(Itens _ingre)
+    public void CheckIngredient(Item _ingre)
     {
+        if(item00 == null)
+        {
+            item00 = _ingre;
+            ingreIn ++;
+        }
+
+        else if(item00 != null && item01 == null)
+        {   
+            item01 = _ingre;
+            ingreIn ++;
+        }
+        else if(item00 != null && item01 != null && item02 == null)
+        {   
+            item02 = _ingre;
+            ingreIn ++;
+        }
+        else
+        {   
+            Debug.Log("Panela cheia");
+        }
+        
+       
+
+
         if(CanAddIngredient(_ingre))
         {
             _ingre.gameObject.SetActive(false);
@@ -100,7 +130,7 @@ public class Pan : Itens
     
     }
 
-    public Itens GiveRecipe(Plates plate)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
+    public Item GiveRecipe(Plates plate)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {
         if(burned == false)
         {
@@ -120,7 +150,7 @@ public class Pan : Itens
 
 
 
-     bool CanAddIngredient(Itens ingre)
+     bool CanAddIngredient(Item ingre)
      {
           switch(itemName)
             {

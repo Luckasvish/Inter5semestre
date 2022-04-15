@@ -13,7 +13,7 @@ public class Chef : MonoBehaviour
 
 
     ///CHEF ---
-    public Itens itenInHand;
+    public Item itenInHand;
     internal bool hasItem;
     public Transform itenPosition;
 
@@ -50,7 +50,7 @@ public class Chef : MonoBehaviour
         movement_Manager.Move(input_Manager.moveInput);
     }
 
-    internal Itens GiveIten(Itens Buffer)//Função de dar Item.
+    internal Item GiveIten(Item Buffer)//Função de dar Item.
     {   
         Buffer = itenInHand;
         itenInHand = null; 
