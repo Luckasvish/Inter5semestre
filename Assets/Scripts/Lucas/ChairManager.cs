@@ -45,14 +45,13 @@ public class ChairManager : MonoBehaviour
         avaiableChair.Clear();
     }
 
-    public Vector3 ChooseChairToGetPosition()
+    public GameObject GetChair()
     {
         int chairIndex = 0;
         chairIndex = Random.RandomRange(1, avaiableChair.Count);
         GameObject myGameObject = avaiableChair[chairIndex];
-        Vector3 pos = myGameObject.transform.position;
         RemoveChair(myGameObject);
-        return pos;
+        return myGameObject;
     }
 
     public bool CheckIfHasAvaiableChair()
