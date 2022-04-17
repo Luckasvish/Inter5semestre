@@ -7,13 +7,15 @@ public class PlateHUD : MonoBehaviour
 {
     internal Plates thisPlate;
     public Image[] options;
+    public GameObject[] recipes;
+
     public Image selector;
 
     internal MeshRenderer mesh;
     public Material[] material; 
 
 
-    bool settle;
+    
 
 
     void Awake()
@@ -29,15 +31,21 @@ public class PlateHUD : MonoBehaviour
     {
         if(this.gameObject.activeInHierarchy)
         {
-            Run(settle);
+            if(thisPlate.settle == false)
+            {
+                RunRecipeSelection();
+            }
+            else 
+            {
+                SetRecipeOnPlateHUD();
+            }
         }
     }
   
 
-    void Run(bool recipeSettled)
+    void RunRecipeSelection()
     {
-        if(recipeSettled == false)
-        {
+        
             if(MacroSistema.sistema.input_Manager.pressed01)
             {
                 selector.transform.position = options[0].transform.position;
@@ -61,7 +69,22 @@ public class PlateHUD : MonoBehaviour
                 mesh.material = material[2]; 
             }
            
-        }
+        
+    }
+    void SetRecipeOnPlateHUD()
+    {
+         for (int i = 0; i < options.Length ; i++)
+            {
+                options[i].gameObject.SetActive(false);
+            }
+            selector.gameObject.SetActive(false);
+
+            switch(thisPlate.recipe.itemName)
+            {
+                case "Feijoada": recipes[0].SetActive(true); break;
+                case "PratoFeito": recipes[1].SetActive(true); break;
+                case "Buchada": recipes[2].SetActive(true); break;
+            }
 
     }
 

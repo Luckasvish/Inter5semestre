@@ -7,6 +7,7 @@ public class MacroSistema : MonoBehaviour
     public static MacroSistema sistema;
     public IngredientInstance[] IngredientsInstance = new IngredientInstance[5];
 
+    GameObject[] characters;
     public static string[] staticRecipes;
 
     int[] counter = new int[5];
@@ -35,19 +36,28 @@ public class MacroSistema : MonoBehaviour
         }
       
     }
+
+    void Start()
+    {
+        Chef[] chefs =  FindObjectsOfType<Chef>();;
+
+        for (int i = 0; i < chefs.Length ; i++)
+        {
+            characters[i] = chefs[i].gameObject;
+        }
+        for (int i = 0; i < IngredientsInstance.Length; i++)
+        { 
+            counter[i]= 0;
+        }
+
+
+    }
     
     public string GetPossibleRecipes( int recipeIndex)
     {
         return staticRecipes[recipeIndex];
     }
     
-    
-        void Start()
-    {
-         for (int i = 0; i < IngredientsInstance.Length; i++)
-        { counter[i]= 0;}
-    }
-
 
     public Item SpawnIngredient(int code)
     {

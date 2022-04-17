@@ -34,6 +34,16 @@ public class IngredientInstance : Item
                     ingredient = new Ingredients(IngreType._Meat);
                     ingredient.ingreType = IngreType._Meat;
                                                      break;
+
+                case 3:
+                    itemName = "Farofa";
+                    type = ItemType._PreparedIngredient;
+                    ingredient = new Ingredients(IngreType._Farofa);
+                    ingredient.ingreType = IngreType._Farofa;
+                                                     break;
+
+                                                      
+                                                      
                 default: itemName = "";  break;
             
             }

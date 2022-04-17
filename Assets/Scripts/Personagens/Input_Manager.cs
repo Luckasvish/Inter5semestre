@@ -9,12 +9,14 @@ public class Input_Manager : MonoBehaviour
     internal bool pressed01;
     internal bool pressed02;
     internal bool pressed03;
+    internal bool pressedSpace;
     void Update()
     {
        pressedE =  Input.GetKeyDown(KeyCode.E);
        pressed01 = Input.GetKeyDown(KeyCode.Alpha1);
        pressed02 = Input.GetKeyDown(KeyCode.Alpha2);
        pressed03 = Input.GetKeyDown(KeyCode.Alpha3);
+       pressedSpace = Input.GetKeyDown(KeyCode.Space);
        moveInput = MovementInput();
     }
 

@@ -17,7 +17,7 @@ public class Chef : MonoBehaviour
     public bool hasItem;
     public Transform itenPosition;
 
-
+    public bool characterOn;
 
     void Awake()
     {
@@ -43,11 +43,27 @@ public class Chef : MonoBehaviour
             itenInHand.transform.position = itenPosition.position;
         }
 
+
+        if(MacroSistema.sistema.input_Manager.pressedSpace)
+        {
+            ToogleChar();
+        }
+
+
+
     }
 
     void FixedUpdate()
     {
-        movement_Manager.Move(input_Manager.moveInput);
+        if(characterOn)
+        {
+            movement_Manager.Move(input_Manager.moveInput);
+        }
+    }
+
+    internal void ToogleChar()
+    {
+        characterOn = !characterOn;
     }
 
     internal Item GiveIten(Item Buffer)//Função de dar Item.
@@ -74,6 +90,6 @@ public class Chef : MonoBehaviour
             if(itenInHand != null) hasItem = true;
        
     }
-
+   
 
 }

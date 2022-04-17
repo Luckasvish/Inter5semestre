@@ -19,7 +19,7 @@ using UnityEngine;
     //////////////////////////////////////////////////////////////////
 
     internal Recipes recipe;
-    bool settle;
+    internal bool settle;
    
     //////////////////////////////////////////////////////////
     public OrderHUD mainHUD;
@@ -130,6 +130,7 @@ using UnityEngine;
                     {
                         Debug.Log("Esse ingrediente não entra nesse prato!!!");//////////////////
                     }
+                    settle = true;
                     break;
                 
                 case "PratoFeito": 
@@ -171,6 +172,7 @@ using UnityEngine;
                     {
                         Debug.Log("Esse ingrediente não entra nesse prato!!!");//////////////////
                     }
+                    settle = true;
                     break;
                 
                 case "Buchada":
@@ -192,9 +194,9 @@ using UnityEngine;
                     }
                     else if (ingre == IngreType._Farofa)
                     {   
-                        if(buchada[3].activeInHierarchy == false)
+                        if(buchada[2].activeInHierarchy == false)
                         {
-                            buchada[3].SetActive(true);
+                            buchada[2].SetActive(true);
                         }
                     }
                     
@@ -202,6 +204,7 @@ using UnityEngine;
                     {
                         Debug.Log("Esse ingrediente não entra nesse prato!!!");//////////////////
                     }
+                    settle = true;
                     break;
 
             }

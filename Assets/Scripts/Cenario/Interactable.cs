@@ -20,4 +20,5 @@ public enum InteractableType
     _Storer,
     _Preparer,
     _Balcon,
+    _Table
 }

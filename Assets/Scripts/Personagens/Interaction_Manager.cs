@@ -24,6 +24,8 @@ public class Interaction_Manager : MonoBehaviour
             break;
             case InteractableType._Balcon: InteractToBalcon(interaction);
             break;
+            case InteractableType._Table: InteractToBalcon(interaction);
+            break;
             default: Debug.Log("Não dá pra interagir!!");///
             break;
 
@@ -211,6 +213,48 @@ public class Interaction_Manager : MonoBehaviour
                 chef.ReceiveItens(oven);
             }
         } 
+    }
+
+    void InteractToTable(Interactable interaction)
+    {
+        Table table = interaction.GetComponent<Table>();
+        if(chef.hasItem)
+        {
+            if(chef.itenInHand.type == ItemType._Plate)
+            {
+                Plates plate = chef.itenInHand.GetComponent<Plates>();
+                if(table.isFull == false)
+                {
+                    table.ReceiveItens(chef.GiveIten(plate));
+                }
+                else
+                {
+                    Debug.Log("A mesa está cheiaa !!!!!!!");/////////////////////////////////
+                }
+            }
+            else 
+            {
+                 Debug.Log("Esse item não vai aqui!");/////////////////////////////////
+            }
+
+        }
+        else
+        {
+            if(table.plate0 != null || table.plate1 != null)
+            {
+                chef.ReceiveItens(table);
+            }
+            else
+            {
+                Debug.Log("Não tem nada na mesa!");///////////////////////////////////////////
+            }
+
+        }
+
+
+
+
+
     }
 
     InteractableType SetInteractionType(Interactable interaction)
