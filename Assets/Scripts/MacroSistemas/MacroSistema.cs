@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class MacroSistema : MonoBehaviour
 {
-   public static MacroSistema sistema;
-   public Ingredients[] Ingredients = new Ingredients[5];
-   public Recipes[] Recipes = new Recipes[5];
+    public static MacroSistema sistema;
+    public IngredientInstance[] IngredientsInstance = new IngredientInstance[5];
+
+    public static string[] staticRecipes;
+
+    int[] counter = new int[5];
 
    [SerializeField] internal Input_Manager input_Manager; ///Sistema de Inputs.
   
+
+
     void Awake()
     {
         if (sistema == null)
@@ -17,61 +22,59 @@ public class MacroSistema : MonoBehaviour
             sistema = this;
         }
 
-        foreach(Item i in Ingredients)
+        staticRecipes = new string[3];
+
+        staticRecipes[0] = "Feijoada";
+         staticRecipes[1] = "PratoFeito";
+          staticRecipes[2] = "Buchada";
+
+
+        foreach(Item i in IngredientsInstance)
         {
             i.gameObject.SetActive(false);
         }
       
-         foreach(Item i in Recipes)
-        {
-            i.gameObject.SetActive(false);
-        }      
+    }
+    
+    public string GetPossibleRecipes( int recipeIndex)
+    {
+        return staticRecipes[recipeIndex];
+    }
+    
+    
+        void Start()
+    {
+         for (int i = 0; i < IngredientsInstance.Length; i++)
+        { counter[i]= 0;}
     }
 
 
-    public Item SpawnIngredient(string code)
+    public Item SpawnIngredient(int code)
     {
-        int counter = 0;
-        foreach( Ingredients ing in Ingredients)
+       bool spawned = false;
+        int index = 0;
+       
+        for( int i = 0; i < counter.Length; i++)
         {
-            if(ing.gameObject.activeInHierarchy)
+            if(counter[i] == 0 && spawned == false)
             {
-                counter ++;
+                counter[i] = 1;
+                spawned = true;
+                index = i;
             }
         }
-        
-        Ingredients[counter].gameObject.SetActive(true);
-        switch(code)
+
+        if(index >= 5)
         {
-            case "Beans":    Ingredients[counter].SpawnBeans();
-            break;
-            case "Rice":    Ingredients[counter].SpawnRice();
-            break;   
-            case "Meat":    Ingredients[counter].SpawnMeat();
-            break;
-            default: Debug.Log("Deu ruim no código de ingrediente !: " + code);
-            break;
+            Debug.Log("Já atingiu o limite de itens!!!");
+            return null;
         }
-        
-        return Ingredients[counter];
-
-    }
-
-    public Item SpawnRecipe(Plates plate)
-    {
-        int counter = 0;
-
-        foreach( Recipes rec in Recipes)
+        else 
         {
-            if(rec.gameObject.activeInHierarchy)
-            {
-                counter ++;
-            }
+            IngredientsInstance[index].gameObject.SetActive(true);
+            Debug.Log("Spawnou");
+            return IngredientsInstance[index];
         }
-        Recipes[counter].gameObject.SetActive(true);
-        Recipes[counter].transform.position = plate.pl_FoodPosition.position;
-        return Recipes[counter];
     }
-
 
 }

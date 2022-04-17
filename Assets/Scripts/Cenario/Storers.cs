@@ -8,15 +8,15 @@ public class Storers : Interactable
 
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override GameObject highLight { get ; set ; }
+    public  GameObject highLight;
     public override bool highLightOn {get; set;}
-    public string ingredientCode;
+    public int ingredientCode;
 
    void Awake()
    {   
        type = InteractableType._Storer;
        hasItemOnIt = true;
-        highLight = GetComponentInChildren<Light>().gameObject;
+        
         highLight.SetActive(false);
    }
     
@@ -34,6 +34,7 @@ public class Storers : Interactable
     public override Item GiveItens(Item Buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {
         itenItHas = MacroSistema.sistema.SpawnIngredient(ingredientCode);
+        itenItHas.GetComponent<IngredientInstance>().SetMesh(ingredientCode);
         Buffer = itenItHas;
         itenItHas = null;        
         return Buffer;

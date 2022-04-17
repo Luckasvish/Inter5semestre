@@ -14,7 +14,7 @@ public class Chef : MonoBehaviour
 
     ///CHEF ---
     public Item itenInHand;
-    internal bool hasItem;
+    public bool hasItem;
     public Transform itenPosition;
 
 
@@ -58,11 +58,20 @@ public class Chef : MonoBehaviour
         return Buffer;
     }
 
+    internal IngredientInstance GiveIten(IngredientInstance Buffer)//Função de dar Item.
+    {   
+        Buffer = itenInHand.GetComponent<IngredientInstance>();
+        itenInHand = null; 
+        hasItem = false;
+        return Buffer;
+    }
+
+
     public void ReceiveItens(Interactable interactedObj)//Função de receber itens, recebendo o item como parâmetro.
     {
 
             itenInHand = interactedObj.GiveItens(interactedObj.itenItHas);
-            hasItem = true;
+            if(itenInHand != null) hasItem = true;
        
     }
 
