@@ -19,10 +19,15 @@ public class Movement_Manager : MonoBehaviour
     {
         moveInput = new Vector3 ( moveInput.x * Time.deltaTime * speed, moveInput.y , moveInput.z * Time.deltaTime * speed);
     
+        //Quaternion direction = Quaternion.LookRotation(moveInput, Vector3.up);
 
-        Quaternion direction = Quaternion.LookRotation(moveInput, Vector3.up);
-
-        transform.rotation = direction;
+        if(moveInput.x != 0 || moveInput.z != 0)
+        {
+        
+            transform.forward = Vector3.Lerp(transform.forward, moveInput,0.9f);
+        
+        
+        }
 
         controller.Move(moveInput);
     }

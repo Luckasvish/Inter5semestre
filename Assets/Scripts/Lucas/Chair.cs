@@ -59,7 +59,7 @@ public class Chair : MonoBehaviour
     void ReceiveItens(Item item)
     {
         hasItem = true;
-        this.item = item.GetComponent<Plates>().itenItHas;
+        this.item = item.GetComponent<Plates>();
         if(item.type == ItemType._Plate)
         {   
             hasFood = true;    
