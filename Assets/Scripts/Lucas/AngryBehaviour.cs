@@ -4,10 +4,31 @@ using UnityEngine;
 
 public class AngryBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    int timeToExit;
-    public int changeTimeToExit()
+    public static AngryBehaviour instance;
+    void Awake()
     {
-        return timeToExit;
+        instance = this;
+    }
+
+    [SerializeField]
+    int waitingTimeToExit;
+    [SerializeField]
+    int orderingTimeToExit;
+    [SerializeField]
+    int eatingTimeToExit;
+
+    public int changeWaitingTimeToExit()
+    {
+        return waitingTimeToExit;
+    }
+
+    public int changeOrderingTimeToExit()
+    {
+        return orderingTimeToExit;
+    }
+
+    public int changeEatingTimeToExit()
+    {
+        return eatingTimeToExit;
     }
 }

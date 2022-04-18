@@ -5,12 +5,15 @@ using System;
 
 public class Client : MonoBehaviour, IBehaviour
 {
-
+    [SerializeField]
     int moneyToGet;
 
     GameObject myChair;
     Order order;
     Chair thisChair;
+
+    [SerializeField]
+    GameObject WayOut;
 
     [SerializeField]
     int timeToGetOut;
@@ -43,6 +46,7 @@ public class Client : MonoBehaviour, IBehaviour
     IBehaviour.BehaviourType type;
     private void Start()
     {
+        type = IBehaviour.BehaviourType.Calm;
         UpdateBehaviour();
         CheckPossibleRecipes();
         Walk(callback);
@@ -53,7 +57,7 @@ public class Client : MonoBehaviour, IBehaviour
     {
         for (int i = 0; i < possibleRecipe.Length; i++)
         {
-            possibleRecipe[i] = "";
+            possibleRecipe[i] = MacroSistema.sistema.GetPossibleRecipes(i);
         }
     }
 
@@ -62,19 +66,19 @@ public class Client : MonoBehaviour, IBehaviour
         switch (type)
         {
             case IBehaviour.BehaviourType.Calm:
-                maxWaitingTime = calm.changeTimeToExit();
-                maxOrderingTime = calm.changeTimeToExit();
-                maxEatingTime = calm.changeTimeToExit();
+                maxWaitingTime = CalmBehaviour.instance.changeWaitingTimeToExit();
+                maxOrderingTime = CalmBehaviour.instance.changeOrderingTimeToExit();
+                maxEatingTime = CalmBehaviour.instance.changeEatingTimeToExit();
                 break;
             case IBehaviour.BehaviourType.Impatient:
-                maxWaitingTime = impatient.changeTimeToExit();
-                maxOrderingTime = impatient.changeTimeToExit();
-                maxEatingTime = impatient.changeTimeToExit();
+                maxWaitingTime = ImpatientBehaviour.instance.changeWaitingTimeToExit();
+                maxOrderingTime = ImpatientBehaviour.instance.changeOrderingTimeToExit();
+                maxEatingTime = ImpatientBehaviour.instance.changeEatingTimeToExit();
                 break;
             case IBehaviour.BehaviourType.Angry:
-                maxWaitingTime = angry.changeTimeToExit();
-                maxOrderingTime = angry.changeTimeToExit();
-                maxEatingTime = angry.changeTimeToExit();
+                maxWaitingTime = AngryBehaviour.instance.changeWaitingTimeToExit();
+                maxOrderingTime = AngryBehaviour.instance.changeOrderingTimeToExit();
+                maxEatingTime = AngryBehaviour.instance.changeEatingTimeToExit();
                 break;
         }
     }
@@ -331,13 +335,22 @@ public class Client : MonoBehaviour, IBehaviour
 
     public void StartExit(Action<bool> callback)
     {
+        ChairManager.instance.AddChair(myChair);
         callback(true);
     }    
 
     public IEnumerator EndExit(Action<bool> callback)
     {
-        callback(true);
-        yield break;
+        if(transform.position == WayOut.transform.position)
+        {
+            callback(true); 
+            yield break;
+        }
+        else
+        {
+            yield return new WaitForSeconds(1);
+            transform.position = WayOut.transform.position;
+        }
     }
 
     public IEnumerator InteractWithClients(Action<bool> callback)
