@@ -7,7 +7,7 @@ public class ChairManager : MonoBehaviour
     public static ChairManager instance;
     List<GameObject> avaiableChair = new List<GameObject>();
 
-    GameObject allChair;
+    public GameObject allChair;
     
 
     private void Awake()
@@ -17,9 +17,9 @@ public class ChairManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject chair in allChair.GetComponentsInChildren<GameObject>())
+        foreach (Chair chair in allChair.GetComponentsInChildren<Chair>())
         {
-            AddChair(chair);
+            AddChair(chair.gameObject);
         }
 
     }
@@ -38,6 +38,7 @@ public class ChairManager : MonoBehaviour
     public void RemoveChair(GameObject chair)
     {
         avaiableChair.Remove(chair);
+        
     }
 
     public void ClearChair()
@@ -50,6 +51,7 @@ public class ChairManager : MonoBehaviour
         int chairIndex = 0;
         chairIndex = Random.RandomRange(1, avaiableChair.Count);
         GameObject myGameObject = avaiableChair[chairIndex];
+        Debug.Log("Chair: "+ myGameObject);//////////////////////////////////////////
         Vector3 pos = myGameObject.transform.position;
         RemoveChair(myGameObject);
         return pos;

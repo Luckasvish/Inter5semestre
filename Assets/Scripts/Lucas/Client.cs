@@ -36,6 +36,7 @@ public class Client : MonoBehaviour, IBehaviour
         UpdateBehaviour();
         CheckPossibleRecipes();
         Walk(callback);
+        Debug.Log(this);
     }
     void CheckPossibleRecipes()
     {

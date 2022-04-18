@@ -84,7 +84,7 @@ using UnityEngine;
     {
         if(recipe != null)
         {
-             Debug.Log("Receita : " + recipe.itemName);//////
+            
             mainHUD.SetReciepOrderHUD(recipe.itemName);
         
         }

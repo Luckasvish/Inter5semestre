@@ -8,7 +8,7 @@ public class UI : MonoBehaviour
     public Image barrinha;
     void Start()
     {
-        RefreshBar();
+        //RefreshBar();
     }
 
     internal void Gold()
