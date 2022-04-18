@@ -6,7 +6,8 @@ public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
     public List<string> recipesToProduce;
-    public List<string> client;
+    int recipeIndex;
+
     private void Awake()
     {
         instance = this;

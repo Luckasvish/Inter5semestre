@@ -12,10 +12,25 @@ public class CalmBehaviour : MonoBehaviour
     }
 
     [SerializeField]
-    int timeToExit;
-    public int changeTimeToExit()
+    int waitingTimeToExit;    
+    [SerializeField]
+    int orderingTimeToExit;    
+    [SerializeField]
+    int eatingTimeToExit;
+
+    public int changeWaitingTimeToExit()
     {
-        return timeToExit;
+        return waitingTimeToExit;
+    }    
+    
+    public int changeOrderingTimeToExit()
+    {
+        return orderingTimeToExit;
+    }    
+
+    public int changeEatingTimeToExit()
+    {
+        return eatingTimeToExit;
     }
 
 }
