@@ -7,13 +7,22 @@ public class Client : MonoBehaviour, IBehaviour
 {
 
     int moneyToGet;
-    
+
+    GameObject myChair;
+    Order order;
+    Chair thisChair;
+
     [SerializeField]
     int timeToGetOut;
+
+    bool hasOrdered;
     bool hasFood;
+    bool canEat;
+
     bool isInteractingWithPlayer;
     string[] possibleRecipe = new string[3];
-    
+    string clientOrder;
+
 
     [SerializeField]
     CalmBehaviour calm;
@@ -25,6 +34,7 @@ public class Client : MonoBehaviour, IBehaviour
     RageBehaviour rage;
 
     int maxWaitingTime;
+    int maxOrderingTime;
     int maxEatingTime;
 
 
@@ -38,6 +48,7 @@ public class Client : MonoBehaviour, IBehaviour
         Walk(callback);
         Debug.Log(this);
     }
+
     void CheckPossibleRecipes()
     {
         for (int i = 0; i < possibleRecipe.Length; i++)
@@ -45,18 +56,25 @@ public class Client : MonoBehaviour, IBehaviour
             possibleRecipe[i] = "";
         }
     }
+
     void UpdateBehaviour()
     {
         switch (type)
         {
             case IBehaviour.BehaviourType.Calm:
                 maxWaitingTime = calm.changeTimeToExit();
+                maxOrderingTime = calm.changeTimeToExit();
+                maxEatingTime = calm.changeTimeToExit();
                 break;
             case IBehaviour.BehaviourType.Impatient:
                 maxWaitingTime = impatient.changeTimeToExit();
+                maxOrderingTime = impatient.changeTimeToExit();
+                maxEatingTime = impatient.changeTimeToExit();
                 break;
             case IBehaviour.BehaviourType.Angry:
                 maxWaitingTime = angry.changeTimeToExit();
+                maxOrderingTime = angry.changeTimeToExit();
+                maxEatingTime = angry.changeTimeToExit();
                 break;
         }
     }
@@ -93,8 +111,8 @@ public class Client : MonoBehaviour, IBehaviour
             UpdateBehaviour();
             switch (x) 
             { 
-                case true: 
-                    
+                case true:
+                    Order(callback);
                     break; 
                 case false:
                     StartExit(callback);
@@ -172,10 +190,10 @@ public class Client : MonoBehaviour, IBehaviour
             switch (x)
             {
                 case true:
-                    Rage(callback);
+                    StartCoroutine(EndExit(callback));
                     break;
                 case false:
-                    StartCoroutine(EndExit(callback));
+                    Rage(callback);
                     break;
             }
         });
@@ -212,8 +230,11 @@ public class Client : MonoBehaviour, IBehaviour
 
     public void Walk(Action<bool> callback)
     {
-        Vector3 chairPos = ChairManager.instance.ChooseChairToGetPosition();
-        transform.Translate(chairPos, Space.World);
+        myChair = ChairManager.instance.GetChair();
+        thisChair = myChair.GetComponent<Chair>();
+        Vector3 chairPos = myChair.transform.position;
+        transform.position = chairPos;
+        //transform.Translate(chairPos, Space.World);
         callback(true);
     }
 
@@ -238,27 +259,21 @@ public class Client : MonoBehaviour, IBehaviour
             yield return new WaitForSeconds(1);
         }
 
-        if (isInteractingWithPlayer)
+        if (hasOrdered)
             callback(true);
         else
             StartCoroutine(WaitingFood(this.callback));
-        yield break;
     }
 
     public void Order(Action<bool> callback)
     {
         int thisClientRecipe = UnityEngine.Random.Range(0, possibleRecipe.Length);
+        clientOrder = possibleRecipe[thisClientRecipe];
 
-        Order order = new Order();
-        for (int i = 0; i < possibleRecipe.Length; i++)
-        {
-            if(i == thisClientRecipe)
-            {
-                order.GetRecipe(possibleRecipe[i]);
-                break;
-            }
-        }
-        maxWaitingTime = timeToGetOut;
+        order = new Order();
+        order.GetRecipe(clientOrder);
+        thisChair.GetOrder(clientOrder);
+        OrderManager.instance.AddRecipeToList(clientOrder);
         callback(true);
     }
 
@@ -276,17 +291,24 @@ public class Client : MonoBehaviour, IBehaviour
             actualWaitingTime += 1;
             yield return new WaitForSeconds(1);
         }
-        Chair.instance.CheckIfHasFood();
+        hasFood = thisChair.CheckIfHasFood();
         if (hasFood)
-            callback(true);
+        {
+            canEat = thisChair.CheckFood();
+
+            if (canEat)
+                callback(true);
+            else 
+                StartCoroutine(WaitingFood(this.callback));
+        }
         else
             StartCoroutine(WaitingFood(this.callback));
     }
 
     public IEnumerator Eat(Action<bool> callback)
     {
+        OrderManager.instance.RemoveRecipeInList(clientOrder);
         int actualWaitingTime = 0;
-        UpdateBehaviour();
         if(actualWaitingTime == maxEatingTime)
         callback(true);
         yield break;

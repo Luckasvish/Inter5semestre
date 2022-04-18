@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class OrderManager : MonoBehaviour
 {
+    public static OrderManager instance;
     public List<string> recipesToProduce;
     public List<string> client;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         recipesToProduce = new List<string>();
     }
 
-    void AddRecipeToList(string recipeToAdd)
+    public void AddRecipeToList(string recipeToAdd)
     {
         recipesToProduce.Add(recipeToAdd);
     }
 
-    void RemoveRecipeInList(string recipeToRemove)
+    public void RemoveRecipeInList(string recipeToRemove)
     {
         recipesToProduce.Remove(recipeToRemove);
     }
 
-    void ClearRecipeList()
+    public void ClearRecipeList()
     {
         recipesToProduce.Clear();
     }
