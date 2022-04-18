@@ -26,16 +26,6 @@ public class Client : MonoBehaviour, IBehaviour
     string[] possibleRecipe = new string[3];
     string clientOrder;
 
-
-    [SerializeField]
-    CalmBehaviour calm;
-    [SerializeField]
-    ImpatientBehaviour impatient;
-    [SerializeField]
-    AngryBehaviour angry;
-    [SerializeField]
-    RageBehaviour rage;
-
     int maxWaitingTime;
     int maxOrderingTime;
     int maxEatingTime;
@@ -234,6 +224,7 @@ public class Client : MonoBehaviour, IBehaviour
 
     public void Walk(Action<bool> callback)
     {
+        this.callback = callback;
         myChair = ChairManager.instance.GetChair();
         thisChair = myChair.GetComponent<Chair>();
         Vector3 chairPos = myChair.transform.position;

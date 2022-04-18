@@ -9,7 +9,7 @@ public class ChairManager : MonoBehaviour
 
     public GameObject allChair;
     
-
+    GameObject myChair;
     private void Awake()
     {
         instance = this;
@@ -50,10 +50,15 @@ public class ChairManager : MonoBehaviour
     {
         int chairIndex = 0;
         chairIndex = Random.RandomRange(1, avaiableChair.Count);
-        GameObject myGameObject = avaiableChair[chairIndex];
-        Vector3 pos = myGameObject.transform.position;
-        RemoveChair(myGameObject);
-        return myGameObject;
+        myChair = avaiableChair[chairIndex].gameObject;
+        Vector3 pos = myChair.transform.position;
+        StartCoroutine(RemovingChair());
+        return myChair;
+    }
+    IEnumerator RemovingChair()
+    {   
+        yield return new WaitForSeconds(1f);
+        RemoveChair(myChair);
     }
 
     public bool CheckIfHasAvaiableChair()
