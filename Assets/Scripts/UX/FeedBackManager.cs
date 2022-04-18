@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FeedBackManager : MonoBehaviour
 {
-    public FeedBackHUD HUD;
+    public UI   HUD;
     internal bool hudOn;
     internal float barMax;
     internal float currentBar;
@@ -31,11 +31,11 @@ public class FeedBackManager : MonoBehaviour
         }
         hudOn = false;
     }
-    internal void Run(float barSet)
+    internal void RunSlider(float barSet)
     {
         HUD.SetBar(barSet);
     }
-    internal void ToogleHUD()
+    internal void ToogleUI()
     {
         if(hudOn)
         {

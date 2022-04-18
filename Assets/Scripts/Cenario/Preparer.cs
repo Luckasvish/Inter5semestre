@@ -9,7 +9,7 @@ public class Preparer : Interactable
      FeedBackManager feedback {get;set;}
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override GameObject highLight { get ; set ; }
+    public  GameObject highLight;
     public override bool highLightOn {get; set;}
     public Transform ingredientPosition;
     public float preparationTime;
@@ -17,12 +17,12 @@ public class Preparer : Interactable
 
     bool preparing;
 
+
     void Awake()
     {
         feedback = GetComponent<FeedBackManager>();
         type = InteractableType._Preparer;
         itenItHas = null;
-        highLight = GetComponentInChildren<Light>().gameObject;
         highLight.SetActive(false);   
     }
     
@@ -36,6 +36,7 @@ public class Preparer : Interactable
       {
         highLight.SetActive(true);
       }
+
       else 
       {
         highLight.SetActive(false);
@@ -47,7 +48,7 @@ public class Preparer : Interactable
             itenItHas = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
             itenItHas.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
             preparationTimer = 0;                                       // O TIMER É ZERADO
-            feedback.ToogleHUD();                                       //  A HUD INICIA 
+            feedback.ToogleUI();                                       //  A HUD INICIA 
             hasItemOnIt = true;                                         //TEM UM ITEM 
     }
 
@@ -56,7 +57,7 @@ public class Preparer : Interactable
     {
         preparationTimer += Time.deltaTime;
         float _hudBar = preparationTimer / preparationTime;
-        feedback.Run(_hudBar);
+        feedback.RunSlider(_hudBar);
         if(preparationTimer >= preparationTime)
         {
             itenItHas.type = ItemType._PreparedIngredient;
@@ -75,7 +76,7 @@ public class Preparer : Interactable
             itenToGive = itenItHas;
             itenItHas = null;
             hasItemOnIt = false;
-            feedback.ToogleHUD();
+            feedback.ToogleUI();
             return itenToGive;
     }
     

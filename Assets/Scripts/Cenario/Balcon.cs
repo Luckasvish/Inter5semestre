@@ -8,33 +8,62 @@ public class Balcon : Interactable
 
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override GameObject highLight { get ; set ; }
+    public  GameObject highLight;
     public override bool highLightOn {get; set;}
     public Transform itemPosition;
-    void Awake()
+    
+    internal bool havePlate;
+    
+    
+        void Awake()
     {
         type = InteractableType._Balcon;
         if(GetComponentInChildren<Plates>() == null)
         {
             itenItHas = null;
         }
-         highLight = GetComponentInChildren<Light>().gameObject;
+        else
+        {
+          hasItemOnIt=true;
+          itenItHas = GetComponentInChildren<Plates>();
+        }
+        highLightOn = false;
         highLight.SetActive(false);
     }
 
     void Update()
     {
-        if(hasItemOnIt)
+
+      if(hasItemOnIt)
+      {
+        if(itenItHas.type == ItemType._Plate)
         {
-            itenItHas.transform.position = itemPosition.position;
+          Plates plate = itenItHas.GetComponent<Plates>();
+
+            if(highLightOn)
+            {
+              plate.hud.SetActive(true);
+            }
+            else
+            {
+              plate.hud.SetActive(false);
+            }
         }
-        if(highLightOn)
-      {
-        highLight.SetActive(true);
+        else 
+        {
+            if(highLightOn)
+            {
+              highLight.SetActive(true);
+            }
+            else
+            {
+              highLight.SetActive(false);
+            }
+        }
       }
-      else 
+      else
       {
-        highLight.SetActive(false);
+          highLight.SetActive(false);
       }
     }
 

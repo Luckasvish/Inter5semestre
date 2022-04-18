@@ -24,6 +24,8 @@ public class Interaction_Manager : MonoBehaviour
             break;
             case InteractableType._Balcon: InteractToBalcon(interaction);
             break;
+            case InteractableType._Table: InteractToBalcon(interaction);
+            break;
             default: Debug.Log("Não dá pra interagir!!");///
             break;
 
@@ -49,6 +51,22 @@ public class Interaction_Manager : MonoBehaviour
 
         if(chef.hasItem)        //000 PRIMEIRA CHECAGEM: SE O JOGADOR TEM ITEM 
         {
+            if(chef.itenInHand.type == ItemType._Pan)
+            {
+                if(interaction.itenItHas.type == ItemType._Plate)
+                {
+                    Plates plate = interaction.itenItHas.GetComponent<Plates>();
+                    Pan pan = chef.itenInHand.GetComponent<Pan>();
+
+                    if(plate != null && pan != null)
+                    {
+
+                        plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.ingredient.ingreType));
+                    }
+                    
+
+                }
+            }
 
             if(interaction.hasItemOnIt) // 001 SEGUNDA CHECAGEM: SE O BALCÃO TEM ITEM 
             {
@@ -132,66 +150,110 @@ public class Interaction_Manager : MonoBehaviour
         if (chef.hasItem)
         {    ItemType itenType = chef.itenInHand.type;
             
+
             switch(itenType)
             {
 
                 case ItemType._PreparedIngredient:
+                IngredientInstance ingre = chef.itenInHand.GetComponent<IngredientInstance>();
 
-                    if(pan.ingreIn < 3)
+                    if(oven.hasItemOnIt == true)
                     {
-                        pan.CheckIngredient(chef.GiveIten(chef.itenInHand));
+                        pan.ReceiveItens(chef.GiveIten(ingre));
                     }
                     else 
                     {
-                        Debug.Log("A panela está cheia !!");///
+                        Debug.Log("Está faltando a panela !!!"); ///////////////////////////////////////////////////////////////////////////////////////////  
+                    }
+                                                    break;
+                
+                case ItemType._Plate:
+                Plates plate =  chef.itenInHand.GetComponent<Plates>();
+                    
+                    if(oven.hasItemOnIt == true)
+                    {
+                        if(pan.ready.activeInHierarchy && plate.recipe != null)
+                        {
+                            plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.ingredient.ingreType));
+                        }
+
+                        else
+                        {
+                            Debug.Log("Ainda não está pronto"); /////////////////////////////////////////////////////////////////////////////////////////// 
+                        }
+                    }
+                    else 
+                    {
+                        Debug.Log("Está faltando a panela !!!"); ///////////////////////////////////////////////////////////////////////////////////////////  
                     }
 
-                break;
+                                                    break;
 
-                case ItemType._Pan: 
-                    
+                case ItemType._Pan:
+
                     if(oven.hasItemOnIt == false)
                     {
                         oven.ReceiveItens(chef.GiveIten(chef.itenInHand));
                     }
-                    else
-                    {
-                        Debug.Log("Esse item não vai aqui!!");///
-                    }
-                break;
-
-                case ItemType._Plate:
-                    Plates plate = chef.itenInHand.GetComponent<Plates>();
-
-                    if(pan.recipe)
-                    {
-                        pan.GiveRecipe(plate);
-                    }
-                    
                     else 
                     {
-                        Debug.Log("A receita ainda não está pronta");
+                        Debug.Log("Já tem panela aqui"); /////////////////////////////////////////////////////////////////////////////////////////// 
                     }
-                    
+                                                    break;
 
-                break;
+                default : Debug.Log("Deu ruim!!"); break;
 
-                default: Debug.Log("Esse item não vai aqui !!!");///
-                break;
             }
+        }    
 
-        }
         else 
         {
             if(oven.hasItemOnIt)
             {
                 chef.ReceiveItens(oven);
             }
+        } 
+    }
+
+    void InteractToTable(Interactable interaction)
+    {
+        Table table = interaction.GetComponent<Table>();
+        if(chef.hasItem)
+        {
+            if(chef.itenInHand.type == ItemType._Plate)
+            {
+                Plates plate = chef.itenInHand.GetComponent<Plates>();
+                if(table.isFull == false)
+                {
+                    table.ReceiveItens(chef.GiveIten(plate));
+                }
+                else
+                {
+                    Debug.Log("A mesa está cheiaa !!!!!!!");/////////////////////////////////
+                }
+            }
             else 
             {
-                Debug.Log("Não tem panela aqui!");///
+                 Debug.Log("Esse item não vai aqui!");/////////////////////////////////
             }
+
         }
+        else
+        {
+            if(table.plate0 != null || table.plate1 != null)
+            {
+                chef.ReceiveItens(table);
+            }
+            else
+            {
+                Debug.Log("Não tem nada na mesa!");///////////////////////////////////////////
+            }
+
+        }
+
+
+
+
 
     }
 

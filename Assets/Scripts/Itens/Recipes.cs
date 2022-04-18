@@ -2,66 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recipes : Item
+public class Recipes 
 
 {
-   public  override ItemType type { get; set; }
-   public  override string itemName { get; set; }
-   
+   internal string itemName { get; set; }
+   internal Ingredients[] ingreNeeded = new Ingredients[3]; 
    public int price;
-
-   public GameObject[] recipes_Mesh;
-   void Awake()
-   {
-         type = ItemType._Recipe;
-   }
-   public void SetRecipe(string recipeCode)
-   {  
    
-      switch(recipeCode)
+      public Recipes(string recipeName)
       {
-            case "FFC" :
-            case "FCF" :
-            case "CFF" :
+            Ingredients[] recipe = new Ingredients[3];
+            switch(recipeName)
+            {
+                  case "Feijoada" : recipe[0] = new Ingredients(IngreType._Beans); 
+                                    recipe[1] = new Ingredients(IngreType._Beans); 
+                                    recipe[2] = new Ingredients(IngreType._Meat); 
+                                    itemName = "Feijoada";
+                                                                              break;
+                  
+                  case "PratoFeito":recipe[0] = new Ingredients(IngreType._Beans); 
+                                    recipe[1] = new Ingredients(IngreType._Rice); 
+                                    recipe[2] = new Ingredients(IngreType._Meat); 
+                                    itemName = "PratoFeito";
+                                                                              break;
+                                                                        
+                  
+                  case "Buchada":   recipe[0] = new Ingredients(IngreType._Meat); 
+                                    recipe[1] = new Ingredients(IngreType._Meat); 
+                                    recipe[2] = new Ingredients(IngreType._Farofa); 
+                                    itemName = "Buchada";
 
-                  recipes_Mesh[0].SetActive(true);    
-                  recipes_Mesh[1].SetActive(false);
-                  recipes_Mesh[2].SetActive(false);
-                  itemName = "Feijoada";
-            break;
-                
-         
-            case "AFC" :
-            case "ACF" :
-            case "CFA" :
-            case "CAF" :
-            case "FAC" :
-            case "FCA" :
+                                                                              break;
+                                                                        
+                  default:  Debug.Log("Deu ruim !!");
+                                                                        break;
+            }
+            ingreNeeded = recipe;
 
-                  recipes_Mesh[0].SetActive(false);    
-                  recipes_Mesh[1].SetActive(true);
-                  recipes_Mesh[2].SetActive(false);  
-                  itemName = "PratoFeito";
-                                
-            break;
-
-
-            case "FaCC" :
-            case "CFaC" :
-            case "CCFa" :
-
-                  recipes_Mesh[0].SetActive(false);    
-                  recipes_Mesh[1].SetActive(false);
-                  recipes_Mesh[2].SetActive(true); 
-                  itemName = "Buchada"; 
-
-            break;
-
-
-            default:
-            break;
       }
 
-   }
 
 }
+

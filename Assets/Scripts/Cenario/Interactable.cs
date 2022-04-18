@@ -7,7 +7,6 @@ public abstract class Interactable : MonoBehaviour
     public  abstract InteractableType type { get; set; }
     public abstract Item itenItHas {get;set;}
     public abstract bool hasItemOnIt {get;set;}
-    public abstract  GameObject highLight{get;set;}
     public abstract bool highLightOn{get; set;}
     public abstract Item GiveItens(Item itenToGive);
     public abstract void ReceiveItens(Item itenReceived);
@@ -21,4 +20,5 @@ public enum InteractableType
     _Storer,
     _Preparer,
     _Balcon,
+    _Table
 }

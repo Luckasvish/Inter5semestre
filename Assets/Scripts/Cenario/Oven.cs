@@ -9,7 +9,7 @@ public class Oven : Interactable
     
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override GameObject highLight { get ; set ; }
+    public  GameObject highLight;
     public override bool highLightOn {get; set;}
 
     public Transform PanPosition;
@@ -19,7 +19,6 @@ public class Oven : Interactable
     void Awake()
     {
         type = InteractableType._Oven;
-         highLight = GetComponentInChildren<Light>().gameObject;
         highLight.SetActive(false);
         
     }
@@ -38,7 +37,6 @@ public class Oven : Interactable
     
     void Start()
     {
-        _Pan  = GetComponentInChildren<Pan>();
         itenItHas = _Pan;
         itenItHas.transform.position = PanPosition.position;
         hasItemOnIt = true;
@@ -51,10 +49,7 @@ public class Oven : Interactable
             Buffer = itenItHas;
             itenItHas = null;
             hasItemOnIt = false;
-            if(_Pan.cooking == true)
-            {
-                _Pan.cooking = false;
-            }
+            _Pan.onOven = false;
             _Pan = null;
             return Buffer;
        
@@ -64,11 +59,7 @@ public class Oven : Interactable
     {
                 _Pan = Pan.GetComponent<Pan>();
                 itenItHas = _Pan;
-                if(_Pan.ingreIn > 0)
-                {
-                    _Pan.cooking = true;
-                }
-                
+                _Pan.onOven = true;
                 itenItHas.transform.position = PanPosition.position;
                 hasItemOnIt = true;
        

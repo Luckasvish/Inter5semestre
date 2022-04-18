@@ -2,41 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredients : Item
+public class Ingredients
 {
-    public override string itemName { get; set;}
-    public override ItemType type { get; set;}
-    public GameObject[] ingredients_Mesh;
+    internal IngreType ingreType;
 
-    public void SpawnBeans()
+
+    public Ingredients(IngreType type)
     {
-
-               ingredients_Mesh[0].SetActive(true);
-               ingredients_Mesh[1].SetActive(false);
-               ingredients_Mesh[2].SetActive(false);
-               type = ItemType._PreparedIngredient;
-               itemName = "Beans";
+        ingreType = type;
     }
 
 
-                
-    public void SpawnRice(){
 
-                ingredients_Mesh[0].SetActive(false);
-                ingredients_Mesh[1].SetActive(true);
-                ingredients_Mesh[2].SetActive(false); 
-                type = ItemType._PreparedIngredient;
-                itemName = "Rice";
-    }
-    
 
-    public void SpawnMeat(){
+}
 
-                ingredients_Mesh[0].SetActive(false);
-                ingredients_Mesh[1].SetActive(false);
-                ingredients_Mesh[2].SetActive(true); 
-                type = ItemType._UnpreparedIngredient;
-                itemName = "Meat";
-    }
-    
+public enum IngreType 
+{
+    _Beans,
+    _Meat,
+    _Rice,
+    _Farofa
+
 }
