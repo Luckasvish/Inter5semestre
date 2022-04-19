@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager instance;
     [SerializeField]
-    GameObject Spawn;
+    internal GameObject Spawn;
     [SerializeField]
     GameObject Client;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
