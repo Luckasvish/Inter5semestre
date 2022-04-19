@@ -475,7 +475,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2499904458460601583}
   - component: {fileID: 8948249365917618372}
-  - component: {fileID: 4449108027454909731}
   m_Layer: 0
   m_Name: olhos
   m_TagString: Untagged
@@ -590,24 +589,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.024045328, y: 0.012478402, z: -0.0003398154}
     m_Extent: {x: 0.039377242, y: 0.03214149, z: 0.021750635}
   m_DirtyAABB: 0
---- !u!114 &4449108027454909731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688842071193965467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e1438d72fbf7a40b24cbfa9d9c08bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyToGet: 0
-  WayOut: {fileID: 0}
-  timeToGetOut: 0
-  hasAvaiableChair: 0
-  callback: 0
-  behaviourState: 0
 --- !u!1 &1997842632159046100
 GameObject:
   m_ObjectHideFlags: 0

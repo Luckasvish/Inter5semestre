@@ -12,8 +12,8 @@ public class Client : IBehaviour
     Order order;
     Chair thisChair;
 
-    
-   public static GameObject WayOut;
+    [SerializeField]
+    GameObject WayOut;
 
     [SerializeField]
     int timeToGetOut;
@@ -43,6 +43,7 @@ public class Client : IBehaviour
   
     private void Start()
     {
+        WayOut = SpawnManager.instance.Spawn;
         type = BehaviourType.Calm;
         UpdateBehaviour();
         CheckPossibleRecipes();
@@ -220,8 +221,8 @@ public class Client : IBehaviour
        
         if (hasAvaiableChair)
         {
-            behaviourState = BehaviourState.Walk;
             myChair = ChairManager.instance.GetChair();
+            behaviourState = BehaviourState.Walk;
             Debug.Log("MyChair : "+ myChair);/////////////////
             thisChair = myChair.GetComponent<Chair>();
             Debug.Log("ThisChair : "+ thisChair);/////////////////
@@ -365,7 +366,8 @@ public class Client : IBehaviour
     public override void StartExit()
     {
         behaviourState = BehaviourState.StartExit;
-        ChairManager.instance.AddChair(myChair);
+        if (myChair != null)
+            ChairManager.instance.AddChair(myChair);
         callback = true;
         StartCoroutine(Main());
     }    
@@ -381,6 +383,7 @@ public class Client : IBehaviour
             {
                 thisChair.client = null;
             }
+
             StartCoroutine(Main());
             
         }

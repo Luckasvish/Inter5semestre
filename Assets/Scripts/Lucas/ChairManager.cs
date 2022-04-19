@@ -44,16 +44,21 @@ public class ChairManager : MonoBehaviour
         chairIndex = Random.RandomRange(0, avaiableChair.Count);
         //Debug.Log(chairIndex);
         myChair = avaiableChair[chairIndex];
-        RemoveChair(myChair);
+        RemoveChair(avaiableChair[chairIndex]);
         return myChair;
     }
 
     public bool CheckIfHasAvaiableChair()
     {
-        if (avaiableChair.Count >= 0)
+        Debug.Log(avaiableChair.Count + " : avaiableChair");
+        if (avaiableChair.Count > 0)
         {
             return true;
         }
-        else return false;
+        else
+        {
+            avaiableChair.Clear();
+            return false;
+        }
     }
 }
