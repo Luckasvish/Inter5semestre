@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChairManager : MonoBehaviour
 {
     public static ChairManager instance;
-    List<GameObject> avaiableChair = new List<GameObject>();
+    List<GameObject> avaiableChair;
 
     public GameObject allChair;
     
@@ -13,26 +13,18 @@ public class ChairManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+        avaiableChair = new List<GameObject>();
         foreach (Chair chair in allChair.GetComponentsInChildren<Chair>())
         {
             AddChair(chair.gameObject);
         }
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void AddChair(GameObject chair)
     {
         avaiableChair.Add(chair);
+        Debug.Log(avaiableChair.Count);
     }
 
     public void RemoveChair(GameObject chair)
@@ -49,10 +41,10 @@ public class ChairManager : MonoBehaviour
     public GameObject GetChair()
     {
         int chairIndex = 0;
-        chairIndex = Random.RandomRange(1, avaiableChair.Count);
-        myChair = avaiableChair[chairIndex].gameObject;
-        Vector3 pos = myChair.transform.position;
-        StartCoroutine(RemovingChair());
+        chairIndex = Random.RandomRange(0, avaiableChair.Count);
+        Debug.Log(chairIndex);
+        myChair = avaiableChair[chairIndex];
+        //StartCoroutine(RemovingChair());
         return myChair;
     }
     IEnumerator RemovingChair()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Client : MonoBehaviour, IBehaviour
+public class Client : IBehaviour
 {
     [SerializeField]
     int moneyToGet;
@@ -31,16 +31,18 @@ public class Client : MonoBehaviour, IBehaviour
     int maxEatingTime;
 
 
-    public Action<bool> callback;
+
+    int actualWaitingTime = 0;
+
+    public bool callback;
     IBehaviour.BehaviourState behaviourState;
     IBehaviour.BehaviourType type;
     private void Start()
     {
-        type = IBehaviour.BehaviourType.Calm;
+        type = BehaviourType.Calm;
         UpdateBehaviour();
         CheckPossibleRecipes();
-        Walk(callback);
-        Debug.Log(this);
+        Walk();
     }
 
     void CheckPossibleRecipes()
@@ -73,147 +75,133 @@ public class Client : MonoBehaviour, IBehaviour
         }
     }
 
-    void Main()
+    IEnumerator Main()
     {
-        Walk(x => 
+        yield return new WaitForSeconds(0.1f);
+        UpdateBehaviour();
+        switch (behaviourState)
         {
-            UpdateBehaviour();
-            switch (x) 
-            { 
-                case true: Sit(callback); 
-                    break; 
-                case false:
-                    StartExit(callback); 
-                    break; 
-            }
-        });
-        Sit(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    WaitingForOrder(callback);
-                    break;
-                case false:
-                    StartExit(callback);
-                    break;
-            }
-        });
-        WaitingForOrder(x => 
-        {
-            UpdateBehaviour();
-            switch (x) 
-            { 
-                case true:
-                    Order(callback);
-                    break; 
-                case false:
-                    StartExit(callback);
-                    break; 
-            }
-        });
-        Order(x => 
-        {
-            UpdateBehaviour();
-            switch (x) 
-            { 
-                case true: 
-                    StartCoroutine(WaitingFood(callback)); 
-                    break; 
-                case false:
-                    StartExit(callback);
-                    break; 
-            }
-        });
-        WaitingFood(x => 
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    Eat(callback);
-                    break;
-                case false:
-                    StartExit(callback);
-                    break;
-            }
-        });
-        Eat(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    StartCoroutine(PayOrder(callback));
-                    break;
-                case false:
-                    StartExit(callback);
-                    break;
-            }
-        });
-        PayOrder(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    PayTip(callback);
-                    break;
-                case false:
-                    StartExit(callback);
-                    break;
-            }
-        });
-        PayTip(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    StartExit(callback);
-                    break;
-                case false:
-                    StartExit(callback);
-                    break;
-            }
-        });
-        StartExit(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    StartCoroutine(EndExit(callback));
-                    break;
-                case false:
-                    Rage(callback);
-                    break;
-            }
-        });
-        Rage(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    StartCoroutine(EndExit(callback));
-                    break;
-                case false:
-                    StartCoroutine(EndExit(callback));
-                    break;
-            }
-        });
-        EndExit(x =>
-        {
-            UpdateBehaviour();
-            switch (x)
-            {
-                case true:
-                    Destroy(gameObject);
-                    break;
-            }
-        });
+            case BehaviourState.Walk:
+                    switch (callback)
+                    {
+                        case true:
+                            Sit();
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.Sit:
+                    switch (callback)
+                    {
+                        case true:
+                            StartCoroutine(WaitingForOrder());
+                            InteractWithClients();
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.WaitingForOrder:
+                    switch (callback)
+                    {
+                        case true:
+                            Order();
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.Order:
+                    switch (callback)
+                    {
+                        case true:
+                            StartCoroutine(WaitingFood());
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.WaitingFood:
+                    switch (callback)
+                    {
+                        case true:
+                            Eat();
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.Eat:
+                    switch (callback)
+                    {
+                        case true:
+                            StartCoroutine(PayOrder());
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.PayOrder:
+                    switch (callback)
+                    {
+                        case true:
+                            PayTip();
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.PayTip:
+                    switch (callback)
+                    {
+                        case true:
+                            StartExit();
+                            break;
+                        case false:
+                            StartExit();
+                            break;
+                    }
+                break;
+            case BehaviourState.StartExit:
+                    switch (callback)
+                    {
+                        case true:
+                            StartCoroutine(EndExit());
+                            break;
+                        case false:
+                            Rage();
+                            break;
+                    }
+                break;
+            case BehaviourState.Rage:
+                    switch (callback)
+                    {
+                        case true:
+                            StartCoroutine(EndExit());
+                            break;
+                        case false:
+                            StartCoroutine(EndExit());
+                            break;
+                    }
+                break;
+            case BehaviourState.EndExit:
+                    switch (callback)
+                    {
+                        case true:
+                            Destroy(gameObject);
+                            break;
+                    }
+                break;
+        }
+
     }
     //public IEnumerator BehaviourManager()
     //{
@@ -222,30 +210,36 @@ public class Client : MonoBehaviour, IBehaviour
     //    StartCoroutine(BehaviourManager());
     //}
 
-    public void Walk(Action<bool> callback)
+    public override void Walk()
     {
-        this.callback = callback;
+        behaviourState = BehaviourState.Walk;
         myChair = ChairManager.instance.GetChair();
         thisChair = myChair.GetComponent<Chair>();
         Vector3 chairPos = myChair.transform.position;
         transform.position = chairPos;
         //transform.Translate(chairPos, Space.World);
-        callback(true);
+        callback = true;
+        StartCoroutine(Main());
     }
 
-    public void Sit(Action<bool> callback)
+    public override void Sit()
     {
+        behaviourState = BehaviourState.Sit;
         //play animation
-        callback(true);
+        Debug.Log("sit");
+        callback = true;
+        StartCoroutine(Main());
     }
 
-    public IEnumerator WaitingForOrder(Action<bool> callback)
+    public override IEnumerator WaitingForOrder()
     {
-        this.callback = callback;
-        int actualWaitingTime = 0;
+        behaviourState = BehaviourState.WaitingForOrder;
+        Debug.Log("WaitingForOrder");
+
         if (actualWaitingTime == maxWaitingTime)
         {
-            callback(false);
+            callback = false;
+            StartCoroutine(Main());
             yield break;
         }
         else
@@ -255,13 +249,18 @@ public class Client : MonoBehaviour, IBehaviour
         }
 
         if (hasOrdered)
-            callback(true);
+        {
+            callback = true;
+            actualWaitingTime = 0;
+        }
         else
-            StartCoroutine(WaitingFood(this.callback));
+            StartCoroutine(WaitingForOrder());
     }
 
-    public void Order(Action<bool> callback)
+    public override void Order()
     {
+        behaviourState = BehaviourState.Order;
+        Debug.Log("Order");
         int thisClientRecipe = UnityEngine.Random.Range(0, possibleRecipe.Length);
         clientOrder = possibleRecipe[thisClientRecipe];
 
@@ -269,16 +268,18 @@ public class Client : MonoBehaviour, IBehaviour
         order.GetRecipe(clientOrder);
         thisChair.GetOrder(clientOrder);
         OrderManager.instance.AddRecipeToList(clientOrder);
-        callback(true);
+        callback = true;
+        StartCoroutine(Main());
     }
 
-    public IEnumerator WaitingFood(Action<bool> callback)
+    public override IEnumerator WaitingFood()
     {
-        this.callback = callback;
-        int actualWaitingTime = 0;
+        behaviourState = BehaviourState.WaitingFood;
+        Debug.Log("WaitingFood");
         if(actualWaitingTime == maxWaitingTime)
         {
-            callback(false);
+            callback = false;
+            StartCoroutine(Main());
             yield break;
         }
         else
@@ -292,66 +293,93 @@ public class Client : MonoBehaviour, IBehaviour
             canEat = thisChair.CheckFood();
 
             if (canEat)
-                callback(true);
+            {
+                callback = true;
+                StartCoroutine(Main());
+                actualWaitingTime = 0;
+            }
             else 
-                StartCoroutine(WaitingFood(this.callback));
+                StartCoroutine(WaitingFood());
         }
         else
-            StartCoroutine(WaitingFood(this.callback));
+            StartCoroutine(WaitingFood());
     }
 
-    public IEnumerator Eat(Action<bool> callback)
+    public override IEnumerator Eat()
     {
+        behaviourState = BehaviourState.Eat;
+        Debug.Log("Eat");
         OrderManager.instance.RemoveRecipeInList(clientOrder);
-        int actualWaitingTime = 0;
+
         if(actualWaitingTime == maxEatingTime)
-        callback(true);
-        yield break;
+        {
+            callback = true;
+            StartCoroutine(Main());
+            actualWaitingTime = 0;
+        }
+        else
+        {
+            actualWaitingTime += 1;
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Eat());
+        }
     }    
     
-
-    public IEnumerator PayOrder(Action<bool> callback)
+    
+    public override IEnumerator PayOrder()
     {
+        behaviourState = BehaviourState.PayOrder;
+        Debug.Log("PayOrder");
         UpdateBehaviour();
         Bank.instance.EarnMoney(moneyToGet);
-        callback(true);
+        callback = true;
+        StartCoroutine(Main());
         yield break;
     }
 
-    public IEnumerator PayTip(Action<bool> callback)
+    public override IEnumerator PayTip()
     {
-        callback(true);
+        behaviourState = BehaviourState.PayTip;
+        callback = true;
+        StartCoroutine(Main());
         yield break;
     }
 
-    public void StartExit(Action<bool> callback)
+    public override void StartExit()
     {
+        behaviourState = BehaviourState.StartExit;
         ChairManager.instance.AddChair(myChair);
-        callback(true);
+        callback = true;
+        StartCoroutine(Main());
     }    
 
-    public IEnumerator EndExit(Action<bool> callback)
+    public override IEnumerator EndExit()
     {
-        if(transform.position == WayOut.transform.position)
+        behaviourState = BehaviourState.EndExit;
+        if (transform.position == WayOut.transform.position)
         {
-            callback(true); 
-            yield break;
+            callback = true;
+            StartCoroutine(Main());
         }
         else
         {
             yield return new WaitForSeconds(1);
             transform.position = WayOut.transform.position;
+            StartCoroutine(EndExit());
         }
     }
 
-    public IEnumerator InteractWithClients(Action<bool> callback)
+    public override IEnumerator InteractWithClients()
     {
-        callback(true);
+        callback = true;
+        StartCoroutine(Main());
         yield break;
     }
 
-    public void Rage(Action<bool> callback)
+    public void Rage()
     {
-        callback(false);
+        behaviourState = BehaviourState.Rage;
+        callback = false;
+        StartCoroutine(Main());
     }
 }
