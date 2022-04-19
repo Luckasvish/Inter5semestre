@@ -12,14 +12,14 @@ public class Client : IBehaviour
     Order order;
     Chair thisChair;
 
-    [SerializeField]
-    GameObject WayOut;
+    
+   public static GameObject WayOut;
 
     [SerializeField]
     int timeToGetOut;
 
     public bool hasAvaiableChair;
-    bool hasOrdered;
+    internal bool hasOrdered;
     bool hasFood;
     bool canEat;
 
@@ -38,6 +38,9 @@ public class Client : IBehaviour
     public bool callback;
     public BehaviourState behaviourState;
     BehaviourType type;
+   
+  
+  
     private void Start()
     {
         type = BehaviourType.Calm;
@@ -214,11 +217,15 @@ public class Client : IBehaviour
     public override void Walk()
     {
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
+       
         if (hasAvaiableChair)
         {
             behaviourState = BehaviourState.Walk;
             myChair = ChairManager.instance.GetChair();
+            Debug.Log("MyChair : "+ myChair);/////////////////
             thisChair = myChair.GetComponent<Chair>();
+            Debug.Log("ThisChair : "+ thisChair);/////////////////
+            thisChair.client = this;
             Vector3 chairPos = myChair.transform.position;
             transform.position = chairPos;
             //transform.Translate(chairPos, Space.World);
@@ -369,7 +376,13 @@ public class Client : IBehaviour
         if (transform.position == WayOut.transform.position)
         {
             callback = true;
+            
+            if(thisChair != null)
+            {
+                thisChair.client = null;
+            }
             StartCoroutine(Main());
+            
         }
         else
         {

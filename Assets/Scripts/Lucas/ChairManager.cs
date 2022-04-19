@@ -42,7 +42,7 @@ public class ChairManager : MonoBehaviour
     {
         int chairIndex = 0;
         chairIndex = Random.RandomRange(0, avaiableChair.Count);
-        Debug.Log(chairIndex);
+        //Debug.Log(chairIndex);
         myChair = avaiableChair[chairIndex];
         RemoveChair(myChair);
         return myChair;
@@ -50,7 +50,7 @@ public class ChairManager : MonoBehaviour
 
     public bool CheckIfHasAvaiableChair()
     {
-        if (avaiableChair.Count > 0)
+        if (avaiableChair.Count >= 0)
         {
             return true;
         }

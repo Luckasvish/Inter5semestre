@@ -13,12 +13,15 @@ public class Table : Interactable
     public Plates plate1;
     internal bool isFull;
 
+    internal Chair[] places;
+
     void Awake()
     {
         type = InteractableType._Table;
         itenItHas = null;
         hasItemOnIt = false;
         highLightOn = false;
+        places = GetComponentsInChildren<Chair>();
     }
 
     public override Item GiveItens(Item itenToGive)
@@ -54,4 +57,6 @@ public class Table : Interactable
 
     }
     
+
+
 }

@@ -6,7 +6,6 @@ public class Chair : MonoBehaviour
 {
     public static Chair instance;
     public GameObject Food;
-
     private bool hasItem;
     private bool hasFood;
     private bool hasDrink;
@@ -15,26 +14,13 @@ public class Chair : MonoBehaviour
     string itemReceived;
 
     Item item;
-
-
+    internal Client client;
 
     private void Awake()
     {
         instance = this;
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public bool CheckIfHasFood()
     {

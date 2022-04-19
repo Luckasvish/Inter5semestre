@@ -33,6 +33,10 @@ public class MacroSistema : MonoBehaviour
             i.gameObject.SetActive(false);
         }
       
+        Client.WayOut = FindObjectOfType<Exit>().gameObject;
+
+
+
     }
 
     void Start()

@@ -240,13 +240,36 @@ public class Interaction_Manager : MonoBehaviour
         }
         else
         {
-            if(table.plate0 != null || table.plate1 != null)
+
+            if(table.places[0].client != null || table.places[1].client != null )
             {
-                chef.ReceiveItens(table);
+                Client client;
+                if(table.places[0].client != null) client = table.places[0].client ;
+                else if(table.places[1].client != null) client = table.places[1].client ;
+                else client = null;
+
+                switch(client.behaviourState)
+                {
+                    case IBehaviour.BehaviourState.WaitingForOrder: 
+                        client.hasOrdered = true;
+                        
+                    break;
+                    default :Debug.Log("O cliente está em outro estado que não o WaitingFor Order"); //////////////////////////
+                     break;
+                }
             }
             else
             {
-                Debug.Log("Não tem nada na mesa!");///////////////////////////////////////////
+
+                if(table.plate0 != null || table.plate1 != null)
+                {
+                    chef.ReceiveItens(table);
+                }
+                else
+                {
+                    Debug.Log("Não tem nada na mesa!");///////////////////////////////////////////
+                }
+
             }
 
         }
