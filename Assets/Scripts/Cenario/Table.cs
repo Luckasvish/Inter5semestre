@@ -9,11 +9,11 @@ public class Table : Interactable
     public override bool hasItemOnIt {get;set;}
     public override bool highLightOn{get; set;}
     public Transform[] platePosition;
-    public Plates plate0;
-    public Plates plate1;
+    public Plates[] plates;
+  
     internal bool isFull;
 
-    internal Chair[] places;
+    public Chair[] places;
 
     void Awake()
     {
@@ -21,39 +21,68 @@ public class Table : Interactable
         itenItHas = null;
         hasItemOnIt = false;
         highLightOn = false;
-        places = GetComponentsInChildren<Chair>();
+        
+        Debug.Log(places.Length);
     }
 
-    public override Item GiveItens(Item itenToGive)
+
+    public void CheckPlaces()/////
     {
-       if(plate0 != null)
-       {
-           return plate0;
-       }
-       else if(plate1 != null)
-                                {  return plate1;}
-       else
-       {
-            return null;
-       }
+
+    }
+
+
+    public override Item GiveItens (Item itenToGive)
+    {
+            Plates Buffer;
+        if(plates[0] != null)
+        {
+            Buffer = plates[0];
+            plates[0] = null;
+            return Buffer;
+        }
+        else if (plates[1] != null)
+        {
+            Buffer = plates[1];
+            plates[1] = null;
+            return Buffer;
+        }
+        else return null;
     }
 
     public override void ReceiveItens(Item itenReceived)
     {   
-        if(plate0 == null)
+        Plates plate = itenReceived.GetComponent<Plates>();
+        if(places[0].client != null || places[1].client != null ) 
+        
         {
-            plate0 = itenReceived.GetComponent<Plates>();
-            plate0.transform.position =  platePosition[0].position;
+            if(places[0].client != null && plates[0] == null)
+            {
+                plates[0] = plate;
+            }
+            else if (places[1].client != null && plates[1] == null)
+            { 
+                plates[1] = plate;
+            }
         }
-        else if(plate1 == null) 
+        else if(places[0].client == null && places[1].client == null)
         {
-             plate1 = itenReceived.GetComponent<Plates>();
-             plate1.transform.position =  platePosition[1].position;
+
+            if(plates[0] == null)
+            {
+                plates[0]  = plate;
+                plates[0].transform.position =  platePosition[0].position;
+            }
+            else  if(plates[1] == null)
+            {
+                plates[1]  = plate;
+                plates[1].transform.position =  platePosition[1].position;
+            }    
+
         }
-        else
-        {
-            Debug.Log("A mesa está cheia!");
-        }      
+
+
+
 
     }
     

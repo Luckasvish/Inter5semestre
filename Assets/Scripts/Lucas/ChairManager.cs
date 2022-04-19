@@ -24,7 +24,7 @@ public class ChairManager : MonoBehaviour
     public void AddChair(GameObject chair)
     {
         avaiableChair.Add(chair);
-        Debug.Log(avaiableChair.Count);
+       // Debug.Log(avaiableChair.Count);
     }
 
     public void RemoveChair(GameObject chair)
@@ -50,7 +50,7 @@ public class ChairManager : MonoBehaviour
 
     public bool CheckIfHasAvaiableChair()
     {
-        Debug.Log(avaiableChair.Count + " : avaiableChair");
+      //  Debug.Log(avaiableChair.Count + " : avaiableChair");
         if (avaiableChair.Count > 0)
         {
             return true;

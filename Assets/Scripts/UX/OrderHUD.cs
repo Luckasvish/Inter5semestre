@@ -14,8 +14,7 @@ public class OrderHUD : MonoBehaviour
     }
 
 
-
-    public void SetReciepOrderHUD(string recipeName)
+    internal void SetReciepOrderHUD(string recipeName)
     {
 
         switch(recipeName)

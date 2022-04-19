@@ -42,7 +42,7 @@ public class Chair : MonoBehaviour
         itemOrdered = order;
     }
 
-    void ReceiveItens(Item item)
+    public void ReceiveItens(Item item)
     {
         hasItem = true;
         this.item = item.GetComponent<Plates>();
@@ -57,11 +57,9 @@ public class Chair : MonoBehaviour
     {
         buffer = item;
         item = null;
-
         hasItem = changeStatus;
         hasFood = changeStatus;
         hasDrink = changeStatus;
-
         itemReceived = "";
         return buffer;
     }

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Interaction_Manager : MonoBehaviour
 {
-    Chef chef;
-
-    void Awake()
+        Chef chef;
+        void Awake()
     {
         chef = GetComponent<Chef>();
     }
@@ -24,7 +23,7 @@ public class Interaction_Manager : MonoBehaviour
             break;
             case InteractableType._Balcon: InteractToBalcon(interaction);
             break;
-            case InteractableType._Table: InteractToBalcon(interaction);
+            case InteractableType._Table: InteractToTable(interaction);
             break;
             default: Debug.Log("Não dá pra interagir!!");///
             break;
@@ -218,6 +217,51 @@ public class Interaction_Manager : MonoBehaviour
     void InteractToTable(Interactable interaction)
     {
         Table table = interaction.GetComponent<Table>();
+
+        if(table.places[0].client != null || table.places[1].client != null )
+        {
+
+
+
+
+
+
+            
+        }
+        
+        else
+        {
+                if(chef.hasItem)
+                {
+                    if(chef.itenInHand.type == ItemType._Plate)
+                    {
+                            if(table.plates[0] != null && table.plates[1] != null)
+                            {
+                                Debug.Log("Já tem muito prato aqui!!!");/////////////////////////////////////////////////////
+                            }
+                            else if (table.plates[0] == null || table.plates[1] == null)
+                            {
+                                table.ReceiveItens(chef.GiveIten(chef.itenInHand));
+                            }
+                    }
+                }
+                else 
+                {
+                    if(table.plates[0] != null || table.plates[1] != null)
+                    {
+                        chef.ReceiveItens(table);
+                    }
+                    else
+                    {
+                        Debug.Log("Não tem nada aqui!!!!");////////////////////////////////////////////       
+                    }
+                }
+                
+        }
+
+
+
+
         if(chef.hasItem)
         {
             if(chef.itenInHand.type == ItemType._Plate)
@@ -242,18 +286,23 @@ public class Interaction_Manager : MonoBehaviour
         {
 
             if(table.places[0].client != null || table.places[1].client != null )
-            {
+            {     
                 Client client;
+
                 if(table.places[0].client != null) client = table.places[0].client ;
                 else if(table.places[1].client != null) client = table.places[1].client ;
                 else client = null;
 
+                Debug.Log("ClientNaMesa:"+ client);///
+
                 switch(client.behaviourState)
                 {
                     case IBehaviour.BehaviourState.WaitingForOrder: 
-                        client.hasOrdered = true;
                         
-                    break;
+                            client.hasOrdered = true;
+                            Debug.Log(client.hasOrdered);
+                    
+                        break;
                     default :Debug.Log("O cliente está em outro estado que não o WaitingFor Order"); //////////////////////////
                      break;
                 }
@@ -261,7 +310,7 @@ public class Interaction_Manager : MonoBehaviour
             else
             {
 
-                if(table.plate0 != null || table.plate1 != null)
+                if(table.plates[0] != null || table.plates[1] != null)
                 {
                     chef.ReceiveItens(table);
                 }

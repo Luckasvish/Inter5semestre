@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using UnityEngine.UI;
 
 public class Client : IBehaviour
 {
     [SerializeField]
     int moneyToGet;
 
+    public GameObject UI;
+    
     GameObject myChair;
     Order order;
     Chair thisChair;
@@ -31,7 +34,7 @@ public class Client : IBehaviour
     int maxOrderingTime;
     int maxEatingTime;
 
-
+    
 
     int actualWaitingTime = 0;
 
@@ -218,18 +221,18 @@ public class Client : IBehaviour
     public override void Walk()
     {
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
+          Debug.Log("Wallking");///
        
         if (hasAvaiableChair)
-        {
+        {   
             myChair = ChairManager.instance.GetChair();
             behaviourState = BehaviourState.Walk;
-            Debug.Log("MyChair : "+ myChair);/////////////////
             thisChair = myChair.GetComponent<Chair>();
-            Debug.Log("ThisChair : "+ thisChair);/////////////////
             thisChair.client = this;
             Vector3 chairPos = myChair.transform.position;
             transform.position = chairPos;
             //transform.Translate(chairPos, Space.World);
+            UI.GetComponent<Image>().color = Color.red;
             callback = true;
             StartCoroutine(Main());
         }
@@ -252,8 +255,7 @@ public class Client : IBehaviour
     public override IEnumerator WaitingForOrder()
     {
         behaviourState = BehaviourState.WaitingForOrder;
-        Debug.Log("WaitingForOrder");
-
+     
         if (actualWaitingTime == maxWaitingTime)
         {
             callback = false;
@@ -267,8 +269,9 @@ public class Client : IBehaviour
         }
 
         if (hasOrdered)
-        {
+        { 
             callback = true;
+            StartCoroutine(Main());
             actualWaitingTime = 0;
         }
         else
@@ -278,13 +281,13 @@ public class Client : IBehaviour
     public override void Order()
     {
         behaviourState = BehaviourState.Order;
-        Debug.Log("Order");
+       
         int thisClientRecipe = UnityEngine.Random.Range(0, possibleRecipe.Length);
         clientOrder = possibleRecipe[thisClientRecipe];
-
         order = new Order();
         order.GetRecipe(clientOrder);
         thisChair.GetOrder(clientOrder);
+         Debug.Log("Order : "+ order);
         OrderManager.instance.AddRecipeToList(clientOrder);
         callback = true;
         StartCoroutine(Main());
@@ -292,7 +295,10 @@ public class Client : IBehaviour
 
     public override IEnumerator WaitingFood()
     {
+        
         behaviourState = BehaviourState.WaitingFood;
+        UI.GetComponent<Image>().color = Color.yellow;
+      
         Debug.Log("WaitingFood");
         if(actualWaitingTime == maxWaitingTime)
         {
@@ -325,6 +331,7 @@ public class Client : IBehaviour
 
     public override IEnumerator Eat()
     {
+        UI.GetComponent<Image>().color = Color.green;
         behaviourState = BehaviourState.Eat;
         Debug.Log("Eat");
         OrderManager.instance.RemoveRecipeInList(clientOrder);
@@ -357,6 +364,7 @@ public class Client : IBehaviour
 
     public override IEnumerator PayTip()
     {
+        Debug.Log("Typ");///
         behaviourState = BehaviourState.PayTip;
         callback = true;
         StartCoroutine(Main());
@@ -365,6 +373,7 @@ public class Client : IBehaviour
 
     public override void StartExit()
     {
+        Debug.Log("Dando o fora!");///
         behaviourState = BehaviourState.StartExit;
         if (myChair != null)
             ChairManager.instance.AddChair(myChair);
