@@ -36,8 +36,8 @@ public class Client : IBehaviour
     int actualWaitingTime = 0;
 
     public bool callback;
-    IBehaviour.BehaviourState behaviourState;
-    IBehaviour.BehaviourType type;
+    public BehaviourState behaviourState;
+    BehaviourType type;
     private void Start()
     {
         type = BehaviourType.Calm;
@@ -58,17 +58,17 @@ public class Client : IBehaviour
     {
         switch (type)
         {
-            case IBehaviour.BehaviourType.Calm:
+            case BehaviourType.Calm:
                 maxWaitingTime = CalmBehaviour.instance.changeWaitingTimeToExit();
                 maxOrderingTime = CalmBehaviour.instance.changeOrderingTimeToExit();
                 maxEatingTime = CalmBehaviour.instance.changeEatingTimeToExit();
                 break;
-            case IBehaviour.BehaviourType.Impatient:
+            case BehaviourType.Impatient:
                 maxWaitingTime = ImpatientBehaviour.instance.changeWaitingTimeToExit();
                 maxOrderingTime = ImpatientBehaviour.instance.changeOrderingTimeToExit();
                 maxEatingTime = ImpatientBehaviour.instance.changeEatingTimeToExit();
                 break;
-            case IBehaviour.BehaviourType.Angry:
+            case BehaviourType.Angry:
                 maxWaitingTime = AngryBehaviour.instance.changeWaitingTimeToExit();
                 maxOrderingTime = AngryBehaviour.instance.changeOrderingTimeToExit();
                 maxEatingTime = AngryBehaviour.instance.changeEatingTimeToExit();
