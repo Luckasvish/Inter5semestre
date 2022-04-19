@@ -18,6 +18,7 @@ public class Client : IBehaviour
     [SerializeField]
     int timeToGetOut;
 
+    public bool hasAvaiableChair;
     bool hasOrdered;
     bool hasFood;
     bool canEat;
@@ -212,14 +213,23 @@ public class Client : IBehaviour
 
     public override void Walk()
     {
-        behaviourState = BehaviourState.Walk;
-        myChair = ChairManager.instance.GetChair();
-        thisChair = myChair.GetComponent<Chair>();
-        Vector3 chairPos = myChair.transform.position;
-        transform.position = chairPos;
-        //transform.Translate(chairPos, Space.World);
-        callback = true;
-        StartCoroutine(Main());
+        hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
+        if (hasAvaiableChair)
+        {
+            behaviourState = BehaviourState.Walk;
+            myChair = ChairManager.instance.GetChair();
+            thisChair = myChair.GetComponent<Chair>();
+            Vector3 chairPos = myChair.transform.position;
+            transform.position = chairPos;
+            //transform.Translate(chairPos, Space.World);
+            callback = true;
+            StartCoroutine(Main());
+        }
+        else
+        {
+            callback = false;
+            StartCoroutine(Main());
+        }
     }
 
     public override void Sit()

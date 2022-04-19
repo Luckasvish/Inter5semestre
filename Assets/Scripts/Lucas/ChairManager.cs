@@ -44,13 +44,8 @@ public class ChairManager : MonoBehaviour
         chairIndex = Random.RandomRange(0, avaiableChair.Count);
         Debug.Log(chairIndex);
         myChair = avaiableChair[chairIndex];
-        //StartCoroutine(RemovingChair());
-        return myChair;
-    }
-    IEnumerator RemovingChair()
-    {   
-        yield return new WaitForSeconds(1f);
         RemoveChair(myChair);
+        return myChair;
     }
 
     public bool CheckIfHasAvaiableChair()
