@@ -28,9 +28,7 @@ public class Table : Interactable
            return plate0;
        }
        else if(plate1 != null)
-       {
-           return plate1;
-       }
+                                {  return plate1;}
        else
        {
             return null;
