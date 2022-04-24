@@ -10,7 +10,7 @@ public class Client : IBehaviour
     int moneyToGet;
 
     public GameObject UI;
-    
+    public GameObject[] OrderHUD;    
     GameObject myChair;
     Order order;
     Chair thisChair;
@@ -28,14 +28,11 @@ public class Client : IBehaviour
 
     bool isInteractingWithPlayer;
     string[] possibleRecipe = new string[3];
-    string clientOrder;
+    internal string clientOrder;
 
     int maxWaitingTime;
     int maxOrderingTime;
     int maxEatingTime;
-
-    
-
     int actualWaitingTime = 0;
 
     public bool callback;
@@ -49,6 +46,7 @@ public class Client : IBehaviour
         WayOut = SpawnManager.instance.Spawn;
         type = BehaviourType.Calm;
         UpdateBehaviour();
+        
         CheckPossibleRecipes();
         Walk();
     }
@@ -287,7 +285,6 @@ public class Client : IBehaviour
         order = new Order();
         order.GetRecipe(clientOrder);
         thisChair.GetOrder(clientOrder);
-         Debug.Log("Order : "+ order);
         OrderManager.instance.AddRecipeToList(clientOrder);
         callback = true;
         StartCoroutine(Main());

@@ -37,7 +37,7 @@ public class PlateHUD : MonoBehaviour
             }
             else 
             {
-                SetRecipeOnPlateHUD();
+                
             }
         }
     }
@@ -71,7 +71,7 @@ public class PlateHUD : MonoBehaviour
            
         
     }
-    void SetRecipeOnPlateHUD()
+    public void SetRecipeOnPlateHUD()
     {
          for (int i = 0; i < options.Length ; i++)
             {

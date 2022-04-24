@@ -9,7 +9,7 @@ public class Table : Interactable
     public override bool hasItemOnIt {get;set;}
     public override bool highLightOn{get; set;}
     public Transform[] platePosition;
-    public Plates[] plates;
+    internal Plates[] plates;
   
     internal bool isFull;
 
@@ -21,7 +21,7 @@ public class Table : Interactable
         itenItHas = null;
         hasItemOnIt = false;
         highLightOn = false;
-        
+        plates = new Plates[2];
         Debug.Log(places.Length);
     }
 
@@ -58,11 +58,32 @@ public class Table : Interactable
         {
             if(places[0].client != null && plates[0] == null)
             {
-                plates[0] = plate;
+                if(places[0].client.clientOrder == plate.recipe.itemName)
+                 {  
+                     plates[0] = plate;
+                    plates[0].transform.position =  platePosition[0].position;
+                    places[0].ReceiveItens(plate);
+                 }
+                 else
+                 {
+                     Debug.Log("Essa não é a receita que o cliente pediu!!!");
+                 }
+            
             }
             else if (places[1].client != null && plates[1] == null)
             { 
-                plates[1] = plate;
+                 if(places[1].client.clientOrder == plate.recipe.itemName)
+                 {  
+                    plates[1] = plate;
+                    plates[1].transform.position =  platePosition[1].position;
+                    places[1].ReceiveItens(plate);
+                 }
+                 
+                 else
+                 {
+                     Debug.Log("Essa não é a receita que o cliente pediu!!!");
+                 }
+            
             }
         }
         else if(places[0].client == null && places[1].client == null)
