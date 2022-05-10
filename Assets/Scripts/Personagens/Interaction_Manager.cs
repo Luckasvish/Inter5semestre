@@ -228,14 +228,14 @@ public class Interaction_Manager : MonoBehaviour
                     client = table.places[0].client ;
                     if(client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
                     {
-                        client.hasOrdered = true;
+                        client.Ordering();
                     }
                     else if(table.places[1].client != null)
                     { 
                         client = table.places[1].client ;
                         if(client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
                         {
-                            client.hasOrdered = true;
+                            client.Ordering();
                         }
                     }
                 }
@@ -244,8 +244,8 @@ public class Interaction_Manager : MonoBehaviour
                         client = table.places[1].client ;
                         if(client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
                         {
-                            client.hasOrdered = true;
-                        }
+                            client.Ordering();
+                    }
                     
                     }
                 else client = null;
