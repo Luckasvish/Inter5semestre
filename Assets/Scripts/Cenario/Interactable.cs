@@ -10,6 +10,8 @@ public abstract class Interactable : MonoBehaviour
     public abstract bool highLightOn{get; set;}
     public abstract Item GiveItens(Item itenToGive);
     public abstract void ReceiveItens(Item itenReceived);
+
+    public abstract void Interact(Item itenInHand, Chef chef);
     
 }
 

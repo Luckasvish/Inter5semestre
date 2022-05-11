@@ -42,5 +42,10 @@ public class Storers : Interactable
     
 
     public override void ReceiveItens(Item itens){}
+     public override void Interact(Item iten, Chef chef)
+     {
+        if(iten == null) chef.ReceiveItens(this);
+          else Debug.Log("Já está com a mão cheia!");///////////////////////////////
+     }
 
 }

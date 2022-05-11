@@ -83,4 +83,41 @@ public class Balcon : Interactable
         return itenToGive;
     }
 
+     public override void Interact(Item iten, Chef chef)
+     {
+        if(iten == null)
+        {
+           if(hasItemOnIt) chef.ReceiveItens(this);
+            else Debug.Log("Não tem item aqui!");///
+        } 
+
+        else 
+        {
+          if(hasItemOnIt == true)
+          {
+           
+           if( iten.type == ItemType._Pan)
+            {
+                
+                if(itenItHas.type == ItemType._Plate )
+                {
+                    Pan pan = iten.GetComponent<Pan>();
+                    Plates plate = itenItHas.GetComponent<Plates>();
+                    
+                    if(plate != null && pan != null) plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.ingredient.ingreType));
+                }
+                else 
+                {
+                  Debug.Log("Já tem um iten neste balcão !!!");///////////////////
+                }
+            }
+            else
+            {
+              Debug.Log("Já tem um iten neste balcão !!!");////////////////////
+            } 
+
+          }
+          else ReceiveItens(chef.GiveIten(chef.itenInHand));
+        }
+     }
 }
