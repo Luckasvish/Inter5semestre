@@ -34,7 +34,6 @@ using UnityEngine;
             balcon.hasItemOnIt = true;
         }
         type = ItemType._Plate;
-
         recipe = new Recipes("Feijoada");
     }
     public void SpanwRecipeOnPlate()

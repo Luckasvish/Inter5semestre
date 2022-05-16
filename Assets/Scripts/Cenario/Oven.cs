@@ -37,9 +37,19 @@ public class Oven : Interactable
     
     void Start()
     {
-        itenItHas = _Pan;
-        itenItHas.transform.position = PanPosition.position;
-        hasItemOnIt = true;
+        if(GetComponentInChildren<Pan>() == null)
+        {
+            _Pan = null;
+            itenItHas = null;
+        }
+        else
+        {
+          hasItemOnIt=true;
+          _Pan = GetComponentInChildren<Pan>();
+          itenItHas = _Pan;
+          itenItHas.transform.position = PanPosition.position;
+        }
+        
     }
 
 

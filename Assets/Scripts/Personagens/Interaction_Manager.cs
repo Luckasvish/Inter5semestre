@@ -32,6 +32,7 @@ public class Interaction_Manager : MonoBehaviour
     }
     void InteractToStorer(Interactable interaction) /// INTERAÇÃO COM O STORER
     {
+        Debug.Log("Ta chegando aqui!!!!");/////////////////////////////////
       interaction.Interact(chef.itenInHand, chef);
     }
 
