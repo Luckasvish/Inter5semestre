@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 2556252130603514203}
   - component: {fileID: 3427570485464859140}
   - component: {fileID: 5829179199726133394}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Arroz_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3689166180144824884
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLight: {fileID: 0}
-  ingredientCode: 1
+  ingredientName: 
 --- !u!65 &5829179199726133394
 BoxCollider:
   m_ObjectHideFlags: 0
