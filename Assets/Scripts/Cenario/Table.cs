@@ -179,6 +179,6 @@ public class Table : Interactable
         else return 0;
     }
 
-    void TakeOrder(Client client){client.hasOrdered = true;}
+    void TakeOrder(Client client){ client.Ordering(); }
 
 }
