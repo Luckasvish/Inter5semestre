@@ -54,7 +54,7 @@ public class MacroSistema : MonoBehaviour
     }
     
 
-    public Item SpawnIngredient(int code)
+    public Item SpawnIngredient()
     {
        bool spawned = false;
         int index = 0;

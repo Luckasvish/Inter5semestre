@@ -9,206 +9,87 @@ using UnityEngine;
     public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
    
-     public GameObject hud;
     /////////////////////////////////////////////////////////////////////////
-     public GameObject[] feijoada;
-     public GameObject[] pratoFeito;
-      public GameObject[] buchada;
-
+ 
 
     //////////////////////////////////////////////////////////////////
-
-    internal Recipes recipe;
+    internal Recipe recipe;
+    public GameObject[] recipeInstance;
     internal bool settle;
-   
+    
     //////////////////////////////////////////////////////////
-    public OrderHUD mainHUD;
+    internal GameObject hud;
 
     void Awake()
     {
         Balcon balcon = GetComponentInParent<Balcon>();
-        
+        hud = GetComponentInChildren<PlateHUD>().gameObject;    
+        recipe = new Recipe();    
+
         if(balcon != null)
         {
             balcon.itenItHas = GetComponent<Plates>();
             balcon.hasItemOnIt = true;
         }
         type = ItemType._Plate;
-        recipe = new Recipes("Feijoada");
+                
     }
-    public void SpanwRecipeOnPlate()
+    void Start()
     {
 
-        switch(recipe.itemName)
+    }
+    public void ReceiveNewRecipe(string recipeName)
+    { 
+        switch(recipeName)
         {
-
-                case "Feijoada":
-                    
-                    for(int i = 0; i< feijoada.Length; i++)
-                    {
-                        Color cor =  feijoada[i].GetComponent<MeshRenderer>().material.color;
-                        cor.a = 0.25f;
-                        feijoada[i].SetActive(true);
-                        pratoFeito[i].SetActive(false);
-                        buchada[i].SetActive(false);
-                    }
-                    
-                                break;
-                 case "PratoFeito":
-                        
-                        for(int i = 0; i< feijoada.Length; i++)
-                    {
-                        feijoada[i].SetActive(false);
-                        pratoFeito[i].SetActive(true);
-                        buchada[i].SetActive(false);
-                    }
-                    
-                                break;
-                  case "Buchada":
-                        for(int i = 0; i< feijoada.Length; i++)
-                    {
-                        feijoada[i].SetActive(false);
-                        pratoFeito[i].SetActive(false);
-                        buchada[i].SetActive(true);
-                    }
-                    
-                                break;
-
+            case "Feijoada":
+                    recipe = recipeInstance[0].GetComponent<Recipe>();
+            break;
+            case "PratoFeito":
+                    recipe = recipeInstance[1].GetComponent<Recipe>();
+            break;
+            case "Buchada":
+                    recipe = recipeInstance[2].GetComponent<Recipe>();
+            break;
         }
-
-
-
-    }
-    void Update()
-    {
-        if(recipe != null)
-        {
-            
-            mainHUD.SetReciepOrderHUD(recipe.itemName);
-        
-        }
+        recipe.InitiateRecipe();
     }
 
-    public void ReceiveIngredient(IngreType ingre) 
+    public void ReceiveIngredient(string ingreName) 
     {
+        bool added = false ;
        
-            switch(recipe.itemName)
+        for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
+        {
+            if(recipe.ingreNeeded[i].itemName == ingreName && added == false)
             {
-                case "Feijoada":    
-
-                    if(ingre == IngreType._Beans)
-                    {
-                        if(feijoada[0].activeInHierarchy == false)
-                        {
-                            feijoada[0].SetActive(true);
-                        }
-
-                        else if(feijoada[1].activeInHierarchy == false)
-                        {
-                            feijoada[1].SetActive(true);
-                        }
-                        else 
-                        {
-                            Debug.Log("Já tem feijão demais aqui!!");////////////////////////////////////////////////////
-                        }
-                    }
-  
-
-                    else if(ingre == IngreType._Meat)
-                    {
-                        if(feijoada[2].activeInHierarchy == false)
-                        {
-                            feijoada[2].SetActive(true);
-                        }
-                        else
-                        {
-                            Debug.Log("Já tem carne demais aqui!!");////////////////////////////////////////////////////
-                        }
-                    }
-                     else 
-                    {
-                        Debug.Log("Esse ingrediente não entra nesse prato!!!");//////////////////
-                    }
-                    settle = true;
-                    break;
-                
-                case "PratoFeito": 
-                    
-                    if(ingre == IngreType._Beans)
-                    {
-                        if(pratoFeito[0].activeInHierarchy == false)
-                        {
-                            pratoFeito[0].SetActive(true);
-                        }
-                        else 
-                        {
-                            Debug.Log("Já tem feijão demais aqui!!");////////////////////////////////////////////////////
-                        }
-                    }
-                    else if (ingre == IngreType._Rice)
-                    {   
-                        if(pratoFeito[1].activeInHierarchy == false)
-                        {
-                            pratoFeito[1].SetActive(true);
-                        }
-                        else 
-                        {
-                            Debug.Log("Já tem arroz demais aqui!!");////////////////////////////////////////////////////
-                        }
-                    }
-                     else if (ingre == IngreType._Meat)
-                    {   
-                        if(pratoFeito[2].activeInHierarchy == false)
-                        {
-                            pratoFeito[2].SetActive(true);
-                        }
-                        else 
-                        {
-                            Debug.Log("Já tem carne demais aqui!!");////////////////////////////////////////////////////
-                        }
-                    }
-                     else 
-                    {
-                        Debug.Log("Esse ingrediente não entra nesse prato!!!");//////////////////
-                    }
-                    settle = true;
-                    break;
-                
-                case "Buchada":
-                    
-                    if (ingre == IngreType._Meat)
-                    {   
-                        if(buchada[0].activeInHierarchy == false)
-                        {
-                            buchada[0].SetActive(true);
-                        }
-                        else if(buchada[1].activeInHierarchy == false)
-                        {
-                            buchada[1].SetActive(true);
-                        }
-                        else 
-                        {
-                            Debug.Log("Já tem feijão demais aqui!!");////////////////////////////////////////////////////
-                        }
-                    }
-                    else if (ingre == IngreType._Farofa)
-                    {   
-                        if(buchada[2].activeInHierarchy == false)
-                        {
-                            buchada[2].SetActive(true);
-                        }
-                    }
-                    
-                    else 
-                    {
-                        Debug.Log("Esse ingrediente não entra nesse prato!!!");//////////////////
-                    }
-                    settle = true;
-                    break;
-
+                recipe.ReceiveIngredient(recipe.ingreNeeded[i]);
+                recipe.ingreNeeded.Remove(recipe.ingreNeeded[i]);
+                settle = true;
+                added = true;
             }
+            
+            else 
+            {
+                Debug.Log("Esse ingrediente não vai aqui!");////////////////////////
+            }
+        }
+
 
     }
 
+    public bool CheckIngredient(string ingreName)
+    {
+        for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
+        {
+            Debug.Log(recipe.ingreNeeded[i].itemName);
+            if(recipe.ingreNeeded[i].itemName == ingreName)
+            {
+                return true;
+            }
+        }
+        
+        return false;
     
+    }
  }

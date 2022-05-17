@@ -104,7 +104,17 @@ public class Balcon : Interactable
                     Pan pan = iten.GetComponent<Pan>();
                     Plates plate = itenItHas.GetComponent<Plates>();
                     
-                    if(plate != null && pan != null) plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.ingredient.ingreType));
+                    if(plate != null && pan != null)
+                    {
+                      if(plate.CheckIngredient(pan.ingredient.itemName) == true)
+                      {
+                        plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.itemName));
+                      }
+                      else
+                      {
+                           Debug.Log("Esse ingrediente não entra nessa receita!!!!");///////////////////
+                      }
+                    }  
                 }
                 else 
                 {

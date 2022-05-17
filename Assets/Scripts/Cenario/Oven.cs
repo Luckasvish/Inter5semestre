@@ -98,7 +98,7 @@ public class Oven : Interactable
                     
                     if(hasItemOnIt == true)
                     {
-                        if(_Pan.ready.activeInHierarchy && plate.recipe != null) plate.ReceiveIngredient(_Pan.GiveItem(_Pan.ingredient.ingredient.ingreType));   
+                        if(_Pan.ready.activeInHierarchy && plate.recipe != null) plate.ReceiveIngredient(_Pan.GiveItem(_Pan.ingredient.itemName));   
                           else Debug.Log("Ainda não está pronto"); ////////////////////////////////////////
                     }
                      else Debug.Log("Está faltando a panela !!!"); ///////////////////////////////////////

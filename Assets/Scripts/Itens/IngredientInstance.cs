@@ -6,40 +6,36 @@ public class IngredientInstance : Item
 {
     public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
-    internal Ingredients ingredient;
+    internal Ingredient ingredient;
     public GameObject[] ingredients_Mesh;
-    public void SetMesh(int i)
+    public void SetMesh(string  ingreName )
     {
         
-
-        switch(i)
+        switch(ingreName)
             {
 
-                case 0:
-                     itemName = "Beans";
+                case "Feijao":
+                     itemName = "Feijao";
                      type = ItemType._PreparedIngredient;
-                     ingredient = new Ingredients(IngreType._Beans);
-                     ingredient.ingreType = IngreType._Beans;
+                     ingredients_Mesh[0].SetActive(true);
                                                      break;
-                case 1:
-                     itemName = "Rice";
+                
+                case "Arroz":
+                     itemName = "Arroz";
                      type = ItemType._PreparedIngredient;
-                     ingredient = new Ingredients(IngreType._Rice);
-                     ingredient.ingreType = IngreType._Rice;
+                    ingredients_Mesh[1].SetActive(true);
                                                      break;
                                                      
-                case 2:
-                    itemName = "Meat";
+                case "Carne":
+                    itemName = "Carne";
                     type = ItemType._UnpreparedIngredient;
-                    ingredient = new Ingredients(IngreType._Meat);
-                    ingredient.ingreType = IngreType._Meat;
+                  ingredients_Mesh[2].SetActive(true);
                                                      break;
 
-                case 3:
+                case "Farofa":
                     itemName = "Farofa";
                     type = ItemType._PreparedIngredient;
-                    ingredient = new Ingredients(IngreType._Farofa);
-                    ingredient.ingreType = IngreType._Farofa;
+                    ingredients_Mesh[3].SetActive(true);
                                                      break;
 
                                                       
@@ -47,9 +43,6 @@ public class IngredientInstance : Item
                 default: itemName = "";  break;
             
             }
-
-            ingredients_Mesh[i].SetActive(true);
-
 
     }
 

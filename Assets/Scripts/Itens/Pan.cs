@@ -83,11 +83,11 @@ public class Pan : Item
         feedBack.ToogleUI();
     }
 
-    public IngreType GiveItem( IngreType buffer)
+    public string GiveItem( string buffer)
     {
         if(burned == true)
         {
-            buffer = ingredient.ingredient.ingreType;
+            buffer = ingredient.itemName;
             ingredient = null;
             feedBack.ToogleUI();
             ready.SetActive(false);
@@ -96,7 +96,7 @@ public class Pan : Item
 
         else 
         {
-            buffer = ingredient.ingredient.ingreType;
+            buffer = ingredient.itemName;
             ingredient = null;
             feedBack.ToogleUI();
             ready.SetActive(false);

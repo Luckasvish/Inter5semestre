@@ -11,17 +11,12 @@ public class PlateHUD : MonoBehaviour
 
     public Image selector;
 
-    internal MeshRenderer mesh;
-    public Material[] material; 
-
-
-    
+    public OrderHUD mainHUD;
 
 
     void Awake()
     {
         thisPlate = GetComponentInParent<Plates>();
-        mesh = thisPlate.GetComponent<MeshRenderer>();
     }
 
 
@@ -37,39 +32,45 @@ public class PlateHUD : MonoBehaviour
             }
             else 
             {
-                
+                SetRecipeOnPlateHUD();
             }
+
+        }
+    
+        if(thisPlate.recipe != null)
+        {
+            mainHUD.SetReciepOrderHUD(thisPlate.recipe.itemName);
         }
     }
   
 
     void RunRecipeSelection()
     {
-        
+        string recipeName;
+            
             if(MacroSistema.sistema.input_Manager.pressed01)
             {
                 selector.transform.position = options[0].transform.position;
-                thisPlate.recipe = new Recipes("Feijoada");
-                mesh.material = material[0]; 
-                
-                
+                recipeName = "Feijoada";    
             }
 
             else if(MacroSistema.sistema.input_Manager.pressed02)
             {
                 selector.transform.position = options[1].transform.position;
-                thisPlate.recipe = new Recipes("PratoFeito");
-                mesh.material = material[1]; 
+                recipeName = "PratoFeito";
+                
             }
 
             else if(MacroSistema.sistema.input_Manager.pressed03)
             {
                 selector.transform.position = options[2].transform.position;
-                thisPlate.recipe = new Recipes("Buchada");
-                mesh.material = material[2]; 
+                recipeName = "Buchada";
             }
            
-        
+            else return;
+
+            thisPlate.ReceiveNewRecipe(recipeName);
+
     }
     public void SetRecipeOnPlateHUD()
     {
@@ -82,8 +83,13 @@ public class PlateHUD : MonoBehaviour
             switch(thisPlate.recipe.itemName)
             {
                 case "Feijoada": recipes[0].SetActive(true); break;
+            
                 case "PratoFeito": recipes[1].SetActive(true); break;
+            
                 case "Buchada": recipes[2].SetActive(true); break;
+            
+                default : break;
+            
             }
 
     }
