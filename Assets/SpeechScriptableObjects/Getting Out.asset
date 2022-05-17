@@ -10,5 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bacbdbef9238964597d48a6340887de, type: 3}
-  m_Name: ENFIA O NOME NO CU
+  m_Name: Getting Out
   m_EditorClassIdentifier: 
+  clientSpeech:
+  - Eita lugar cheio!
+  - Vou ser atendido nunca aqui!
+  - "To s\xF3 dando uma olhadinha!"

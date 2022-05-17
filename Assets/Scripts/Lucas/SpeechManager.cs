@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ENFIA O NOME NO CU", menuName = "ENFIA O CAMINHO NO CU DE NOVO")]
+[CreateAssetMenu(fileName = "speech", menuName = "ClientSpeech")]
 public class SpeechManager : ScriptableObject
 {
-    public string[] clientSpeech;
+    [SerializeField]
+    string[] clientSpeech;
 
+    internal string RandomizeString()
+    {
+        int value = Random.RandomRange(0, clientSpeech.Length);
+        return clientSpeech[value];
+    }
 }

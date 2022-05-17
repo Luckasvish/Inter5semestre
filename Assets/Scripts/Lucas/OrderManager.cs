@@ -32,15 +32,18 @@ public class OrderManager : MonoBehaviour
         recipesToProduce.Add(recipeToAdd);
         OrderInHud[0].SetReciepOrderHUD(recipeToAdd);
         OrderInHud[0].gameObject.SetActive(true);
+        recipeIndex += 1;
     }
 
     public void RemoveRecipeInList(string recipeToRemove)
     {
         recipesToProduce.Remove(recipeToRemove);
+        recipeIndex -= 1;
     }
 
     public void ClearRecipeList()
     {
         recipesToProduce.Clear();
+        recipeIndex = 0;
     }
 }
