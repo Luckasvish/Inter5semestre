@@ -80,5 +80,30 @@ public class Preparer : Interactable
             return itenToGive;
     }
     
+    public override void Interact(Item iten, Chef chef)
+    {
+        if(iten !=null)
+        {
+            if(iten.type == ItemType._UnpreparedIngredient)
+            {   
+                if(hasItemOnIt == false) ReceiveItens(chef.GiveIten(chef.itenInHand));
+                 else  Debug.Log("Já tem um item aqui!!!");
+            }
+             
+            else if (iten.type == ItemType._PreparedIngredient) Debug.Log("Esse ingrediente já está preparado!!!!");////////  
+              else Debug.Log("Esse item não vem aqui!!!!");////////
+        }
+
+        else 
+        {
+            if(hasItemOnIt)     
+            {
+                if(itenItHas.type != ItemType._PreparedIngredient) TooglePreparer(); 
+                 else chef.ReceiveItens(this);  
+            }
+            else Debug.Log("Não tem nada aqui!!!");
+                
+        }
+    }
    
 }

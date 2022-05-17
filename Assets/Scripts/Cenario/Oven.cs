@@ -37,9 +37,19 @@ public class Oven : Interactable
     
     void Start()
     {
-        itenItHas = _Pan;
-        itenItHas.transform.position = PanPosition.position;
-        hasItemOnIt = true;
+        if(GetComponentInChildren<Pan>() == null)
+        {
+            _Pan = null;
+            itenItHas = null;
+        }
+        else
+        {
+          hasItemOnIt=true;
+          _Pan = GetComponentInChildren<Pan>();
+          itenItHas = _Pan;
+          itenItHas.transform.position = PanPosition.position;
+        }
+        
     }
 
 
@@ -63,6 +73,55 @@ public class Oven : Interactable
                 itenItHas.transform.position = PanPosition.position;
                 hasItemOnIt = true;
        
+    }
+
+    public override void Interact(Item iten, Chef chef)
+    {
+
+        if(iten != null)
+        { 
+           ItemType type = iten.type;
+            switch(type)
+            {
+
+                case ItemType._PreparedIngredient:
+
+                    IngredientInstance ingre = iten.GetComponent<IngredientInstance>();
+                    if(hasItemOnIt == true) _Pan.ReceiveItens(chef.GiveIten(ingre));
+                      else  Debug.Log("Está faltando a panela !!!"); ////////////////////////////////////  
+
+                break;
+                
+                case ItemType._Plate:
+                    
+                    Plates plate =  iten.GetComponent<Plates>();
+                    
+                    if(hasItemOnIt == true)
+                    {
+                        if(_Pan.ready.activeInHierarchy && plate.recipe != null) plate.ReceiveIngredient(_Pan.GiveItem(_Pan.ingredient.ingredient.ingreType));   
+                          else Debug.Log("Ainda não está pronto"); ////////////////////////////////////////
+                    }
+                     else Debug.Log("Está faltando a panela !!!"); ///////////////////////////////////////
+                
+                break;
+
+                case ItemType._Pan:
+
+                    if(hasItemOnIt == false) ReceiveItens(chef.GiveIten(chef.itenInHand));
+                      else Debug.Log("Já tem panela aqui"); /////////////////////////////////////////////////////////////////////////////////////////// 
+                    
+                    
+                break;
+
+                default : Debug.Log("Deu ruim!!"); break;
+
+            }
+        }
+        else 
+        {
+           if(hasItemOnIt) chef.ReceiveItens(this);
+            else Debug.Log("Não tem nada aqui!");////////////////////
+        }
     }
     
 }

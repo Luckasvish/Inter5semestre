@@ -9,9 +9,9 @@ public class Table : Interactable
     public override bool hasItemOnIt {get;set;}
     public override bool highLightOn{get; set;}
     public Transform[] platePosition;
-    internal Plates[] plates;
+    internal Item[] plates;
   
-    internal bool isFull;
+    //internal bool isFull;
 
     public Chair[] places;
 
@@ -21,7 +21,7 @@ public class Table : Interactable
         itenItHas = null;
         hasItemOnIt = false;
         highLightOn = false;
-        plates = new Plates[2];
+        plates = new Item[2];
         Debug.Log(places.Length);
     }
 
@@ -34,7 +34,8 @@ public class Table : Interactable
 
     public override Item GiveItens (Item itenToGive)
     {
-            Plates Buffer;
+        Item Buffer;
+        
         if(plates[0] != null)
         {
             Buffer = plates[0];
@@ -50,63 +51,134 @@ public class Table : Interactable
         else return null;
     }
 
-    public override void ReceiveItens(Item itenReceived)
+    public override void ReceiveItens(Item item)
     {   
-        Plates plate = itenReceived.GetComponent<Plates>();
         if(places[0].client != null || places[1].client != null ) 
         
         {
-            if(places[0].client != null && plates[0] == null)
+            if(places[0].client != null && plates[1] == null)
             {
-                if(places[0].client.clientOrder == plate.recipe.itemName)
+                if(places[0].client.clientOrder ==item.itemName)
                  {  
-                     plates[0] = plate;
+                    plates[0] = item;
                     plates[0].transform.position =  platePosition[0].position;
-                    places[0].ReceiveItens(plate);
+                    places[0].ReceiveItens(item);
                  }
                  else
                  {
-                     Debug.Log("Essa não é a receita que o cliente pediu!!!");
+                    plates[0] = item;
+                    plates[0].transform.position =  platePosition[0].position;
+                    places[0].ReceiveItens(item);
+                    Debug.Log("Essa não é a receita que o cliente pediu!!!");
                  }
             
             }
-            else if (places[1].client != null && plates[1] == null)
+
+            else if (places[1].client != null && plates[0] == null)
             { 
-                 if(places[1].client.clientOrder == plate.recipe.itemName)
+                 if(places[1].client.clientOrder == item.itemName)
                  {  
-                    plates[1] = plate;
+                    plates[1] = item;
                     plates[1].transform.position =  platePosition[1].position;
-                    places[1].ReceiveItens(plate);
+                    places[1].ReceiveItens(item);
                  }
                  
                  else
                  {
+                    plates[1] = item;
+                    plates[1].transform.position =  platePosition[1].position;
+                    places[1].ReceiveItens(item);
                      Debug.Log("Essa não é a receita que o cliente pediu!!!");
                  }
-            
+        
             }
+            
+            else if(places[0].client != null && places[1].client != null)
+            {
+                
+                if(places[0].client.clientOrder == item.itemName)
+                 {  
+                    plates[0] = item;
+                    plates[0].transform.position =  platePosition[1].position;
+                    places[0].ReceiveItens(item);
+                 }
+                 
+                 else if(places[1].client.clientOrder == item.itemName)
+                 {  
+                    plates[1] = item;
+                    plates[1].transform.position =  platePosition[1].position;
+                    places[1].ReceiveItens(item);
+                 }
+                 
+                 else {
+                    plates[0] = item;
+                    plates[0].transform.position =  platePosition[1].position;
+                    places[0].ReceiveItens(item);
+                     Debug.Log("Essa não é a receita que o cliente pediu!!!");
+                 }
+
+
+            }
+
+
         }
         else if(places[0].client == null && places[1].client == null)
         {
 
             if(plates[0] == null)
             {
-                plates[0]  = plate;
+                plates[0]  = item;
                 plates[0].transform.position =  platePosition[0].position;
             }
-            else  if(plates[1] == null)
+            else if(plates[1] == null)
             {
-                plates[1]  = plate;
+                plates[1]  = item;
                 plates[1].transform.position =  platePosition[1].position;
             }    
 
         }
 
 
+    }
+    
+    public override void Interact(Item iten, Chef chef)
+    {
+        if(iten != null)
+        {
+            ReceiveItens(chef.GiveIten(iten));
+        }
 
+        else 
+        {
+            if(places[0].client != null || places[1].client != null)
+            {
+
+                if(places[0].client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
+                {
+                    TakeOrder(places[0].client);
+                }
+                if(places[1].client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
+                {
+                    TakeOrder(places[1].client);
+                }
+            }
+
+            else if (places[0].client == null && places[1].client == null)
+            {
+                chef.ReceiveItens(this);
+            }
+        }
 
     }
     
+    int CheckSeats()
+    {
+        if (places[0].client != null && places[1].client != null) return 2;
+        else if (places[0].client != null && places[1].client == null) return -1;
+        else if (places[0].client == null && places[1].client != null) return 1;
+        else return 0;
+    }
 
+    void TakeOrder(Client client){client.hasOrdered = true;}
 
 }
