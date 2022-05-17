@@ -22,7 +22,7 @@ public class Client : IBehaviour
     int timeToGetOut;
 
     public bool hasAvaiableChair;
-    internal bool hasOrdered;
+    bool hasOrdered;
     bool hasFood;
     bool canEat;
 
@@ -414,4 +414,16 @@ public class Client : IBehaviour
         callback = false;
         StartCoroutine(Main());
     }
+
+    public bool GetIfHasOrdered()
+    {
+        return hasOrdered;
+    }
+
+    public void Ordering()
+    {
+        if(!hasOrdered && behaviourState == BehaviourState.WaitingForOrder)
+        hasOrdered = true;
+    }
+
 }

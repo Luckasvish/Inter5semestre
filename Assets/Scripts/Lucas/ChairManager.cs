@@ -44,7 +44,7 @@ public class ChairManager : MonoBehaviour
         chairIndex = Random.RandomRange(0, avaiableChair.Count);
         //Debug.Log(chairIndex);
         myChair = avaiableChair[chairIndex];
-        RemoveChair(avaiableChair[chairIndex]);
+        RemoveChair(myChair);
         return myChair;
     }
 
