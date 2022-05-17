@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c02c2289f34d2445b0c60be4908748b, type: 2}
+  - {fileID: 2100000, guid: e6f7a971b14d8f84892b433f88ed2d78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLight: {fileID: 8971479732751660079}
-  ingredientCode: 3
+  ingredientName: 
 --- !u!65 &803807268504906370
 BoxCollider:
   m_ObjectHideFlags: 0
