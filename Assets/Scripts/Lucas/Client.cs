@@ -3,14 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
+using TMPro;
 
 public class Client : IBehaviour
 {
+    [Header("Navmesh Atributes")]
     [SerializeField]
-    int moneyToGet;
+    NavMeshAgent navMesh;
 
-    public GameObject UI;
-    public GameObject[] OrderHUD;    
+    [SerializeField]
+    Collider collider;
+
+
+    [SerializeField]
+    int moneyToGet = 10;
+
+
+    [Header("UI")]
+    [SerializeField]
+    GameObject InteractionBaloon;    
+    [SerializeField]
+    GameObject OrderUI;
+    Image _OrderUI_Sprite;
+    [SerializeField]
+    Image[] OrderImages = new Image[3];
+    [SerializeField]
+    GameObject InteractionImage;
+
     GameObject myChair;
     Order order;
     Chair thisChair;
@@ -21,7 +41,22 @@ public class Client : IBehaviour
     [SerializeField]
     int timeToGetOut;
 
-    public bool hasAvaiableChair;
+    [Header("Speech")]
+    string clientSpeech;
+    [SerializeField]
+    SpeechManager[] speech;
+    // Index 0 = Story Telling
+    // Index 1 = Waiting For Order
+    // Index 2 = Order 
+    // Index 3 = Waiting Food
+    // Index 4 = Eating
+    // Index 5 = Paying
+    // Index 6 = Paying Tip
+    // Index 7 = Getting Out
+
+    bool isGettingOut;
+
+    bool hasAvaiableChair;
     bool hasOrdered;
     bool hasFood;
     bool canEat;
@@ -35,22 +70,30 @@ public class Client : IBehaviour
     int maxEatingTime;
     int actualWaitingTime = 0;
 
-    public bool callback;
-    public BehaviourState behaviourState;
+    bool callback;
+    [SerializeField]
+    BehaviourState behaviourState;
     BehaviourType type;
-   
-  
-  
+
+
+    TextMeshPro interactionText;
+
+
+
     private void Start()
     {
         WayOut = SpawnManager.instance.Spawn;
+        _OrderUI_Sprite = OrderUI.GetComponent<Image>();
         type = BehaviourType.Calm;
         UpdateBehaviour();
         
         CheckPossibleRecipes();
-        Walk();
+        WaitingForChair();
     }
 
+    private void Update()
+    {
+    }
     void CheckPossibleRecipes()
     {
         for (int i = 0; i < possibleRecipe.Length; i++)
@@ -85,8 +128,20 @@ public class Client : IBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         UpdateBehaviour();
+        InteractWithClients();
         switch (behaviourState)
         {
+            case BehaviourState.WaitingForChair:
+                switch (callback)
+                {
+                    case true:
+                        StartCoroutine(Walk());
+                        break;
+                    case false:
+                        StartExit();
+                        break;
+                }
+                break;
             case BehaviourState.Walk:
                     switch (callback)
                     {
@@ -103,7 +158,6 @@ public class Client : IBehaviour
                     {
                         case true:
                             StartCoroutine(WaitingForOrder());
-                            InteractWithClients();
                             break;
                         case false:
                             StartExit();
@@ -136,7 +190,7 @@ public class Client : IBehaviour
                     switch (callback)
                     {
                         case true:
-                            Eat();
+                            StartCoroutine(Eat());
                             break;
                         case false:
                             StartExit();
@@ -209,28 +263,29 @@ public class Client : IBehaviour
         }
 
     }
-    //public IEnumerator BehaviourManager()
-    //{
 
-    //    yield return new WaitForSeconds(timeToUpdateBehaviour);
-    //    StartCoroutine(BehaviourManager());
-    //}
-
-    public override void Walk()
+    public override void WaitingForChair()
     {
+        if (SpawnManager.instance.GetClientsNumber() == SpawnManager.instance.GetMaxClientPerLevel() -2)
+        {
+            int valueToGetOut = UnityEngine.Random.RandomRange(0,10);
+            if(valueToGetOut <= 2)
+            {
+                callback = false;
+                isGettingOut = true;
+                StartCoroutine(Main());
+            }
+        }
+
+        behaviourState = BehaviourState.WaitingForChair;
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
           Debug.Log("Wallking");///
        
         if (hasAvaiableChair)
         {   
             myChair = ChairManager.instance.GetChair();
-            behaviourState = BehaviourState.Walk;
             thisChair = myChair.GetComponent<Chair>();
             thisChair.client = this;
-            Vector3 chairPos = myChair.transform.position;
-            transform.position = chairPos;
-            //transform.Translate(chairPos, Space.World);
-            UI.GetComponent<Image>().color = Color.red;
             callback = true;
             StartCoroutine(Main());
         }
@@ -239,6 +294,24 @@ public class Client : IBehaviour
             callback = false;
             StartCoroutine(Main());
         }
+    }
+    public override IEnumerator Walk()
+    {
+        Debug.Log("Walk");
+        behaviourState = BehaviourState.Walk;
+        yield return new WaitForSeconds(2);
+        Vector3 chairPos = myChair.transform.position;
+        this.navMesh.destination = chairPos;
+        if (transform.position != navMesh.destination)
+        {
+            Debug.Log("volta a andar");
+            StartCoroutine(Walk());
+            yield break;
+        }
+
+        Debug.Log("passa pro sit");
+        callback = true;
+        StartCoroutine(Main());
     }
 
     public override void Sit()
@@ -253,7 +326,8 @@ public class Client : IBehaviour
     public override IEnumerator WaitingForOrder()
     {
         behaviourState = BehaviourState.WaitingForOrder;
-     
+        InteractionImage.SetActive(true);
+
         if (actualWaitingTime == maxWaitingTime)
         {
             callback = false;
@@ -279,9 +353,11 @@ public class Client : IBehaviour
     public override void Order()
     {
         behaviourState = BehaviourState.Order;
-       
+        InteractionImage.SetActive(false);
+
         int thisClientRecipe = UnityEngine.Random.Range(0, possibleRecipe.Length);
         clientOrder = possibleRecipe[thisClientRecipe];
+        Debug.Log(clientOrder);
         order = new Order();
         order.GetRecipe(clientOrder);
         thisChair.GetOrder(clientOrder);
@@ -292,11 +368,26 @@ public class Client : IBehaviour
 
     public override IEnumerator WaitingFood()
     {
-        
-        behaviourState = BehaviourState.WaitingFood;
-        UI.GetComponent<Image>().color = Color.yellow;
-      
         Debug.Log("WaitingFood");
+        behaviourState = BehaviourState.WaitingFood;
+        InteractionBaloon.SetActive(true);
+        OrderUI.SetActive(true);
+
+        
+        switch(clientOrder)
+        {
+            case "Feijoada":
+                _OrderUI_Sprite.sprite = OrderImages[0].sprite;
+                break;
+            case "PratoFeito":
+                _OrderUI_Sprite.sprite = OrderImages[1].sprite;
+                break;
+            case "Buchada":
+                _OrderUI_Sprite.sprite = OrderImages[2].sprite;
+                break;
+        }
+
+
         if(actualWaitingTime == maxWaitingTime)
         {
             callback = false;
@@ -328,8 +419,9 @@ public class Client : IBehaviour
 
     public override IEnumerator Eat()
     {
-        UI.GetComponent<Image>().color = Color.green;
         behaviourState = BehaviourState.Eat;
+        OrderUI.SetActive(false);
+        InteractionBaloon.SetActive(false);
         Debug.Log("Eat");
         OrderManager.instance.RemoveRecipeInList(clientOrder);
 
@@ -337,7 +429,6 @@ public class Client : IBehaviour
         {
             callback = true;
             StartCoroutine(Main());
-            actualWaitingTime = 0;
         }
         else
         {
@@ -356,12 +447,12 @@ public class Client : IBehaviour
         Bank.instance.EarnMoney(moneyToGet);
         callback = true;
         StartCoroutine(Main());
-        yield break;
+        yield return new WaitForSeconds(2);
     }
 
     public override IEnumerator PayTip()
     {
-        Debug.Log("Typ");///
+        Debug.Log("PayTip");///
         behaviourState = BehaviourState.PayTip;
         callback = true;
         StartCoroutine(Main());
@@ -370,8 +461,12 @@ public class Client : IBehaviour
 
     public override void StartExit()
     {
-        Debug.Log("Dando o fora!");///
         behaviourState = BehaviourState.StartExit;
+        InteractionImage.SetActive(false);
+        OrderUI.SetActive(false);
+        InteractionBaloon.SetActive(false);
+        Debug.Log("Dando o fora!");///
+        navMesh.destination = WayOut.transform.position;
         if (myChair != null)
             ChairManager.instance.AddChair(myChair);
         callback = true;
@@ -381,31 +476,83 @@ public class Client : IBehaviour
     public override IEnumerator EndExit()
     {
         behaviourState = BehaviourState.EndExit;
-        if (transform.position == WayOut.transform.position)
-        {
-            callback = true;
-            
-            if(thisChair != null)
-            {
-                thisChair.client = null;
-            }
-
-            StartCoroutine(Main());
-            
-        }
-        else
+        if (transform.position != navMesh.destination)
         {
             yield return new WaitForSeconds(1);
-            transform.position = WayOut.transform.position;
+            navMesh.destination = WayOut.transform.position;
             StartCoroutine(EndExit());
+            yield break;
         }
-    }
 
-    public override IEnumerator InteractWithClients()
-    {
+        Debug.Log("vazei");
+        if (thisChair != null)
+        {
+            thisChair.client = null;
+        }
+        SpawnManager.instance.ChangeClientsNumber(-1);
         callback = true;
         StartCoroutine(Main());
         yield break;
+
+    }
+
+    public override void InteractWithClients()
+    {
+        if (!isGettingOut)
+        {
+            int interactValue = UnityEngine.Random.RandomRange(0, 10);
+            if (interactValue > 3)
+                return;
+        }
+
+        //draw image with text
+        //interactionText.text = TextForInteraction();
+    }
+
+    public string TextForInteraction()
+    {
+        /////////////////////Summary
+        /// SpeechIndex
+        ///
+        // Index 0 = Story Telling
+        // Index 1 = Waiting For Order
+        // Index 2 = Order 
+        // Index 3 = Waiting Food
+        // Index 4 = Eating
+        // Index 5 = Paying
+        // Index 6 = Paying Tip
+        // Index 7 = Getting Out
+        switch (behaviourState)
+        {
+            case BehaviourState.Walk:
+                clientSpeech = speech[0].RandomizeString();
+                break;
+            case BehaviourState.WaitingForOrder:
+                clientSpeech = speech[1].RandomizeString();
+                break;
+            case BehaviourState.Order:
+                clientSpeech = speech[2].RandomizeString();
+                break;
+            case BehaviourState.WaitingFood:
+                clientSpeech = speech[3].RandomizeString();
+                break;
+            case BehaviourState.Eat:
+                clientSpeech = speech[4].RandomizeString();
+                break;
+            case BehaviourState.PayOrder:
+                clientSpeech = speech[5].RandomizeString();
+                break;
+            case BehaviourState.PayTip:
+                clientSpeech = speech[6].RandomizeString();
+                break;
+            case BehaviourState.StartExit:
+                if(isGettingOut)
+                    clientSpeech = speech[7].RandomizeString();
+                else
+                    clientSpeech = speech[0].RandomizeString();
+                break;
+        }
+        return clientSpeech;
     }
 
     public void Rage()
@@ -426,4 +573,21 @@ public class Client : IBehaviour
         hasOrdered = true;
     }
 
+    public int GetImageForClientRecipe()
+    {
+        for (int i = 0; i < possibleRecipe.Length; i++)
+        {
+            if (possibleRecipe[i] == clientOrder)
+            {
+                return i;
+            }
+        }
+        return -1;
+
+    }
+
+    public IBehaviour.BehaviourState GetActualBehaviour()
+    {
+        return behaviourState;
+    }
 }

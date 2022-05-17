@@ -153,11 +153,11 @@ public class Table : Interactable
             if(places[0].client != null || places[1].client != null)
             {
 
-                if(places[0].client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
+                if(places[0].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingForOrder)
                 {
                     TakeOrder(places[0].client);
                 }
-                if(places[1].client.behaviourState == IBehaviour.BehaviourState.WaitingForOrder)
+                if(places[1].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingForOrder)
                 {
                     TakeOrder(places[1].client);
                 }
