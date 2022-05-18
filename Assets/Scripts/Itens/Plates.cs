@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity;
  public class Plates : Item
  
  {
@@ -44,12 +44,15 @@ using UnityEngine;
         {
             case "Feijoada":
                     recipe = recipeInstance[0].GetComponent<Recipe>();
+                    itemName = recipe.itemName;
             break;
             case "PratoFeito":
                     recipe = recipeInstance[1].GetComponent<Recipe>();
+                    itemName = recipe.itemName;
             break;
             case "Buchada":
                     recipe = recipeInstance[2].GetComponent<Recipe>();
+                    itemName = recipe.itemName;
             break;
         }
         recipe.InitiateRecipe();
@@ -66,6 +69,7 @@ using UnityEngine;
                 recipe.ReceiveIngredient(recipe.ingreNeeded[i]);
                 recipe.ingreNeeded.Remove(recipe.ingreNeeded[i]);
                 settle = true;
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
                 added = true;
             }
             

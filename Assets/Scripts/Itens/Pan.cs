@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity;
+using FMOD.Studio;
 public class Pan : Item
 {
     public  override ItemType type { get; set; }
@@ -23,6 +24,10 @@ public class Pan : Item
     internal bool onOven ; 
     internal IngredientInstance ingredient;
     
+    EventInstance cookingSfxEvent;
+    EventInstance burningSfxEvent;
+    bool sfxPlayed;
+    bool sfx1Played;
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
@@ -39,12 +44,31 @@ public class Pan : Item
         type = ItemType._Pan;
     }
 
+    void Start()
+    {
+        cookingSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_cooking");
+        burningSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_burning");
+    }
     
     void Update()
     {
-        if(ingredient != null && onOven && !ready.activeInHierarchy)
+        if(ingredient != null && onOven && cooking == true)
         {
             Cook();
+        }
+        else 
+        {
+            if(sfxPlayed == true)
+            {
+                cookingSfxEvent.setParameterByName("fire_on", 0);
+                cookingSfxEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);////////////////////testar fade ou imediato 
+                sfxPlayed = false;
+            }
+            if(sfx1Played == true)
+            {
+                burningSfxEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);////////////////////testar fade ou imediato 
+                sfx1Played = false;
+            }
         }
         if(ready.activeInHierarchy)
         {
@@ -54,6 +78,12 @@ public class Pan : Item
     }
     void Cook()
     {
+        if(sfxPlayed == false)
+        {
+            cookingSfxEvent.start();
+            cookingSfxEvent.setParameterByName("fire_on", 1);
+            sfxPlayed = true;
+        }
         currentTime += Time.deltaTime;
         float timer = currentTime / maxTime;
         feedBack.RunSlider(timer);
@@ -66,11 +96,18 @@ public class Pan : Item
 
     void BurnTime()
     {
+        
+        if(sfx1Played == false)
+        {
+            burningSfxEvent.start();
+            sfx1Played = true;
+        }
         currentTime += Time.deltaTime;
         float timer = currentTime / _burnTime;
         feedBack.RunSlider(timer);
         if(currentTime >= _burnTime)
         {
+            burningSfxEvent.setParameterByName("burn", 1);
             burned = true;
         }
     }
@@ -80,6 +117,7 @@ public class Pan : Item
         ingredient = ingre;
         cooking = true;
         ingre.gameObject.SetActive(false);
+        RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
         feedBack.ToogleUI();
     }
 
@@ -91,6 +129,7 @@ public class Pan : Item
             ingredient = null;
             feedBack.ToogleUI();
             ready.SetActive(false);
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return buffer;
         }
 
@@ -100,6 +139,7 @@ public class Pan : Item
             ingredient = null;
             feedBack.ToogleUI();
             ready.SetActive(false);
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return buffer;
         }
     }

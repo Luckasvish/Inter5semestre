@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Oven : Interactable
 {
@@ -61,6 +62,7 @@ public class Oven : Interactable
             hasItemOnIt = false;
             _Pan.onOven = false;
             _Pan = null;
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return Buffer;
        
     }
@@ -71,6 +73,7 @@ public class Oven : Interactable
                 itenItHas = _Pan;
                 _Pan.onOven = true;
                 itenItHas.transform.position = PanPosition.position;
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
                 hasItemOnIt = true;
        
     }

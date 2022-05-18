@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Table : Interactable
 {
@@ -46,6 +47,7 @@ public class Table : Interactable
         {
             Buffer = plates[1];
             plates[1] = null;
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return Buffer;
         }
         else return null;
@@ -69,6 +71,7 @@ public class Table : Interactable
                     plates[0] = item;
                     plates[0].transform.position =  platePosition[0].position;
                     places[0].ReceiveItens(item);
+                    Debug.Log("places[0].client.clientOrder");
                     Debug.Log("Essa não é a receita que o cliente pediu!!!");
                  }
             
@@ -137,7 +140,7 @@ public class Table : Interactable
             }    
 
         }
-
+        RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
 
     }
     

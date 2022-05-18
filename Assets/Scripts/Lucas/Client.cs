@@ -368,7 +368,7 @@ public class Client : IBehaviour
 
     public override IEnumerator WaitingFood()
     {
-        Debug.Log("WaitingFood");
+       // Debug.Log("WaitingFood");
         behaviourState = BehaviourState.WaitingFood;
         InteractionBaloon.SetActive(true);
         OrderUI.SetActive(true);
@@ -442,7 +442,7 @@ public class Client : IBehaviour
     public override IEnumerator PayOrder()
     {
         behaviourState = BehaviourState.PayOrder;
-        Debug.Log("PayOrder");
+       // Debug.Log("PayOrder");
         UpdateBehaviour();
         Bank.instance.EarnMoney(moneyToGet);
         callback = true;
@@ -452,7 +452,7 @@ public class Client : IBehaviour
 
     public override IEnumerator PayTip()
     {
-        Debug.Log("PayTip");///
+       // Debug.Log("PayTip");///
         behaviourState = BehaviourState.PayTip;
         callback = true;
         StartCoroutine(Main());
@@ -465,7 +465,7 @@ public class Client : IBehaviour
         InteractionImage.SetActive(false);
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
-        Debug.Log("Dando o fora!");///
+       // Debug.Log("Dando o fora!");///
         navMesh.destination = WayOut.transform.position;
         if (myChair != null)
             ChairManager.instance.AddChair(myChair);

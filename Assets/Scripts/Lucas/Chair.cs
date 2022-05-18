@@ -30,7 +30,11 @@ public class Chair : MonoBehaviour
     public bool CheckFood()
     {
         if(itemOrdered == itemReceived)
+        {
+            Debug.Log("itemOrdered: " + itemOrdered);
+            Debug.Log("itemReceived: " + itemReceived);
             return true;
+        }
         else 
             return false;
     }
@@ -40,6 +44,7 @@ public class Chair : MonoBehaviour
     public void GetOrder(string order)
     {
         itemOrdered = order;
+        Debug.Log("itemOrdered: " + itemOrdered);
     }
 
     public void ReceiveItens(Item item)

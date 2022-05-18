@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Balcon : Interactable
 {
@@ -72,6 +73,7 @@ public class Balcon : Interactable
     {
         itenItHas = itenInHand;
         itenItHas.transform.position = itemPosition.position;
+        RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
         hasItemOnIt = true;
     }
 
@@ -80,6 +82,7 @@ public class Balcon : Interactable
         itenToGive = itenItHas;
         itenItHas = null;
         hasItemOnIt = false;
+        RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
         return itenToGive;
     }
 

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity;
+using FMOD.Studio;
 
 public class Preparer : Interactable
 {
@@ -14,6 +15,8 @@ public class Preparer : Interactable
     public Transform ingredientPosition;
     public float preparationTime;
     internal float preparationTimer;
+    EventInstance choppSfxEvent;
+    bool sfxPlayed;
 
     bool preparing;
 
@@ -25,7 +28,10 @@ public class Preparer : Interactable
         itenItHas = null;
         highLight.SetActive(false);   
     }
-    
+    void Start()
+    {
+        choppSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_chopp");
+    }
     void Update()
     {
         if(preparing)
@@ -48,7 +54,8 @@ public class Preparer : Interactable
             itenItHas = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
             itenItHas.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
             preparationTimer = 0;                                       // O TIMER É ZERADO
-            feedback.ToogleUI();                                       //  A HUD INICIA 
+            feedback.ToogleUI();
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");                                       //  A HUD INICIA 
             hasItemOnIt = true;                                         //TEM UM ITEM 
     }
 
@@ -56,12 +63,19 @@ public class Preparer : Interactable
     void Prepare()
     {
         preparationTimer += Time.deltaTime;
+        if(sfxPlayed == false)
+        {
+            choppSfxEvent.start();
+            sfxPlayed = true;
+        }
         float _hudBar = preparationTimer / preparationTime;
         feedback.RunSlider(_hudBar);
         if(preparationTimer >= preparationTime)
         {
             itenItHas.type = ItemType._PreparedIngredient;
             preparing = false;
+            choppSfxEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            sfxPlayed = false;
         }
     }
 
@@ -77,6 +91,7 @@ public class Preparer : Interactable
             itenItHas = null;
             hasItemOnIt = false;
             feedback.ToogleUI();
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return itenToGive;
     }
     

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity;
+using FMOD.Studio;
 public class MacroSistema : MonoBehaviour
 {
     public static MacroSistema sistema;
@@ -12,7 +13,8 @@ public class MacroSistema : MonoBehaviour
 
    [SerializeField] internal Input_Manager input_Manager; ///Sistema de Inputs.
   
-
+    EventInstance soundTrack;
+     EventInstance soundScape;
 
     void Awake()
     {
@@ -44,7 +46,11 @@ public class MacroSistema : MonoBehaviour
         { 
             counter[i]= 0;
         }
-
+        
+        soundTrack = RuntimeManager.CreateInstance("event:/MUSIC/music_gameplay");
+        soundScape = RuntimeManager.CreateInstance("event:/SOUNDSCAPE/soudscape_restaurante");
+        soundScape.start();
+        soundTrack.start();
 
     }
     
