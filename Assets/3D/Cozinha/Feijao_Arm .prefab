@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLight: {fileID: 4412799802937580743}
-  ingredientCode: 0
+  ingredientName: Feijao
 --- !u!65 &3300943167609394599
 BoxCollider:
   m_ObjectHideFlags: 0

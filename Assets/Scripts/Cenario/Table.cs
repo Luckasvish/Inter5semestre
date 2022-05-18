@@ -150,19 +150,28 @@ public class Table : Interactable
 
         else 
         {
-            if(places[0].client != null || places[1].client != null)
+            if(places[0].client != null) 
             {
 
                 if(places[0].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingForOrder)
                 {
                     TakeOrder(places[0].client);
-                }
-                if(places[1].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingForOrder)
-                {
-                    TakeOrder(places[1].client);
+                
+                    Debug.Log("ChegouA!!!");//////////
                 }
             }
 
+            if(places[1].client != null)
+            {
+
+                if(places[1].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingForOrder)
+                {
+                    TakeOrder(places[1].client);
+                    Debug.Log("ChegouB!!!");//////////
+
+                }
+            }
+            
             else if (places[0].client == null && places[1].client == null)
             {
                 chef.ReceiveItens(this);

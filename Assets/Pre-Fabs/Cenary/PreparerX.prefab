@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLight: {fileID: 1147407627580856438}
-  ingredientPosition: {fileID: 0}
+  ingredientPosition: {fileID: 1922532818584478377}
   preparationTime: 5
 --- !u!114 &2202240867602811586
 MonoBehaviour:

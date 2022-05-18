@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Input_Manager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Input_Manager : MonoBehaviour
     internal bool pressedSpace;
     void Update()
     {
+
        pressedE =  Input.GetKeyDown(KeyCode.E);
        pressed01 = Input.GetKeyDown(KeyCode.Alpha1);
        pressed02 = Input.GetKeyDown(KeyCode.Alpha2);

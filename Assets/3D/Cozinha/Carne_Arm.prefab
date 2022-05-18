@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highLight: {fileID: 7692489524455082179}
-  ingredientName: 
+  ingredientName: Carne
 --- !u!1001 &7349979761181078930
 PrefabInstance:
   m_ObjectHideFlags: 0
