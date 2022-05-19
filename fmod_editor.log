@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001F5EE028DF8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001F5EE028168 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,254 +18,53 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5EDDA5378
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5EDDA5378
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000019EBB1F0B8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFBC87160E0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFBC87160B0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFBC87161B0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFBC8716270
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F51AF6DC48
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='pop', format=5, channels=2, frequency=48000, lengthbytes=1888, lengthpcm=6999, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000019EBB1F0B8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFBC87160E0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFBC87160B0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFBC87161B0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFBC8716270
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F6072A4838
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='pop 4', format=5, channels=2, frequency=48000, lengthbytes=1792, lengthpcm=6674, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000019EBB1F0B8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFBC87160E0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFBC87160B0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFBC87161B0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFBC8716270
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F6072A4838
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='pop 2', format=5, channels=2, frequency=48000, lengthbytes=2144, lengthpcm=6674, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.697026.
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001F5EE2AE688 : node = 000001F60698ACE0
-[LOG] SystemI::createSound                     : add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5EE2AE688
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F60698ADF0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Soundscape talher_1', format=5, channels=2, frequency=48000, lengthbytes=278816, lengthpcm=1384000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5EE2AE688
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F4CFDC7258
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F4CFDC7258
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001F5EAD36668 : node = 000001F51AD1CFA0
-[LOG] SystemI::createSound                     : add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5EAD36668
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F51AD1D0B0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Soundscape talher_1', format=5, channels=2, frequency=48000, lengthbytes=278816, lengthpcm=1384000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5EAD36668
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5F7AD2858
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5F7AD2858
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001F5ED653928 : node = 000001F602F8DA10
-[LOG] SystemI::createSound                     : add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5ED653928
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F602F8DB20
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Soundscape talher_1', format=5, channels=2, frequency=48000, lengthbytes=278816, lengthpcm=1384000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5ED653928
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5F7AD2A08
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5F7AD2A08
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001F6023D49F8 : node = 000001F5EB9C7F90
-[LOG] SystemI::createSound                     : add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F6023D49F8
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     setdata soundi = 000001F6023D44E8 : node = 000001F5EB9C8D50
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F5EB9C80A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='muita gente', format=5, channels=2, frequency=48000, lengthbytes=925984, lengthpcm=4600000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F6023D49F8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F6023D44E8
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F5EB9C8E60
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 123
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='pouca gente', format=5, channels=2, frequency=48000, lengthbytes=761856, lengthpcm=3840000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F6023D44E8
-[LOG] SoundI::release                          : pouca gente (000001F5EE21E828)
-[LOG] SoundI::release                          :     pouca gente (000001F606F11248)
-[LOG] SoundI::release                          :     pouca gente (000001F5EDDA5888)
-[LOG] SoundI::release                          : muita gente (000001F5EE21F248)
-[LOG] SoundI::release                          :     muita gente (000001F606F113E8)
-[LOG] SoundI::release                          :     muita gente (000001F5EDDA5378)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F4CFDC69E8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F4CFDC69E8
-[LOG] SoundI::release                          : Forró (000001F602845108)
-[LOG] SoundI::release                          :     Forró (000001F51F015708)
-[LOG] SoundI::release                          :     Forró (000001F5EDDA5528)
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001F5EDDA5378 : node = 000001F60698A920
-[LOG] SystemI::createSound                     : add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5EDDA5378
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     setdata soundi = 000001F5EDDA5A38 : node = 000001F60698A6A0
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001F523B34828.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F60698AA30
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='muita gente', format=5, channels=2, frequency=48000, lengthbytes=925984, lengthpcm=4600000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5EDDA5378
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5EDDA5A38
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F60698A7B0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 123
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='pouca gente', format=5, channels=2, frequency=48000, lengthbytes=761856, lengthpcm=3840000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5EDDA5A38
-[LOG] SoundI::release                          : pouca gente (000001F6023D44E8)
-[LOG] SoundI::release                          :     pouca gente (000001F5ED6CB208)
-[LOG] SoundI::release                          :     pouca gente (000001F4CFDC6B98)
-[LOG] SoundI::release                          : muita gente (000001F6023D49F8)
-[LOG] SoundI::release                          :     muita gente (000001F5ED6CB068)
-[LOG] SoundI::release                          :     muita gente (000001F4CFDC69E8)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F5EDDA5528
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F5EDDA5528
-[LOG] SoundI::release                          :  (000001F523D85518)
-[LOG] SoundI::release                          :     pop 2 (000001F6033A7DC8)
-[LOG] SoundI::release                          :  (000001F523D857F8)
-[LOG] SoundI::release                          :     pop 4 (000001F6033A6A48)
-[LOG] SoundI::release                          :  (000001F5466286D8)
-[LOG] SoundI::release                          :     pop (000001F5ED6CAB88)
-[LOG] SoundI::release                          :  (000001F602F70A48)
-[LOG] SoundI::release                          :     queimando (000001F6025E5268)
-[LOG] SoundI::release                          :  (000001F5EB1D5198)
-[LOG] SoundI::release                          :     queimou 2 (000001F6066E0B48)
-[LOG] SoundI::release                          :  (000001F5EB1D4EB8)
-[LOG] SoundI::release                          :     queimou (000001F6066E0808)
-[LOG] SoundI::release                          :  (000001F5EB1D44A8)
-[LOG] SoundI::release                          :     wrong 1 (000001F5209D6528)
-[LOG] SoundI::release                          :  (000001F5EB1D5A38)
-[LOG] SoundI::release                          :     wrong 2 (000001F6066E11C8)
-[LOG] SoundI::release                          :  (000001F5EB1D5308)
-[LOG] SoundI::release                          :     wrong 3 (000001F6066E09A8)
-[LOG] SoundI::release                          :  (000001F5EB1D3D78)
-[LOG] SoundI::release                          :     wrong 5 (000001F6066E0CE8)
-[LOG] SoundI::release                          :  (000001F546626FD8)
-[LOG] SoundI::release                          :     cooking fire (000001F6025E5C28)
-[LOG] SoundI::release                          :  (000001F5EB1D3C08)
-[LOG] SoundI::release                          :     chop 3.2 (000001F6066E04C8)
-[LOG] SoundI::release                          :  (000001F5EB1D5E88)
-[LOG] SoundI::release                          :     chop 2.2 (000001F6066E0668)
-[LOG] SoundI::release                          :  (000001F5EB1CBC18)
-[LOG] SoundI::release                          :     chop 1.2 (000001F6025E55A8)
-[LOG] SoundI::release                          :  (000001F5EB1D4A68)
-[LOG] SoundI::release                          :     chop 3.1 (000001F6066E1028)
-[LOG] SoundI::release                          :  (000001F5EB1D6168)
-[LOG] SoundI::release                          :     chop 2.1 (000001F6025E5DC8)
-[LOG] SoundI::release                          :  (000001F5EB1D4788)
-[LOG] SoundI::release                          :     chop 1.1 (000001F5209D66C8)
-[LOG] SoundI::release                          :  (000001F602F705F8)
-[LOG] SoundI::release                          :     cooking fire 2 (000001F6025E50C8)
-[LOG] SoundI::release                          : cachorro (000001F5ED9BB598)
-[LOG] SoundI::release                          :     cachorro (000001F606F110A8)
-[LOG] SoundI::release                          :     cachorro (000001F5EDDA5F48)
-[LOG] SoundI::release                          : Soundscape talher_1 (000001F5ED653928)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F4CFB3D518)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F5F7AD2A08)
-[LOG] SoundI::release                          : Soundscape talher_1 (000001F5EAD36668)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F4CFB3D378)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F5F7AD2858)
-[LOG] SoundI::release                          : Soundscape talher_1 (000001F5EE2AE688)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F5ED6C60C8)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F4CFDC7258)
-[LOG] SoundI::release                          : Soundscape talher_1 (000001F5EE21EEE8)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F606F11588)
-[LOG] SoundI::release                          :     Soundscape talher_1 (000001F5EDDA5D98)
-[LOG] SoundI::release                          : pouca gente (000001F5EDDA5A38)
-[LOG] SoundI::release                          :     pouca gente (000001F606F113E8)
-[LOG] SoundI::release                          :     pouca gente (000001F5F763DDD8)
-[LOG] SoundI::release                          : muita gente (000001F5EDDA5378)
-[LOG] SoundI::release                          :     muita gente (000001F606F11248)
-[LOG] SoundI::release                          :     muita gente (000001F5EDDA5528)
-[LOG] SoundI::release                          :  (000001F5EB1D58C8)
-[LOG] SoundI::release                          :     cooking bubble (000001F6066E0E88)
+[LOG] SoundI::release                          :  (000001F602E467B8)
+[LOG] SoundI::release                          :     queimando (000001F51FF19A68)
+[LOG] SoundI::release                          :  (000001F5209D5288)
+[LOG] SoundI::release                          :     queimou 2 (000001F5EDDA5D28)
+[LOG] SoundI::release                          :  (000001F5209D56D8)
+[LOG] SoundI::release                          :     queimou (000001F5EDDA59E8)
+[LOG] SoundI::release                          :  (000001F5ED960188)
+[LOG] SoundI::release                          :     wrong 1 (000001F5EB35F4F8)
+[LOG] SoundI::release                          :  (000001F5209D59B8)
+[LOG] SoundI::release                          :     wrong 2 (000001F5EDDA5368)
+[LOG] SoundI::release                          :  (000001F5209D5568)
+[LOG] SoundI::release                          :     wrong 3 (000001F5EDDA51C8)
+[LOG] SoundI::release                          :  (000001F5209D5848)
+[LOG] SoundI::release                          :     wrong 5 (000001F5EDDA56A8)
+[LOG] SoundI::release                          :  (000001F602E464D8)
+[LOG] SoundI::release                          :     cooking fire (000001F51FF19728)
+[LOG] SoundI::release                          :  (000001F5209D5C98)
+[LOG] SoundI::release                          :     chop 3.2 (000001F5EDDA5848)
+[LOG] SoundI::release                          :  (000001F5209D5F78)
+[LOG] SoundI::release                          :     chop 2.2 (000001F5EDDA5EC8)
+[LOG] SoundI::release                          :  (000001F602E46D78)
+[LOG] SoundI::release                          :     chop 1.2 (000001F51FF198C8)
+[LOG] SoundI::release                          :  (000001F5209D53F8)
+[LOG] SoundI::release                          :     chop 3.1 (000001F5EDDA5508)
+[LOG] SoundI::release                          :  (000001F5209D5B28)
+[LOG] SoundI::release                          :     chop 2.1 (000001F51FF19C08)
+[LOG] SoundI::release                          :  (000001F5ED9602F8)
+[LOG] SoundI::release                          :     chop 1.1 (000001F5EB35F698)
+[LOG] SoundI::release                          :  (000001F602E46648)
+[LOG] SoundI::release                          :     cooking fire 2 (000001F51FF19588)
+[LOG] SoundI::release                          : cachorro (000001F5EAD3C338)
+[LOG] SoundI::release                          :     cachorro (000001F522C650A8)
+[LOG] SoundI::release                          :     cachorro (000001F519FBFC68)
+[LOG] SoundI::release                          : Soundscape talher_1 (000001F5EAD3CD58)
+[LOG] SoundI::release                          :     Soundscape talher_1 (000001F522C677A8)
+[LOG] SoundI::release                          :     Soundscape talher_1 (000001F519FC1408)
+[LOG] SoundI::release                          : pouca gente (000001F5EAD3C188)
+[LOG] SoundI::release                          :     pouca gente (000001F522C64548)
+[LOG] SoundI::release                          :     pouca gente (000001F519FC0EF8)
+[LOG] SoundI::release                          : muita gente (000001F5EAD3C848)
+[LOG] SoundI::release                          :     muita gente (000001F522C64F08)
+[LOG] SoundI::release                          :     muita gente (000001F519FC09E8)
+[LOG] SoundI::release                          : Forró (000001F5EAD37748)
+[LOG] SoundI::release                          :     Forró (000001F522C665C8)
+[LOG] SoundI::release                          :     Forró (000001F4CFDC7258)
+[LOG] SoundI::release                          :  (000001F5209D5E08)
+[LOG] SoundI::release                          :     cooking bubble (000001F5EDDA5B88)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients

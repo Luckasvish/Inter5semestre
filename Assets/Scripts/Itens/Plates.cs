@@ -19,6 +19,8 @@ using FMODUnity;
     
     //////////////////////////////////////////////////////////
     internal GameObject hud;
+    
+    public bool plateOn;
 
     void Awake()
     {
@@ -32,12 +34,15 @@ using FMODUnity;
             balcon.hasItemOnIt = true;
         }
         type = ItemType._Plate;
-                
-    }
-    void Start()
-    {
+        if(plateOn)
+        {
+            settle =true;
+            itemName = "Feijoada";
+
+        }
 
     }
+    
     public void ReceiveNewRecipe(string recipeName)
     { 
         switch(recipeName)

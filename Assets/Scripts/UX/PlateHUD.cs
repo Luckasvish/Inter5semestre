@@ -11,8 +11,7 @@ public class PlateHUD : MonoBehaviour
 
     public Image selector;
 
-    public OrderHUD mainHUD;
-
+   
 
     void Awake()
     {
@@ -35,12 +34,13 @@ public class PlateHUD : MonoBehaviour
                 SetRecipeOnPlateHUD();
             }
 
+
+
+
         }
-    
-        if(thisPlate.recipe != null)
-        {
-            mainHUD.SetReciepOrderHUD(thisPlate.recipe.itemName);
-        }
+
+        
+        
     }
   
 
