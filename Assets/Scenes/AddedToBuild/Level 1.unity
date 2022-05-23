@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1341,9 +1341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39262c9178e07054f8c60470332080f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingTimeToExit: 0
-  orderingTimeToExit: 0
-  eatingTimeToExit: 0
+  waitingTimeToExit: 7
+  orderingTimeToExit: 12
+  eatingTimeToExit: 4
 --- !u!114 &443913353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,9 +1356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a45f4cc69acf4740996989714802cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingTimeToExit: 0
-  orderingTimeToExit: 0
-  eatingTimeToExit: 0
+  waitingTimeToExit: 9
+  orderingTimeToExit: 15
+  eatingTimeToExit: 4
 --- !u!114 &443913354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,9 +1371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174e91721760e4b44a5bd30996052e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingTimeToExit: 30
-  orderingTimeToExit: 25
-  eatingTimeToExit: 10
+  waitingTimeToExit: 13
+  orderingTimeToExit: 17
+  eatingTimeToExit: 8
 --- !u!114 &443913355
 MonoBehaviour:
   m_ObjectHideFlags: 0

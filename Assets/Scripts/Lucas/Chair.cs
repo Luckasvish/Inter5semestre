@@ -6,11 +6,11 @@ public class Chair : MonoBehaviour
 {
     public static Chair instance;
     public GameObject Food;
-    private bool hasItem;
-    private bool hasFood;
-    private bool hasDrink;
+    bool hasItem;
+    bool hasFood;
+    bool hasDrink;
 
-    private string itemOrdered;
+    string clientOrder;
     string itemReceived;
 
     Item item;
@@ -29,9 +29,9 @@ public class Chair : MonoBehaviour
 
     public bool CheckFood()
     {
-        if(itemOrdered == itemReceived)
+        if(clientOrder == itemReceived)
         {
-            Debug.Log("itemOrdered: " + itemOrdered);
+            Debug.Log("itemOrdered: " + clientOrder);
             Debug.Log("itemReceived: " + itemReceived);
             return true;
         }
@@ -43,14 +43,14 @@ public class Chair : MonoBehaviour
 
     public void GetOrder(string order)
     {
-        itemOrdered = order;
-        Debug.Log("itemOrdered: " + itemOrdered);
+        clientOrder = order;
+        Debug.Log("itemOrdered: " + clientOrder);
     }
 
-    public void ReceiveItens(Item item)
+    public void ReceiveItens(Item _item)
     {
         hasItem = true;
-        this.item = item.GetComponent<Plates>();
+        this.item = _item.GetComponent<Plates>();
         if(item.type == ItemType._Plate)
         {   
             hasFood = true;    
@@ -67,6 +67,11 @@ public class Chair : MonoBehaviour
         hasDrink = changeStatus;
         itemReceived = "";
         return buffer;
+    }
+
+    public void ClientGetOff()
+    {
+        client = null;
     }
 
 }

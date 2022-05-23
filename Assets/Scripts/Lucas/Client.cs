@@ -17,7 +17,12 @@ public class Client : IBehaviour
 
 
     [SerializeField]
-    int moneyToGet = 10;
+    int moneyForRecipe;  
+    [SerializeField]
+    int moneyForTip = UnityEngine.Random.RandomRange(0, 8);  
+    
+    [SerializeField]
+    int increaseAngerValue;
 
 
     [Header("UI")]
@@ -26,8 +31,7 @@ public class Client : IBehaviour
     [SerializeField]
     GameObject OrderUI;
     Image _OrderUI_Sprite;
-    [SerializeField]
-    Image[] OrderImages = new Image[3];
+
     [SerializeField]
     GameObject InteractionImage;
 
@@ -40,6 +44,8 @@ public class Client : IBehaviour
 
     [SerializeField]
     int timeToGetOut;
+    [SerializeField]
+    int clientIrritation;
 
     [Header("Speech")]
     string clientSpeech;
@@ -55,6 +61,7 @@ public class Client : IBehaviour
     // Index 7 = Getting Out
 
     bool isGettingOut;
+    bool canRage;
 
     bool hasAvaiableChair;
     bool hasOrdered;
@@ -79,21 +86,21 @@ public class Client : IBehaviour
     TextMeshPro interactionText;
 
 
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
         WayOut = SpawnManager.instance.Spawn;
         _OrderUI_Sprite = OrderUI.GetComponent<Image>();
-        type = BehaviourType.Calm;
         UpdateBehaviour();
         
         CheckPossibleRecipes();
         WaitingForChair();
     }
 
-    private void Update()
-    {
-    }
     void CheckPossibleRecipes()
     {
         for (int i = 0; i < possibleRecipe.Length; i++)
@@ -295,6 +302,7 @@ public class Client : IBehaviour
             StartCoroutine(Main());
         }
     }
+
     public override IEnumerator Walk()
     {
         Debug.Log("Walk");
@@ -355,11 +363,14 @@ public class Client : IBehaviour
         behaviourState = BehaviourState.Order;
         InteractionImage.SetActive(false);
 
+        //randomizeOrder
         int thisClientRecipe = UnityEngine.Random.Range(0, possibleRecipe.Length);
+        //order for client
         clientOrder = possibleRecipe[thisClientRecipe];
         Debug.Log(clientOrder);
         order = new Order();
         order.GetRecipe(clientOrder);
+        //setting order to client chair
         thisChair.GetOrder(clientOrder);
         OrderManager.instance.AddRecipeToList(clientOrder);
         callback = true;
@@ -373,19 +384,7 @@ public class Client : IBehaviour
         InteractionBaloon.SetActive(true);
         OrderUI.SetActive(true);
 
-        
-        switch(clientOrder)
-        {
-            case "Feijoada":
-                _OrderUI_Sprite.sprite = OrderImages[0].sprite;
-                break;
-            case "PratoFeito":
-                _OrderUI_Sprite.sprite = OrderImages[1].sprite;
-                break;
-            case "Buchada":
-                _OrderUI_Sprite.sprite = OrderImages[2].sprite;
-                break;
-        }
+        _OrderUI_Sprite.sprite = OrderManager.instance.GetOrderImage(clientOrder);
 
 
         if(actualWaitingTime == maxWaitingTime)
@@ -438,13 +437,12 @@ public class Client : IBehaviour
         }
     }    
     
-    
     public override IEnumerator PayOrder()
     {
         behaviourState = BehaviourState.PayOrder;
        // Debug.Log("PayOrder");
-        UpdateBehaviour();
-        Bank.instance.EarnMoney(moneyToGet);
+        moneyForRecipe = GetMoneyForRecipe();
+        Bank.instance.ChangeMoneyAmount(moneyForRecipe, true);
         callback = true;
         StartCoroutine(Main());
         yield return new WaitForSeconds(2);
@@ -454,6 +452,14 @@ public class Client : IBehaviour
     {
        // Debug.Log("PayTip");///
         behaviourState = BehaviourState.PayTip;
+        bool canPay = false;
+        int payChance = UnityEngine.Random.RandomRange(1, 10);
+        if(payChance > 0)
+            canPay = true;
+
+        if(canPay)
+            Bank.instance.ChangeMoneyAmount(moneyForTip, true);
+
         callback = true;
         StartCoroutine(Main());
         yield break;
@@ -468,7 +474,11 @@ public class Client : IBehaviour
        // Debug.Log("Dando o fora!");///
         navMesh.destination = WayOut.transform.position;
         if (myChair != null)
+        {
             ChairManager.instance.AddChair(myChair);
+            thisChair.ClientGetOff();
+        }
+
         callback = true;
         StartCoroutine(Main());
     }    
@@ -562,6 +572,25 @@ public class Client : IBehaviour
         StartCoroutine(Main());
     }
 
+    int GetMoneyForRecipe()
+    {
+        int value = 10;
+        switch(clientOrder)
+        {
+            case "Feijoada":
+                value = 12;
+                break;            
+            case "PratoFeito":
+                value = 10;
+                break;            
+            case "Buchada":
+                value = 15;
+                break;
+        }
+
+        return value;
+    }
+
     public bool GetIfHasOrdered()
     {
         return hasOrdered;
@@ -573,21 +602,74 @@ public class Client : IBehaviour
         hasOrdered = true;
     }
 
-    public int GetImageForClientRecipe()
-    {
-        for (int i = 0; i < possibleRecipe.Length; i++)
-        {
-            if (possibleRecipe[i] == clientOrder)
-            {
-                return i;
-            }
-        }
-        return -1;
-
-    }
-
-    public IBehaviour.BehaviourState GetActualBehaviour()
+    public BehaviourState GetActualBehaviour()
     {
         return behaviourState;
+    }    
+
+    public void ChangeIrritation()
+    {
+        switch (type)
+        {
+            case BehaviourType.Calm:
+                type = BehaviourType.Impatient;  
+                break;
+            case BehaviourType.Impatient:
+                type = BehaviourType.Angry;
+                break;
+        }
+    }
+
+    public int SetStarterIrritation()
+    {
+        int irritationNumber = UnityEngine.Random.RandomRange(1,3);
+        switch (irritationNumber)
+        {
+            case 1:
+                type = BehaviourType.Calm;
+                increaseAngerValue = 1;
+                break;
+            case 2:
+                type = BehaviourType.Impatient;
+                increaseAngerValue = 4;
+                break;            
+            case 3:
+                type = BehaviourType.Angry;
+                increaseAngerValue = 2;
+                break;
+        }
+        return increaseAngerValue;
+    }
+
+    public int RandomizeAngerBar()
+    {
+        bool moreAnger = false;
+        int angerValue = UnityEngine.Random.RandomRange(0, 10);
+
+        if(angerValue > 8)
+            moreAnger = true;
+
+        switch (type)
+        {
+            case BehaviourType.Calm:
+                if(moreAnger)
+                    clientIrritation = UnityEngine.Random.RandomRange(16, 20);
+                else
+                    clientIrritation = UnityEngine.Random.RandomRange(0, 16);
+                break;
+            case BehaviourType.Impatient:
+                if (moreAnger)
+                    clientIrritation = UnityEngine.Random.RandomRange(10, 20);
+                else 
+                    clientIrritation = UnityEngine.Random.RandomRange(0, 10);
+                break;            
+            case BehaviourType.Angry:
+                if (moreAnger)
+                    clientIrritation = UnityEngine.Random.RandomRange(8, 20);
+                else
+                    clientIrritation = UnityEngine.Random.RandomRange(0, 8);
+                break;
+        }
+        return clientIrritation;
     }
 }

@@ -7,6 +7,7 @@ public class SceneManage : MonoBehaviour
 {
     [SerializeField]
     static int numberOfScenes;
+    int lastScene;
 
     [SerializeField]
     static int actualScene = 0;
@@ -17,6 +18,7 @@ public class SceneManage : MonoBehaviour
     void Start()
     {
         numberOfScenes = 4;
+        lastScene = numberOfScenes - 2;
         sceneName = new string[numberOfScenes];
 //#if UNITY_EDITOR
 //        Scene scene = SceneManager.GetActiveScene();
@@ -58,6 +60,16 @@ public class SceneManage : MonoBehaviour
     public void GoToCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public int GetActualScene()
+    {
+        return actualScene;
+    }    
+    
+    public int GetLastScene()
+    {
+        return lastScene;
     }
 
     void StartSceneNames()
