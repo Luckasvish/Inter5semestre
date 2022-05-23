@@ -29,24 +29,23 @@ public class OrderManager : MonoBehaviour
         recipesToProduce = new List<string>();
     }
 
-    public void AddRecipeToList(string recipeToAdd)
+    public int AddRecipeToList(string recipeToAdd)
     {
         recipesToProduce.Add(recipeToAdd);
-        RecipeInHud(true);
+        RecipeInHud(true, recipeIndex);
         recipeIndex += 1;
+        return recipeIndex - 1;
     }    
     
-    public void RecipeInHud(bool isAdding)
+    public void RecipeInHud(bool isAdding, int _recipeIndex)
     {
         if (isAdding)
         {
-            recipesHudSprites[recipeIndex].sprite = GetOrderImage(recipesToProduce[recipeIndex]);
-            recipesHud[recipeIndex].SetActive(true);
+            recipesHudSprites[_recipeIndex].sprite = GetOrderImage(recipesToProduce[recipeIndex]);
+            recipesHud[_recipeIndex].SetActive(true);
         }
         else
-            recipesHud[recipeIndex].SetActive(false);
-
-        recipeIndex += 1;
+            recipesHud[_recipeIndex].SetActive(false);
     }
     public Sprite GetOrderImage(string _clientOrder)
     {
@@ -66,10 +65,10 @@ public class OrderManager : MonoBehaviour
         return OrderImages[_recipeindex].sprite;
     }
 
-    public void RemoveRecipeInList(string recipeToRemove)
+    public void RemoveRecipeInList(int _recipeIndex)
     {
-        recipesToProduce.Remove(recipeToRemove);
-        RecipeInHud(false);
+        recipesToProduce.Remove(recipesToProduce[_recipeIndex]);
+        RecipeInHud(false, _recipeIndex);
         recipeIndex -= 1;
     }
 

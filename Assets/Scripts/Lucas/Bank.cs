@@ -11,7 +11,7 @@ public class Bank : MonoBehaviour
     private int startMoney;
 
     [SerializeField]
-    TextMeshProUGUI moneyInUI;
+    TextMeshProUGUI actualMoneyUI;
 
     [SerializeField]
     TextMeshProUGUI goal;
@@ -29,7 +29,7 @@ public class Bank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goal.text = goalNumber.ToString();
+        goal.text = "Meta: " + goalNumber.ToString();
         UpdateMoneyUI();
     }
 
@@ -56,6 +56,6 @@ public class Bank : MonoBehaviour
     public void UpdateMoneyUI()
     {
         //change the money UI text for the actual value
-        moneyInUI.text = actualMoney.ToString();
+        actualMoneyUI.text = actualMoney.ToString();
     }
 }

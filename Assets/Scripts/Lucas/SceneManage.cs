@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManage : MonoBehaviour
 {
+    public static SceneManage instance;
     [SerializeField]
     static int numberOfScenes;
     int lastScene;
@@ -14,6 +15,11 @@ public class SceneManage : MonoBehaviour
     [SerializeField]
     static string[] sceneName;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {

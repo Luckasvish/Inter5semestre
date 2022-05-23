@@ -37,4 +37,9 @@ public class AngerManager : MonoBehaviour
         clientAnger += angerToIncrease;
         StartCoroutine(IncreaseAnger());
     }
+
+    public int GetIrritation()
+    {
+        return clientAnger;
+    }
 }

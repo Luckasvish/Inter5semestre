@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6156984275228273507}
   - component: {fileID: 6156984275228273506}
-  - component: {fileID: 6156984275228273509}
   - component: {fileID: 6156984275228273508}
   - component: {fileID: 6156984275228273511}
   - component: {fileID: 6156984275228273510}
@@ -30,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6156984275228273512}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0002002716, y: -1.335816, z: -11.354929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -50,23 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allChair: {fileID: 0}
---- !u!114 &6156984275228273509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6156984275228273512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b198a3cc66d3d49b444b0ea94eadc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recipesToProduce: []
-  OrderInHud:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &6156984275228273508
 MonoBehaviour:
   m_ObjectHideFlags: 0

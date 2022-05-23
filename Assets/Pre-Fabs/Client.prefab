@@ -1217,16 +1217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e1438d72fbf7a40b24cbfa9d9c08bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angerManager: {fileID: 8710533584187976648}
   navMesh: {fileID: 4427749519490172165}
   collider: {fileID: 1548414299}
-  moneyToGet: 10
+  moneyForRecipe: 0
+  moneyForTip: 0
   increaseAngerValue: 0
   InteractionBaloon: {fileID: 3392285391753136361}
   OrderUI: {fileID: 3368667826076469915}
-  OrderImages:
-  - {fileID: 7251701790054742605, guid: d7321bdff5076974799a516510310384, type: 3}
-  - {fileID: 8703166627015826689, guid: 90b3a5215db73e047843f307cf87b9b7, type: 3}
-  - {fileID: 2356474661665506113, guid: dc2f7b58e5d76094a8a610a0bd6f6b3e, type: 3}
   InteractionImage: {fileID: 6739490016544762485}
   WayOut: {fileID: 0}
   timeToGetOut: 10
