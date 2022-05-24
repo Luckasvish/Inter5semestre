@@ -10,8 +10,13 @@ public class Oven : Interactable
     
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public  GameObject highLight;
     public override bool highLightOn {get; set;}
+
+    public override Material OriginalMaterial {get; set;}
+    
+    public override Material FlashMaterial{get ; set;}
+    
+    public override MeshRenderer mesh{get; set;}
 
     public Transform PanPosition;
 
@@ -20,22 +25,11 @@ public class Oven : Interactable
     void Awake()
     {
         type = InteractableType._Oven;
-        highLight.SetActive(false);
-        
+         mesh = this.GetComponent<MeshRenderer>();
+        OriginalMaterial = mesh.material;
+         FlashMaterial = MacroSistema.sistema.flashMaterial;
+         
     }
-
-    void Update()
-    {
-        if(highLightOn)
-      {
-        highLight.SetActive(true);
-      }
-      else 
-      {
-        highLight.SetActive(false);
-      }
-    }
-    
     void Start()
     {
         if(GetComponentInChildren<Pan>() == null)
@@ -51,6 +45,20 @@ public class Oven : Interactable
           itenItHas.transform.position = PanPosition.position;
         }
         
+    }
+
+     public override void ToogleHighLight(bool On)
+    {
+
+        if(On)
+        {
+            mesh.material = FlashMaterial;
+        }
+        else
+        {
+             mesh.material = OriginalMaterial;
+        }
+
     }
 
 

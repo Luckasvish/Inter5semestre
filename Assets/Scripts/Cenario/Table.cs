@@ -11,6 +11,12 @@ public class Table : Interactable
     public override bool highLightOn{get; set;}
     public Transform[] platePosition;
     internal Item[] plates;
+
+    public override Material OriginalMaterial {get; set;}
+    
+    public override Material FlashMaterial{get ; set;}
+    
+    public override MeshRenderer mesh{get; set;}
   
     //internal bool isFull;
 
@@ -23,15 +29,24 @@ public class Table : Interactable
         hasItemOnIt = false;
         highLightOn = false;
         plates = new Item[2];
-        Debug.Log(places.Length);
+        mesh = this.GetComponent<MeshRenderer>();
+        OriginalMaterial = mesh.material;
+        FlashMaterial = MacroSistema.sistema.flashMaterial;
     }
 
-
-    public void CheckPlaces()/////
+     public override void ToogleHighLight(bool On)
     {
 
-    }
+        if(On)
+        {
+            mesh.material = FlashMaterial;
+        }
+        else
+        {
+             mesh.material = OriginalMaterial;
+        }
 
+    }
 
     public override Item GiveItens (Item itenToGive)
     {

@@ -16,6 +16,10 @@ public class MacroSistema : MonoBehaviour
     EventInstance soundTrack;
      EventInstance soundScape;
 
+    public Material flashMaterial;
+
+     
+
     void Awake()
     {
         if (sistema == null)

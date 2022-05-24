@@ -8,8 +8,13 @@ public abstract class Interactable : MonoBehaviour
     public abstract Item itenItHas {get;set;}
     public abstract bool hasItemOnIt {get;set;}
     public abstract bool highLightOn{get; set;}
+    public abstract Material OriginalMaterial{get ; set;}
+    public abstract Material FlashMaterial{get ; set;}
+    public abstract MeshRenderer mesh{get; set;}
+
     public abstract Item GiveItens(Item itenToGive);
     public abstract void ReceiveItens(Item itenReceived);
+    public abstract void ToogleHighLight(bool On);
 
     public abstract void Interact(Item itenInHand, Chef chef);
     

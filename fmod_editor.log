@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000019761A5F208 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000197AF759708 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,3 +18,62 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000197C2D9A758
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000197C2D9A758
+[LOG] SoundI::release                          :  (0000019697E38778)
+[LOG] SoundI::release                          :     queimando (00000196994AD0B8)
+[LOG] SoundI::release                          :  (0000019794F6B358)
+[LOG] SoundI::release                          :     queimou 2 (00000196994AC558)
+[LOG] SoundI::release                          :  (0000019794F6B638)
+[LOG] SoundI::release                          :     queimou (00000196994AA338)
+[LOG] SoundI::release                          :  (00000196946A1E28)
+[LOG] SoundI::release                          :     wrong 1 (00000196994A78F8)
+[LOG] SoundI::release                          :  (0000019794F6BBF8)
+[LOG] SoundI::release                          :     wrong 2 (00000196994A7C38)
+[LOG] SoundI::release                          :  (0000019794F6B1E8)
+[LOG] SoundI::release                          :     wrong 3 (00000196994AA818)
+[LOG] SoundI::release                          :  (0000019794F6B078)
+[LOG] SoundI::release                          :     wrong 5 (00000196994ABD38)
+[LOG] SoundI::release                          :  (0000019697E38EA8)
+[LOG] SoundI::release                          :     cooking fire (00000196994A9158)
+[LOG] SoundI::release                          :  (0000019794F6B918)
+[LOG] SoundI::release                          :     chop 3.2 (00000196994A8AD8)
+[LOG] SoundI::release                          :  (0000019794F6C8D8)
+[LOG] SoundI::release                          :     chop 2.2 (00000196994A7F78)
+[LOG] SoundI::release                          :  (0000019794F6CBB8)
+[LOG] SoundI::release                          :     chop 1.2 (00000196994A8FB8)
+[LOG] SoundI::release                          :  (0000019794F6B4C8)
+[LOG] SoundI::release                          :     chop 3.1 (00000196994AA198)
+[LOG] SoundI::release                          :  (0000019794F6CA48)
+[LOG] SoundI::release                          :     chop 2.1 (00000196994A8C78)
+[LOG] SoundI::release                          :  (00000196946A23E8)
+[LOG] SoundI::release                          :     chop 1.1 (00000196994A68B8)
+[LOG] SoundI::release                          :  (0000019697E39188)
+[LOG] SoundI::release                          :     cooking fire 2 (00000196994AA9B8)
+[LOG] SoundI::release                          : cachorro (000001969639BFC8)
+[LOG] SoundI::release                          :     cachorro (00000196994ADC18)
+[LOG] SoundI::release                          :     cachorro (00000197C2D9A5A8)
+[LOG] SoundI::release                          : Soundscape talher_1 (000001969639BAB8)
+[LOG] SoundI::release                          :     Soundscape talher_1 (00000196994AD258)
+[LOG] SoundI::release                          :     Soundscape talher_1 (00000197C2D9A098)
+[LOG] SoundI::release                          : pouca gente (000001969639B3F8)
+[LOG] SoundI::release                          :     pouca gente (00000196994ACF18)
+[LOG] SoundI::release                          :     pouca gente (00000197C2D9AE18)
+[LOG] SoundI::release                          : muita gente (000001969639CB98)
+[LOG] SoundI::release                          :     muita gente (00000196994ABB98)
+[LOG] SoundI::release                          :     muita gente (00000197C2D9A758)
+[LOG] SoundI::release                          : Forró (00000196983B1D78)
+[LOG] SoundI::release                          :     Forró (00000196994AD598)
+[LOG] SoundI::release                          :     Forró (00000197676C6DF8)
+[LOG] SoundI::release                          :  (0000019794F6B7A8)
+[LOG] SoundI::release                          :     cooking bubble (00000196994A7A98)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
