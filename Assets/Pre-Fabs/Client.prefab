@@ -1228,7 +1228,7 @@ MonoBehaviour:
   InteractionImage: {fileID: 6739490016544762485}
   WayOut: {fileID: 0}
   timeToGetOut: 10
-  clientIrritation: 0
+  clientStarterIrritation: 0
   speech:
   - {fileID: 11400000, guid: 22e5af216731bca449f1ba3a4339fbaa, type: 2}
   - {fileID: 11400000, guid: ce65e77d3d631c84c9e5b09c1f55e3fb, type: 2}
@@ -1238,7 +1238,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be1de1a00c4c9874fbe276972097df61, type: 2}
   - {fileID: 11400000, guid: 14e09de893a0d014aaf1a22c3ee0f5f7, type: 2}
   - {fileID: 11400000, guid: a42de5a6fa72f494daf9c3244f21cd02, type: 2}
+  possibleFood:
+  - {fileID: -3474079583254149891, guid: d7321bdff5076974799a516510310384, type: 3}
+  - {fileID: 5078107103301101074, guid: 90b3a5215db73e047843f307cf87b9b7, type: 3}
+  - {fileID: -8778301345363065724, guid: dc2f7b58e5d76094a8a610a0bd6f6b3e, type: 3}
   behaviourState: 0
+  foodRef: {fileID: 0}
 --- !u!114 &8710533584187976648
 MonoBehaviour:
   m_ObjectHideFlags: 0

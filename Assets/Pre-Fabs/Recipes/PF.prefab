@@ -88,4 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8a7caca1b49e344aed17dc74eb04ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodName: PratoFeito
   foodImage: {fileID: 8703166627015826689}
+  client: {fileID: 0}

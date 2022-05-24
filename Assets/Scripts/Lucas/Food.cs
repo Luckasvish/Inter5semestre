@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class Food : MonoBehaviour
 {
-    [SerializeField]
-    Image foodImage;
+    public string foodName;
+    public Image foodImage;
+    public Client client;
 
+    void SetReference()
+    {
 
+    }
 }
