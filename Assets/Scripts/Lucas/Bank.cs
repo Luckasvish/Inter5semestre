@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Bank : MonoBehaviour
@@ -10,9 +11,14 @@ public class Bank : MonoBehaviour
     private int startMoney;
 
     [SerializeField]
-    TextMeshProUGUI moneyInUI;
-    public int yourMoney;
-    public string actualMoney;
+    TextMeshProUGUI actualMoneyUI;
+
+    [SerializeField]
+    TextMeshProUGUI goal;
+    [SerializeField]
+    int goalNumber = 800;
+
+    int actualMoney;
 
     private void Awake()
     {
@@ -23,33 +29,33 @@ public class Bank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        goal.text = "Meta: " + goalNumber.ToString();
         UpdateMoneyUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetGoalNumber()
     {
-        
+        return goalNumber;
+    }
+    
+    public int GetaActualMoney()
+    {
+        return actualMoney;
     }
 
-
-    public void EarnMoney(int earnedMoney)
+    public void ChangeMoneyAmount(int money, bool isIncreasing)
     {
         //increase the money and then uptade the money UI
-        yourMoney += earnedMoney;
+        if(isIncreasing)
+            actualMoney += money;
+        else
+            actualMoney -= money;
         UpdateMoneyUI();
     }    
-    
-    public void LostMoney(int moneyLoss)
-    {
-        //decrease the money and then uptade the money UI
-        yourMoney -= moneyLoss;
-        UpdateMoneyUI();
-    }
 
     public void UpdateMoneyUI()
     {
         //change the money UI text for the actual value
-        moneyInUI.text = actualMoney + " = O taldo dinheiro do Taldo Buteco";   
+        actualMoneyUI.text = actualMoney.ToString();
     }
 }

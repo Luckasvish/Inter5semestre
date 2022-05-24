@@ -5,18 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class SceneManage : MonoBehaviour
 {
+    public static SceneManage instance;
     [SerializeField]
     static int numberOfScenes;
+    int lastScene;
 
     [SerializeField]
     static int actualScene = 0;
     [SerializeField]
     static string[] sceneName;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
         numberOfScenes = 4;
+        lastScene = numberOfScenes - 2;
         sceneName = new string[numberOfScenes];
 //#if UNITY_EDITOR
 //        Scene scene = SceneManager.GetActiveScene();
@@ -58,6 +66,16 @@ public class SceneManage : MonoBehaviour
     public void GoToCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public int GetActualScene()
+    {
+        return actualScene;
+    }    
+    
+    public int GetLastScene()
+    {
+        return lastScene;
     }
 
     void StartSceneNames()

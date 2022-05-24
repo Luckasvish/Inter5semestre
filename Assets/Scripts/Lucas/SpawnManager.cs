@@ -38,14 +38,8 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(Spawner());
             yield break;
         }
-        else if (clientsInScene > (maxClientsPerLevel * (3 / 4)) + (maxClientsPerLevel * 1/ 8))
-            yield return new WaitForSeconds(Random.RandomRange(25, 30));
-        else if(clientsInScene > maxClientsPerLevel*(3/4))
-            yield return new WaitForSeconds(Random.RandomRange(10, 25));
-        else if(clientsInScene > maxClientsPerLevel * (1 / 4))
-            yield return new WaitForSeconds(Random.RandomRange(6, 16));
-        else
-            yield return new WaitForSeconds(Random.RandomRange(4, 10));
+
+        yield return new WaitForSeconds(3);
         Instantiate(Client, Spawn.transform.position, Quaternion.identity);
         ChangeClientsNumber(+1);
         StartCoroutine(Spawner());
