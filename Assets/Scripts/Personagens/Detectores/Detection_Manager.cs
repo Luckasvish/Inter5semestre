@@ -20,23 +20,26 @@ public class Detection_Manager : MonoBehaviour
     /// Detector
     public Transform detectorPosition;  /// Posição.y do detector
     [SerializeField] internal float detectionDistance;  /// Distancia de detecção
+   
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
 
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
+
 
     public void SetDetection(Interactable interaction)  /// Atribuir detecção  >>> chamada em InteractableDetector
     {
             interactable = interaction;     /// recebe a interação do detector e aloca aqui no manager;
-            interactable.highLightOn = true;       /// liga o highlight do interagível;
+            interactable.ToogleHighLight(true);
             canInteract = true;     /// permite interagir;
     }
 
     public void ClearDetection()    /// Limpar detecção  >>> chamada em InteractableDetector
     {
         canInteract = false;    /// tira a permição para interagir
-        interactable.highLightOn = false;   /// desliga o highlight do interagível;
+        interactable.ToogleHighLight(false);
         interactable = null;    /// anula a referência de interaagível;
     }
 
