@@ -92,11 +92,6 @@ public class Client : IBehaviour
     TextMeshPro interactionText;
 
 
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         WayOut = SpawnManager.instance.Spawn;
@@ -426,11 +421,11 @@ public class Client : IBehaviour
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
         Debug.Log("Eat");
-        OrderManager.instance.RemoveRecipeInList(clientOrderIndex);
+        hasAte = true;
+        OrderManager.instance.RemoveRecipeInList(clientOrderIndex, clientOrder);
 
         if(actualWaitingTime == maxEatingTime)
         {
-            hasAte = true;
             callback = true;
             StartCoroutine(Main());
         }
@@ -491,7 +486,7 @@ public class Client : IBehaviour
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
         if(hasOrdered && !hasAte)
-            OrderManager.instance.RemoveRecipeInList(clientOrderIndex);
+            OrderManager.instance.RemoveRecipeInList(clientOrderIndex, clientOrder);
         // Debug.Log("Dando o fora!");///
         navMesh.destination = WayOut.transform.position;
         if (myChair != null)

@@ -65,9 +65,9 @@ public class OrderManager : MonoBehaviour
         return OrderImages[_recipeindex].sprite;
     }
 
-    public void RemoveRecipeInList(int _recipeIndex)
+    public void RemoveRecipeInList(int _recipeIndex, string recipeToAdd)
     {
-        recipesToProduce.Remove(recipesToProduce[_recipeIndex]);
+        recipesToProduce.Remove(recipeToAdd);
         RecipeInHud(false, _recipeIndex);
         recipeIndex -= 1;
     }
