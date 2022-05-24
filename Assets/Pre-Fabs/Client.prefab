@@ -1169,6 +1169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4194207297956353008}
   - component: {fileID: 4449108028638739550}
+  - component: {fileID: 8710533584187976648}
   - component: {fileID: 4427749519490172165}
   - component: {fileID: 1548414299}
   m_Layer: 6
@@ -1216,18 +1217,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e1438d72fbf7a40b24cbfa9d9c08bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angerManager: {fileID: 8710533584187976648}
   navMesh: {fileID: 4427749519490172165}
   collider: {fileID: 1548414299}
-  moneyToGet: 10
+  moneyForRecipe: 0
+  moneyForTip: 0
+  increaseAngerValue: 0
   InteractionBaloon: {fileID: 3392285391753136361}
   OrderUI: {fileID: 3368667826076469915}
-  OrderImages:
-  - {fileID: 7251701790054742605, guid: d7321bdff5076974799a516510310384, type: 3}
-  - {fileID: 8703166627015826689, guid: 90b3a5215db73e047843f307cf87b9b7, type: 3}
-  - {fileID: 2356474661665506113, guid: dc2f7b58e5d76094a8a610a0bd6f6b3e, type: 3}
   InteractionImage: {fileID: 6739490016544762485}
   WayOut: {fileID: 0}
   timeToGetOut: 10
+  clientIrritation: 0
   speech:
   - {fileID: 11400000, guid: 22e5af216731bca449f1ba3a4339fbaa, type: 2}
   - {fileID: 11400000, guid: ce65e77d3d631c84c9e5b09c1f55e3fb, type: 2}
@@ -1238,6 +1239,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 14e09de893a0d014aaf1a22c3ee0f5f7, type: 2}
   - {fileID: 11400000, guid: a42de5a6fa72f494daf9c3244f21cd02, type: 2}
   behaviourState: 0
+--- !u!114 &8710533584187976648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566571613215934794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1a4cc3dc19bb745a9059ad71ecfda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myClient: {fileID: 4449108028638739550}
+  clientAnger: 0
 --- !u!195 &4427749519490172165
 NavMeshAgent:
   m_ObjectHideFlags: 0

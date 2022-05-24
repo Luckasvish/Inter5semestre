@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: 13779a413f5bfd541aba3fada806ca11
+guid: 49e86f432f2a76e409d9b2b6fc303e1a
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 4767416239722893738
-    second: O Tal Do Buteco_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -44,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -104,28 +101,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: O Tal Do Buteco_0
-      rect:
-        serializedVersion: 2
-        x: 467
-        y: 491
-        width: 324
-        height: 159
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa19c19afc3492240800000000000000
-      internalID: 4767416239722893738
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
