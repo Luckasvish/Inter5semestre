@@ -6,6 +6,7 @@ public class Movement_Manager : MonoBehaviour
 {
     internal CharacterController controller;
     public float rotationSpeed;
+    float smoothVelocity;
     
     public float speed;
     void Start()
@@ -17,19 +18,14 @@ public class Movement_Manager : MonoBehaviour
 
     public void Move(Vector3 moveInput)
     {
-        moveInput = new Vector3 ( moveInput.x * Time.deltaTime * speed, moveInput.y , moveInput.z * Time.deltaTime * speed);
-    
-        //Quaternion direction = Quaternion.LookRotation(moveInput, Vector3.up);
-
-        if(moveInput.x != 0 || moveInput.z != 0)
+        float targetAngle = Mathf.Atan2(moveInput.x, moveInput.z) * Mathf.Rad2Deg;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothVelocity, rotationSpeed);
+       
+        if(moveInput.magnitude > 0.1f)
         {
-        
-            transform.forward = Vector3.Lerp(transform.forward, moveInput,0.9f);
-        
-        
+            transform.rotation = Quaternion.Euler(0f,angle,0f);
+            controller.Move(moveInput * speed * Time.deltaTime);
         }
-
-        controller.Move(moveInput);
     }
 
 

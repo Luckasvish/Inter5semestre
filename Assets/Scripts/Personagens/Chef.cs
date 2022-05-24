@@ -7,7 +7,6 @@ public class Chef : MonoBehaviour
     ///COMPONENTES DE PLAYER///
     internal Movement_Manager movement_Manager;
     internal Input_Manager input_Manager;
-    internal Interaction_Manager interaction_Manager;
     internal Detection_Manager detection_Manager;
     ///--------------------///
 
@@ -23,18 +22,17 @@ public class Chef : MonoBehaviour
     {
         input_Manager = MacroSistema.sistema.input_Manager;
         movement_Manager = GetComponent<Movement_Manager>();
-        interaction_Manager = GetComponent<Interaction_Manager>();
         detection_Manager = GetComponent<Detection_Manager>();
     }
 
 
     void Update()
     {
-        if(detection_Manager.canInteract == true)
+        if(detection_Manager.canInteract == true && characterOn)
         {
             if (input_Manager.pressedE == true)
             {
-                interaction_Manager.Interaction(detection_Manager.interactable);
+                Interaction(detection_Manager.interactable);
             }
         }
  
@@ -48,17 +46,18 @@ public class Chef : MonoBehaviour
         {
             ToogleChar();
         }
-
-
-
-    }
-
-    void FixedUpdate()
-    {
+        
         if(characterOn)
         {
             movement_Manager.Move(input_Manager.moveInput);
         }
+
+
+    }
+
+    public void Interaction(Interactable interaction)
+    {
+        interaction.Interact(itenInHand, this);
     }
 
     internal void ToogleChar()

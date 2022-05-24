@@ -5,27 +5,19 @@ using UnityEngine.InputSystem;
 
 public class Input_Manager : MonoBehaviour
 {
-    internal bool pressedE;
-    internal Vector3 moveInput;
-    internal bool pressed01;
-    internal bool pressed02;
-    internal bool pressed03;
-    internal bool pressedSpace;
-    void Update()
-    {
-
-       pressedE =  Input.GetKeyDown(KeyCode.E);
-       pressed01 = Input.GetKeyDown(KeyCode.Alpha1);
-       pressed02 = Input.GetKeyDown(KeyCode.Alpha2);
-       pressed03 = Input.GetKeyDown(KeyCode.Alpha3);
-       pressedSpace = Input.GetKeyDown(KeyCode.Space);
-       moveInput = MovementInput();
-    }
-
-
+    internal bool pressedE => Input.GetKeyDown(KeyCode.E);
+    internal Vector3 moveInput => MovementInput();
+    internal bool pressed01 => Input.GetKeyDown(KeyCode.Alpha1);
+    internal bool pressed02 => Input.GetKeyDown(KeyCode.Alpha2);
+    internal bool pressed03 => Input.GetKeyDown(KeyCode.Alpha3);
+    internal bool pressedSpace => Input.GetKeyDown(KeyCode.Space);
+  
     Vector3 MovementInput()
     {
-        Vector3 input = new Vector3 (Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
+        float hInput = Input.GetAxisRaw("Horizontal");
+        float vInput = Input.GetAxisRaw("Vertical");
+        Vector3 input = new Vector3 (hInput * Camera.main.transform.forward.z,0,vInput * Camera.main.transform.forward.z).normalized;
+        
         return input;
     }
 
