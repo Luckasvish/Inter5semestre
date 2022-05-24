@@ -10,12 +10,18 @@ public class Preparer : Interactable
      FeedBackManager feedback {get;set;}
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public  GameObject highLight;
     public override bool highLightOn {get; set;}
     public Transform ingredientPosition;
     public float preparationTime;
     internal float preparationTimer;
     EventInstance choppSfxEvent;
+
+    public override Material OriginalMaterial {get; set;}
+    
+    public override Material FlashMaterial{get ; set;}
+    
+    public override MeshRenderer mesh{get; set;}
+
     bool sfxPlayed;
 
     bool preparing;
@@ -26,7 +32,10 @@ public class Preparer : Interactable
         feedback = GetComponent<FeedBackManager>();
         type = InteractableType._Preparer;
         itenItHas = null;
-        highLight.SetActive(false);   
+         mesh = this.GetComponent<MeshRenderer>();
+        OriginalMaterial = mesh.material;
+         FlashMaterial = MacroSistema.sistema.flashMaterial;
+
     }
     void Start()
     {
@@ -38,17 +47,22 @@ public class Preparer : Interactable
         {
             Prepare();
         }
-        if(highLightOn)
-      {
-        highLight.SetActive(true);
-      }
 
-      else 
-      {
-        highLight.SetActive(false);
-      }   
     }
-    
+
+     public override void ToogleHighLight(bool On)
+    {
+
+        if(On)
+        {
+            mesh.material = FlashMaterial;
+        }
+        else
+        {
+             mesh.material = OriginalMaterial;
+        }
+
+    }
     public override void ReceiveItens(Item itenInHand) // RECEBE O INGREDIENTE 
     {  
             itenItHas = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
@@ -114,6 +128,7 @@ public class Preparer : Interactable
             if(hasItemOnIt)     
             {
                 if(itenItHas.type != ItemType._PreparedIngredient) TooglePreparer(); 
+                
                  else chef.ReceiveItens(this);  
             }
             else Debug.Log("Não tem nada aqui!!!");

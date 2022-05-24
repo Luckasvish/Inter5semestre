@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000019761A5F208 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000019764C86F18 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,3 +18,101 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000197881011F8 : node = 00000196951EB0C0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000019794A09D28.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000197881011F8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4256800
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 25312
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000196951EB1D0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Soundscape talher_1', format=5, channels=2, frequency=48000, lengthbytes=278816, lengthpcm=1384000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000197881011F8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000197887FA168
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000197887FA168
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000197674B4E88
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000197674B4E88
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 4256800
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 25312
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000724E27F1A8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFCE95660E0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFCE95660B0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFCE95661B0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFCE9566270
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000197C3B0DAD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='pop', format=5, channels=2, frequency=48000, lengthbytes=1888, lengthpcm=6999, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.988500.
+[LOG] SoundI::release                          :  (000001969880E398)
+[LOG] SoundI::release                          :     pop (000001969473BC18)
+[LOG] SoundI::release                          :  (00000197620F5E78)
+[LOG] SoundI::release                          :     queimando (000001969473A6F8)
+[LOG] SoundI::release                          :  (00000197620F0C88)
+[LOG] SoundI::release                          :     queimou 2 (00000196945DA418)
+[LOG] SoundI::release                          :  (00000197620F4A58)
+[LOG] SoundI::release                          :     queimou (00000196945D5138)
+[LOG] SoundI::release                          :  (00000197620F24F8)
+[LOG] SoundI::release                          :     wrong 1 (00000196945DAA98)
+[LOG] SoundI::release                          :  (00000197620F2AB8)
+[LOG] SoundI::release                          :     wrong 2 (00000196945DADD8)
+[LOG] SoundI::release                          :  (00000197620F2948)
+[LOG] SoundI::release                          :     wrong 3 (00000196945DA758)
+[LOG] SoundI::release                          :  (00000197620F3D68)
+[LOG] SoundI::release                          :     wrong 5 (00000196945D7D18)
+[LOG] SoundI::release                          :  (00000197620F4048)
+[LOG] SoundI::release                          :     cooking fire (000001969473B8D8)
+[LOG] SoundI::release                          :  (00000197620F5A28)
+[LOG] SoundI::release                          :     chop 3.2 (00000196945D8058)
+[LOG] SoundI::release                          :  (00000197620F3078)
+[LOG] SoundI::release                          :     chop 2.2 (00000196945DAF78)
+[LOG] SoundI::release                          :  (00000197620F3638)
+[LOG] SoundI::release                          :     chop 1.2 (00000196945D4AB8)
+[LOG] SoundI::release                          :  (00000197620F0F68)
+[LOG] SoundI::release                          :     chop 3.1 (00000196945D9718)
+[LOG] SoundI::release                          :  (00000197620F34C8)
+[LOG] SoundI::release                          :     chop 2.1 (00000196945D52D8)
+[LOG] SoundI::release                          :  (00000197620F5188)
+[LOG] SoundI::release                          :     chop 1.1 (00000196945D7B78)
+[LOG] SoundI::release                          :  (00000197620F4D38)
+[LOG] SoundI::release                          :     cooking fire 2 (000001969473B738)
+[LOG] SoundI::release                          : cachorro (0000019787D575E8)
+[LOG] SoundI::release                          :     cachorro (000001969473A218)
+[LOG] SoundI::release                          :     cachorro (00000197674B73A8)
+[LOG] SoundI::release                          : Soundscape talher_1 (00000197881011F8)
+[LOG] SoundI::release                          :     Soundscape talher_1 (000001969473A558)
+[LOG] SoundI::release                          :     Soundscape talher_1 (00000197887FA168)
+[LOG] SoundI::release                          : Soundscape talher_1 (0000019787D57CA8)
+[LOG] SoundI::release                          :     Soundscape talher_1 (000001969473BA78)
+[LOG] SoundI::release                          :     Soundscape talher_1 (00000197674B7048)
+[LOG] SoundI::release                          : pouca gente (0000019787D57798)
+[LOG] SoundI::release                          :     pouca gente (000001969473ABD8)
+[LOG] SoundI::release                          :     pouca gente (00000197674B5548)
+[LOG] SoundI::release                          : muita gente (0000019787D57948)
+[LOG] SoundI::release                          :     muita gente (00000196945D5478)
+[LOG] SoundI::release                          :     muita gente (00000197674B4E88)
+[LOG] SoundI::release                          : Forró (0000019764C765B8)
+[LOG] SoundI::release                          :     Forró (000001969473AF18)
+[LOG] SoundI::release                          :     Forró (00000197674B82D8)
+[LOG] SoundI::release                          :  (00000197620F5D08)
+[LOG] SoundI::release                          :     cooking bubble (00000196945DAC38)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
