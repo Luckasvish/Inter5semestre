@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
-    public GameObject[] recipesHud = new GameObject[16];
     public Image[] recipesHudSprites = new Image[16];
 
     public List<string> recipesToProduce;
@@ -18,10 +17,9 @@ public class OrderManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        for (int i = 0; i < recipesHud.Length; i++)
+        for (int i = 0; i < recipesHudSprites.Length; i++)
         {
-            recipesHudSprites[i] = recipesHud[i].GetComponent<Image>();
-            recipesHud[i].SetActive(false);
+            recipesHudSprites[i].gameObject.SetActive(false);
         }
     }
     void Start()
@@ -42,10 +40,10 @@ public class OrderManager : MonoBehaviour
         if (isAdding)
         {
             recipesHudSprites[_recipeIndex].sprite = GetOrderImage(recipesToProduce[recipeIndex]);
-            recipesHud[_recipeIndex].SetActive(true);
+            recipesHudSprites[_recipeIndex].gameObject.SetActive(true);
         }
         else
-            recipesHud[_recipeIndex].SetActive(false);
+            recipesHudSprites[_recipeIndex].gameObject.SetActive(false);
     }
     public Sprite GetOrderImage(string _clientOrder)
     {
