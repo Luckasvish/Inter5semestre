@@ -16,7 +16,6 @@ public class MacroSistema : MonoBehaviour
     EventInstance soundTrack;
      EventInstance soundScape;
 
-    public Material flashMaterial;
 
      
 

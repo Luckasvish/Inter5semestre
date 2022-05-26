@@ -8,42 +8,22 @@ public class Storers : Interactable
 
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override bool highLightOn {get; set;}
     public string ingredientName;
 
-    public override Material OriginalMaterial {get; set;}
-    
-    public override Material FlashMaterial{get ; set;}
-    
-    public override MeshRenderer mesh{get; set;}
-
+    internal override Material material{get ; set;}  
    void Awake()
    {   
        type = InteractableType._Storer;
        hasItemOnIt = true;
-        mesh = this.GetComponent<MeshRenderer>();
-        OriginalMaterial = mesh.material;
-         FlashMaterial = MacroSistema.sistema.flashMaterial;
+
         
        
    }
     
-    void Update()
+    void Start()
     {
-   
-    }
-     public override void ToogleHighLight(bool On)
-    {
-
-        if(On)
-        {
-            mesh.material = FlashMaterial;
-        }
-        else
-        {
-             mesh.material = OriginalMaterial;
-        }
-
+        material = GetComponent<MeshRenderer>().material;
+        material.SetFloat("_emission", 4);
     }
     public override Item GiveItens(Item Buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {

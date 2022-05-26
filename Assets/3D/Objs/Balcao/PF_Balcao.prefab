@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3934678978952197218}
   - component: {fileID: 3934678978952197229}
   m_Layer: 10
-  m_Name: Balcao
+  m_Name: PF_Balcao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e8329e3e8aa8afc4da6204204b487c52, type: 2}
+  - {fileID: 2100000, guid: 9d2b864364816af44b9ea52779479f58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

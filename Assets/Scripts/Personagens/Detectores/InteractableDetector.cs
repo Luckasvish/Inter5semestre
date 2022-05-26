@@ -33,7 +33,6 @@ public class InteractableDetector : MonoBehaviour
                 }
                 else    /// (Se já houver um interagível em manager)
                 {
-                    manager.interactable.highLightOn = false;   /// desliga o highlight do interagível;
                     manager.SetDetection(interactable.transform.GetComponent<Interactable>());  /// retorna a nova interação ao manager;
                 }
 

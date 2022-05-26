@@ -9,18 +9,13 @@ public class Balcon : Interactable
 
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override bool highLightOn {get; set;}
+    internal override Material material{get ; set;}  
+
     
-    public override Material OriginalMaterial {get; set;}
-    
-    public override Material FlashMaterial{get ; set;}
-    
-    public override MeshRenderer mesh{get; set;}
-    
-    public Transform itemPosition;
-    
+    public Transform itemPosition;    
     internal bool havePlate;
-    
+
+
     
         void Awake()
     {
@@ -35,16 +30,17 @@ public class Balcon : Interactable
           hasItemOnIt=true;
           itenItHas = GetComponentInChildren<Plates>();
         }
-
-        highLightOn = false;
-        mesh = this.GetComponent<MeshRenderer>();
-        OriginalMaterial = mesh.material;
-         FlashMaterial = MacroSistema.sistema.flashMaterial;
       
+    }
+    void Start()
+    {
+        material = GetComponent<MeshRenderer>().material;
+        material.SetFloat("_emission", 4);
     }
 
     void Update()
     {
+      
 
       if(hasItemOnIt)
       {
@@ -52,33 +48,11 @@ public class Balcon : Interactable
         {
           Plates plate = itenItHas.GetComponent<Plates>();
 
-            if(highLightOn)
-            {
-              plate.hud.SetActive(true);
-            }
-            else
-            {
-              plate.hud.SetActive(false);
-            }
+
 
         }
       }
     }
-
-    public override void ToogleHighLight(bool On)
-    {
-
-        if(On)
-        {
-            mesh.material = FlashMaterial;
-        }
-        else
-        {
-             mesh.material = OriginalMaterial;
-        }
-
-    }
-
 
 
     public override void ReceiveItens(Item itenInHand)
