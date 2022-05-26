@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 13b0da01c7dcc05469d5976b9ecca869
+guid: ee5519c021ef2644592e0269f2ba486a
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 8052441213920564187
+    second: lisbelaCatch
   externalObjects: {}
   materials:
     materialImportMode: 2
