@@ -8,45 +8,32 @@ public class Table : Interactable
     public  override InteractableType type { get; set; }
     public override Item itenItHas {get;set;}
     public override bool hasItemOnIt {get;set;}
-    public override bool highLightOn{get; set;}
     public Transform[] platePosition;
     internal Item[] plates;
 
-    public override Material OriginalMaterial {get; set;}
-    
-    public override Material FlashMaterial{get ; set;}
-    
-    public override MeshRenderer mesh{get; set;}
   
     //internal bool isFull;
 
     public Chair[] places;
 
+    internal override Material material{get ; set;}  
     void Awake()
     {
         type = InteractableType._Table;
         itenItHas = null;
         hasItemOnIt = false;
-        highLightOn = false;
         plates = new Item[2];
-        mesh = this.GetComponent<MeshRenderer>();
-        OriginalMaterial = mesh.material;
-        FlashMaterial = MacroSistema.sistema.flashMaterial;
+   
     }
 
-     public override void ToogleHighLight(bool On)
+    void Start()
     {
-
-        if(On)
-        {
-            mesh.material = FlashMaterial;
-        }
-        else
-        {
-             mesh.material = OriginalMaterial;
-        }
-
+        material = GetComponent<MeshRenderer>().material;
+        material.SetFloat("_emission", 4);
+        Debug.Log("CADEIRA 1: " + places[0]);///////////////
+        Debug.Log("CADEIRA 2: " + places[1]);///////////////
     }
+
 
     public override Item GiveItens (Item itenToGive)
     {
@@ -75,7 +62,7 @@ public class Table : Interactable
         {
             if(places[0].client != null && plates[1] == null)
             {
-                if(places[0].client.clientOrder ==item.itemName)
+                if(places[0].client.clientOrder == item.itemName)
                  {  
                     plates[0] = item;
                     plates[0].transform.position =  platePosition[0].position;
@@ -83,9 +70,13 @@ public class Table : Interactable
                  }
                  else
                  {
+                    
                     plates[0] = item;
+                    
                     plates[0].transform.position =  platePosition[0].position;
+                    
                     places[0].ReceiveItens(item);
+
                     Debug.Log("places[0].client.clientOrder");
                     Debug.Log("Essa não é a receita que o cliente pediu!!!");
                  }
@@ -147,11 +138,13 @@ public class Table : Interactable
             {
                 plates[0]  = item;
                 plates[0].transform.position =  platePosition[0].position;
+                places[0].ReceiveItens(item);
             }
             else if(plates[1] == null)
             {
                 plates[1]  = item;
                 plates[1].transform.position =  platePosition[1].position;
+                places[1].ReceiveItens(item);
             }    
 
         }

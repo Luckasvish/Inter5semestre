@@ -7,27 +7,22 @@ public class Oven : Interactable
 {
     public override InteractableType type { get; set;}
     FeedBackManager feedback {get;set;}
-    
+
+
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override bool highLightOn {get; set;}
+    internal override Material material{get ; set;}  
+  
 
-    public override Material OriginalMaterial {get; set;}
-    
-    public override Material FlashMaterial{get ; set;}
-    
-    public override MeshRenderer mesh{get; set;}
-
+    public Material ovenMaterial;
     public Transform PanPosition;
 
-    public Pan _Pan;
+    internal Pan _Pan;
 
     void Awake()
     {
-        type = InteractableType._Oven;
-         mesh = this.GetComponent<MeshRenderer>();
-        OriginalMaterial = mesh.material;
-         FlashMaterial = MacroSistema.sistema.flashMaterial;
+         type = InteractableType._Oven;
+   
          
     }
     void Start()
@@ -44,22 +39,12 @@ public class Oven : Interactable
           itenItHas = _Pan;
           itenItHas.transform.position = PanPosition.position;
         }
+        material = ovenMaterial;
+        material.SetFloat("_emission", 4);
         
     }
 
-     public override void ToogleHighLight(bool On)
-    {
 
-        if(On)
-        {
-            mesh.material = FlashMaterial;
-        }
-        else
-        {
-             mesh.material = OriginalMaterial;
-        }
-
-    }
 
 
     public override Item GiveItens(Item Buffer)

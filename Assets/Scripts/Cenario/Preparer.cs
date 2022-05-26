@@ -10,17 +10,15 @@ public class Preparer : Interactable
      FeedBackManager feedback {get;set;}
     public override Item itenItHas { get; set; }
     public override bool hasItemOnIt {get; set;}
-    public override bool highLightOn {get; set;}
+    internal override Material material{get ; set;}  
+
+  
     public Transform ingredientPosition;
     public float preparationTime;
     internal float preparationTimer;
     EventInstance choppSfxEvent;
 
-    public override Material OriginalMaterial {get; set;}
-    
-    public override Material FlashMaterial{get ; set;}
-    
-    public override MeshRenderer mesh{get; set;}
+   
 
     bool sfxPlayed;
 
@@ -32,34 +30,20 @@ public class Preparer : Interactable
         feedback = GetComponent<FeedBackManager>();
         type = InteractableType._Preparer;
         itenItHas = null;
-         mesh = this.GetComponent<MeshRenderer>();
-        OriginalMaterial = mesh.material;
-         FlashMaterial = MacroSistema.sistema.flashMaterial;
+   
 
     }
     void Start()
     {
         choppSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_chopp");
+        material = GetComponent<MeshRenderer>().material;
+        material.SetFloat("_emission", 4);
     }
     void Update()
     {
         if(preparing)
         {
             Prepare();
-        }
-
-    }
-
-     public override void ToogleHighLight(bool On)
-    {
-
-        if(On)
-        {
-            mesh.material = FlashMaterial;
-        }
-        else
-        {
-             mesh.material = OriginalMaterial;
         }
 
     }

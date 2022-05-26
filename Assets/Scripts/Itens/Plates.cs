@@ -14,7 +14,7 @@ using FMODUnity;
 
     //////////////////////////////////////////////////////////////////
     internal Recipe recipe;
-    public GameObject[] recipeInstance;
+    public Recipe[] recipeInstance;
     internal bool settle;
     
     //////////////////////////////////////////////////////////
@@ -26,6 +26,7 @@ using FMODUnity;
     {
         Balcon balcon = GetComponentInParent<Balcon>();
         hud = GetComponentInChildren<PlateHUD>().gameObject;    
+        hud.SetActive(false);
         recipe = new Recipe();    
 
         if(balcon != null)
@@ -34,6 +35,7 @@ using FMODUnity;
             balcon.hasItemOnIt = true;
         }
         type = ItemType._Plate;
+        
         if(plateOn)
         {
             settle =true;
@@ -48,18 +50,22 @@ using FMODUnity;
         switch(recipeName)
         {
             case "Feijoada":
-                    recipe = recipeInstance[0].GetComponent<Recipe>();
+                    recipe = recipeInstance[0];
                     itemName = recipe.itemName;
+                    
             break;
             case "PratoFeito":
-                    recipe = recipeInstance[1].GetComponent<Recipe>();
+                    recipe = recipeInstance[1];
                     itemName = recipe.itemName;
+
             break;
             case "Buchada":
-                    recipe = recipeInstance[2].GetComponent<Recipe>();
+                    recipe = recipeInstance[2];
                     itemName = recipe.itemName;
             break;
         }
+
+        Debug.Log("Nome da receita no prato: " + itemName);///////////////
         recipe.InitiateRecipe();
     }
 
