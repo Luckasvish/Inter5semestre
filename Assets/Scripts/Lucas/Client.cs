@@ -213,7 +213,7 @@ public class Client : IBehaviour
                     switch (callback)
                     {
                         case true:
-                            PayTip();
+                            StartCoroutine(PayTip());
                             break;
                         case false:
                             StartExit();
@@ -280,7 +280,7 @@ public class Client : IBehaviour
 
         behaviourState = BehaviourState.WaitingForChair;
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
-          Debug.Log("Wallking");///
+        //          Debug.Log("Wallking");///
        
         if (hasAvaiableChair)
         {   
@@ -299,19 +299,19 @@ public class Client : IBehaviour
 
     public override IEnumerator Walk()
     {
-        Debug.Log("Walk");
+        //Debug.Log("Walk");
         behaviourState = BehaviourState.Walk;
         yield return new WaitForSeconds(2);
         Vector3 chairPos = myChair.transform.position;
         this.navMesh.destination = chairPos;
         if (transform.position != navMesh.destination)
         {
-            Debug.Log("volta a andar");
+           // Debug.Log("volta a andar");
             StartCoroutine(Walk());
             yield break;
         }
 
-        Debug.Log("passa pro sit");
+    //    Debug.Log("passa pro sit");
         callback = true;
         StartCoroutine(Main());
     }
@@ -320,7 +320,7 @@ public class Client : IBehaviour
     {
         behaviourState = BehaviourState.Sit;
         //play animation
-        Debug.Log("sit");
+       // Debug.Log("sit");
         callback = true;
         StartCoroutine(Main());
     }
@@ -417,9 +417,13 @@ public class Client : IBehaviour
         behaviourState = BehaviourState.Eat;
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
-        Debug.Log("Eat");
+       // Debug.Log("Eat");
         hasAte = true;
-        OrderManager.instance.RemoveRecipeInList(foodRef);
+        if(foodRef != null)
+        {
+
+             OrderManager.instance.RemoveRecipeInList(foodRef);
+        }
 
         if(actualWaitingTime == maxEatingTime)
         {
@@ -437,9 +441,10 @@ public class Client : IBehaviour
     public override IEnumerator PayOrder()
     {
         behaviourState = BehaviourState.PayOrder;
-       // Debug.Log("PayOrder");
+        Debug.Log("PayOrder");
         moneyForRecipe = GetMoneyForRecipe();
         int irritation = angerManager.GetIrritation();
+
         if(type == BehaviourType.Angry && irritation > 25)
         {
             Bank.instance.ChangeMoneyAmount(moneyForRecipe, false);

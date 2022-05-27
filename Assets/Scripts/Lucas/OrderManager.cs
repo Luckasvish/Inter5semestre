@@ -46,6 +46,7 @@ public class OrderManager : MonoBehaviour
 
     public void RemoveRecipeInList(Food recipeToRemove)
     {
+
         recipesToProduce.Remove(recipeToRemove);
         Destroy(recipeToRemove.gameObject);
     }

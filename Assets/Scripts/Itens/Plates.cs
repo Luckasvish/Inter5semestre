@@ -51,21 +51,17 @@ using FMODUnity;
         {
             case "Feijoada":
                     recipe = recipeInstance[0];
-                    itemName = recipe.itemName;
                     
             break;
             case "PratoFeito":
                     recipe = recipeInstance[1];
-                    itemName = recipe.itemName;
 
             break;
             case "Buchada":
                     recipe = recipeInstance[2];
-                    itemName = recipe.itemName;
             break;
         }
-
-        Debug.Log("Nome da receita no prato: " + itemName);///////////////
+        Debug.Log("Receita Escolhida: " + recipe.itemName);//
         recipe.InitiateRecipe();
     }
 
@@ -73,23 +69,51 @@ using FMODUnity;
     {
         bool added = false ;
        
-        for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
-        {
-            if(recipe.ingreNeeded[i].itemName == ingreName && added == false)
+       if(recipe.ingreNeeded.Count > 0)
+       {
+            for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
             {
-                recipe.ReceiveIngredient(recipe.ingreNeeded[i]);
-                recipe.ingreNeeded.Remove(recipe.ingreNeeded[i]);
-                settle = true;
-                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-                added = true;
-            }
-            
-            else 
-            {
-                Debug.Log("Esse ingrediente não vai aqui!");////////////////////////
-            }
-        }
+                
 
+
+                if(recipe.ingreNeeded[i].itemName == ingreName && added == false)
+                {
+                    
+                    recipe.ReceiveIngredient(recipe.ingreNeeded[i]);
+                    recipe.ingreNeeded.Remove(recipe.ingreNeeded[i]);
+                    if(recipe.CheckRecipe())
+                    {
+                        itemName = recipe.itemName;
+                        Debug.Log("Receita Pronta: " + itemName);
+                    }
+                    settle = true;
+                    RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                    added = true;
+                }
+
+                
+                else 
+                {
+                    Debug.Log("Esse ingrediente não vai aqui!");////////////////////////
+                }
+            }
+       }
+       else 
+       {
+           Debug.Log("Esse prato está cheio!");////////////////////////
+       }
+
+
+    }
+
+    public void CleanPlate()
+    {
+        foreach(GameObject obj in recipe.recipeIngre)
+        {
+            obj.SetActive(false);
+        }
+        itemName = "";
+        settle = false;
 
     }
 
@@ -97,7 +121,7 @@ using FMODUnity;
     {
         for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
         {
-            Debug.Log(recipe.ingreNeeded[i].itemName);
+
             if(recipe.ingreNeeded[i].itemName == ingreName)
             {
                 return true;

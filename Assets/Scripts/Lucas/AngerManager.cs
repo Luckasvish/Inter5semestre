@@ -23,6 +23,7 @@ public class AngerManager : MonoBehaviour
     {
         starterIrritation = myClient.RandomizeAngerBar();
         clientAnger = starterIrritation;
+        StartCoroutine(IncreaseAnger());
     }
 
     public IEnumerator IncreaseAnger()

@@ -16,11 +16,17 @@ public class Chair : MonoBehaviour
     Item item;
     internal Client client;
 
+    internal Table thisTable;
+
     private void Awake()
     {
         instance = this;
     }
 
+    void Start()
+    {
+        thisTable = GetComponentInParent<Table>();
+    }
 
     public bool CheckIfHasFood()
     {
@@ -29,10 +35,10 @@ public class Chair : MonoBehaviour
 
     public bool CheckFood()
     {
-        if(clientOrder == itemReceived)
-        {
             Debug.Log("itemOrdered: " + clientOrder);
             Debug.Log("itemReceived: " + itemReceived);
+        if(clientOrder == itemReceived)
+        {
             return true;
         }
         else 
@@ -50,14 +56,39 @@ public class Chair : MonoBehaviour
     public void ReceiveItens(Item _item)
     {
         hasItem = true;
-        this.item = _item.GetComponent<Plates>();
+        this.item = _item;
         
         if(item.type == ItemType._Plate)
         {   
+
+            Debug.Log("Essa cadeira recebeu um prato : " + item.itemName);/////
             hasFood = true;    
-            itemReceived = item.name;
+            Debug.Log("HasFood " + hasFood);////
+            itemReceived = item.itemName;
             Food = item.gameObject;
+
         }
+
+        else
+        {
+            Debug.Log("Esse item aí não é um prato não !!!");/////////;
+        }
+    }
+
+
+    public void CleanPlate()
+    {
+        if(client != null)
+        {
+            Plates p = item.GetComponent<Plates>();
+            Debug.Log("Item: " +item);//////////
+            if(p != null)
+            {
+                p.CleanPlate();
+                 Debug.Log("Prato: " + p);//////////
+            }
+        }
+
     }
 
     public Item GiveItem(bool changeStatus,Item buffer)
@@ -73,6 +104,7 @@ public class Chair : MonoBehaviour
 
     public void ClientGetOff()
     {
+        CleanPlate();
         client = null;
     }
 
