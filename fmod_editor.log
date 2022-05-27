@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000179BFCEC7B8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001FAAA6F2CD8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,30 +18,3 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000179F497FF78
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000179F497FF78
-[LOG] SoundI::release                          : cachorro (00000179F497BBF8)
-[LOG] SoundI::release                          :     cachorro (0000017934E09678)
-[LOG] SoundI::release                          :     cachorro (00000179F4987E08)
-[LOG] SoundI::release                          : Soundscape talher_1 (00000179F497C108)
-[LOG] SoundI::release                          :     Soundscape talher_1 (0000017934E099B8)
-[LOG] SoundI::release                          :     Soundscape talher_1 (00000179F4989908)
-[LOG] SoundI::release                          : pouca gente (00000179F497B538)
-[LOG] SoundI::release                          :     pouca gente (0000017934E0B558)
-[LOG] SoundI::release                          :     pouca gente (00000179F49858E8)
-[LOG] SoundI::release                          : muita gente (00000179F4977F38)
-[LOG] SoundI::release                          :     muita gente (0000017934E05F38)
-[LOG] SoundI::release                          :     muita gente (00000179F497FF78)
-[LOG] SoundI::release                          : Forró (00000179F497F8B8)
-[LOG] SoundI::release                          :     Forró (0000017934E0A6B8)
-[LOG] SoundI::release                          :     Forró (00000179F4984B68)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
