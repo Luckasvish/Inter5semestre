@@ -84,7 +84,7 @@ public class Client : IBehaviour
     bool callback;
     [SerializeField]
     BehaviourState behaviourState;
-    BehaviourType type;
+    public BehaviourType type;
 
     [SerializeField]
     Food foodRef;
