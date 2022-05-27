@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659f73c5c327b6643ab7b2d35940fbc4, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  waves: []
-  countdownBetweenWaves: 
+  waves:
+  - {fileID: 11400000, guid: 87e8a904f0e1ce645b17ab089c38973b, type: 2}
+  - {fileID: 11400000, guid: eb1c78b7650afa04daa2a8910da6b882, type: 2}
+  countdownBetweenWaves: 030000000f000000

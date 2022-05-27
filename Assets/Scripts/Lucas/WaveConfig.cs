@@ -9,4 +9,5 @@ public class WaveConfig : ScriptableObject
     [Header("1 for Impatient")] 
     [Header("0 for Calm")]
     public int[] enemyToSpawn;
+    public int[] countdownBetweenSpawn;
 }
