@@ -104,7 +104,7 @@ public class Chair : MonoBehaviour
 
     public void ClientGetOff()
     {
-        CleanPlate();
+        //CleanPlate();
         client = null;
     }
 
