@@ -30,7 +30,6 @@ public class ChairManager : MonoBehaviour
     public void RemoveChair(GameObject chair)
     {
         avaiableChair.Remove(chair);
-        
     }
 
     public void ClearChair()

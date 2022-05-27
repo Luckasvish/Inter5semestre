@@ -53,6 +53,7 @@ public class Client : IBehaviour
 
     [Header("Speech")]
     string clientSpeech;
+    TextMeshPro interactionText;
     [SerializeField]
     SpeechManager[] speech;
     // Index 0 = Story Telling
@@ -74,9 +75,6 @@ public class Client : IBehaviour
     bool hasAte;
 
     bool isInteractingWithPlayer;
-    string[] possibleRecipe = new string[3];
-    internal string clientOrder;
-    internal int clientOrderIndex;
 
     int maxWaitingTime;
     int maxOrderingTime;
@@ -88,14 +86,13 @@ public class Client : IBehaviour
     BehaviourState behaviourState;
     BehaviourType type;
 
+    [SerializeField]
+    Food foodRef;
+    [SerializeField]
+    Food[] possibleFood = new Food[3];
+    internal string clientOrder;
+    internal int clientOrderIndex;
 
-    TextMeshPro interactionText;
-
-
-    private void Awake()
-    {
-        
-    }
 
     private void Start()
     {
@@ -103,16 +100,7 @@ public class Client : IBehaviour
         _OrderUI_Sprite = OrderUI.GetComponent<Image>();
         UpdateBehaviour();
         
-        CheckPossibleRecipes();
         WaitingForChair();
-    }
-
-    void CheckPossibleRecipes()
-    {
-        for (int i = 0; i < possibleRecipe.Length; i++)
-        {
-            possibleRecipe[i] = MacroSistema.sistema.GetPossibleRecipes(i);
-        }
     }
 
     void UpdateBehaviour()
@@ -370,13 +358,17 @@ public class Client : IBehaviour
         InteractionImage.SetActive(false);
 
         //randomizeOrder
-        int thisClientRecipe = UnityEngine.Random.Range(0, possibleRecipe.Length);
+        int thisClientRecipe = UnityEngine.Random.Range(0, possibleFood.Length);
+
         //order for client
-        clientOrder = possibleRecipe[thisClientRecipe];
+        clientOrder = possibleFood[thisClientRecipe].foodName;
+
         //setting order to client chair
         thisChair.GetOrder(clientOrder);
+
         //setting client order index
-        clientOrderIndex = OrderManager.instance.AddRecipeToList(clientOrder);
+        foodRef = OrderManager.instance.AddRecipeToList(possibleFood[thisClientRecipe], this);
+
         callback = true;
         StartCoroutine(Main());
     }
@@ -426,11 +418,11 @@ public class Client : IBehaviour
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
         Debug.Log("Eat");
-        OrderManager.instance.RemoveRecipeInList(clientOrderIndex);
+        hasAte = true;
+        OrderManager.instance.RemoveRecipeInList(foodRef);
 
         if(actualWaitingTime == maxEatingTime)
         {
-            hasAte = true;
             callback = true;
             StartCoroutine(Main());
         }
@@ -491,7 +483,7 @@ public class Client : IBehaviour
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
         if(hasOrdered && !hasAte)
-            OrderManager.instance.RemoveRecipeInList(clientOrderIndex);
+            OrderManager.instance.RemoveRecipeInList(foodRef);
         // Debug.Log("Dando o fora!");///
         navMesh.destination = WayOut.transform.position;
         if (myChair != null)
