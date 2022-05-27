@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     public int timeIndex;
 
     public float timeBetweenSpawn;
+    [SerializeField]
     private float counterSpawn;
 
     public float timeBetweenWave;
@@ -80,7 +81,10 @@ public class SpawnManager : MonoBehaviour
                             break;
 
                     }
+                    Debug.Log("waveSpawner = " + waveSpawner);
+                    Debug.Log("counterSpawn = " + counterSpawn);
                     waveSpawner += 1;
+                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[timeIndex];
                 }
                 else
                 {
