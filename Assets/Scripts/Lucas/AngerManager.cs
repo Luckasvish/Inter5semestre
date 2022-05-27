@@ -17,7 +17,7 @@ public class AngerManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        angerToIncrease = myClient.SetStarterIrritation();
+        //angerToIncrease = myClient.SetStarterIrritation();
     }
     void Start()
     {
