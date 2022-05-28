@@ -74,13 +74,13 @@ public class SpawnManager : MonoBehaviour
 
         if (counterSpawn >= timeBetweenSpawn && !endWave)
         {
-            Debug.Log("--------------1--------------");
+            //Debug.Log("--------------1--------------");
             if (atualWave < nivel.waves.Length)
             {
-                Debug.Log("--------------2--------------");
+                //Debug.Log("--------------2--------------");
                 if (waveSpawner < nivel.waves[atualWave].enemyToSpawn.Length)
                 {
-                    Debug.Log("--------------3--------------");
+                    //Debug.Log("--------------3--------------");
                     switch (nivel.waves[atualWave].enemyToSpawn[waveSpawner])
                     {
                         case 0:
@@ -95,11 +95,11 @@ public class SpawnManager : MonoBehaviour
 
                     }
                     waveSpawner += 1;
-                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[timeIndex];
+                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[waveSpawner];
                 }
                 else
                 {
-                    Debug.Log("--------------4--------------");
+                    //Debug.Log("--------------4--------------");
                     waveSpawner = 0;
                     atualWave += 1;
                     timeIndex += 1;
