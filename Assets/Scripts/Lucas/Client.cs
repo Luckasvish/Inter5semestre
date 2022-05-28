@@ -494,7 +494,6 @@ public class Client : IBehaviour
         if (myChair != null)
         {
             ChairManager.instance.AddChair(myChair);
-            thisChair.ClientGetOff();
         }
 
         callback = true;
@@ -515,9 +514,11 @@ public class Client : IBehaviour
         Debug.Log("vazei");
         if (thisChair != null)
         {
-            thisChair.client = null;
+            thisChair.ClientGetOff();
+            Debug.Log("sem cliente");
         }
         SpawnManager.instance.ChangeClientsNumber(-1);
+        Debug.Log("callback");
         callback = true;
         StartCoroutine(Main());
         yield break;

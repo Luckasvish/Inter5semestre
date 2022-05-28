@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     public int timeIndex;
 
     public float timeBetweenSpawn;
+    [SerializeField]
     private float counterSpawn;
 
     public float timeBetweenWave;
@@ -47,27 +48,40 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        counterSpawn += Time.deltaTime;
+
+                    //Debug.Log("counterSpawn = " + counterSpawn);
+                    //Debug.Log("atualWave = " + atualWave);
+                    //Debug.Log(" nivel.waves.Length = " + nivel.waves.Length);
+
+ 
         if (endWave)
         {
             if (counterWave >= timeBetweenWave)
             {
                 counterWave = 0;
                 endWave = false;
+                counterSpawn = 0;
             }
             else
             {
                 counterWave += Time.deltaTime;
             }
         }
+        else
+        {
+            counterSpawn += Time.deltaTime;
+        }
 
         if (counterSpawn >= timeBetweenSpawn && !endWave)
         {
+            //Debug.Log("--------------1--------------");
             if (atualWave < nivel.waves.Length)
             {
+                //Debug.Log("--------------2--------------");
                 if (waveSpawner < nivel.waves[atualWave].enemyToSpawn.Length)
                 {
-                    switch (nivel.waves[atualWave].enemyToSpawn[atualWave])
+                    //Debug.Log("--------------3--------------");
+                    switch (nivel.waves[atualWave].enemyToSpawn[waveSpawner])
                     {
                         case 0:
                             SpawnEnemyPath(IBehaviour.BehaviourType.Calm);
@@ -81,19 +95,17 @@ public class SpawnManager : MonoBehaviour
 
                     }
                     waveSpawner += 1;
+                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[waveSpawner];
                 }
                 else
                 {
+                    //Debug.Log("--------------4--------------");
                     waveSpawner = 0;
                     atualWave += 1;
                     timeIndex += 1;
                     endWave = true;
                     timeBetweenWave = nivel.countdownBetweenWaves[timeIndex];
                 }
-            }
-            else
-            {
-                endNivel = true;
             }
 
             counterSpawn = 0;
