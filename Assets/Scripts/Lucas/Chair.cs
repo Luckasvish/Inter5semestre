@@ -13,7 +13,7 @@ public class Chair : MonoBehaviour
     string clientOrder;
     string itemReceived;
 
-    Item item;
+    _Item item;
     internal Client client;
 
     internal Table thisTable;
@@ -53,7 +53,7 @@ public class Chair : MonoBehaviour
         Debug.Log("itemOrdered: " + clientOrder);
     }
 
-    public void ReceiveItens(Item _item)
+    public void ReceiveItens(_Item _item)
     {
         hasItem = true;
         this.item = _item;
@@ -91,7 +91,7 @@ public class Chair : MonoBehaviour
 
     }
 
-    public Item GiveItem(bool changeStatus,Item buffer)
+    public _Item GiveItem(bool changeStatus,_Item buffer)
     {
         buffer = item;
         item = null;
