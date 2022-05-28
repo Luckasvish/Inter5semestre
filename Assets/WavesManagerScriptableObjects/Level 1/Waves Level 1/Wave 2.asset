@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: Wave 2
   m_EditorClassIdentifier: 
   enemyToSpawn: 0000000001000000
-<<<<<<< Updated upstream
-  countdownBetweenSpawn: 0400000008000000
-=======
->>>>>>> Stashed changes
+  countdownBetweenSpawn: 0300000005000000
