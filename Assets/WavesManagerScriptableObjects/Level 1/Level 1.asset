@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - {fileID: 11400000, guid: 87e8a904f0e1ce645b17ab089c38973b, type: 2}
+<<<<<<< Updated upstream
   - {fileID: 11400000, guid: eb1c78b7650afa04daa2a8910da6b882, type: 2}
   - {fileID: 11400000, guid: a027822a59ab3b94b895d010efbf9719, type: 2}
   - {fileID: 11400000, guid: 1bdd992567d7aee439fdcb566fdcb178, type: 2}
@@ -22,3 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 527f086dcb554514396aec9c5bf7a0eb, type: 2}
   - {fileID: 11400000, guid: f37e305f48ab04249a93fc980a8a7aad, type: 2}
   countdownBetweenWaves: 030000000f0000000a0000000a0000000a0000000a0000000a0000000a000000
+=======
+  - {fileID: 11400000, guid: fe6e6ed7d42242240931d34cc6970bdd, type: 2}
+  countdownBetweenWaves: 030000000f000000
+>>>>>>> Stashed changes
