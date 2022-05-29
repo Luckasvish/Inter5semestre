@@ -94,7 +94,9 @@ public class SpawnManager : MonoBehaviour
                             break;
 
                     }
-                    waveSpawner += 1;
+                    if(waveSpawner < nivel.waves[atualWave].enemyToSpawn.Length)
+                        waveSpawner += 1;
+
                     timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[waveSpawner];
                 }
                 else
