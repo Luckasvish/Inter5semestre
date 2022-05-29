@@ -12,5 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659f73c5c327b6643ab7b2d35940fbc4, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  waves: []
-  countdownBetweenWaves: 
+  waves:
+  - {fileID: 11400000, guid: ddd0e64402120084d8f5d0436e3dad4d, type: 2}
+  - {fileID: 11400000, guid: c7ad4c0c5d7188a4f8ce6337c36becf1, type: 2}
+  - {fileID: 11400000, guid: 720c8313ee43b0b41b996681a8297c0b, type: 2}
+  - {fileID: 11400000, guid: 224ae25a25f3efe498badc0f5359191c, type: 2}
+  - {fileID: 11400000, guid: c735d560c649c6a4091163c8f5413c75, type: 2}
+  - {fileID: 11400000, guid: 2aef81d0a7979a8448b3d71d2e8f81b5, type: 2}
+  - {fileID: 11400000, guid: b3a3634e51995fe4a8815afaa68d28db, type: 2}
+  - {fileID: 11400000, guid: 23e58b8351f48bc44ad6f9c68158e08e, type: 2}
+  - {fileID: 11400000, guid: 242008bb750d9f245a5f833cab07725d, type: 2}
+  - {fileID: 11400000, guid: 93f94ad9d85cf1a48968de22487e1f8d, type: 2}
+  - {fileID: 11400000, guid: 69f36cc4ebf8acd48bd7109720395430, type: 2}
+  - {fileID: 11400000, guid: d7c1e072c74eafd4fbfaae382ffaa068, type: 2}
+  countdownBetweenWaves: 030000000a00000004000000050000000500000005000000050000000500000005000000050000000500000005000000

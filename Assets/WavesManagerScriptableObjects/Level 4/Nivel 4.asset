@@ -12,5 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659f73c5c327b6643ab7b2d35940fbc4, type: 3}
   m_Name: Nivel 4
   m_EditorClassIdentifier: 
-  waves: []
-  countdownBetweenWaves: 
+  waves:
+  - {fileID: 11400000, guid: 7991474622ef5e44681c9fc21cd7b7be, type: 2}
+  - {fileID: 11400000, guid: 932038e60b2d91649a73ed6d8f04bf40, type: 2}
+  - {fileID: 11400000, guid: 5e60af4741fa4a1429a79422130f47cf, type: 2}
+  - {fileID: 11400000, guid: 8304e3b7b2206ae4b8ce0fd32ad9487b, type: 2}
+  - {fileID: 11400000, guid: 6b792c0cd2fdb014fbcd92dccb8248c7, type: 2}
+  - {fileID: 11400000, guid: da228cd02e4132344bc91d2c8920a05a, type: 2}
+  - {fileID: 11400000, guid: afddc36a6aad3e24ba8818ea17beb4b5, type: 2}
+  - {fileID: 11400000, guid: 2ef45f0ec130edb488b41130a058f8eb, type: 2}
+  - {fileID: 11400000, guid: db42340163c85434c9446b704301e79c, type: 2}
+  - {fileID: 11400000, guid: f50d368b7aa3b2a47b6fe4f73f733409, type: 2}
+  countdownBetweenWaves: 03000000060000000600000006000000060000000600000006000000060000000600000006000000
