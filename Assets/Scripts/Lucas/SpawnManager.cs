@@ -17,16 +17,15 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     int atualWave;
-    int waveSpawner;
-
-    public int timeIndex;
+    [SerializeField]
+    int clientNumberInWave;
 
     public float timeBetweenSpawn;
     [SerializeField]
     private float counterSpawn;
 
-    public float timeBetweenWave;
-    private float counterWave;
+    public float timeToWaitBetweenWaves;
+    private float counterBetweenWave;
 
     private bool endWave = false;
     public static bool endNivel = false;
@@ -39,11 +38,11 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        timeBetweenSpawn = nivel.countdownBetweenWaves[timeIndex];
         atualWave = 0;
-        waveSpawner = 0;
+        clientNumberInWave = 0;
         counterSpawn = 0;
-        counterWave = 0;
+        counterBetweenWave = 0;
+        timeBetweenSpawn = nivel.countdownBetweenWaves[atualWave];
     }
 
     private void Update()
@@ -56,15 +55,15 @@ public class SpawnManager : MonoBehaviour
  
         if (endWave)
         {
-            if (counterWave >= timeBetweenWave)
+            if (counterBetweenWave >= timeToWaitBetweenWaves)
             {
-                counterWave = 0;
+                counterBetweenWave = 0;
                 endWave = false;
                 counterSpawn = 0;
             }
             else
             {
-                counterWave += Time.deltaTime;
+                counterBetweenWave += Time.deltaTime;
             }
         }
         else
@@ -78,10 +77,10 @@ public class SpawnManager : MonoBehaviour
             if (atualWave < nivel.waves.Length)
             {
                 //Debug.Log("--------------2--------------");
-                if (waveSpawner < nivel.waves[atualWave].enemyToSpawn.Length)
+                if (clientNumberInWave < nivel.waves[atualWave].enemyToSpawn.Length)
                 {
                     //Debug.Log("--------------3--------------");
-                    switch (nivel.waves[atualWave].enemyToSpawn[waveSpawner])
+                    switch (nivel.waves[atualWave].enemyToSpawn[clientNumberInWave])
                     {
                         case 0:
                             SpawnEnemyPath(IBehaviour.BehaviourType.Calm);
@@ -94,19 +93,18 @@ public class SpawnManager : MonoBehaviour
                             break;
 
                     }
-                    if(waveSpawner < nivel.waves[atualWave].enemyToSpawn.Length)
-                        waveSpawner += 1;
-
-                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[waveSpawner];
+                    clientNumberInWave += 1;
+                    if(clientNumberInWave < nivel.waves[atualWave].countdownBetweenSpawn.Length)
+                        timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[clientNumberInWave];
                 }
                 else
                 {
                     //Debug.Log("--------------4--------------");
-                    waveSpawner = 0;
+                    clientNumberInWave = 0;
                     atualWave += 1;
-                    timeIndex += 1;
                     endWave = true;
-                    timeBetweenWave = nivel.countdownBetweenWaves[timeIndex];
+                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[clientNumberInWave];
+                    timeToWaitBetweenWaves = nivel.countdownBetweenWaves[atualWave];
                 }
             }
 
