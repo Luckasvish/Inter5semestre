@@ -5,38 +5,33 @@ using FMODUnity;
 using FMOD.Studio;
 public class Pan : _Item
 {
+    // PROPRIEDADES DE ITEM
     public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
     //////////////////////////////////////////////////////
-    public FeedBackManager feedBack;
   
-    //////////////////////////////////////////////////////
-    ////////////////// COZINHAR ////////////////////////////
-    /////////////////////////////////////////////////////
-
+    // PROPRIEDADES DE PAN
     internal bool cooking; // Cozinhando.
-   
     internal bool burned; //Se queimou.
     float currentTime; // Tempo de cozimento.
     public float maxTime; // Tempo máximo de cozimento.
-
     public float _burnTime; // Tempo pra queimar.
     internal bool onOven ; 
     internal IngredientInstance ingredient;
-    
+    internal Vector3 panPosition;
+    /////////////////////////////////////////////////////
+
+    //UX / UI
+    public FeedBackManager feedBack;
     EventInstance cookingSfxEvent;
     EventInstance burningSfxEvent;
     bool sfxPlayed;
     bool sfx1Played;
-    ////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////
-    /// Itens ////////
-    
     public GameObject ready;
 
-    void Awake()    //INICIALIZqANDO A PAN
+    void Awake()   
     {
+        panPosition = this.transform.position;     // Setando o valor da posição da panela (passa pra Oven posicionar).
         ready.SetActive(false);
         onOven = true;
         feedBack = GetComponent<FeedBackManager>();
@@ -143,5 +138,7 @@ public class Pan : _Item
             return buffer;
         }
     }
+
+    public void Position(){ transform.position = panPosition;}  //  Método pra posicionar a panela.
 
 }

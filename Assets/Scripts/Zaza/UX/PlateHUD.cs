@@ -8,7 +8,6 @@ public class PlateHUD : MonoBehaviour
     internal Plates thisPlate;
     public Image[] options;
     public GameObject[] recipes;
-
     public Image selector;
 
    

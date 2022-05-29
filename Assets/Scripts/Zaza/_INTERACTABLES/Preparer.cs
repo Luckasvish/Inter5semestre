@@ -8,7 +8,7 @@ public class Preparer : _InteractionOBJ
 {
     public override InteractableType type { get; set;}
      FeedBackManager feedback {get;set;}
-    public override _Item itenItHas { get; set; }
+    public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
     internal override Material material{get ; set;}  
 
@@ -29,7 +29,7 @@ public class Preparer : _InteractionOBJ
     {
         feedback = GetComponent<FeedBackManager>();
         type = InteractableType._Preparer;
-        itenItHas = null;
+        itenOnThis = null;
    
 
     }
@@ -49,8 +49,8 @@ public class Preparer : _InteractionOBJ
     }
     public override void ReceiveItens(_Item itenInHand) // RECEBE O INGREDIENTE 
     {  
-            itenItHas = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
-            itenItHas.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
+            itenOnThis = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
+            itenOnThis.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
             preparationTimer = 0;                                       // O TIMER É ZERADO
             feedback.ToogleUI();
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");                                       //  A HUD INICIA 
@@ -70,7 +70,7 @@ public class Preparer : _InteractionOBJ
         feedback.RunSlider(_hudBar);
         if(preparationTimer >= preparationTime)
         {
-            itenItHas.type = ItemType._PreparedIngredient;
+            itenOnThis.type = ItemType._PreparedIngredient;
             preparing = false;
             choppSfxEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             sfxPlayed = false;
@@ -85,15 +85,15 @@ public class Preparer : _InteractionOBJ
 
      public override _Item GiveItens(_Item itenToGive)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {    
-            itenToGive = itenItHas;
-            itenItHas = null;
+            itenToGive = itenOnThis;
+            itenOnThis = null;
             hasItemOnIt = false;
             feedback.ToogleUI();
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return itenToGive;
     }
     
-    public override void Interact(_Item iten, Chef chef)
+    public override void Interact(_Item iten, PJ_Character chef)
     {
         if(iten !=null)
         {
@@ -111,7 +111,7 @@ public class Preparer : _InteractionOBJ
         {
             if(hasItemOnIt)     
             {
-                if(itenItHas.type != ItemType._PreparedIngredient) TooglePreparer(); 
+                if(itenOnThis.type != ItemType._PreparedIngredient) TooglePreparer(); 
                 
                  else chef.ReceiveItens(this);  
             }

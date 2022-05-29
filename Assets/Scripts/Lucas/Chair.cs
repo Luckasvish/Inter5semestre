@@ -61,7 +61,7 @@ public class Chair : MonoBehaviour
         if(item.type == ItemType._Plate)
         {   
 
-            Debug.Log("Essa cadeira recebeu um prato : " + item.itemName);/////
+        //  Debug.Log("Essa cadeira recebeu um prato : " + item.itemName);/////
             hasFood = true;    
             Debug.Log("HasFood " + hasFood);////
             itemReceived = item.itemName;
@@ -81,7 +81,7 @@ public class Chair : MonoBehaviour
         if(client != null)
         {
             Plates p = item.GetComponent<Plates>();
-            Debug.Log("Item: " +item);//////////
+     //       Debug.Log("Item: " +item);//////////
             if(p != null)
             {
                 p.CleanPlate();

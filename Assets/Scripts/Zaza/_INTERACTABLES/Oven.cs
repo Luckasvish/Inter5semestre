@@ -5,41 +5,37 @@ using FMODUnity;
 
 public class Oven : _InteractionOBJ
 {
+    // PROPRIEDADES DE INTERACTABLE (_INTERACTIONOBJ)
     public override InteractableType type { get; set;}
-    FeedBackManager feedback {get;set;}
 
-
-    public override _Item itenItHas { get; set; }
+    public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
     internal override Material material{get ; set;}  
-  
+    FeedBackManager feedback {get;set;} 
+    /////////////////////////////////////////////////// 
 
-    public Material ovenMaterial;
-    public Transform PanPosition;
-
+    // PROPRIEDADES DE OVEN  
     internal Pan _Pan;
 
-    void Awake()
-    {
-         type = InteractableType._Oven;
-   
-         
-    }
+    void Awake(){   type = InteractableType._Oven;  }
+
+
     void Start()
     {
+
         if(GetComponentInChildren<Pan>() == null)
         {
             _Pan = null;
-            itenItHas = null;
+            itenOnThis = null;
         }
         else
         {
           hasItemOnIt=true;
           _Pan = GetComponentInChildren<Pan>();
-          itenItHas = _Pan;
-          itenItHas.transform.position = PanPosition.position;
+          itenOnThis = _Pan;
         }
-        material = ovenMaterial;
+
+        material = GetComponent<MeshRenderer>().material;
         material.SetFloat("_emission", 4);
         
     }
@@ -50,8 +46,8 @@ public class Oven : _InteractionOBJ
     public override _Item GiveItens(_Item Buffer)
     {
        
-            Buffer = itenItHas;
-            itenItHas = null;
+            Buffer = itenOnThis;
+            itenOnThis = null;
             hasItemOnIt = false;
             _Pan.onOven = false;
             _Pan = null;
@@ -63,15 +59,15 @@ public class Oven : _InteractionOBJ
     public override void ReceiveItens(_Item Pan)
     {
                 _Pan = Pan.GetComponent<Pan>();
-                itenItHas = _Pan;
+                itenOnThis = _Pan;
                 _Pan.onOven = true;
-                itenItHas.transform.position = PanPosition.position;
+                _Pan.Position();    // Posiciona a panela ao recebe-la.
                 RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
                 hasItemOnIt = true;
        
     }
 
-    public override void Interact(_Item iten, Chef chef)
+    public override void Interact(_Item iten, PJ_Character chef)
     {
 
         if(iten != null)

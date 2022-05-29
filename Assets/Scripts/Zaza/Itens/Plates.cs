@@ -31,7 +31,7 @@ using FMODUnity;
 
         if(balcon != null)
         {
-            balcon.itenItHas = GetComponent<Plates>();
+            balcon.itenOnThis = GetComponent<Plates>();
             balcon.hasItemOnIt = true;
         }
         type = ItemType._Plate;
@@ -131,4 +131,18 @@ using FMODUnity;
         return false;
     
     }
+
+    void TurnOnHUD()
+    {
+        if(hud.activeInHierarchy)
+        {
+
+        }
+        else 
+        {
+            
+        }
+
+    }
+
  }
