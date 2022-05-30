@@ -6,7 +6,7 @@ public class IngredientInstance : _Item
 {
     public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
-    internal Ingredient ingredient;
+    // internal Ingredient ingredient;
     public GameObject[] ingredients_Mesh;
     public void SetMesh(string  ingreName )
     {

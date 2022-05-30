@@ -63,22 +63,25 @@ public class Detection_Manager : MonoBehaviour
     // Método para lidar com a HUD de pratos. 
     void HandlePlateHUD(_InteractionOBJ interaction)    
     {
-        if (interaction.GetComponent<Balcon>().hasItemOnIt) // (se tiver um balcao com item nele)
+        if (interaction.GetComponent<Balcon>() != null) // (se tiver um balcao )
         {
-            Plates p = interaction.itenOnThis.GetComponent<Plates>();    //  Tenta achar um prato.
 
-            if(p != null)   //  (se achar um prato)
+            if(interaction.hasItemOnIt == true) //  (se o balcão tiver item)
             {
-                if(hudOn == true)   // (se a hud estiver ativa)
+                Plates p = interaction.itenOnThis.GetComponent<Plates>();    //  Tenta achar um prato.
+                if(p != null)   //  (se achar um prato)
                 {
-                    p.hud.SetActive(false); //  Desativa a HUD()
-                    hudOn = false;
-                }
+                    if(hudOn == true)   // (se a hud estiver ativa)
+                    {
+                        p.hud.SetActive(false); //  Desativa a HUD()
+                        hudOn = false;
+                    }
 
-                else // (se a huda estiver desativada)
-                {
-                    p.hud.SetActive(true);  //  Ativa a HUD()
-                    hudOn = true;
+                    else // (se a huda estiver desativada)
+                    {
+                        p.hud.SetActive(true);  //  Ativa a HUD()
+                        hudOn = true;
+                    }
                 }
             }
         }

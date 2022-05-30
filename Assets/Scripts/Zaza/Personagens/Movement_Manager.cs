@@ -15,6 +15,11 @@ public class Movement_Manager : MonoBehaviour
     ////////////////////////
     void Start(){ controller = GetComponentInChildren<CharacterController>();}
 
+
+
+    internal Animation_Manager animation_Manager;
+
+
     public void Move(Vector3 moveInput)
     {
         if(this.controller.isGrounded == false)  //  Se não estiver no chão 
@@ -30,11 +35,18 @@ public class Movement_Manager : MonoBehaviour
         
             if(moveInput.magnitude > 0.1f)  // Se houver input
             {
+                animation_Manager.SetWalk(true);
                 transform.rotation = Quaternion.Euler(0f,angle,0f); //  Rotaciona
                 this.controller.Move(moveInput * speed * Time.deltaTime);    //  Movimenta
             }
-
+            else 
+            {
+                animation_Manager.SetWalk(false);
+        
+            }
         }
+
+
         else Debug.Log("Gravidade tá maluka!!!");///////////////
     }
 

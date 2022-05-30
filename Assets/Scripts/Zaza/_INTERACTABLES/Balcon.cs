@@ -161,7 +161,7 @@ public class Balcon : _InteractionOBJ
         if(plate != null && pan != null)  
         {
 
-          if(pan.ingredient != null && pan.ready.activeInHierarchy == true) //  (se a panela tiver um ingrediente e estiver pronta)
+          if(pan.ingredient != null && pan.finishedCooking == true) //  (se a panela tiver um ingrediente e estiver pronta)
           {
               if(plate.CheckIngredient(pan.ingredient.itemName) == true) 
               plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.itemName)); //  O prato tenta receber o item da panela.
@@ -170,7 +170,7 @@ public class Balcon : _InteractionOBJ
                                           
           }
 
-          else if (pan.ingredient != null && pan.ready.activeInHierarchy == false) //  (se a panela tiver um ingrediente mas não estiver pronta)
+          else if (pan.ingredient != null && pan.finishedCooking == false) //  (se a panela tiver um ingrediente mas não estiver pronta)
           Debug.Log("Esse ingrediente não esta pronto ainda !!!!");///////////////////
                                         
           else if(pan.ingredient == null) // (se a panela não tiver ingrediente)

@@ -28,6 +28,7 @@ public class PJ_Character : MonoBehaviour
         movement_Manager = GetComponent<Movement_Manager>();
         detection_Manager = GetComponent<Detection_Manager>();
         anim_Manager = GetComponent<Animation_Manager>();
+        movement_Manager.animation_Manager = anim_Manager;
     }
 
 

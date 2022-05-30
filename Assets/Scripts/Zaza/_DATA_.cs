@@ -4,8 +4,10 @@
 
 public enum ItemType   // Tipos de item.
 {
+    _BurnedIngrediente,
     _UnpreparedIngredient,
     _PreparedIngredient,
+    _CookedIngredient,
     _Recipe,
     _Plate,
     _Glass,

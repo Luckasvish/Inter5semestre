@@ -28,9 +28,10 @@ public class Oven : _InteractionOBJ
             _Pan = null;
             itenOnThis = null;
         }
+
         else
         {
-          hasItemOnIt=true;
+          hasItemOnIt = true;
           _Pan = GetComponentInChildren<Pan>();
           itenOnThis = _Pan;
         }
@@ -39,7 +40,6 @@ public class Oven : _InteractionOBJ
         material.SetFloat("_emission", 4);
         
     }
-
 
 
 
@@ -70,37 +70,48 @@ public class Oven : _InteractionOBJ
     public override void Interact(_Item iten, PJ_Character chef)
     {
 
-        if(iten != null)
+        if(iten != null)    //  PATH #1: (se o jogador tiver um item na mão)
         { 
            ItemType type = iten.type;
             switch(type)
             {
 
-                case ItemType._PreparedIngredient:
+                case ItemType._PreparedIngredient:  // PATH #1.1 (se o item do jogador for um ingrediente preparado)
 
                     IngredientInstance ingre = iten.GetComponent<IngredientInstance>();
-                    if(hasItemOnIt == true) _Pan.ReceiveItens(chef.GiveIten(ingre));
-                      else  Debug.Log("Está faltando a panela !!!"); ////////////////////////////////////  
+                    
+                    if(hasItemOnIt == true && _Pan.ingredient == null ) _Pan.ReceiveItens(chef.GiveIten(ingre));    //  (se o fogão tiver uma panela e a panela estiver vazia ) {a panela recebe o ingrediente}
+                    
+                    else if(hasItemOnIt == true && _Pan.ingredient != null) Debug.Log("Já tem um ingrediente nessa panela!!"); //////// 
+                   
+                    else Debug.Log("Está faltando a panela !!!"); ////////////////////////////////////  
 
                 break;
                 
-                case ItemType._Plate:
+                case ItemType._Plate:   //  PATH # 1.2 (se o item do jogador for um prato)
                     
                     Plates plate =  iten.GetComponent<Plates>();
                     
-                    if(hasItemOnIt == true)
+                    if(hasItemOnIt == true) //  (se o fogão tiver uma panela)
                     {
-                        if(_Pan.ready.activeInHierarchy && plate.recipe != null) plate.ReceiveIngredient(_Pan.GiveItem(_Pan.ingredient.itemName));   
-                          else Debug.Log("Ainda não está pronto"); ////////////////////////////////////////
+                        if(_Pan.finishedCooking == true && plate.recipe != null)    //   (se a panela já tiver terminado de cozinhar) { o prato tenta receber o ingrediente }   
+                        {
+                            if(plate.CheckIngredient(_Pan.ingredient.itemName) == true) plate.ReceiveIngredient(_Pan.GiveItem(_Pan.ingredient.itemName));  
+                        }
+                        
+                        else Debug.Log("Esse ingrediente ainda não está pronto"); ////////////////////////////////////////
                     }
-                     else Debug.Log("Está faltando a panela !!!"); ///////////////////////////////////////
+                    
+                    else Debug.Log("Está faltando a panela !!!"); ///////////////////////////////////////
                 
                 break;
 
-                case ItemType._Pan:
+                case ItemType._Pan: //  PATH #1.3 (se o item do jogador for uma panela)
 
-                    if(hasItemOnIt == false) ReceiveItens(chef.GiveIten(chef.itenInHand));
-                      else Debug.Log("Já tem panela aqui"); /////////////////////////////////////////////////////////////////////////////////////////// 
+                    
+                    if(hasItemOnIt == false) ReceiveItens(chef.GiveIten(chef.itenInHand));  //  (se não tiver panela )  { o fogão recebe a panela}
+                    
+                    else Debug.Log("Já tem panela aqui"); /////////////////////////////// 
                     
                     
                 break;
@@ -109,10 +120,13 @@ public class Oven : _InteractionOBJ
 
             }
         }
-        else 
+        else // PATH #2 (se o jogador não tiver nenhum item)
         {
-           if(hasItemOnIt) chef.ReceiveItens(this);
+            
+            if(hasItemOnIt) chef.ReceiveItens(this); //  (se o fogão tiver uma panela)   {o jogador recebe a panela}
+
             else Debug.Log("Não tem nada aqui!");////////////////////
+        
         }
     }
     
