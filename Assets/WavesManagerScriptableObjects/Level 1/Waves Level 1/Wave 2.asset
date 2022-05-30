@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Wave 2
   m_EditorClassIdentifier: 
   enemyToSpawn: 0000000001000000
-  countdownBetweenSpawn: 0300000005000000
+  countdownBetweenSpawn: 0500000005000000
