@@ -10,6 +10,7 @@ public class Client : IBehaviour
 {
     Order order;
     Chair thisChair;
+    [Header("Anger Controller")]
     [SerializeField]
     AngerManager angerManager;
 
@@ -18,20 +19,22 @@ public class Client : IBehaviour
     [SerializeField]
     NavMeshAgent navMesh;
 
-    [SerializeField]
-    Collider collider;
-
-
+    [Header("Money To Pay")]
     [SerializeField]
     int moneyForRecipe;
     [SerializeField]
-    int moneyForTip;  
-    
+    int moneyForTip;
+
+    [Header("Irritation Atributes")]
     [SerializeField]
     int increaseAngerValue;
+    [SerializeField]
+    int timeToGetOut;
+    [SerializeField]
+    int clientStarterIrritation;
 
 
-    [Header("UI")]
+    [Header("UI Food")]
     [SerializeField]
     GameObject InteractionBaloon;    
     [SerializeField]
@@ -41,21 +44,40 @@ public class Client : IBehaviour
     [SerializeField]
     GameObject InteractionImage;
 
+
+    [Header("UI Irritation Feedback")]
+    [SerializeField]
+    GameObject[] IrritationImage = new GameObject[3];
+    [SerializeField]
+    Image IrritationFeedback;
+    [SerializeField]
+    GameObject IrritationAnimEnd;    
+
+    [Header("UI Pay Feedback")]
+    [SerializeField]
+    GameObject PayHolder;    
+    [SerializeField]
+    GameObject[] PayImage = new GameObject[2];
+    [SerializeField]
+    Image PayFeedback;
+    [SerializeField]
+    TextMeshProUGUI payValue;
+    [SerializeField]
+    GameObject PayAnimEnd;
+
+
     GameObject myChair;
 
+    [Header("Start/End position")]
     [SerializeField]
     GameObject WayOut;
 
-    [SerializeField]
-    int timeToGetOut;
-    [SerializeField]
-    int clientStarterIrritation;
 
-    [Header("Speech")]
-    string clientSpeech;
-    TextMeshPro interactionText;
+    [Header("Speech Atributes")]
     [SerializeField]
     SpeechManager[] speech;
+    string clientSpeech;
+    TextMeshPro interactionText;
     // Index 0 = Story Telling
     // Index 1 = Waiting For Order
     // Index 2 = Order 
@@ -82,10 +104,12 @@ public class Client : IBehaviour
     int actualWaitingTime = 0;
 
     bool callback;
+    [Header("Behaviour Atributes")]
     [SerializeField]
     BehaviourState behaviourState;
     public BehaviourType type;
 
+    [Header("Food Atributes")]
     [SerializeField]
     Food foodRef;
     [SerializeField]
@@ -111,19 +135,23 @@ public class Client : IBehaviour
                 maxWaitingTime = CalmBehaviour.instance.changeWaitingTimeToExit();
                 maxOrderingTime = CalmBehaviour.instance.changeOrderingTimeToExit();
                 maxEatingTime = CalmBehaviour.instance.changeEatingTimeToExit();
+                StartCoroutine(IrritationFeedbackAnim(0, true));
                 break;
             case BehaviourType.Impatient:
                 maxWaitingTime = ImpatientBehaviour.instance.changeWaitingTimeToExit();
                 maxOrderingTime = ImpatientBehaviour.instance.changeOrderingTimeToExit();
                 maxEatingTime = ImpatientBehaviour.instance.changeEatingTimeToExit();
+                StartCoroutine(IrritationFeedbackAnim(1, true));
                 break;
             case BehaviourType.Angry:
                 maxWaitingTime = AngryBehaviour.instance.changeWaitingTimeToExit();
                 maxOrderingTime = AngryBehaviour.instance.changeOrderingTimeToExit();
                 maxEatingTime = AngryBehaviour.instance.changeEatingTimeToExit();
+                StartCoroutine(IrritationFeedbackAnim(2, true));
                 break;
         }
     }
+
 
     IEnumerator Main()
     {
@@ -265,6 +293,7 @@ public class Client : IBehaviour
 
     }
 
+    #region Behaviour
     public override void WaitingForChair()
     {
         if (SpawnManager.instance.GetClientsNumber() == SpawnManager.instance.GetMaxClientPerLevel() -2)
@@ -303,7 +332,7 @@ public class Client : IBehaviour
         behaviourState = BehaviourState.Walk;
         yield return new WaitForSeconds(2);
         Vector3 chairPos = myChair.transform.position;
-        this.navMesh.destination = chairPos;
+        navMesh.SetDestination(chairPos);
         if (transform.position != navMesh.destination)
         {
            // Debug.Log("volta a andar");
@@ -454,6 +483,7 @@ public class Client : IBehaviour
         else
         {
             Bank.instance.ChangeMoneyAmount(moneyForRecipe, true);
+            StartCoroutine(PayFeedbackAnim(0, true, moneyForRecipe));
             yield return new WaitForSeconds(2);
             callback = true;
         }
@@ -473,10 +503,13 @@ public class Client : IBehaviour
         if (canPay)
         {
             Bank.instance.ChangeMoneyAmount(moneyForTip, true);
+            StartCoroutine(PayFeedbackAnim(1, true, moneyForTip));
             yield return new WaitForSeconds(2);
             callback = true;
 
         }
+        else 
+            callback = false;
 
         StartCoroutine(Main());
     }
@@ -490,7 +523,7 @@ public class Client : IBehaviour
         if(hasOrdered && !hasAte)
             OrderManager.instance.RemoveRecipeInList(foodRef);
         // Debug.Log("Dando o fora!");///
-        navMesh.destination = WayOut.transform.position;
+        navMesh.SetDestination(WayOut.transform.position);
         if (myChair != null)
         {
             ChairManager.instance.AddChair(myChair);
@@ -524,6 +557,13 @@ public class Client : IBehaviour
         yield break;
 
     }
+    public void Rage()
+    {
+        behaviourState = BehaviourState.Rage;
+        callback = false;
+        StartCoroutine(Main());
+    }
+    #endregion
 
     public override void InteractWithClients()
     {
@@ -584,12 +624,6 @@ public class Client : IBehaviour
         return clientSpeech;
     }
 
-    public void Rage()
-    {
-        behaviourState = BehaviourState.Rage;
-        callback = false;
-        StartCoroutine(Main());
-    }
 
     bool CheckIfCanPaytip()
     {
@@ -697,13 +731,13 @@ public class Client : IBehaviour
         bool moreAnger = false;
         int angerValue = UnityEngine.Random.RandomRange(0, 10);
 
-        if(angerValue > 8)
+        if (angerValue > 8)
             moreAnger = true;
 
         switch (type)
         {
             case BehaviourType.Calm:
-                if(moreAnger)
+                if (moreAnger)
                     clientStarterIrritation = UnityEngine.Random.RandomRange(16, 20);
                 else
                     clientStarterIrritation = UnityEngine.Random.RandomRange(0, 16);
@@ -711,9 +745,9 @@ public class Client : IBehaviour
             case BehaviourType.Impatient:
                 if (moreAnger)
                     clientStarterIrritation = UnityEngine.Random.RandomRange(10, 20);
-                else 
+                else
                     clientStarterIrritation = UnityEngine.Random.RandomRange(0, 10);
-                break;            
+                break;
             case BehaviourType.Angry:
                 if (moreAnger)
                     clientStarterIrritation = UnityEngine.Random.RandomRange(8, 20);
@@ -723,4 +757,59 @@ public class Client : IBehaviour
         }
         return clientStarterIrritation;
     }
+
+    #region Feedbacks
+    IEnumerator IrritationFeedbackAnim(int spriteIndex, bool reset_pos)
+    {
+        if (IrritationFeedback.gameObject.transform.position.y >= IrritationAnimEnd.transform.position.y)
+        {
+            IrritationFeedback.gameObject.SetActive(false);
+            yield break;
+        }
+        if (reset_pos)
+        {
+            IrritationFeedback.color = new Color(255,255,255,0);
+            IrritationFeedback.gameObject.transform.position = gameObject.transform.position;
+            IrritationFeedback.gameObject.SetActive(true);
+            yield return new WaitForSeconds(.1f);
+            IrritationFeedback.color = new Color(255, 255, 255, 1);
+        }
+
+        IrritationFeedback.sprite = IrritationImage[spriteIndex].GetComponent<Image>().sprite;
+        if (IrritationFeedback.gameObject.transform.position.y < IrritationAnimEnd.transform.position.y)
+        {
+            IrritationFeedback.gameObject.transform.Translate(new Vector3 (0, IrritationAnimEnd.transform.position.y) * Time.deltaTime * 2f, Space.World);
+            yield return new WaitForSeconds(.1f);
+            StartCoroutine(IrritationFeedbackAnim(spriteIndex, false));
+        }
+    }
+
+    IEnumerator PayFeedbackAnim(int spriteIndex, bool reset_pos, int value)
+    {
+        if (PayHolder.gameObject.transform.position.y >= PayAnimEnd.transform.position.y && !reset_pos)
+        {
+            PayHolder.gameObject.SetActive(false);
+            yield break;
+        }
+        if (reset_pos)
+        {
+            PayFeedback.color = new Color(255, 255, 255, 0);
+            payValue.text = "";
+            PayHolder.gameObject.transform.position = gameObject.transform.position;
+            PayHolder.gameObject.SetActive(true);
+            payValue.text = "+" + value.ToString();
+            yield return new WaitForSeconds(.1f);
+            PayFeedback.color = new Color(255, 255, 255, 1);
+        }
+
+        PayFeedback.sprite = PayImage[spriteIndex].GetComponent<Image>().sprite;
+        if (PayHolder.gameObject.transform.position.y < PayAnimEnd.transform.position.y)
+        {
+            PayHolder.gameObject.transform.Translate(new Vector3(0, PayAnimEnd.transform.position.y) * Time.deltaTime * 2f, Space.World);
+            yield return new WaitForSeconds(.1f);
+            StartCoroutine(PayFeedbackAnim(spriteIndex, false, value));
+        }
+    }
+    #endregion
+
 }
