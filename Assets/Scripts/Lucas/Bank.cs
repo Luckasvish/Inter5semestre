@@ -14,11 +14,12 @@ public class Bank : MonoBehaviour
     TextMeshProUGUI actualMoneyUI;
 
     [SerializeField]
-    TextMeshProUGUI goal;
+    Image goal;
+
     [SerializeField]
     int goalNumber = 800;
 
-    int actualMoney;
+    static int actualMoney;
 
     private void Awake()
     {
@@ -29,7 +30,6 @@ public class Bank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        goal.text = "Meta: " + goalNumber.ToString();
         UpdateMoneyUI();
     }
 
@@ -57,5 +57,6 @@ public class Bank : MonoBehaviour
     {
         //change the money UI text for the actual value
         actualMoneyUI.text = actualMoney.ToString();
+        goal.fillAmount = actualMoney/goalNumber;
     }
 }
