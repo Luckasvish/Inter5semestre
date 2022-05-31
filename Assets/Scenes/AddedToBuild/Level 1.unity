@@ -2854,10 +2854,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua
       objectReference: {fileID: 0}
-    - target: {fileID: 2192480019540126035, guid: 02c3de6750a3c52448c1da691f1b15a4, type: 3}
-      propertyPath: chefsHands
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02c3de6750a3c52448c1da691f1b15a4, type: 3}
 --- !u!4 &8024065615898060998 stripped

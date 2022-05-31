@@ -38,8 +38,6 @@ public class Detection_Manager : MonoBehaviour
 
 
             }
-
-
             CheckPreparer(interactionOBJ);
             Glow(); // Highlight()
         }

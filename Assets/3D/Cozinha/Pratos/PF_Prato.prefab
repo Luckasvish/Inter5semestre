@@ -15,8 +15,8 @@ GameObject:
   m_Name: PratoFeito
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!224 &832912386703950
 RectTransform:
@@ -90,8 +90,8 @@ GameObject:
   m_Name: Recipe 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!224 &832912413205260
 RectTransform:
@@ -163,8 +163,8 @@ GameObject:
   m_Name: Receitas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &832912594041916
 Transform:
@@ -198,8 +198,8 @@ GameObject:
   m_Name: 'Branquin '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!224 &832912800793691
 RectTransform:
@@ -274,8 +274,8 @@ GameObject:
   m_Name: "\xCDcones"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!224 &832913362122370
 RectTransform:
@@ -312,8 +312,8 @@ GameObject:
   m_Name: Recipe 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!224 &832913482248529
 RectTransform:
@@ -387,8 +387,8 @@ GameObject:
   m_Name: Feijoada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!224 &832913970858550
 RectTransform:
@@ -462,8 +462,8 @@ GameObject:
   m_Name: Recipe 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!224 &832914259168118
 RectTransform:
@@ -535,8 +535,8 @@ GameObject:
   m_Name: Receitas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!224 &832914320580477
 RectTransform:
@@ -575,8 +575,8 @@ GameObject:
   m_Name: Buchada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!224 &832914376262040
 RectTransform:
@@ -651,8 +651,8 @@ GameObject:
   m_Name: Feijao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &2403561840072651149
 Transform:
@@ -746,8 +746,8 @@ GameObject:
   m_Name: Feijao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &3488946901984359179
 Transform:
@@ -841,8 +841,8 @@ GameObject:
   m_Name: Carne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &6840931700718937508
 Transform:
@@ -936,8 +936,8 @@ GameObject:
   m_Name: Arroz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &8942014314496339246
 Transform:
@@ -1031,8 +1031,8 @@ GameObject:
   m_Name: PF_Prato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &6770832267783657763
 Transform:
@@ -1041,7 +1041,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6250157073566204825}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1049,7 +1049,7 @@ Transform:
   - {fileID: 6520206686992964157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &7663173316612478598
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1132,8 +1132,8 @@ GameObject:
   m_Name: 'Carne '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &6520206686492030352
 Transform:
@@ -1225,8 +1225,8 @@ GameObject:
   m_Name: Feijoada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &6520206686602070779
 Transform:
@@ -1279,8 +1279,8 @@ GameObject:
   m_Name: Carne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &6520206686792135751
 Transform:
@@ -1375,8 +1375,8 @@ GameObject:
   m_Name: --HUD_prato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!224 &6520206686992964157
 RectTransform:
@@ -1385,18 +1385,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6520206686992964156}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 134}
   m_LocalScale: {x: 1.6549, y: 1.6549, z: 1.6549}
   m_Children:
   - {fileID: 832914320580477}
   - {fileID: 832913362122370}
   m_Father: {fileID: 6770832267783657763}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -180, z: -180}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 155.4046}
+  m_AnchoredPosition: {x: -0, y: 25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6520206686992964145
@@ -1495,8 +1495,8 @@ GameObject:
   m_Name: PratoFeito
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &6520206687176481551
 Transform:
@@ -1549,8 +1549,8 @@ GameObject:
   m_Name: Farofa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &6520206687266661695
 Transform:
@@ -1642,8 +1642,8 @@ GameObject:
   m_Name: Buchada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &6520206687724691763
 Transform:
@@ -1696,8 +1696,8 @@ GameObject:
   m_Name: 'Feijao '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &6520206688110552157
 Transform:
@@ -1791,8 +1791,8 @@ GameObject:
   m_Name: Carne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 0
 --- !u!4 &6520206688238381141
 Transform:
