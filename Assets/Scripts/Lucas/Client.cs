@@ -779,7 +779,7 @@ public class Client : IBehaviour
         if (IrritationFeedback.gameObject.transform.position.y < IrritationAnimEnd.transform.position.y)
         {
             IrritationFeedback.gameObject.transform.Translate(new Vector3 (0, IrritationAnimEnd.transform.position.y) * Time.deltaTime * 2f, Space.World);
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.04f);
             StartCoroutine(IrritationFeedbackAnim(spriteIndex, false));
         }
     }
