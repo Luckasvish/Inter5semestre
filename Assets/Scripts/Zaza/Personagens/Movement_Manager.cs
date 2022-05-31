@@ -24,17 +24,20 @@ public class Movement_Manager : MonoBehaviour
     {
         if(this.controller.isGrounded == false)  //  Se não estiver no chão 
         {
+           
             Vector3 gravity = new Vector3(0, -10, 0); // Vetor pra gravidade.
             this.controller.Move(gravity);   //  Aplicação da gravidade.
         }
      
         else if (this.controller.isGrounded == true)
         {
+            
             float targetAngle = Mathf.Atan2(moveInput.x, moveInput.z) * Mathf.Rad2Deg;  //  Cálculo do ângulo alvo (dado através do input).
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothVelocity, rotationSpeed);   // Cálculo para ser aplicado à rotação.
         
             if(moveInput.magnitude > 0.1f)  // Se houver input
             {
+              
                 animation_Manager.SetWalk(true);
                 transform.rotation = Quaternion.Euler(0f,angle,0f); //  Rotaciona
                 this.controller.Move(moveInput * speed * Time.deltaTime);    //  Movimenta
@@ -44,6 +47,7 @@ public class Movement_Manager : MonoBehaviour
                 animation_Manager.SetWalk(false);
         
             }
+           
         }
 
 

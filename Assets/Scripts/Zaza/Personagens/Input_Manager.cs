@@ -17,11 +17,21 @@ public class Input_Manager : MonoBehaviour
     //Método que retorna o Vetor inputado.
     Vector3 MovementInput()
     {
+        
+
         float hInput = Input.GetAxisRaw("Horizontal");          float vInput = Input.GetAxisRaw("Vertical");
        
-        Vector3 input = new Vector3 (hInput * Camera.main.transform.forward.z,0,vInput * Camera.main.transform.forward.z).normalized;
-       
+        Vector3 input = new Vector3 (vInput , 0 , -hInput ).normalized;
+    
+
         return input;
+    }
+
+    void Update()
+    {
+        Debug.Log("Input de movimento" + MovementInput());
+        Debug.Log("Input E" + pressedE);
+        
     }
 
 

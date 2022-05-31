@@ -35,6 +35,7 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
             i.gameObject.SetActive(false);
         }
 
+        
 
 
     }

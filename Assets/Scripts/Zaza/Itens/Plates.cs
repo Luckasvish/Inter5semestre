@@ -69,7 +69,6 @@ using FMODUnity;
                     recipe = recipeInstance[2];
             break;
         }
-        Debug.Log("Receita Escolhida: " + recipe.itemName);//
         recipe.InitiateRecipe();
     }
 

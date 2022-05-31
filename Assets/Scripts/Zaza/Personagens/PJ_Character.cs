@@ -72,7 +72,10 @@ public class PJ_Character : MonoBehaviour
         
         if(characterOn)
         {
+        
             movement_Manager.Move(input_Manager.moveInput);
+            
+            
         }
 
 
