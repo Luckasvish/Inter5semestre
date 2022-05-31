@@ -5,42 +5,50 @@ using FMODUnity;
  public class Plates : _Item
  
  {
-
+     // PROPRIEDADES DE ITEM
     public  override ItemType type { get; set; }
     public  override string itemName { get; set; }
    
     /////////////////////////////////////////////////////////////////////////
- 
-
-    //////////////////////////////////////////////////////////////////
+    
+    // PROPRIEDADES DE PLATE
     internal Recipe recipe;
     public Recipe[] recipeInstance;
     internal bool settle;
-    
-    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+
+    // UI / UX
     internal GameObject hud;
+    //////////////////////////////////////////////////////////
     
-    public bool plateOn;
+
+
+    public bool plateOn;    //  bool pra deixar o prato preparado DEBUG
+
+
+
+
 
     void Awake()
     {
+        type = ItemType._Plate;
+
         Balcon balcon = GetComponentInParent<Balcon>();
-        hud = GetComponentInChildren<PlateHUD>().gameObject;    
+        hud = GetComponentInChildren<RecipeChoise>().gameObject;    
         hud.SetActive(false);
         recipe = new Recipe();    
 
+    
         if(balcon != null)
         {
             balcon.itenOnThis = GetComponent<Plates>();
             balcon.hasItemOnIt = true;
         }
-        type = ItemType._Plate;
         
         if(plateOn)
         {
             settle =true;
             itemName = "Feijoada";
-
         }
 
     }
@@ -74,8 +82,6 @@ using FMODUnity;
             for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
             {
                 
-
-
                 if(recipe.ingreNeeded[i].itemName == ingreName && added == false)
                 {
                     
@@ -121,7 +127,6 @@ using FMODUnity;
     {
         for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
         {
-
             if(recipe.ingreNeeded[i].itemName == ingreName)
             {
                 return true;
@@ -130,19 +135,6 @@ using FMODUnity;
         
         return false;
     
-    }
-
-    void TurnOnHUD()
-    {
-        if(hud.activeInHierarchy)
-        {
-
-        }
-        else 
-        {
-            
-        }
-
     }
 
  }

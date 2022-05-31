@@ -107,9 +107,10 @@ public class Pan : _Item
             Timer.ToogleTimer();
         }
         
-        Timer.timer.color = Color.red;
         Timer.CheckImageToSet();
-        startedBurning = true;    }
+        startedBurning = true;    
+        Timer.timer.color = Timer.red;
+    }
 
     
     //  Método para parar de queimar (chamado quando queima ou quando a panela sai do fogão)
@@ -182,7 +183,10 @@ public class Pan : _Item
         
             buffer = ingredient.itemName;
             ingredient = null;
-            Timer.ToogleTimer();    
+            if(onOven == true)
+            {
+                Timer.ToogleTimer();    
+            }
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
             return buffer;
         

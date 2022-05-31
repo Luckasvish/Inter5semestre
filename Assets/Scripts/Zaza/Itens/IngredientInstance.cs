@@ -8,7 +8,7 @@ public class IngredientInstance : _Item
     public  override string itemName { get; set; }
     // internal Ingredient ingredient;
     public GameObject[] ingredients_Mesh;
-    public void SetMesh(string  ingreName )
+    public void SetMesh(string  ingreName)
     {
         
         switch(ingreName)
@@ -43,6 +43,13 @@ public class IngredientInstance : _Item
                 default: itemName = "";  break;
             
             }
+
+    }
+
+    public void CutMeat()
+    {
+        ingredients_Mesh[2].SetActive(false);
+        ingredients_Mesh[4].SetActive(true);
 
     }
 

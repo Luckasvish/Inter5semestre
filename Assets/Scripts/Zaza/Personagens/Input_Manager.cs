@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class Input_Manager : MonoBehaviour
 {
     internal bool pressedE => Input.GetKeyDown(KeyCode.E);
+    internal bool pressedQ => Input.GetKeyDown(KeyCode.Q);
+    internal bool holdE => Input.GetKey(KeyCode.E);
     internal Vector3 moveInput => MovementInput();
     internal bool pressed01 => Input.GetKeyDown(KeyCode.Alpha1);
     internal bool pressed02 => Input.GetKeyDown(KeyCode.Alpha2);

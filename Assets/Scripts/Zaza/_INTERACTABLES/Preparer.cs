@@ -18,11 +18,14 @@ public class Preparer : _InteractionOBJ
     internal float preparationTimer;
     EventInstance choppSfxEvent;
 
-   
+    public GameObject knife;
+    Vector3 knifeOriginialPosition;
+    
+    public Transform chefsHands;
 
     bool sfxPlayed;
 
-    bool preparing;
+    internal bool preparing;
 
 
     void Awake()
@@ -38,6 +41,8 @@ public class Preparer : _InteractionOBJ
         choppSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_chopp");
         material = GetComponent<MeshRenderer>().material;
         material.SetFloat("_emission", 4);
+        knifeOriginialPosition = knife.transform.position;
+
     }
     void Update()
     {
@@ -61,6 +66,8 @@ public class Preparer : _InteractionOBJ
     void Prepare()
     {
         preparationTimer += Time.deltaTime;
+        knife.transform.position = chefsHands.position;
+
         if(sfxPlayed == false)
         {
             choppSfxEvent.start();
@@ -70,7 +77,9 @@ public class Preparer : _InteractionOBJ
         feedback.RunSlider(_hudBar);
         if(preparationTimer >= preparationTime)
         {
+            itenOnThis.GetComponent<IngredientInstance>().CutMeat();
             itenOnThis.type = ItemType._PreparedIngredient;
+            knife.transform.position = knifeOriginialPosition;
             preparing = false;
             choppSfxEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             sfxPlayed = false;
@@ -111,10 +120,16 @@ public class Preparer : _InteractionOBJ
         {
             if(hasItemOnIt)     
             {
-                if(itenOnThis.type != ItemType._PreparedIngredient) TooglePreparer(); 
+                if(itenOnThis.type != ItemType._PreparedIngredient) Debug.Log("Cheogu onde não deveria!!!");////////
                 
-                 else chef.ReceiveItens(this);  
+                 else 
+                 {
+                    chef.ReceiveItens(this);  
+                    Debug.Log("Cheogu onde não deveria!!!");////////
+                 }
+            
             }
+
             else Debug.Log("Não tem nada aqui!!!");
                 
         }

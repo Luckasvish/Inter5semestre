@@ -17,6 +17,7 @@ public class PanTimer : MonoBehaviour
     public GameObject[] sprites;
 
     internal Color green;
+    internal Color red;
     void Start()
     {
         main = GetComponentInParent<Pan>();
@@ -25,6 +26,8 @@ public class PanTimer : MonoBehaviour
         cookingSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_cooking");
         burningSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_burning");
         green = timer.color;
+        red = new Color32(200,48,20,255);
+        timer.color = red;
 
     }
 
@@ -76,7 +79,7 @@ public class PanTimer : MonoBehaviour
             
             break;
             
-            case "Farinha":     if(main.ingredient.type == ItemType._PreparedIngredient)    i = 6;
+            case "Farofa":     if(main.ingredient.type == ItemType._PreparedIngredient)    i = 6;
                                 else if (main.ingredient.type == ItemType._CookedIngredient)    i=  7;
             
             break;

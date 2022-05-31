@@ -38,7 +38,13 @@ public class Storers : _InteractionOBJ
     public override void ReceiveItens(_Item itens){}
      public override void Interact(_Item iten, PJ_Character chef)
      {
-        if(iten == null) chef.ReceiveItens(this);
+        if(iten == null) 
+        {
+
+         chef.ReceiveItens(this);
+          
+        }
+          
           else Debug.Log("Já está com a mão cheia!");///////////////////////////////
      }
 

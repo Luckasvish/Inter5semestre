@@ -12,6 +12,7 @@ public class Detection_Manager : MonoBehaviour
     internal bool canInteract {get; set;}   //  booleana para determinar a possibilidade de interação.
     public Transform detectorPosition;  // Posição.y do detector.
     [SerializeField] internal float detectionDistance;  // Distancia de detecção.
+    internal bool preparerInteract; //  booleana para interação com o preparador.  
     ////////////////////////////
 
     //  PROPRIEDADES DO HIGHLIGHT
@@ -28,7 +29,18 @@ public class Detection_Manager : MonoBehaviour
     {
         if(canInteract) //  (se puder interagir)
         { 
-            if(hudOn == false) {    HandlePlateHUD(interactionOBJ);} // (se a HUD estiver desligada) { Lida com a HUD()} 
+            if(hudOn == false) 
+            { 
+                ToogleePlateHUD(interactionOBJ); // (se a HUD do PRATO estiver desligada) { Lida com a HUD()} 
+            }
+            else if (hudOn == true)
+            {
+
+
+            }
+
+
+            CheckPreparer(interactionOBJ);
             Glow(); // Highlight()
         }
     }
@@ -59,9 +71,20 @@ public class Detection_Manager : MonoBehaviour
         interactionOBJ.material.SetFloat("_emission", glowTimer);   //  Seta o brilho no Shader.
     }
 
+    void CheckPreparer(_InteractionOBJ interaction)
+    {
+        Preparer p = interaction.GetComponent<Preparer>();
+        
+        if(p != null) preparerInteract = true;
+        
+        else preparerInteract = false;
+    }
+
+    public Preparer GetPreparer( ){return interactionOBJ.GetComponent<Preparer>();}
+
 
     // Método para lidar com a HUD de pratos. 
-    void HandlePlateHUD(_InteractionOBJ interaction)    
+    void ToogleePlateHUD(_InteractionOBJ interaction)    
     {
         if (interaction.GetComponent<Balcon>() != null) // (se tiver um balcao )
         {
@@ -69,28 +92,35 @@ public class Detection_Manager : MonoBehaviour
             if(interaction.hasItemOnIt == true) //  (se o balcão tiver item)
             {
                 Plates p = interaction.itenOnThis.GetComponent<Plates>();    //  Tenta achar um prato.
+                
                 if(p != null)   //  (se achar um prato)
                 {
-                    if(hudOn == true)   // (se a hud estiver ativa)
+                    if( p.recipe == null || p.recipe.ingreNeeded.Count > 0)
                     {
-                        p.hud.SetActive(false); //  Desativa a HUD()
-                        hudOn = false;
-                    }
 
-                    else // (se a huda estiver desativada)
-                    {
-                        p.hud.SetActive(true);  //  Ativa a HUD()
-                        hudOn = true;
+                        if(hudOn == true)   // (se a hud estiver ativa)
+                        {
+                            p.hud.SetActive(false); //  Desativa a HUD()
+                            hudOn = false;
+                        }
+
+                        else // (se a huda estiver desativada)
+                        {
+                            p.hud.SetActive(true);  //  Ativa a HUD()
+                            hudOn = true;
+                        }
                     }
+                 
                 }
             }
         }
     }
 
+
     // Método para anular a detecção. >>> chamada em InteractableDetector
     public void ClearDetection()  
     {
-        if(hudOn == true)   HandlePlateHUD(interactionOBJ); // (se a HUD do prato estiver ligada) {Lida com a HUD()}
+        if(hudOn == true)   ToogleePlateHUD(interactionOBJ); // (se a HUD do prato estiver ligada) {Lida com a HUD()}
 
         canInteract = false;    // Tira a permição para interagir.
         interactionOBJ.material.SetFloat("_emission", 4);   // Diminui o brilho do HighLight. 
