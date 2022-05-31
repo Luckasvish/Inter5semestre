@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 3620288263120598950}
   - component: {fileID: 3620288263120598937}
   - component: {fileID: 3620288263120598936}
-  - component: {fileID: 3620288263120598949}
   - component: {fileID: 3620288263120598948}
   m_Layer: 0
   m_Name: 'PF_Leleu '
@@ -126,18 +125,6 @@ MonoBehaviour:
   InteractableLayer:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &3620288263120598949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3620288263120598938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb81826db953f5e48966e36b96b42b23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &3620288263120598948
 CharacterController:
   m_ObjectHideFlags: 0
@@ -227,7 +214,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5883816596015349406}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 000a5270af2a41a40bbe2516aae3fba4, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 57032501599183a4ca371deef7acbee8, type: 3}
   m_Controller: {fileID: 9100000, guid: 43332d6b75e37404aa4a90064dc0e023, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -237,6 +224,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4762960721682825047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883816596015349406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb81826db953f5e48966e36b96b42b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6730328191514690511
 PrefabInstance:
   m_ObjectHideFlags: 0

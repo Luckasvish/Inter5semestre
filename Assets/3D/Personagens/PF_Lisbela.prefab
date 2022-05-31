@@ -468,8 +468,9 @@ GameObject:
   m_Component:
   - component: {fileID: 959931445046004628}
   - component: {fileID: 959931445046004627}
+  - component: {fileID: 6219092402111925429}
   m_Layer: 0
-  m_Name: LisbelaWalk
+  m_Name: Modelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,7 +513,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959931445046004629}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 522172e3d14081a4590f3fbdf6f630ad, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 57032501599183a4ca371deef7acbee8, type: 3}
   m_Controller: {fileID: 9100000, guid: 43332d6b75e37404aa4a90064dc0e023, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -522,6 +523,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6219092402111925429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959931445046004629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb81826db953f5e48966e36b96b42b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &959931445139197886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1295,6 @@ GameObject:
   - component: {fileID: 2421842842268237702}
   - component: {fileID: 2421842842268237753}
   - component: {fileID: 2421842842268237752}
-  - component: {fileID: 2421842842268237701}
   - component: {fileID: 2421842842268237700}
   m_Layer: 0
   m_Name: PF_Lisbela
@@ -1365,18 +1377,6 @@ MonoBehaviour:
   InteractableLayer:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &2421842842268237701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2421842842268237754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb81826db953f5e48966e36b96b42b23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &2421842842268237700
 CharacterController:
   m_ObjectHideFlags: 0
