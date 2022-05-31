@@ -35,6 +35,7 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
             i.gameObject.SetActive(false);
         }
 
+        
 
 
     }
@@ -50,7 +51,7 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
         soundTrack = RuntimeManager.CreateInstance("event:/MUSIC/music_gameplay");
         soundScape = RuntimeManager.CreateInstance("event:/SOUNDSCAPE/soudscape_restaurante");
         soundScape.start();
-        soundTrack.start();
+       // soundTrack.start();
 
     }
     

@@ -6,7 +6,7 @@ using FMODUnity;
 public class Table : _InteractionOBJ
 {
     public  override InteractableType type { get; set; }
-    public override _Item itenItHas {get;set;}
+    public override _Item itenOnThis {get;set;}
     public override bool hasItemOnIt {get;set;}
     public Transform[] platePosition;
     internal _Item[] plates;
@@ -20,7 +20,7 @@ public class Table : _InteractionOBJ
     void Awake()
     {
         type = InteractableType._Table;
-        itenItHas = null;
+        itenOnThis = null;
         hasItemOnIt = false;
         plates = new _Item[2];
    
@@ -152,7 +152,7 @@ public class Table : _InteractionOBJ
 
     }
     
-    public override void Interact( _Item iten, Chef chef)
+    public override void Interact( _Item iten, PJ_Character chef)
     {
         if(iten != null)
         {
