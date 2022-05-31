@@ -348,6 +348,9 @@ public class Client : IBehaviour
     public override void Sit()
     {
         behaviourState = BehaviourState.Sit;
+        navMesh.updatePosition = false;
+        navMesh.ResetPath();
+        transform.position = myChair.transform.position;
         //play animation
        // Debug.Log("sit");
         callback = true;
@@ -523,6 +526,7 @@ public class Client : IBehaviour
         if(hasOrdered && !hasAte)
             OrderManager.instance.RemoveRecipeInList(foodRef);
         // Debug.Log("Dando o fora!");///
+        navMesh.updatePosition = true;
         navMesh.SetDestination(WayOut.transform.position);
         if (myChair != null)
         {
