@@ -83,6 +83,7 @@ using FMODUnity;
                         {
                             itemName = recipe.itemName;
                             Debug.Log("Receita Pronta: " + itemName);
+                            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_bell");
                         }
                         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
                         added = true;

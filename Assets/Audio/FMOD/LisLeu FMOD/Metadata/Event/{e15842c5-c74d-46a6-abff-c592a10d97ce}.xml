@@ -62,7 +62,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{1fd61cae-5462-4d0d-abdb-3e0dc404badc}">
 		<property name="maxVoices">
-			<value>23</value>
+			<value>11</value>
 		</property>
 		<property name="priority">
 			<value>3</value>
@@ -135,7 +135,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{dc1ba27e-cc46-47ea-b868-cc1dcbafcb72}">
 		<property name="volume">
-			<value>-17</value>
+			<value>-25</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -171,7 +171,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{77cd549d-ed58-48da-a7dc-3f4966ddc702}">
 		<property name="volume">
-			<value>-26</value>
+			<value>-16</value>
 		</property>
 		<property name="name">
 			<value>Audio 2</value>
@@ -188,10 +188,10 @@
 	</object>
 	<object class="LoopRegion" id="{e356f14a-73d0-4385-85aa-cd94d9709ecb}">
 		<property name="position">
-			<value>0.10000000000000001</value>
+			<value>0.12</value>
 		</property>
 		<property name="length">
-			<value>0.22427487203624175</value>
+			<value>0.21427487203624174</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{be35b779-b8a3-4f6b-a8db-c5b5fa7e8384}</destination>
@@ -249,7 +249,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>7</value>
+			<value>8.5</value>
 		</property>
 	</object>
 	<object class="SingleSound" id="{fc4b5f58-fe0a-4cd2-97c7-5cf92cb7d407}">

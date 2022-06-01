@@ -41,6 +41,7 @@ public class PJ_Character : MonoBehaviour
 
     void Update()
     {
+        anim_Manager.gameObject.transform.position = transform.position;
         if(detection_Manager.canInteract == true && characterOn)
         {
         
@@ -51,6 +52,7 @@ public class PJ_Character : MonoBehaviour
                 }
                 
         }
+        else anim_Manager.animator.SetBool("cutting",false);
  
         if(CheckItem())
         {

@@ -157,7 +157,8 @@ public class Pan : _Item
             currentTime = 0;
             this.ingredient = ItemType._CookedIngredient;   //  {o ingrediente vira do tipo cozido}
             finishedCooking = true; //  e a panela cozinhou 
-            //            Debug.Log($"Pan: {this} IngreInPanName:{ingredient.itemName}");
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_bell");
+        
         }
         else 
         {

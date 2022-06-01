@@ -56,6 +56,7 @@ public class Preparer : _InteractionOBJ
             
             if( chef.input_Manager.moveInput.magnitude > 0.2 && chef.characterOn)
             {
+                chef.anim_Manager.animator.SetBool("cutting",false);
                 preparing = false;
             }
 
@@ -77,6 +78,7 @@ public class Preparer : _InteractionOBJ
 
     void Prepare()
     {
+        chef.anim_Manager.animator.SetBool("cutting",true);
         preparationTimer += Time.deltaTime;
         knife.transform.position = chefsHands.position;
 
@@ -97,6 +99,7 @@ public class Preparer : _InteractionOBJ
             preparing = false;
             choppSfxEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             sfxPlayed = false;
+            chef.anim_Manager.animator.SetBool("cutting",false);
         }
 
 

@@ -30,7 +30,6 @@ public class Storers : _InteractionOBJ
         itenOnThis = MacroSistema.sistema.SpawnIngredient();
         itenOnThis.GetComponent<IngredientInstance>().SetMesh(ingredientName);
         itenOnThis.type = resetType();
-        Debug.Log($"PATH#1: O ITEM SAIU DO STORER {itenOnThis.itemName}");
         Buffer = itenOnThis;
         itenOnThis = null;        
         return Buffer;
@@ -43,7 +42,6 @@ public class Storers : _InteractionOBJ
         if(iten == null) 
         {
             chef.ReceiveItens(this);
-            Debug.Log($"PATH#2: O ITEM CHEGOU NA MAO DO CHEF {chef.itenInHand.itemName} , TIPO DO ITEM {chef.itenInHand.type}");
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick"); 
         }
           

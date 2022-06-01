@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{47d0ec09-1480-492d-a56f-8b173a29ccbf}">
+		<property name="assetPath">
+			<value>assovio 5.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.25</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{661dbd5d-7d1a-48fa-a61a-4046addad2f5}</destination>
+		</relationship>
+	</object>
+</objects>

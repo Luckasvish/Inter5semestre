@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{d51df99b-4dc4-483b-8181-8691f34af641}">
+		<property name="assetPath">
+			<value>Forró batida.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>85.333333333333329</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{661dbd5d-7d1a-48fa-a61a-4046addad2f5}</destination>
+		</relationship>
+	</object>
+</objects>

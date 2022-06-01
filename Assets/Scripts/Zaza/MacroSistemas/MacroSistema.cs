@@ -16,6 +16,8 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
      EventInstance soundTrack;   // Instância da trilha sonora. 
      EventInstance soundScape;  //  Intância da ambiência sonora.
 
+
+
     void Awake()
     {
         if (sistema == null)

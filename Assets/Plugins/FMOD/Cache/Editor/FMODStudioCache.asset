@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: -7243729885720231905}
   MinDistance: 0
   MaxDistance: 0
-  Length: 14400
+  Length: 17125
 --- !u!114 &-7243729885720231905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 0
+  Length: 200
 --- !u!114 &-3824077356819445520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,11 +258,12 @@ MonoBehaviour:
   - {fileID: 7353261435858414457}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
-  Parameters: []
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2600649993423392143}
   MinDistance: 0
   MaxDistance: 0
-  Length: 85333
+  Length: 175619
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,13 +290,44 @@ MonoBehaviour:
   - {fileID: -3824077356819445520}
   - {fileID: -1801701591672203663}
   - {fileID: -2472535607584637618}
+  - {fileID: 3235386741747873445}
+  - {fileID: 5115805473783810001}
+  - {fileID: 657558089061749950}
+  - {fileID: 4394471169376609975}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7353261435858414457}
   StringsBanks:
   - {fileID: 3394935367563006710}
-  cacheTime: 637884033233594713
+  cacheTime: 637896769800000000
   cacheVersion: 131591
+--- !u!114 &657558089061749950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX GAMEPLAY/sfx_angry
+  m_EditorClassIdentifier: 
+  Path: event:/SFX GAMEPLAY/sfx_angry
+  Guid:
+    Data1: 2077653387
+    Data2: 1306429954
+    Data3: 46760635
+    Data4: -628773685
+  Banks:
+  - {fileID: 7353261435858414457}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 854
 --- !u!114 &1277165705896565864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +356,57 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 78000
+--- !u!114 &2600649993423392143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/music_gameplay/menu
+  m_EditorClassIdentifier: 
+  Name: menu
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1989963401
+    data2: 204636483
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &3235386741747873445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX GAMEPLAY/sfx_call
+  m_EditorClassIdentifier: 
+  Path: event:/SFX GAMEPLAY/sfx_call
+  Guid:
+    Data1: -1538211504
+    Data2: 1248383465
+    Data3: -1951753804
+    Data4: 125757176
+  Banks:
+  - {fileID: 7353261435858414457}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1250
 --- !u!114 &3394935367563006710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,11 +422,38 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637884033233594713
+  lastModified: 637896769800000000
   FileSizes:
   - Name: Desktop
-    Value: 1776
+    Value: 1954
   Exists: 1
+--- !u!114 &4394471169376609975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX GAMEPLAY/sfx_money
+  m_EditorClassIdentifier: 
+  Path: event:/SFX GAMEPLAY/sfx_money
+  Guid:
+    Data1: 832249744
+    Data2: 1235701038
+    Data3: 765287827
+    Data4: -91761138
+  Banks:
+  - {fileID: 7353261435858414457}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2200
 --- !u!114 &4526535356348571785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +478,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &5115805473783810001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX GAMEPLAY/sfx_patience
+  m_EditorClassIdentifier: 
+  Path: event:/SFX GAMEPLAY/sfx_patience
+  Guid:
+    Data1: -874792604
+    Data2: 1236300836
+    Data3: 1950471324
+    Data4: -1402631758
+  Banks:
+  - {fileID: 7353261435858414457}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2500
 --- !u!114 &6266100128178817314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +531,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 0
+  Length: 1083
 --- !u!114 &7353261435858414457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,10 +547,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/LisLeu FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637884033233544745
+  lastModified: 637896769800000000
   FileSizes:
   - Name: Desktop
-    Value: 4282112
+    Value: 5615456
   Exists: 1
 --- !u!114 &7902342086488555277
 MonoBehaviour:
@@ -437,7 +574,7 @@ MonoBehaviour:
   - {fileID: 7353261435858414457}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
   - {fileID: -3514753769739559114}
   MinDistance: 0
