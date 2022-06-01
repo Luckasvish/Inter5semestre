@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6620481401908975352}
   - component: {fileID: 6620481401908975355}
   - component: {fileID: 6620481401908975354}
+  - component: {fileID: 6620481403487100624}
   m_Layer: 5
   m_Name: BackToMenu
   m_TagString: Untagged
@@ -120,15 +121,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4096725773299348109, guid: 74c68fa172ed65b4795eab363e5c12b6, type: 3}
-        m_TargetAssemblyTypeName: SceneManage, Assembly-CSharp
-        m_MethodName: GoToMenu
-        m_Mode: 1
+      - m_Target: {fileID: 6620481403487100624}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6620481403487100624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620481401908975356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5370144ab43d9404ca843961c8fde80e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

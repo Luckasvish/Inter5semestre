@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
     TextMeshProUGUI timerSecondsText;
 
     public bool isFinished = false;
-    public GameObject[] StageComplete = new GameObject[3];
+    public GameObject[] StageComplete = new GameObject[2];
 
 
     // Start is called before the first frame update
@@ -108,16 +108,14 @@ public class LevelManager : MonoBehaviour
         else
         {
             isFinished = true;
-
-            if(SceneManage.instance.GetLastScene() != SceneManage.instance.GetActualScene())
+            if(SceneManage.currentSceneIndex < 8)
             {
-                SceneManage.instance.NextScene(isFinished);
-                //StageComplete[0].SetActive(true);
+                SceneManage.GoToNextScene();
             }
             else
             {
                 if(Bank.instance.GetaActualMoney() == Bank.instance.GetGoalNumber())
-                    StageComplete[1].SetActive(true);
+                    StageComplete[0].SetActive(true);
                 else 
                     StageComplete[1].SetActive(true);
             }
