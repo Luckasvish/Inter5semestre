@@ -117,11 +117,13 @@ public class Client : IBehaviour
     internal string clientOrder;
     internal int clientOrderIndex;
 
+    Animator animator;
 
     private void Start()
     {
         WayOut = SpawnManager.instance.Spawn;
         _OrderUI_Sprite = OrderUI.GetComponent<Image>();
+        animator = GetComponentInChildren<Animator>();
         UpdateBehaviour();
         
         WaitingForChair();
@@ -184,8 +186,9 @@ public class Client : IBehaviour
                 break;
             case BehaviourState.Sit:
                     switch (callback)
-                    {
+                    {   
                         case true:
+                            animator.SetInteger("Stage",1);
                             StartCoroutine(WaitingForOrder());
                             break;
                         case false:
@@ -230,6 +233,7 @@ public class Client : IBehaviour
                     switch (callback)
                     {
                         case true:
+                            animator.SetInteger("Stage",2);
                             StartCoroutine(PayOrder());
                             break;
                         case false:
@@ -263,6 +267,7 @@ public class Client : IBehaviour
                     switch (callback)
                     {
                         case true:
+                        animator.SetInteger("Stage",0);
                             StartCoroutine(EndExit());
                             break;
                         case false:
@@ -309,7 +314,7 @@ public class Client : IBehaviour
 
         behaviourState = BehaviourState.WaitingForChair;
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
-        //          Debug.Log("Wallking");///
+        //Debug.Log("Wallking");///
        
         if (hasAvaiableChair)
         {   
@@ -350,11 +355,27 @@ public class Client : IBehaviour
         behaviourState = BehaviourState.Sit;
         navMesh.updatePosition = false;
         navMesh.ResetPath();
-        transform.position = myChair.transform.position;
+        transform.position = thisChair.clientPosition.transform.position;
+        transform.forward = CheckDirectionToSit();
         //play animation
        // Debug.Log("sit");
         callback = true;
         StartCoroutine(Main());
+    }
+
+    Vector3 CheckDirectionToSit()
+    {
+        if (thisChair == thisChair.thisTable.places[1])
+        {
+            Debug.Log("Essa é a cadeira Y");
+            return -thisChair.transform.forward;
+        }
+        else 
+        {
+
+        Debug.Log("Essa é a cadeira X");
+        return thisChair.transform.forward;
+        }
     }
 
     public override IEnumerator WaitingForOrder()

@@ -6,8 +6,6 @@ using FMODUnity;
 public class Oven : _InteractionOBJ
 {
     // PROPRIEDADES DE INTERACTABLE (_INTERACTIONOBJ)
-    public override InteractableType type { get; set;}
-
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
     internal override Material material{get ; set;}  
@@ -17,7 +15,7 @@ public class Oven : _InteractionOBJ
     // PROPRIEDADES DE OVEN  
     internal Pan _Pan;
 
-    void Awake(){   type = InteractableType._Oven;  }
+
 
 
     void Start()
@@ -62,6 +60,7 @@ public class Oven : _InteractionOBJ
                 itenOnThis = _Pan;
                 _Pan.onOven = true;
                 _Pan.Position();    // Posiciona a panela ao recebe-la.
+                itenOnThis.transform.SetParent(this.transform);
                 RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
                 hasItemOnIt = true;
        

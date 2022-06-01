@@ -13,6 +13,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 108.37146, y: 115.31438, z: 148.84308}
   m_Center: {x: 0, y: 57.487495, z: 0.0000038146973}
+--- !u!1 &3563147534769398783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6734593134713869512}
+  m_Layer: 10
+  m_Name: PlatePosition X
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6734593134713869512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563147534769398783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 106, z: -50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7967922527257656862}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1732687841210349667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26,6 +56,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 108.37146, y: 115.31438, z: 148.84308}
   m_Center: {x: 0, y: 57.487495, z: -0.00005722046}
+--- !u!1 &5372458009282541348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871758531155550020}
+  m_Layer: 10
+  m_Name: PlatePosition Y
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &871758531155550020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372458009282541348}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 106, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7967922527257656862}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7338738729541313700
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,6 +98,7 @@ GameObject:
   - component: {fileID: 6430125177547878843}
   - component: {fileID: 9140217682767480177}
   - component: {fileID: 9150130039609684132}
+  - component: {fileID: 8025970308565169273}
   m_Layer: 10
   m_Name: PF1_Mesa
   m_TagString: Untagged
@@ -58,6 +119,8 @@ Transform:
   m_Children:
   - {fileID: 3922505640137002816}
   - {fileID: 1631327628427636217}
+  - {fileID: 6734593134713869512}
+  - {fileID: 871758531155550020}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -123,6 +186,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 160, y: 101.57755, z: 200}
   m_Center: {x: 0, y: 50.69791, z: 0}
+--- !u!114 &8025970308565169273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338738729541313700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d800ea7da413e2b4390cd3b9127a8cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platePosition:
+  - {fileID: 6734593134713869512}
+  - {fileID: 871758531155550020}
+  places:
+  - {fileID: 6831113549126554698}
+  - {fileID: 9079490331076687603}
 --- !u!1001 &6382444904518339278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,7 +213,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5006468597855600013, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
       propertyPath: m_Name
-      value: PF_Cadeira (1)
+      value: PF_Cadeira Y
       objectReference: {fileID: 0}
     - target: {fileID: 5006468597855600013, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
       propertyPath: m_Layer
@@ -206,6 +287,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5634385791953463095, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
   m_PrefabInstance: {fileID: 6382444904518339278}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9079490331076687603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2779331795525188669, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
+  m_PrefabInstance: {fileID: 6382444904518339278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2155099385862944579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb8cdbea34f8864599d4b0d763cc369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8673605358397286519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,7 +307,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5006468597855600013, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
       propertyPath: m_Name
-      value: PF_Cadeira
+      value: PF_Cadeira X
       objectReference: {fileID: 0}
     - target: {fileID: 5006468597855600013, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
       propertyPath: m_Layer
@@ -277,6 +369,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7124202313428131551, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 97.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
 --- !u!1 &4405746066618930682 stripped
@@ -289,3 +385,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5634385791953463095, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
   m_PrefabInstance: {fileID: 8673605358397286519}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6831113549126554698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2779331795525188669, guid: 366d23d9df434094f86c3295a3fac6b1, type: 3}
+  m_PrefabInstance: {fileID: 8673605358397286519}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405746066618930682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb8cdbea34f8864599d4b0d763cc369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

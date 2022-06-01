@@ -62,6 +62,7 @@ public class PJ_Character : MonoBehaviour
         if(CheckItem())
         {
             PositionItem(itenPosition.position);
+            Debug.Log("ItemInHand: " + itenInHand.itemName);
         }
 
 
@@ -95,46 +96,50 @@ public class PJ_Character : MonoBehaviour
 
     public void PrepareInteraction(Preparer p)
     {
-        if(p.hasItemOnIt == true)
+        if(p != null)
         {
-            if(p.itenOnThis.type == ItemType._UnpreparedIngredient)
+            if(p.hasItemOnIt == true)
             {
-                if(input_Manager.holdE && input_Manager.moveInput.magnitude <= 0.3)
+                if(p.itenOnThis.type == ItemType._UnpreparedIngredient)
                 {
-                    p.preparing = true;
-                   
-                    if(cutAnimSet == false)
+                    if(input_Manager.holdE && input_Manager.moveInput.magnitude <= 0.3)
                     {
-                        anim_Manager.SetCut(true);
-                        cutAnimSet = true;
-                
+                        p.preparing = true;
+                    
+                        if(cutAnimSet == false)
+                        {
+                            anim_Manager.SetCut(true);
+                            cutAnimSet = true;
+                    
+                        }
+                    }
+
+                    else 
+                    {
+                        p.preparing = false;
+                        if(cutAnimSet == true)
+                        {
+                            anim_Manager.SetCut(false);
+                            cutAnimSet = false;             
+                        }
                     }
                 }
-
                 else 
-                {
-                    p.preparing = false;
-                    if(cutAnimSet == true)
+                {   if(cutAnimSet == true)
                     {
                         anim_Manager.SetCut(false);
                         cutAnimSet = false;             
                     }
+
+                    if(input_Manager.pressedE)  ReceiveItens(p);
                 }
             }
+
             else 
-            {   if(cutAnimSet == true)
-                {
-                    anim_Manager.SetCut(false);
-                    cutAnimSet = false;             
-                }
-
-                if(input_Manager.pressedE)  ReceiveItens(p);
+            {
+                if(input_Manager.pressedE) p.Interact(itenInHand,this);   
             }
-        }
 
-        else 
-        {
-            if(input_Manager.pressedE) p.Interact(itenInHand,this);   
         }
 
 
@@ -162,7 +167,12 @@ public class PJ_Character : MonoBehaviour
     // Função pra Receber itens.
     public void ReceiveItens(_InteractionOBJ interactedObj)//Função de receber itens, recebendo o item como parâmetro.
     {
-        itenInHand = interactedObj.GiveItens(interactedObj.itenOnThis);  
+        if(interactedObj != null)
+        {
+            itenInHand = interactedObj.GiveItens(interactedObj.itenOnThis);  
+            itenInHand.transform.SetParent(this.gameObject.transform);
+        }
+        
     }
    
 

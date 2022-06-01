@@ -6,7 +6,7 @@ using FMOD.Studio;
 
 public class Preparer : _InteractionOBJ
 {
-    public override InteractableType type { get; set;}
+   
      FeedBackManager feedback {get;set;}
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
@@ -31,7 +31,7 @@ public class Preparer : _InteractionOBJ
     void Awake()
     {
         feedback = GetComponent<FeedBackManager>();
-        type = InteractableType._Preparer;
+     
         itenOnThis = null;
    
 
@@ -56,6 +56,7 @@ public class Preparer : _InteractionOBJ
     {  
             itenOnThis = itenInHand;                         //  O ITEM DO PREPARER VIRA O ITEM QUE RECEBE
             itenOnThis.transform.position = ingredientPosition.position; // O ITEM VA PRA POSIÇÃO CORRETA
+            itenOnThis.transform.SetParent(this.transform);
             preparationTimer = 0;                                       // O TIMER É ZERADO
             feedback.ToogleUI();
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");                                       //  A HUD INICIA 

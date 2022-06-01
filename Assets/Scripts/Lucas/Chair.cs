@@ -10,13 +10,14 @@ public class Chair : MonoBehaviour
     bool hasFood;
     bool hasDrink;
 
-    string clientOrder;
+    internal string clientOrder;
     string itemReceived;
 
     _Item item;
     internal Client client;
 
     internal Table thisTable;
+    internal Transform clientPosition;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Chair : MonoBehaviour
     void Start()
     {
         thisTable = GetComponentInParent<Table>();
+        clientPosition = GetComponentInChildren<Transform>();
     }
 
     public bool CheckIfHasFood()
@@ -35,8 +37,8 @@ public class Chair : MonoBehaviour
 
     public bool CheckFood()
     {
-            Debug.Log("itemOrdered: " + clientOrder);
-            Debug.Log("itemReceived: " + itemReceived);
+        Debug.Log("itemOrdered: " + clientOrder);
+        Debug.Log("itemReceived: " + itemReceived);
         if(clientOrder == itemReceived)
         {
             return true;

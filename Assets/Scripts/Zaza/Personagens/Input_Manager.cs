@@ -27,12 +27,7 @@ public class Input_Manager : MonoBehaviour
         return input;
     }
 
-    void Update()
-    {
-        Debug.Log("Input de movimento" + MovementInput());
-        Debug.Log("Input E" + pressedE);
-        
-    }
+
 
 
 

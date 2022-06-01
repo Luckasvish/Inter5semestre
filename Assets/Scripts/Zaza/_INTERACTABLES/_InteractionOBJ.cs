@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class _InteractionOBJ : MonoBehaviour  // CLASSE MÃE DE INTERAGÍVEIS.
 {
     //Propriedades Nativas de interagíveis.
-    public  abstract InteractableType type { get; set; } // Tipo do interagível.
     public abstract _Item itenOnThis {get;set;}   //  Item no interagível.
     public abstract bool hasItemOnIt {get;set;}  //  Booleana para checar se o interagível tem um item nele ou não. 
     internal abstract Material material {get ; set;}   //   Referência pro material com Shader de Highlight.

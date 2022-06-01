@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity;
 public class Storers : _InteractionOBJ
 {
-    public override InteractableType type { get; set;}
+
 
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
@@ -13,7 +13,7 @@ public class Storers : _InteractionOBJ
     internal override Material material{get ; set;}  
    void Awake()
    {   
-       type = InteractableType._Storer;
+
        hasItemOnIt = true;
 
         
@@ -40,12 +40,11 @@ public class Storers : _InteractionOBJ
      {
         if(iten == null) 
         {
-
-         chef.ReceiveItens(this);
-          
+            chef.ReceiveItens(this);
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick"); 
         }
           
-          else Debug.Log("Já está com a mão cheia!");///////////////////////////////
+        else Debug.Log("Já está com a mão cheia!");///////////////////////////////
      }
 
 }

@@ -25,11 +25,10 @@ public class Pan : _Item
     internal bool finishedCooking; // Terminou de cozinhar.
 
 
-
-
             //////////  BURNING //////////
     bool startedBurning;    // booleana para inicializar a queima.
     public float _burnTime; // Tempo pra queimar.
+    internal bool burned;
 
     /////////////////////////////////////////////////////
     
@@ -122,6 +121,7 @@ public class Pan : _Item
             Timer.burningSfxEvent.setParameterByName("burn", 1);
             Timer.burningSfxEvent.start();
             Timer.CheckImageToSet();
+            this.burned = true;
         }
         else 
         {
@@ -155,8 +155,7 @@ public class Pan : _Item
             ingredient.type = ItemType._CookedIngredient;   //  {o ingrediente vira do tipo cozido}
             
             finishedCooking = true; //  e a panela cozinhou 
-            
-            
+            Debug.Log("IngreInPanName: " + ingredient.itemName);
         }
         else 
         {
@@ -178,16 +177,31 @@ public class Pan : _Item
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
     }
 
-    public string GiveItem( string buffer)
+    public string GiveItem (string buffer)
     {
         
             buffer = ingredient.itemName;
-            ingredient = null;
+
+
             if(onOven == true)
             {
                 Timer.ToogleTimer();    
             }
+
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+            
+         
+            currentTime = 0;
+            startedBurning = false;
+            startedCooking = false;
+                
+            if(burned)
+            {
+                Timer.ToogleTimer();
+            }
+           
+            ingredient = null;
+            burned = false;
             return buffer;
         
     }

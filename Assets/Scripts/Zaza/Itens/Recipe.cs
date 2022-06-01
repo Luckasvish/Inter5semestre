@@ -14,7 +14,6 @@ public class Recipe : MonoBehaviour
    public void InitiateRecipe()
    {
          ingreNeeded.Clear();
-
          foreach(GameObject obj in recipeIngre)
          {
                if(obj.GetComponent<Ingredient>() != null)
@@ -27,6 +26,8 @@ public class Recipe : MonoBehaviour
       public void ReceiveIngredient(Ingredient ingredient)
       {
             ingredient.gameObject.SetActive(true);    
+            
+            Debug.Log("Ingrediente Recebido Pela Receita :" + ingredient.itemName);////
             CheckRecipe();
       }
 
@@ -48,6 +49,7 @@ public class Recipe : MonoBehaviour
             {
                   return true;
             }
+            
             else return false;
 
 

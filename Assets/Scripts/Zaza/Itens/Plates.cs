@@ -21,13 +21,7 @@ using FMODUnity;
     internal GameObject hud;
     //////////////////////////////////////////////////////////
     
-
-
     public bool plateOn;    //  bool pra deixar o prato preparado DEBUG
-
-
-
-
 
     void Awake()
     {
@@ -36,7 +30,8 @@ using FMODUnity;
         Balcon balcon = GetComponentInParent<Balcon>();
         hud = GetComponentInChildren<RecipeChoise>().gameObject;    
         hud.SetActive(false);
-        recipe = new Recipe();    
+        recipe = recipeInstance[0];  
+        recipe.InitiateRecipe();  
 
     
         if(balcon != null)
@@ -44,12 +39,7 @@ using FMODUnity;
             balcon.itenOnThis = GetComponent<Plates>();
             balcon.hasItemOnIt = true;
         }
-        
-        if(plateOn)
-        {
-            settle =true;
-            itemName = "Feijoada";
-        }
+    
 
     }
     
@@ -75,32 +65,35 @@ using FMODUnity;
     public void ReceiveIngredient(string ingreName) 
     {
         bool added = false ;
+        Debug.Log("IngreReceived: " + ingreName);
        
-       if(recipe.ingreNeeded.Count > 0)
+       if(this.recipe.ingreNeeded.Count > 0)
        {
-            for(int i = 0 ; i < recipe.ingreNeeded.Count ; i ++)
+            foreach(Ingredient i in this.recipe.ingreNeeded)
             {
-                
-                if(recipe.ingreNeeded[i].itemName == ingreName && added == false)
-                {
                     
-                    recipe.ReceiveIngredient(recipe.ingreNeeded[i]);
-                    recipe.ingreNeeded.Remove(recipe.ingreNeeded[i]);
+                
+                if(i.itemName == ingreName && added == false)
+                {
+                    this.recipe.ReceiveIngredient(i);
+                    this.recipe.ingreNeeded.Remove(i);
+                    settle = true;
+                 
                     if(recipe.CheckRecipe())
                     {
                         itemName = recipe.itemName;
                         Debug.Log("Receita Pronta: " + itemName);
                     }
-                    settle = true;
+                 
+                 
                     RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                 
                     added = true;
+                    Debug.Log("IngreAdeed:" + i.itemName);///////
+                    Debug.Log("IngresNeeded:" + recipe.ingreNeeded.Count);///////
                 }
 
                 
-                else 
-                {
-                    Debug.Log("Esse ingrediente não vai aqui!");////////////////////////
-                }
             }
        }
        else 
@@ -113,11 +106,8 @@ using FMODUnity;
 
     public void CleanPlate()
     {
-        foreach(GameObject obj in recipe.recipeIngre)
-        {
-            obj.SetActive(false);
-        }
-        itemName = "";
+        foreach(GameObject obj in recipe.recipeIngre){   obj.SetActive(false);}
+        recipe.InitiateRecipe();
         settle = false;
 
     }

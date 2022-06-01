@@ -54,6 +54,7 @@ public class RecipeChoise : MonoBehaviour
         {
             index = 0;
         }
+
     }
 
 
@@ -103,6 +104,7 @@ public class RecipeChoise : MonoBehaviour
 
             default: return;
         }
+            Debug.Log("ThisPlateRecipe: " + recipeName);
 
             thisPlate.ReceiveNewRecipe(recipeName);
 

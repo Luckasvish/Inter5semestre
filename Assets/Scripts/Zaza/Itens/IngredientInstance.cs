@@ -43,6 +43,7 @@ public class IngredientInstance : _Item
                 default: itemName = "";  break;
             
             }
+        Debug.Log("IngreSpawnedName: " + itemName);
 
     }
 
@@ -50,6 +51,7 @@ public class IngredientInstance : _Item
     {
         ingredients_Mesh[2].SetActive(false);
         ingredients_Mesh[4].SetActive(true);
+        Debug.Log("BifeName: " + itemName);
 
     }
 

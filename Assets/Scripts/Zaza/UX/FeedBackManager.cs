@@ -14,14 +14,6 @@ public class FeedBackManager : MonoBehaviour
     void Awake()
     {
         _InteractionOBJ interactable = GetComponent<_InteractionOBJ>();
-        if(interactable != null)
-        {
-            type = interactable.type;
-        }
-        else
-        {
-            type = InteractableType._Null;
-        }
     }
     void Start()
     {

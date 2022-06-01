@@ -5,7 +5,6 @@ using FMODUnity;
 
 public class Balcon : _InteractionOBJ
 {
-    public override InteractableType type { get; set;}
 
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
@@ -19,7 +18,7 @@ public class Balcon : _InteractionOBJ
     
         void Awake()
     {
-        type = InteractableType._Balcon;
+       
 
         if(GetComponentInChildren<Plates>() == null)
         {
@@ -38,27 +37,12 @@ public class Balcon : _InteractionOBJ
         material.SetFloat("_emission", 4);
     }
 
-    void Update()
-    {
-      
-
-      if(hasItemOnIt)
-      {
-        if(itenOnThis.type == ItemType._Plate)
-        {
-          Plates plate = itenOnThis.GetComponent<Plates>();
-
-
-
-        }
-      }
-    }
-
 
     public override void ReceiveItens(_Item itenInHand)
     {
         itenOnThis = itenInHand;
         itenOnThis.transform.position = itemPosition.position;
+        itenOnThis.transform.SetParent(this.transform);
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
         hasItemOnIt = true;
     }
@@ -161,7 +145,7 @@ public class Balcon : _InteractionOBJ
         if(plate != null && pan != null)  
         {
 
-          if(pan.ingredient != null && pan.finishedCooking == true) //  (se a panela tiver um ingrediente e estiver pronta)
+          if(pan.ingredient != null && pan.finishedCooking == true && pan.burned == false) //  (se a panela tiver um ingrediente e estiver pronta)
           {
               if(plate.CheckIngredient(pan.ingredient.itemName) == true) 
               plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.itemName)); //  O prato tenta receber o item da panela.
