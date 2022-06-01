@@ -30,15 +30,11 @@ public class Chair : MonoBehaviour
         clientPosition = GetComponentInChildren<Transform>();
     }
 
-    public bool CheckIfHasFood()
-    {
-        return hasFood; 
-    }
-
     public bool CheckFood()
     {
         Debug.Log("itemOrdered: " + clientOrder);
         Debug.Log("itemReceived: " + itemReceived);
+        
         if(clientOrder == itemReceived)
         {
             return true;
@@ -54,60 +50,7 @@ public class Chair : MonoBehaviour
         clientOrder = order;
         Debug.Log("itemOrdered: " + clientOrder);
     }
-
-    public void ReceiveItens(_Item _item)
-    {
-        hasItem = true;
-        this.item = _item;
-        
-        if(item.type == ItemType._Plate)
-        {   
-
-        //  Debug.Log("Essa cadeira recebeu um prato : " + item.itemName);/////
-            hasFood = true;    
-            Debug.Log("HasFood " + hasFood);////
-            itemReceived = item.itemName;
-            Food = item.gameObject;
-
-        }
-
-        else
-        {
-            Debug.Log("Esse item aí não é um prato não !!!");/////////;
-        }
-    }
-
-
-    public void CleanPlate()
-    {
-        if(client != null)
-        {
-            Plates p = item.GetComponent<Plates>();
-     //       Debug.Log("Item: " +item);//////////
-            if(p != null)
-            {
-                p.CleanPlate();
-                 Debug.Log("Prato: " + p);//////////
-            }
-        }
-
-    }
-
-    public _Item GiveItem(bool changeStatus,_Item buffer)
-    {
-        buffer = item;
-        item = null;
-        hasItem = changeStatus;
-        hasFood = changeStatus;
-        hasDrink = changeStatus;
-        itemReceived = "";
-        return buffer;
-    }
-
-    public void ClientGetOff()
-    {
-        //CleanPlate();
-        client = null;
-    }
+ 
+    public void ClientGetOff(){client = null;}
 
 }

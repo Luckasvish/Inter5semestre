@@ -83,6 +83,47 @@ public class Table : _InteractionOBJ
         }
     }
 
+    public bool CheckIfHasFood(Chair chair)
+    {
+        if(chair == places[0])
+        {
+            if(plates[0] != null) return true;
+            else 
+            {
+                Debug.Log($"Não tem prato nessa cadeira {places[0]}!");
+                return false;
+            }
+            
+        }
+        else if(chair == places[1])
+        {
+            if(plates[1] != null) return true;
+            else 
+            {
+                Debug.Log($"Não tem prato nessa cadeira {places[1]}!");
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log($"Essa cadeira {chair} aí não está nessa mesa aqui {this}!");
+            return false;
+        }
+    }
+
+    public bool CheckIfClientCanEat(string clientOrder, Chair chair)
+    {
+        int i = (chair == places[0])? 0:1; 
+        return (clientOrder == plates[i].itemName)? true : false;
+    }
+
+    public void CleanClientPlate(Chair chair)
+    {
+        int i = (chair == places[0])? 0:1; 
+        plates[i].GetComponent<Plates>().CleanPlate();
+        
+    }
+
 
      public override void Interact(_Item itenInHand, PJ_Character chef)
      {

@@ -34,8 +34,7 @@ public class Detection_Manager : MonoBehaviour
                 ToogleePlateHUD(interactionOBJ); // (se a HUD do PRATO estiver desligada) { Lida com a HUD()} 
                 toogledPlate = true;
             }
-            
-            CheckPreparer(interactionOBJ);
+            else if(CheckPreparer(interactionOBJ))
             
             Glow(); // Highlight()
         
@@ -68,14 +67,7 @@ public class Detection_Manager : MonoBehaviour
 //        interactionOBJ.material.SetFloat("_emission", glowTimer);   //  Seta o brilho no Shader.
     }
 
-    void CheckPreparer(_InteractionOBJ interaction)
-    {
-        Preparer p = interaction.GetComponent<Preparer>();
-        
-        if(p != null) preparerInteract = true;
-        
-        else preparerInteract = false;
-    }
+    bool CheckPreparer(_InteractionOBJ interaction) {return (interaction.GetComponent<Preparer>() != null)? true: false;}
 
     public Preparer GetPreparer( ){return interactionOBJ.GetComponent<Preparer>();}
 

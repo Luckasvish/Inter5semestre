@@ -155,7 +155,7 @@ public class Pan : _Item
             ingredient.type = ItemType._CookedIngredient;   //  {o ingrediente vira do tipo cozido}
             
             finishedCooking = true; //  e a panela cozinhou 
-            Debug.Log("IngreInPanName: " + ingredient.itemName);
+            Debug.Log($"Pan: {this} IngreInPanName:{ingredient.itemName}");
         }
         else 
         {

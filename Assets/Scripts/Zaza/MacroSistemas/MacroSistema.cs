@@ -84,7 +84,6 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
         else 
         {
             IngredientsInstance[index].gameObject.SetActive(true);
-            Debug.Log("Spawnou");
             return IngredientsInstance[index];
         }
     }

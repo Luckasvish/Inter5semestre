@@ -339,7 +339,7 @@ public class Client : IBehaviour
         if (transform.position != navMesh.destination)
         {
             yield return new WaitForSeconds(1);
-            Debug.Log("AIIIIIIIIIIIII");
+           // Debug.Log("AIIIIIIIIIIIII");
            // Debug.Log("volta a andar");
             StartCoroutine(Walk());
             yield break;
@@ -368,13 +368,12 @@ public class Client : IBehaviour
     {
         if (thisChair == thisChair.thisTable.places[1])
         {
-            Debug.Log("Essa é a cadeira Y");
+   
             return -thisChair.transform.forward;
         }
         else 
         {
 
-        Debug.Log("Essa é a cadeira X");
         return thisChair.transform.forward;
         }
     }
@@ -436,7 +435,6 @@ public class Client : IBehaviour
 
         _OrderUI_Sprite.sprite = OrderManager.instance.GetOrderImage(clientOrder);
 
-
         if(actualWaitingTime == maxWaitingTime)
         {
             callback = false;
@@ -448,11 +446,13 @@ public class Client : IBehaviour
             actualWaitingTime += 1;
             yield return new WaitForSeconds(1);
         }
-        hasFood = thisChair.CheckIfHasFood();
+
+        hasFood = thisChair.thisTable.CheckIfHasFood(thisChair);
+
         if (hasFood)
         {
-            canEat = thisChair.CheckFood();
-
+            canEat = thisChair.thisTable.CheckIfClientCanEat(clientOrder,thisChair);
+         
             if (canEat)
             {
                 callback = true;
@@ -462,8 +462,9 @@ public class Client : IBehaviour
             else 
                 StartCoroutine(WaitingFood());
         }
-        else
-            StartCoroutine(WaitingFood());
+
+        else StartCoroutine(WaitingFood());
+
     }
 
     public override IEnumerator Eat()
@@ -496,7 +497,6 @@ public class Client : IBehaviour
     public override IEnumerator PayOrder()
     {
         behaviourState = BehaviourState.PayOrder;
-        Debug.Log("PayOrder");
         moneyForRecipe = GetMoneyForRecipe();
         int irritation = angerManager.GetIrritation();
 
@@ -547,17 +547,22 @@ public class Client : IBehaviour
         InteractionImage.SetActive(false);
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
-        if(hasOrdered && !hasAte)
-            OrderManager.instance.RemoveRecipeInList(foodRef);
-        // Debug.Log("Dando o fora!");///
-        navMesh.updatePosition = true;
-        navMesh.SetDestination(WayOut.transform.position);
-        if (myChair != null)
+        
+
+        if(hasOrdered && !hasAte)  OrderManager.instance.RemoveRecipeInList(foodRef);
+        else if (hasOrdered && hasAte)
         {
-            ChairManager.instance.AddChair(myChair);
+            thisChair.thisTable.CleanClientPlate(thisChair);
         }
 
+        navMesh.updatePosition = true;
+        
+        navMesh.SetDestination(WayOut.transform.position);
+        
+        if(myChair != null){ChairManager.instance.AddChair(myChair);}
+        
         callback = true;
+        
         StartCoroutine(Main());
     }    
 

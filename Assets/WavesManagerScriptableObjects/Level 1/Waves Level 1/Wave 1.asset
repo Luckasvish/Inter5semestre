@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b1813cf3e47d4ca54c461afa30770, type: 3}
   m_Name: Wave 1
   m_EditorClassIdentifier: 
-  enemyToSpawn: 00000000
-  countdownBetweenSpawn: 01000000
+  enemyToSpawn: 000000000000000000000000
+  countdownBetweenSpawn: 010000000f0000000a000000

@@ -43,7 +43,7 @@ public class IngredientInstance : _Item
                 default: itemName = "";  break;
             
             }
-        Debug.Log("IngreSpawnedName: " + itemName);
+   
 
     }
 

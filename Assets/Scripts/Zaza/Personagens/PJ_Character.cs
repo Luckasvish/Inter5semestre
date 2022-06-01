@@ -44,9 +44,6 @@ public class PJ_Character : MonoBehaviour
                 PrepareInteraction(detection_Manager.GetPreparer());
 
             }
-
-
-
             else
             {
                 if(input_Manager.pressedE == true)
@@ -62,7 +59,7 @@ public class PJ_Character : MonoBehaviour
         if(CheckItem())
         {
             PositionItem(itenPosition.position);
-            Debug.Log("ItemInHand: " + itenInHand.itemName);
+            Debug.Log("TIPO DO ITEM:"+ itenInHand.itemName);
         }
 
 
@@ -170,6 +167,7 @@ public class PJ_Character : MonoBehaviour
         if(interactedObj != null)
         {
             itenInHand = interactedObj.GiveItens(interactedObj.itenOnThis);  
+           
             itenInHand.transform.SetParent(this.gameObject.transform);
         }
         
