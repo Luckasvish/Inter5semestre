@@ -121,6 +121,7 @@ public class Client : IBehaviour
 
     private void Start()
     {
+        behaviourState = BehaviourState.WaitingForChair;
         WayOut = SpawnManager.instance.Spawn;
         _OrderUI_Sprite = OrderUI.GetComponent<Image>();
         animator = GetComponentInChildren<Animator>();
@@ -188,7 +189,6 @@ public class Client : IBehaviour
                     switch (callback)
                     {   
                         case true:
-                            animator.SetInteger("Stage",1);
                             StartCoroutine(WaitingForOrder());
                             break;
                         case false:
@@ -233,7 +233,6 @@ public class Client : IBehaviour
                     switch (callback)
                     {
                         case true:
-                            animator.SetInteger("Stage",2);
                             StartCoroutine(PayOrder());
                             break;
                         case false:
@@ -267,7 +266,6 @@ public class Client : IBehaviour
                     switch (callback)
                     {
                         case true:
-                        animator.SetInteger("Stage",0);
                             StartCoroutine(EndExit());
                             break;
                         case false:
@@ -311,8 +309,8 @@ public class Client : IBehaviour
                 StartCoroutine(Main());
             }
         }
-
         behaviourState = BehaviourState.WaitingForChair;
+
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
         //Debug.Log("Wallking");///
        
@@ -335,24 +333,27 @@ public class Client : IBehaviour
     {
         //Debug.Log("Walk");
         behaviourState = BehaviourState.Walk;
-        yield return new WaitForSeconds(2);
         Vector3 chairPos = myChair.transform.position;
+        navMesh.updatePosition = true;
         navMesh.SetDestination(chairPos);
         if (transform.position != navMesh.destination)
         {
+            yield return new WaitForSeconds(1);
+            Debug.Log("AIIIIIIIIIIIII");
            // Debug.Log("volta a andar");
             StartCoroutine(Walk());
             yield break;
         }
+            callback = true;
+            StartCoroutine(Main());
 
     //    Debug.Log("passa pro sit");
-        callback = true;
-        StartCoroutine(Main());
     }
 
     public override void Sit()
     {
         behaviourState = BehaviourState.Sit;
+        animator.SetInteger("Stage", 1);
         navMesh.updatePosition = false;
         navMesh.ResetPath();
         transform.position = thisChair.clientPosition.transform.position;
@@ -468,6 +469,7 @@ public class Client : IBehaviour
     public override IEnumerator Eat()
     {
         behaviourState = BehaviourState.Eat;
+        animator.SetInteger("Stage", 2);
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
        // Debug.Log("Eat");
@@ -541,6 +543,7 @@ public class Client : IBehaviour
     public override void StartExit()
     {
         behaviourState = BehaviourState.StartExit;
+        animator.SetInteger("Stage", 0);
         InteractionImage.SetActive(false);
         OrderUI.SetActive(false);
         InteractionBaloon.SetActive(false);
