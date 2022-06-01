@@ -6,10 +6,10 @@ using FMOD.Studio;
 public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
 {
     public static MacroSistema sistema; //  Instância estática para referência do gerente.
-    public IngredientInstance[] IngredientsInstance = new IngredientInstance[5];    //  Instâncias de ingredientes. 
+    public GameObject IngredientsInstance;    //  Instâncias de ingredientes. 
     public static string[] staticRecipes;   //  Nomes estáticos das receitas.
 
-    int[] counter = new int[5];  // Contador pra gerenciar o spawn dos ingredientes.  
+    int[] counter;  // Contador pra gerenciar o spawn dos ingredientes.  
 
     [SerializeField] internal Input_Manager input_Manager; // Referência pro gerente principal de Inputs.
   
@@ -30,12 +30,13 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
           staticRecipes[2] = "Buchada";
 
 
-        foreach(_Item i in IngredientsInstance)
-        {
-            i.gameObject.SetActive(false);
-        }
+        // foreach(_Item i in IngredientsInstance)
+        // {
+        //     i.gameObject.SetActive(false);
+        // }
+        // int x =  IngredientsInstance.Length;
 
-        
+        // counter = new int[x];
 
 
     }
@@ -43,10 +44,10 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
     void Start()
     {
     
-        for (int i = 0; i < IngredientsInstance.Length; i++)
-        { 
-            counter[i]= 0;
-        }
+        // for (int i = 0; i < IngredientsInstance.Length; i++)
+        // { 
+        //     counter[i]= 0;
+        // }
         
         soundTrack = RuntimeManager.CreateInstance("event:/MUSIC/music_gameplay");
         soundScape = RuntimeManager.CreateInstance("event:/SOUNDSCAPE/soudscape_restaurante");
@@ -63,29 +64,8 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
 
     public _Item SpawnIngredient()  // Método que spawna os ingredientes.
     {
-       bool spawned = false;
-        int index = 0;
-       
-        for( int i = 0; i < counter.Length; i++)
-        {
-            if(counter[i] == 0 && spawned == false)
-            {
-                counter[i] = 1;
-                spawned = true;
-                index = i;
-            }
-        }
-
-        if(index >= 5)
-        {
-            Debug.Log("Já atingiu o limite de itens!!!");
-            return null;
-        }
-        else 
-        {
-            IngredientsInstance[index].gameObject.SetActive(true);
-            return IngredientsInstance[index];
-        }
+        GameObject obj = Instantiate(IngredientsInstance, this.transform.position, this.transform.rotation);
+        return obj.GetComponent<IngredientInstance>();
     }
 
 }

@@ -104,11 +104,17 @@ public class RecipeChoise : MonoBehaviour
 
             default: return;
         }
-            Debug.Log("ThisPlateRecipe: " + recipeName);
+//            Debug.Log("ThisPlateRecipe: " + recipeName);
 
             thisPlate.ReceiveNewRecipe(recipeName);
 
     }
+
+    public void CleanPlate()
+    {
+        branquin.SetActive(false);
+    }
+
     public void SetRecipeOnPlateHUD()
     {
         if(branquin.activeInHierarchy == false)

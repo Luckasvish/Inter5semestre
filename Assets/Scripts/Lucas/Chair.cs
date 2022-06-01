@@ -48,7 +48,7 @@ public class Chair : MonoBehaviour
     public void GetOrder(string order)
     {
         clientOrder = order;
-        Debug.Log("itemOrdered: " + clientOrder);
+//        Debug.Log("itemOrdered: " + clientOrder);
     }
  
     public void ClientGetOff(){client = null;}

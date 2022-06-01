@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174e91721760e4b44a5bd30996052e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingTimeToExit: 15
-  orderingTimeToExit: 22
-  eatingTimeToExit: 11
+  waitingTimeToExit: 60
+  orderingTimeToExit: 10
+  eatingTimeToExit: 5
 --- !u!114 &6156984275228273511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,9 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a45f4cc69acf4740996989714802cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingTimeToExit: 11
-  orderingTimeToExit: 20
-  eatingTimeToExit: 7
+  waitingTimeToExit: 50
+  orderingTimeToExit: 7
+  eatingTimeToExit: 5
 --- !u!114 &6156984275228273510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,9 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39262c9178e07054f8c60470332080f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingTimeToExit: 9
-  orderingTimeToExit: 17
-  eatingTimeToExit: 7
+  waitingTimeToExit: 40
+  orderingTimeToExit: 8
+  eatingTimeToExit: 5
 --- !u!114 &6156984275228273513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +119,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawn: {fileID: 0}
-  Client: {fileID: 3566571613215934794, guid: c6cb290ad2ae2164ea7eb81899deecec, type: 3}
+  Client: {fileID: 9049177522537205742, guid: 426fac152c8910f4baec0dc0c23909ab, type: 3}
   maxClientsPerLevel: 16
   clientsInScene: 0
+  atualWave: 0
+  clientNumberInWave: 0
+  timeBetweenSpawn: 0
+  counterSpawn: 0
+  timeToWaitBetweenWaves: 0
+  nivel: {fileID: 0}

@@ -108,6 +108,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             isFinished = true;
+
             if(SceneManage.instance.GetLastScene() != SceneManage.instance.GetActualScene())
             {
                 SceneManage.instance.NextScene(isFinished);

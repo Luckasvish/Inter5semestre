@@ -79,9 +79,15 @@ public class Oven : _InteractionOBJ
 
                     IngredientInstance ingre = iten.GetComponent<IngredientInstance>();
                     
-                    if(hasItemOnIt == true && _Pan.ingredient == null ) _Pan.ReceiveItens(chef.GiveIten(ingre));    //  (se o fogão tiver uma panela e a panela estiver vazia ) {a panela recebe o ingrediente}
+                    if(hasItemOnIt == true && _Pan.hasIngredient == false)
+                    {
+
                     
-                    else if(hasItemOnIt == true && _Pan.ingredient != null) Debug.Log("Já tem um ingrediente nessa panela!!"); //////// 
+                        _Pan.ReceiveItens(chef.GiveIten(ingre));    //  (se o fogão tiver uma panela e a panela estiver vazia ) {a panela recebe o ingrediente}
+                       
+                    }
+                    
+                    else if(hasItemOnIt == true && _Pan.hasIngredient) Debug.Log("Já tem um ingrediente nessa panela!!"); //////// 
                    
                     else Debug.Log("Está faltando a panela !!!"); ////////////////////////////////////  
 
@@ -95,7 +101,7 @@ public class Oven : _InteractionOBJ
                     {
                         if(_Pan.finishedCooking == true && plate.recipe != null)    //   (se a panela já tiver terminado de cozinhar) { o prato tenta receber o ingrediente }   
                         {
-                            if(plate.CheckIngredient(_Pan.ingredient.itemName) == true) plate.ReceiveIngredient(_Pan.GiveItem(_Pan.ingredient.itemName));  
+                            if(plate.CheckIngredient(_Pan._ingreName) == true) plate.ReceiveIngredient(_Pan.GiveItem(_Pan._ingreName));  
                         }
                         
                         else Debug.Log("Esse ingrediente ainda não está pronto"); ////////////////////////////////////////
@@ -115,7 +121,10 @@ public class Oven : _InteractionOBJ
                     
                 break;
 
-                default : Debug.Log("Deu ruim!!"); break;
+                default :
+                
+                Debug.Log($"!!!!!!!!!!!!!!!!!!!!!!!ESSA MERDA DE NOVO:{iten.type}, ITEM: {iten.gameObject}, ITEMInstance: {iten.GetComponent<IngredientInstance>()} ");
+                 Debug.Log("Deu ruim!!"); break;
 
             }
         }

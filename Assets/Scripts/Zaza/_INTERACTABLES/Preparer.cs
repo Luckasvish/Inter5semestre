@@ -28,6 +28,10 @@ public class Preparer : _InteractionOBJ
     internal bool preparing;
 
 
+    public PJ_Character chef;
+
+
+
     void Awake()
     {
         feedback = GetComponent<FeedBackManager>();
@@ -49,6 +53,13 @@ public class Preparer : _InteractionOBJ
         if(preparing)
         {
             Prepare();
+            
+            if( chef.input_Manager.moveInput.magnitude > 0.2 && chef.characterOn)
+            {
+                preparing = false;
+            }
+
+
         }
 
     }
@@ -75,7 +86,9 @@ public class Preparer : _InteractionOBJ
             sfxPlayed = true;
         }
         float _hudBar = preparationTimer / preparationTime;
+
         feedback.RunSlider(_hudBar);
+        
         if(preparationTimer >= preparationTime)
         {
             itenOnThis.GetComponent<IngredientInstance>().CutMeat();
@@ -85,6 +98,8 @@ public class Preparer : _InteractionOBJ
             choppSfxEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             sfxPlayed = false;
         }
+
+
     }
 
     public void TooglePreparer()
@@ -121,14 +136,14 @@ public class Preparer : _InteractionOBJ
         {
             if(hasItemOnIt)     
             {
-                if(itenOnThis.type != ItemType._PreparedIngredient) Debug.Log("Cheogu onde não deveria!!!");////////
-                
-                 else 
-                 {
-                    chef.ReceiveItens(this);  
-                    Debug.Log("Cheogu onde não deveria!!!");////////
-                 }
-            
+                if(itenOnThis.type != ItemType._PreparedIngredient)
+                {
+                    preparing = true;
+                } 
+                else if (itenOnThis.type == ItemType._PreparedIngredient) chef.ReceiveItens(this); 
+
+                else  Debug.Log("Cheogu onde não deveria!!!");////////
+        
             }
 
             else Debug.Log("Não tem nada aqui!!!");

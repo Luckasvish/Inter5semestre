@@ -14,20 +14,22 @@ public class Pan : _Item
     // PROPRIEDADES DE PAN PRA COZINHAR
     internal bool onOven ;  //  booleana pra saber se está no fogão.
     internal float currentTime; // Tempo de cozimento.
-    internal IngredientInstance ingredient; // referência do ingrediente da panela.
-    
+    internal ItemType ingredient; // referência do ingrediente da panela.
+    internal string _ingreName;
+    internal bool hasIngredient;
     
 
 
             //////////  COCKING //////////
     bool startedCooking;    // booleana para incializar o cozimento.
-    public float _cockingTime; // Tempo máximo de cozimento.
+    internal float _cockingTime = 3; // Tempo máximo de cozimento.
     internal bool finishedCooking; // Terminou de cozinhar.
+
 
 
             //////////  BURNING //////////
     bool startedBurning;    // booleana para inicializar a queima.
-    public float _burnTime; // Tempo pra queimar.
+    internal float _burnTime = 10; // Tempo pra queimar.
     internal bool burned;
 
     /////////////////////////////////////////////////////
@@ -44,20 +46,21 @@ public class Pan : _Item
         if(GetComponentInParent<Oven>() != null) onOven = true; //  (se tiver um fogão em Parent) {a panela está no fogão}
         
         type = ItemType._Pan;  
+        hasIngredient = false;
     }
 
     
     void Update()
     { 
-        if(ingredient != null && onOven)    Cook();  //  (se tiver um ingrediente na panela e ela estiver no fogão) { Cozinhar(); }
+        if(hasIngredient && onOven)    Cook();  //  (se tiver um ingrediente na panela e ela estiver no fogão) { Cozinhar(); }
         
-        else if (ingredient != null && onOven == false)
+        else if (hasIngredient&& onOven == false)
         {
-            if(ingredient.type == ItemType._PreparedIngredient && startedCooking == true)
+            if(this.ingredient == ItemType._PreparedIngredient && this.startedCooking == true)
             {
                 StopCooking(false);
             }
-            else if(ingredient.type == ItemType._CookedIngredient && startedBurning == true)
+            else if(ingredient == ItemType._CookedIngredient && startedBurning == true)
             {
                 StopBurn(false);
             }
@@ -71,26 +74,26 @@ public class Pan : _Item
     //Método que trata o cozimento.
     void Cook() 
     {
-        if(ingredient.type == ItemType._PreparedIngredient) //  PATH #1 : (se o ingrediente for do tipo preparado)
+        if(this.ingredient == ItemType._PreparedIngredient) //  PATH #1 : (se o ingrediente for do tipo preparado)
         {
             
-            if(startedCooking == false ) { StartCooking();}  // (se não tiver começado a cozinhar) { Começa a cozinhar() }
+            if(this.startedCooking == false ) { StartCooking();}  // (se não tiver começado a cozinhar) { Começa a cozinhar() }
 
             else currentTime += Time.deltaTime; //  (se já tiver começado a cozinhar)  { O tempo de cozimento começa a aumentar}
                
-            if(currentTime >= _cockingTime &&  startedCooking == true)   {StopCooking(true);}    // (se o tempo atual for maior que o tempo de cozimento )   {Para de cozinhar()}
+            if(this.currentTime >= this._cockingTime &&  this.startedCooking == true)   {this.StopCooking(true);}    // (se o tempo atual for maior que o tempo de cozimento )   {Para de cozinhar()}
 
         }
 
 
-        else if(ingredient.type == ItemType._CookedIngredient)   //  PATH #2 : (se o ingrediente for do tipo cozinhado)
+        else if(this.ingredient == ItemType._CookedIngredient)   //  PATH #2 : (se o ingrediente for do tipo cozinhado)
         {
             
-            if(startedBurning == false) StartBurning(); // (se não tiver começado a queimar) { Começa a queimar()}
+            if(startedBurning == false) this.StartBurning(); // (se não tiver começado a queimar) { Começa a queimar()}
             
-            else currentTime += Time.deltaTime; //  (se já tiver começado a queimar)  { O tempo de queima começa a aumentar}
+            else this.currentTime += Time.deltaTime; //  (se já tiver começado a queimar)  { O tempo de queima começa a aumentar}
            
-            if(currentTime >= _burnTime && startedBurning == true) {StopBurn(true);}    // (se o tempo atual for maior que o tempo de queima )   {Para de queimar()}
+            if(this.currentTime >= this._burnTime && this.startedBurning == true) {StopBurn(true);}    // (se o tempo atual for maior que o tempo de queima )   {Para de queimar()}
 
         }
     
@@ -117,7 +120,7 @@ public class Pan : _Item
     {
         if(burned == true)  //  (se a comida queimar)
         {
-            ingredient.type = ItemType._BurnedIngrediente;  //  { Ela vira ingrediente queimado }
+            ingredient = ItemType._BurnedIngrediente;  //  { Ela vira ingrediente queimado }
             Timer.burningSfxEvent.setParameterByName("burn", 1);
             Timer.burningSfxEvent.start();
             Timer.CheckImageToSet();
@@ -152,13 +155,13 @@ public class Pan : _Item
         if(endCooking)  //  (se o ingrediente estiver pronto)
         {
             currentTime = 0;
-            ingredient.type = ItemType._CookedIngredient;   //  {o ingrediente vira do tipo cozido}
-            
+            this.ingredient = ItemType._CookedIngredient;   //  {o ingrediente vira do tipo cozido}
             finishedCooking = true; //  e a panela cozinhou 
-            Debug.Log($"Pan: {this} IngreInPanName:{ingredient.itemName}");
+            //            Debug.Log($"Pan: {this} IngreInPanName:{ingredient.itemName}");
         }
         else 
         {
+            Debug.Log($"PAROU SAPORRA {this}");////////////////////////////////////////////////
             Timer.ToogleTimer();
             Timer.cookingSfxEvent.setParameterByName("fire_on", 0);
         }
@@ -172,17 +175,18 @@ public class Pan : _Item
  
     public void ReceiveItens(IngredientInstance ingre)
     {
-        ingredient = ingre;
-        ingre.gameObject.SetActive(false);
+        ingredient = ingre.type;
+        _ingreName = ingre.itemName;
+        Destroy(ingre.gameObject);
+        hasIngredient = true;
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
     }
 
     public string GiveItem (string buffer)
     {
         
-            buffer = ingredient.itemName;
-
-
+            buffer = _ingreName;
+            
             if(onOven == true)
             {
                 Timer.ToogleTimer();    
@@ -200,7 +204,7 @@ public class Pan : _Item
                 Timer.ToogleTimer();
             }
            
-            ingredient = null;
+            hasIngredient = false;
             burned = false;
             return buffer;
         
@@ -208,6 +212,5 @@ public class Pan : _Item
 
     public void Position(){ transform.position = panPosition;}  //  Método pra posicionar a panela.
     
-   
 
 }

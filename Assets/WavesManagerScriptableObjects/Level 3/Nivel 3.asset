@@ -14,14 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - {fileID: 11400000, guid: 45ff6d37fcc060f4aa8cc0bf898bc2fe, type: 2}
-  - {fileID: 11400000, guid: 5e1405468d2c2ef4dba6d08f95527c1a, type: 2}
-  - {fileID: 11400000, guid: 5e5e0801b44bd5c4f97b0a2fc610d85c, type: 2}
-  - {fileID: 11400000, guid: 743e67a98eb9f7146871b8226b5a4227, type: 2}
-  - {fileID: 11400000, guid: e7fbedf167e29cc448ec71d398b7282d, type: 2}
-  - {fileID: 11400000, guid: 6da1db64d81416a45adeaca9c9174164, type: 2}
-  - {fileID: 11400000, guid: 250e01e3ffaad8148a227e68351d2e48, type: 2}
-  - {fileID: 11400000, guid: 18956d5f73a5c04448d67b998d6f0c84, type: 2}
-  - {fileID: 11400000, guid: 541359f6c8e9b2743a1ef2cbae9a6dbc, type: 2}
-  - {fileID: 11400000, guid: d2502fdd0d584d241a96b41a22366c79, type: 2}
-  - {fileID: 11400000, guid: c18fc1ed6eea41f4497844604a68a18f, type: 2}
-  countdownBetweenWaves: 0300000008000000080000000600000008000000080000000800000008000000080000000800000008000000
+  - {fileID: 11400000, guid: fa80dbd73e80d9349aedfc329dd61a6b, type: 2}
+  - {fileID: 11400000, guid: 4fdd9a245b7861e49b8a1d63f46baba7, type: 2}
+  - {fileID: 11400000, guid: 932c9eae4e3114f48b40a6419f3af012, type: 2}
+  - {fileID: 11400000, guid: 8f5318f96a66f4a41815234d50d8855b, type: 2}
+  - {fileID: 11400000, guid: 773b818d69594a04198ce0f37eee3a7d, type: 2}
+  - {fileID: 11400000, guid: d284ea0943da05f48aee0b6a6ffb0c20, type: 2}
+  - {fileID: 11400000, guid: 6ad04f4f44e1a8c47abfed14230bf113, type: 2}
+  countdownBetweenWaves: 010000000a0000000a0000000a0000000a0000000a0000000a0000000a000000

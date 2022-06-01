@@ -34,9 +34,9 @@ public class Detection_Manager : MonoBehaviour
                 ToogleePlateHUD(interactionOBJ); // (se a HUD do PRATO estiver desligada) { Lida com a HUD()} 
                 toogledPlate = true;
             }
-            else if(CheckPreparer(interactionOBJ))
-            
+            else preparerInteract = CheckPreparer(interactionOBJ);
             Glow(); // Highlight()
+        
         
         }
     }

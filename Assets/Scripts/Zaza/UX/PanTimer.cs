@@ -34,11 +34,11 @@ public class PanTimer : MonoBehaviour
 
     void Update()
     {
-        if(main.onOven == true && main.ingredient != null)
+        if(main.onOven == true && main.hasIngredient)
         {
-            if(main.ingredient.type == ItemType._PreparedIngredient) SetTimer(main.currentTime, main._cockingTime);
+            if(main.ingredient == ItemType._PreparedIngredient) SetTimer(main.currentTime, main._cockingTime);
 
-            else if(main.ingredient.type == ItemType._CookedIngredient) SetTimer(main.currentTime, main._burnTime);
+            else if(main.ingredient == ItemType._CookedIngredient) SetTimer(main.currentTime, main._burnTime);
     
         }
         
@@ -63,31 +63,31 @@ public class PanTimer : MonoBehaviour
     {
         int i = 0;
 
-        switch(main.ingredient.itemName)
+        switch(main._ingreName)
         {
-            case "Feijao":      if(main.ingredient.type == ItemType._PreparedIngredient)    i = 2;
-                                else if (main.ingredient.type == ItemType._CookedIngredient)    i=  3;
+            case "Feijao":      if(main.ingredient == ItemType._PreparedIngredient)    i = 2;
+                                else if (main.ingredient == ItemType._CookedIngredient)    i=  3;
             break;
             
-            case "Arroz":       if(main.ingredient.type == ItemType._PreparedIngredient)    i = 0;
-                                else if (main.ingredient.type == ItemType._CookedIngredient)    i=  1;
-            
-            break;
-            
-            case "Carne":       if(main.ingredient.type == ItemType._PreparedIngredient)    i = 4;
-                                else if (main.ingredient.type == ItemType._CookedIngredient)    i=  5;
+            case "Arroz":       if(main.ingredient == ItemType._PreparedIngredient)    i = 0;
+                                else if (main.ingredient == ItemType._CookedIngredient)    i=  1;
             
             break;
             
-            case "Farofa":     if(main.ingredient.type == ItemType._PreparedIngredient)    i = 6;
-                                else if (main.ingredient.type == ItemType._CookedIngredient)    i=  7;
+            case "Carne":       if(main.ingredient == ItemType._PreparedIngredient)    i = 4;
+                                else if (main.ingredient == ItemType._CookedIngredient)    i=  5;
+            
+            break;
+            
+            case "Farofa":     if(main.ingredient == ItemType._PreparedIngredient)    i = 6;
+                                else if (main.ingredient == ItemType._CookedIngredient)    i=  7;
             
             break;
 
         }
         foreach(GameObject obj in sprites){ obj.SetActive(false);}
 
-        if(main.ingredient.type != ItemType._BurnedIngrediente)
+        if(main.ingredient != ItemType._BurnedIngrediente)
         {
             sprites[i].SetActive(true);
         }

@@ -20,4 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a186aba011fa8a84f92346b1324ca0de, type: 2}
   - {fileID: 11400000, guid: aefd44e3ca8de224c8a6b71486aaffc7, type: 2}
   - {fileID: 11400000, guid: 527f086dcb554514396aec9c5bf7a0eb, type: 2}
-  countdownBetweenWaves: 050000001e0000001e000000
+  - {fileID: 11400000, guid: 9322afcf7330d2941bac82bcec5da84f, type: 2}
+  countdownBetweenWaves: 020000000a0000000a0000000a0000000a0000000a0000000a0000000a000000

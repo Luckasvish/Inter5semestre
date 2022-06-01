@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d831c53079dbae41a0dca6675f3535b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cockingTime: 5
-  _burnTime: 7
+  _cockingTime: 3
+  _burnTime: 10
 --- !u!1 &7330143823523922631
 GameObject:
   m_ObjectHideFlags: 0

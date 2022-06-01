@@ -89,8 +89,7 @@ public class Table : _InteractionOBJ
         {
             if(plates[0] != null) return true;
             else 
-            {
-                Debug.Log($"Não tem prato nessa cadeira {places[0]}!");
+            { 
                 return false;
             }
             
@@ -99,14 +98,12 @@ public class Table : _InteractionOBJ
         {
             if(plates[1] != null) return true;
             else 
-            {
-                Debug.Log($"Não tem prato nessa cadeira {places[1]}!");
+            {  
                 return false;
             }
         }
         else
         {
-            Debug.Log($"Essa cadeira {chair} aí não está nessa mesa aqui {this}!");
             return false;
         }
     }

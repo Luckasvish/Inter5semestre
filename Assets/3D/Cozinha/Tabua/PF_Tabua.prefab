@@ -114,9 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientPosition: {fileID: 2577194588489040939}
-  preparationTime: 1.5
+  preparationTime: 3
   knife: {fileID: 5326224885063259228}
   chefsHands: {fileID: 0}
+  chef: {fileID: 0}
 --- !u!114 &2192480019540126034
 MonoBehaviour:
   m_ObjectHideFlags: 0

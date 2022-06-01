@@ -42,7 +42,6 @@ public class Balcon : _InteractionOBJ
     {
         itenOnThis = itenInHand;
         itenOnThis.transform.position = itemPosition.position;
-        itenOnThis.transform.SetParent(this.transform);
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
         hasItemOnIt = true;
     }
@@ -145,35 +144,37 @@ public class Balcon : _InteractionOBJ
         if(plate != null && pan != null)  
         {
 
-          if(pan.ingredient != null && pan.finishedCooking == true && pan.burned == false) //  (se a panela tiver um ingrediente e estiver pronta)
+          if(pan.hasIngredient && pan.finishedCooking == true && pan.burned == false) //  (se a panela tiver um ingrediente e estiver pronta)
           {
-              if(plate.CheckIngredient(pan.ingredient.itemName) == true) 
-              plate.ReceiveIngredient(pan.GiveItem(pan.ingredient.itemName)); //  O prato tenta receber o item da panela.
+              if(plate.CheckIngredient(pan._ingreName) == true) 
+              
+              plate.ReceiveIngredient(pan.GiveItem(pan._ingreName)); //  O prato tenta receber o item da panela.
                                         
               else Debug.Log("Esse ingrediente não entra nessa receita!!!!");///////////////////
                                           
           }
 
-          else if (pan.ingredient != null && pan.finishedCooking == false) //  (se a panela tiver um ingrediente mas não estiver pronta)
+          else if (pan.hasIngredient && pan.finishedCooking == false) //  (se a panela tiver um ingrediente mas não estiver pronta)
           Debug.Log("Esse ingrediente não esta pronto ainda !!!!");///////////////////
                                         
-          else if(pan.ingredient == null) // (se a panela não tiver ingrediente)
+          else if(pan.hasIngredient) // (se a panela não tiver ingrediente)
           Debug.Log("Não tem ingrediente nessa panela !!!!"); /////////////////////
                                         
           else  // #2.2 DEAD END *** Se o programa chegar aqui, tem algo de errado !
           Debug.Log("Algo ta muito errado !!!!!"); //////////////////////////
 
         }  
+        else return;
     }
 
     //Método para interagir a panela com ingrediente
     void InteractPanToIngre(Pan pan , IngredientInstance ingre)
     {
-        if(pan != null && pan.ingredient == null) // (se a panela estiver vazia)                          
+        if(pan != null && pan.hasIngredient) // (se a panela estiver vazia)                          
         pan.ReceiveItens(ingre);  //  A panela recebe o ingrediente.
             
                                   
-        else if (pan != null && pan.ingredient != null)  // (se a panela estiver cheia)
+        else if (pan != null && pan.hasIngredient)  // (se a panela estiver cheia)
         Debug.Log("Essa panela já está cheia!!!!"); ////////////// 
 
     }

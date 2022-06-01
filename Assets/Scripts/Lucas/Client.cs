@@ -339,8 +339,6 @@ public class Client : IBehaviour
         if (transform.position != navMesh.destination)
         {
             yield return new WaitForSeconds(1);
-           // Debug.Log("AIIIIIIIIIIIII");
-           // Debug.Log("volta a andar");
             StartCoroutine(Walk());
             yield break;
         }
@@ -410,8 +408,15 @@ public class Client : IBehaviour
         behaviourState = BehaviourState.Order;
         InteractionImage.SetActive(false);
 
+        int buchadaChance = UnityEngine.Random.RandomRange(0,10);
+
         //randomizeOrder
         int thisClientRecipe = UnityEngine.Random.Range(0, possibleFood.Length);
+        
+        if(buchadaChance < 8  && thisClientRecipe == 2)
+        {
+           thisClientRecipe = UnityEngine.Random.Range(0, possibleFood.Length - 1);
+        }
 
         //order for client
         clientOrder = possibleFood[thisClientRecipe].foodName;
@@ -577,14 +582,14 @@ public class Client : IBehaviour
             yield break;
         }
 
-        Debug.Log("vazei");
+//        Debug.Log("vazei");
         if (thisChair != null)
         {
             thisChair.ClientGetOff();
-            Debug.Log("sem cliente");
+//            Debug.Log("sem cliente");
         }
         SpawnManager.instance.ChangeClientsNumber(-1);
-        Debug.Log("callback");
+//        Debug.Log("callback");
         callback = true;
         StartCoroutine(Main());
         yield break;
