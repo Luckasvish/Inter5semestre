@@ -31,6 +31,8 @@ public class SpawnManager : MonoBehaviour
     public static bool endNivel = false;
     public Nivel nivel;
 
+    public bool _TutorialEnded = true;
+
     private void Awake()
     {
         instance = this;
@@ -52,63 +54,65 @@ public class SpawnManager : MonoBehaviour
                     //Debug.Log("atualWave = " + atualWave);
                     //Debug.Log(" nivel.waves.Length = " + nivel.waves.Length);
 
- 
-        if (endWave)
+        if(_TutorialEnded)
         {
-            if (counterBetweenWave >= timeToWaitBetweenWaves)
+            if (endWave)
             {
-                counterBetweenWave = 0;
-                endWave = false;
-                counterSpawn = 0;
-            }
-            else
-            {
-                counterBetweenWave += Time.deltaTime;
-            }
-        }
-        else
-        {
-            counterSpawn += Time.deltaTime;
-        }
-
-        if (counterSpawn >= timeBetweenSpawn && !endWave)
-        {
-            //Debug.Log("--------------1--------------");
-            if (atualWave < nivel.waves.Length)
-            {
-                //Debug.Log("--------------2--------------");
-                if (clientNumberInWave < nivel.waves[atualWave].enemyToSpawn.Length)
+                if (counterBetweenWave >= timeToWaitBetweenWaves)
                 {
-                    //Debug.Log("--------------3--------------");
-                    switch (nivel.waves[atualWave].enemyToSpawn[clientNumberInWave])
-                    {
-                        case 0:
-                            SpawnEnemyPath(IBehaviour.BehaviourType.Calm);
-                            break;
-                        case 1:
-                            SpawnEnemyPath(IBehaviour.BehaviourType.Impatient);
-                            break;
-                        case 2:
-                            SpawnEnemyPath(IBehaviour.BehaviourType.Angry);
-                            break;
-
-                    }
-                    clientNumberInWave += 1;
-                    if(clientNumberInWave < nivel.waves[atualWave].countdownBetweenSpawn.Length)
-                        timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[clientNumberInWave];
+                    counterBetweenWave = 0;
+                    endWave = false;
+                    counterSpawn = 0;
                 }
                 else
                 {
-                    //Debug.Log("--------------4--------------");
-                    clientNumberInWave = 0;
-                    atualWave += 1;
-                    endWave = true;
-                    timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[clientNumberInWave];
-                    timeToWaitBetweenWaves = nivel.countdownBetweenWaves[atualWave];
+                    counterBetweenWave += Time.deltaTime;
                 }
             }
+            else
+            {
+                counterSpawn += Time.deltaTime;
+            }
 
-            counterSpawn = 0;
+            if (counterSpawn >= timeBetweenSpawn && !endWave)
+            {
+                //Debug.Log("--------------1--------------");
+                if (atualWave < nivel.waves.Length)
+                {
+                    //Debug.Log("--------------2--------------");
+                    if (clientNumberInWave < nivel.waves[atualWave].enemyToSpawn.Length)
+                    {
+                        //Debug.Log("--------------3--------------");
+                        switch (nivel.waves[atualWave].enemyToSpawn[clientNumberInWave])
+                        {
+                            case 0:
+                                SpawnEnemyPath(IBehaviour.BehaviourType.Calm);
+                                break;
+                            case 1:
+                                SpawnEnemyPath(IBehaviour.BehaviourType.Impatient);
+                                break;
+                            case 2:
+                                SpawnEnemyPath(IBehaviour.BehaviourType.Angry);
+                                break;
+
+                        }
+                        clientNumberInWave += 1;
+                        if(clientNumberInWave < nivel.waves[atualWave].countdownBetweenSpawn.Length)
+                            timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[clientNumberInWave];
+                    }
+                    else
+                    {
+                        //Debug.Log("--------------4--------------");
+                        clientNumberInWave = 0;
+                        atualWave += 1;
+                        endWave = true;
+                        timeBetweenSpawn = nivel.waves[atualWave].countdownBetweenSpawn[clientNumberInWave];
+                        timeToWaitBetweenWaves = nivel.countdownBetweenWaves[atualWave];
+                    }
+                }
+
+                counterSpawn = 0;
+            }
         }
 
     }

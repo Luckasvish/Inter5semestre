@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a072367a5299d47b83c0645e05090e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TutorialOff: 1
   itenInHand: {fileID: 0}
   itenPosition: {fileID: 2421842841069385801}
   characterOn: 0

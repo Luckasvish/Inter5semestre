@@ -13,7 +13,7 @@ public class PJ_Character : MonoBehaviour
     //////////////////////////
     public static int playerOn; 
 
-
+    public bool TutorialOff;
 
 
     ///CHEF
@@ -89,7 +89,7 @@ public class PJ_Character : MonoBehaviour
     
 
     // Método para trocar de personagem.
-    internal void ToogleChar(){ characterOn = !characterOn;}
+    internal void ToogleChar(){ if(TutorialOff == true)characterOn = !characterOn;}
 
     //Função de dar Item.
     internal _Item GiveIten(_Item Buffer)

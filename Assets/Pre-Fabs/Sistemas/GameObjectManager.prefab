@@ -128,3 +128,4 @@ MonoBehaviour:
   counterSpawn: 0
   timeToWaitBetweenWaves: 0
   nivel: {fileID: 0}
+  _TutorialEnded: 1
