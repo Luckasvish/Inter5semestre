@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class SceneManage
 {
-    public static string[] sceneOrder = { "Cutscene", "Loading", "Fase1", "Loading", "Fase2", "Loading", "Fase3", "Loading", "Fase4" };
+    public static string[] sceneOrder = { "Cutscene", "Loading", "Fase 1", "Loading", "Fase 2", "Loading", "Fase 3", "Loading", "Fase 4" };
     public static int currentSceneIndex = -1;
     public static void GoToScene(string nextScene)
     {

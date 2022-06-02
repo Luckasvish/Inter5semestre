@@ -973,6 +973,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1500482499377273133, guid: b6911c0d63856294bb068682c5b3897c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500482499377273133, guid: b6911c0d63856294bb068682c5b3897c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500482499377273133, guid: b6911c0d63856294bb068682c5b3897c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 897771686}
+    - target: {fileID: 1500482499377273133, guid: b6911c0d63856294bb068682c5b3897c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1500482499377273135, guid: b6911c0d63856294bb068682c5b3897c, type: 3}
       propertyPath: m_Name
       value: Quit

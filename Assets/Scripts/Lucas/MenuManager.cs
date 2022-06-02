@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject InstructionsUI;
+
     public void Play() 
     { 
         SceneManage.GoToNextScene();
@@ -12,6 +15,11 @@ public class MenuManager : MonoBehaviour
     public void GoToScene(string _nextScene)
     {
         SceneManage.GoToScene(_nextScene);
+    }    
+    
+    public void Hide(bool active)
+    {
+        InstructionsUI.SetActive(active);
     }
 
 }
