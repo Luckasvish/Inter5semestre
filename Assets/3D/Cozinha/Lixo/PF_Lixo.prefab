@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5497862423376101777
+--- !u!1 &8954891936595067029
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5118204715917466411}
-  - component: {fileID: 8117843362262963342}
-  - component: {fileID: 6290588386405294148}
-  m_Layer: 0
-  m_Name: PF_Lixo
+  - component: {fileID: 5645507098288090352}
+  - component: {fileID: 5164681379058493675}
+  - component: {fileID: 8651191624302318571}
+  m_Layer: 10
+  m_Name: Copo_MESH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5118204715917466411
+--- !u!4 &5645507098288090352
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5497862423376101777}
+  m_GameObject: {fileID: 8954891936595067029}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.996563, y: 0.0022512304, z: 17.824017}
-  m_LocalScale: {x: 0.9, y: 1, z: 0.9}
+  m_LocalPosition: {x: -0, y: -0.00000037353, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1.0345}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 8561378473700068412}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8117843362262963342
+--- !u!33 &5164681379058493675
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5497862423376101777}
-  m_Mesh: {fileID: 4115405833617829289, guid: 3e297404370d5fa408df5d6a0ccaa5ae, type: 3}
---- !u!23 &6290588386405294148
+  m_GameObject: {fileID: 8954891936595067029}
+  m_Mesh: {fileID: 9206025331195655104, guid: 8b9dc2ab6ef6a0846850c1e27bbf787e, type: 3}
+--- !u!23 &8651191624302318571
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5497862423376101777}
+  m_GameObject: {fileID: 8954891936595067029}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0dc4a8fd3bd341e489a2d292cb861a0a, type: 2}
+  - {fileID: 2100000, guid: 7a2c64f39e1eea747ab82fed234dd727, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,3 +81,61 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &9051092789749732998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8561378473700068412}
+  - component: {fileID: 8168009245064489930}
+  - component: {fileID: 8168009245064489941}
+  m_Layer: 10
+  m_Name: PF_Lixo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8561378473700068412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051092789749732998}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.01, y: 0.027375, z: 9.41}
+  m_LocalScale: {x: 0.068499595, y: 0.044879653, z: 0.069318704}
+  m_Children:
+  - {fileID: 5645507098288090352}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8168009245064489930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051092789749732998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.687177, y: 24.095482, z: 13.703993}
+  m_Center: {x: 0, y: 13.219289, z: 0}
+--- !u!114 &8168009245064489941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051092789749732998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5bfe34c03582c94f896264ce22da0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
