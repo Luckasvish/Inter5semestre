@@ -19,6 +19,6 @@ public class SoundController : MonoBehaviour
     
     }
 
-   // public void SetVolume(float volume){    _VcaController.   }
+    public void SetVolume(float volume){    _VcaController.setVolume(volume);   }
 
 }
