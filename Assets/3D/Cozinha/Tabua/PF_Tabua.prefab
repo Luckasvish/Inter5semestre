@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d2b864364816af44b9ea52779479f58, type: 2}
+  - {fileID: 2100000, guid: 2153b27cf17b15f40885ec09195bda94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -567,7 +567,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ca51d9450040e9348850b4c6a5c17e18, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 523b8d2adccac4244833b1c83c795688, type: 2}
+      objectReference: {fileID: 2100000, guid: 79aea27c7d2392c44bbdc5d79594e68a, type: 2}
     - target: {fileID: 919132149155446097, guid: ca51d9450040e9348850b4c6a5c17e18, type: 3}
       propertyPath: m_Name
       value: Tabua
