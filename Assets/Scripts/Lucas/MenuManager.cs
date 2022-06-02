@@ -22,4 +22,9 @@ public class MenuManager : MonoBehaviour
         InstructionsUI.SetActive(active);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }

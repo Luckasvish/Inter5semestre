@@ -21,8 +21,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI timerSecondsText;
 
-    public bool isFinished = false;
-    public GameObject[] StageComplete = new GameObject[2];
+    public static bool isFinished = false;
 
 
     // Start is called before the first frame update
@@ -115,9 +114,9 @@ public class LevelManager : MonoBehaviour
             else
             {
                 if(Bank.instance.GetaActualMoney() == Bank.instance.GetGoalNumber())
-                    StageComplete[0].SetActive(true);
-                else 
-                    StageComplete[1].SetActive(true);
+                    SceneManage.GoToScene("Win");
+                else
+                    SceneManage.GoToScene("Lose");
             }
 
 
