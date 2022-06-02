@@ -6,6 +6,7 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField]
     GameObject PauseUI;
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -25,10 +26,18 @@ public class PauseManager : MonoBehaviour
     }
     public void Pause(bool can_pause)
     {
-        if (can_pause)
-            Time.timeScale = 0;
-        if (!can_pause)
+        if (!LevelManager.isFinished)
+        {
+            if (can_pause)
+                Time.timeScale = 0;
+            if (!can_pause)
+                Time.timeScale = 1;
+            PauseUI.SetActive(can_pause);
+        }
+        else
+        {
             Time.timeScale = 1;
-        PauseUI.SetActive(can_pause);
+            PauseUI.SetActive(false);
+        }
     }
 }

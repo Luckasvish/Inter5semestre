@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class CutsceneManager : MonoBehaviour
+public class VideoManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
     VideoPlayer video;
     float videoTime;
+    [SerializeField]
+    string scene;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,6 @@ public class CutsceneManager : MonoBehaviour
     IEnumerator GoToNextScene()
     {
         yield return new WaitForSeconds(videoTime);
-        SceneManage.GoToNextScene();
+        SceneManage.GoToScene(scene);
     }
 }
