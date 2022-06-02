@@ -7,15 +7,35 @@ public class OrderManager : MonoBehaviour
 {
     public static OrderManager instance;
     public RectTransform hudOrderGrid;
+    public GameObject orderTextImage;
 
     public List<Food> recipesToProduce = new List<Food>();
 
     [SerializeField]
     Image[] OrderImages = new Image[3];
+    bool active;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+            HideHud();
+    }
+    void HideHud()
+    {
+        Debug.Log(active);
+        active = !active;
+        hudOrderGrid.gameObject.SetActive(active);
+        orderTextImage.gameObject.SetActive(active);
+    }
+
+    IEnumerator HudMove()
+    {
+        yield break;
     }
 
     public Food AddRecipeToList(Food recipeToAdd,Client client)
