@@ -119,6 +119,8 @@ public class Client : IBehaviour
 
     Animator animator;
 
+    ClientRandomizer clientRandom;
+
     private void Start()
     {
         behaviourState = BehaviourState.WaitingForChair;
@@ -126,7 +128,7 @@ public class Client : IBehaviour
         _OrderUI_Sprite = OrderUI.GetComponent<Image>();
         animator = GetComponentInChildren<Animator>();
         UpdateBehaviour();
-        
+        clientRandom = GetComponent<ClientRandomizer>();
         WaitingForChair();
     }
 
@@ -299,6 +301,8 @@ public class Client : IBehaviour
     #region Behaviour
     public override void WaitingForChair()
     {
+        clientRandom.HairRandomizer();
+
         if (SpawnManager.instance.GetClientsNumber() == SpawnManager.instance.GetMaxClientPerLevel() -2)
         {
             int valueToGetOut = UnityEngine.Random.RandomRange(0,10);
