@@ -128,8 +128,7 @@ public class Pan : _Item
         {
             //Timer.ToogleTimer();
         }
-        
-        Timer.cookingSfxEvent.setParameterByName("fire_on", 0);
+        Timer.cookingSfxEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         startedBurning = false; //  e começou a queimar fica falso
     }
 
@@ -165,7 +164,7 @@ public class Pan : _Item
         {
             Debug.Log($"PAROU SAPORRA {this}");////////////////////////////////////////////////
             //Timer.ToogleTimer();
-            Timer.cookingSfxEvent.setParameterByName("fire_on", 0);
+            Timer.cookingSfxEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         startedCooking = false;
