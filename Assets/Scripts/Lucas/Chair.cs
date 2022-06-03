@@ -18,6 +18,8 @@ public class Chair : MonoBehaviour
 
     internal Table thisTable;
     internal Transform clientPosition;
+    [SerializeField]
+    Transform TableDirection;
 
     private void Awake()
     {
@@ -53,4 +55,8 @@ public class Chair : MonoBehaviour
  
     public void ClientGetOff(){client = null;}
 
+    public Vector3 PositionToLook()
+    {
+        return TableDirection.position;
+    }
 }

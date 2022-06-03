@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8763590993811073170}
   - component: {fileID: 6807877868949544024}
   - component: {fileID: 2779331795525188669}
-  m_Layer: 0
+  - component: {fileID: 1732687841210349667}
+  m_Layer: 10
   m_Name: PF_Cadeira
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5006468597855600013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.1093147, y: 0.0016974217, z: 4.91883}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7124202313428131551}
   m_Father: {fileID: 0}
@@ -96,6 +97,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food: {fileID: 0}
+  TableDirection: {fileID: 0}
+--- !u!65 &1732687841210349667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5006468597855600013}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 108.37146, y: 115.31438, z: 148.84308}
+  m_Center: {x: 0, y: 57.487495, z: -0.00005722046}
 --- !u!1 &8256566690543037980
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +135,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8256566690543037980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 44.7}
+  m_LocalPosition: {x: -0, y: 0, z: 97.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5634385791953463095}

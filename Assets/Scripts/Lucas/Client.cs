@@ -53,7 +53,9 @@ public class Client : IBehaviour
     [SerializeField]
     Image IrritationFeedback;
     [SerializeField]
-    GameObject IrritationAnimEnd;    
+    GameObject IrritationAnimEnd;     
+    [SerializeField]
+    GameObject IrritationAnimStart;    
 
     [Header("UI Pay Feedback")]
     [SerializeField]
@@ -65,7 +67,9 @@ public class Client : IBehaviour
     [SerializeField]
     TextMeshProUGUI payValue;
     [SerializeField]
-    GameObject PayAnimEnd;
+    GameObject PayAnimEnd;    
+    [SerializeField]
+    GameObject PayAnimStart;
 
 
     GameObject myChair;
@@ -343,7 +347,7 @@ public class Client : IBehaviour
         navMesh.SetDestination(chairPos);
         if (transform.position != navMesh.destination)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
             StartCoroutine(Walk());
             yield break;
         }
@@ -360,26 +364,12 @@ public class Client : IBehaviour
         navMesh.updatePosition = false;
         navMesh.ResetPath();
         transform.position = thisChair.clientPosition.transform.position;
-        transform.forward = CheckDirectionToSit();
+        transform.LookAt(thisChair.PositionToLook());
         //play animation
-       // Debug.Log("sit");
+        // Debug.Log("sit");
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_call");
         callback = true;
         StartCoroutine(Main());
-    }
-
-    Vector3 CheckDirectionToSit()
-    {
-        if (thisChair == thisChair.thisTable.places[1])
-        {
-   
-            return -thisChair.transform.forward;
-        }
-        else 
-        {
-
-        return thisChair.transform.forward;
-        }
     }
 
     public override IEnumerator WaitingForOrder()
@@ -809,26 +799,29 @@ public class Client : IBehaviour
     #region Feedbacks
     IEnumerator IrritationFeedbackAnim(int spriteIndex, bool reset_pos)
     {
-        if (IrritationFeedback.gameObject.transform.position.y >= IrritationAnimEnd.transform.position.y)
+        if(behaviourState == BehaviourState.Order || behaviourState == BehaviourState.Sit || behaviourState == BehaviourState.WaitingForOrder || behaviourState == BehaviourState.WaitingFood)
         {
-            IrritationFeedback.gameObject.SetActive(false);
-            yield break;
-        }
-        if (reset_pos)
-        {
-            IrritationFeedback.color = new Color(255,255,255,0);
-            IrritationFeedback.gameObject.transform.position = gameObject.transform.position;
-            IrritationFeedback.gameObject.SetActive(true);
-            yield return new WaitForSeconds(.1f);
-            IrritationFeedback.color = new Color(255, 255, 255, 1);
-        }
+            if (IrritationFeedback.gameObject.transform.position.y >= IrritationAnimEnd.transform.position.y && !reset_pos)
+            {
+                IrritationFeedback.gameObject.SetActive(false);
+                yield break;
+            }
+            if (reset_pos)
+            {
+                IrritationFeedback.color = new Color(255,255,255,0);
+                IrritationFeedback.gameObject.transform.position = IrritationAnimStart.transform.position;
+                IrritationFeedback.gameObject.SetActive(true);
+                yield return new WaitForSeconds(.1f);
+                IrritationFeedback.color = new Color(255, 255, 255, 1);
+            }
 
-        IrritationFeedback.sprite = IrritationImage[spriteIndex].GetComponent<Image>().sprite;
-        if (IrritationFeedback.gameObject.transform.position.y < IrritationAnimEnd.transform.position.y)
-        {
-            IrritationFeedback.gameObject.transform.Translate(new Vector3 (0, IrritationAnimEnd.transform.position.y) * Time.deltaTime * 2f, Space.World);
-            yield return new WaitForSeconds(.04f);
-            StartCoroutine(IrritationFeedbackAnim(spriteIndex, false));
+            IrritationFeedback.sprite = IrritationImage[spriteIndex].GetComponent<Image>().sprite;
+            if (IrritationFeedback.gameObject.transform.position.y < IrritationAnimEnd.transform.position.y)
+            {
+                IrritationFeedback.gameObject.transform.Translate(new Vector3 (0, IrritationAnimEnd.transform.position.y) * Time.deltaTime * 2f, Space.World);
+                yield return new WaitForSeconds(.04f);
+                StartCoroutine(IrritationFeedbackAnim(spriteIndex, false));
+            }
         }
     }
 
@@ -843,7 +836,7 @@ public class Client : IBehaviour
         {
             PayFeedback.color = new Color(255, 255, 255, 0);
             payValue.text = "";
-            PayHolder.gameObject.transform.position = gameObject.transform.position;
+            PayHolder.gameObject.transform.position = PayAnimStart.transform.position;
             PayHolder.gameObject.SetActive(true);
             payValue.text = "+" + value.ToString();
             yield return new WaitForSeconds(.1f);
