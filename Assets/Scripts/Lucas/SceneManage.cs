@@ -10,8 +10,8 @@ public static class SceneManage
     public static int currentSceneIndex = -1;
     public static void GoToScene(string nextScene)
     {
-        if(nextScene == "Menu")
-            currentSceneIndex = 0;
+        if (nextScene == "Menu")
+            currentSceneIndex = -1;
         SceneManager.LoadScene(nextScene);
     }
 
