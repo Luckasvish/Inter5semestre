@@ -18,7 +18,9 @@ public class CutsceneManager : MonoBehaviour
 
     IEnumerator GoToNextScene()
     {
+        Debug.Log(videoTime + "videoTime");
         yield return new WaitForSeconds(videoTime);
+        Debug.Log("finish");
         SceneManage.GoToNextScene();
     }
 }

@@ -576,8 +576,8 @@ public class Client : IBehaviour
         navMesh.updatePosition = true;
         
         navMesh.SetDestination(WayOut.transform.position);
-        
-        if(myChair != null){ChairManager.instance.AddChair(myChair);}
+        animator.SetInteger("Stage", 0);
+        if (myChair != null){ChairManager.instance.AddChair(myChair);}
         
         callback = true;
         
@@ -587,6 +587,7 @@ public class Client : IBehaviour
     public override IEnumerator EndExit()
     {
         behaviourState = BehaviourState.EndExit;
+        animator.SetInteger("Stage", 0);
         if (transform.position != navMesh.destination)
         {
             yield return new WaitForSeconds(1);

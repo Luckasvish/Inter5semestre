@@ -17,7 +17,7 @@ public class Bank : MonoBehaviour
     Image goal;
 
     [SerializeField]
-    int goalNumber = 800;
+    int goalNumber = 200;
 
     static int actualMoney;
 

@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isFinished = true;
         actualTimerNumber = startTimerNumber;
         if ((actualTimerNumber % 60) >= 10)
         {
