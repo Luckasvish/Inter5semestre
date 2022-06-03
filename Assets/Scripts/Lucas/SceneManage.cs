@@ -10,8 +10,12 @@ public static class SceneManage
     public static int currentSceneIndex = -1;
     public static void GoToScene(string nextScene)
     {
-        if(nextScene == "Menu")
-            currentSceneIndex = 0;
+        Debug.Log(currentSceneIndex + " = currentSceneIndex");
+        if (nextScene == "Menu")
+        {
+            currentSceneIndex = -1;
+            Debug.Log(currentSceneIndex + " = Menu");
+        }
         SceneManager.LoadScene(nextScene);
     }
 
@@ -22,7 +26,9 @@ public static class SceneManage
 
     public static void GoToNextScene()
     {
+        Debug.Log(currentSceneIndex + " = currentSceneIndex");
         currentSceneIndex += 1;
+        Debug.Log(currentSceneIndex + " = currentSceneIndex + 1");
         SceneManager.LoadScene(sceneOrder[currentSceneIndex]);
     }
 }
