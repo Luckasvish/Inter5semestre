@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isFinished = true;
+        isFinished = false;
         actualTimerNumber = startTimerNumber;
         if ((actualTimerNumber % 60) >= 10)
         {
@@ -130,7 +130,7 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                if(Bank.instance.GetaActualMoney() == Bank.instance.GetGoalNumber())
+                if(Bank.instance.GetaActualMoney() >= Bank.instance.GetGoalNumber())
                     SceneManage.GoToScene("Win");
                 else
                     SceneManage.GoToScene("Lose");
