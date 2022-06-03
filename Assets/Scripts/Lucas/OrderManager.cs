@@ -19,6 +19,8 @@ public class OrderManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        hudOrderGrid.gameObject.SetActive(active);
+        orderTextImage.gameObject.SetActive(active);
     }
 
     private void Update()
@@ -28,7 +30,6 @@ public class OrderManager : MonoBehaviour
     }
     void HideHud()
     {
-        
         active = !active;
         hudOrderGrid.gameObject.SetActive(active);
         orderTextImage.gameObject.SetActive(active);
@@ -67,7 +68,6 @@ public class OrderManager : MonoBehaviour
 
     public void RemoveRecipeInList(Food recipeToRemove)
     {
-
         recipesToProduce.Remove(recipeToRemove);
         Destroy(recipeToRemove.gameObject);
     }

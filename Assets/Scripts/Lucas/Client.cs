@@ -454,17 +454,25 @@ public class Client : IBehaviour
         if (hasFood)
         {
             canEat = thisChair.thisTable.CheckIfClientCanEat(clientOrder,thisChair);
-         
+
             if (canEat)
             {
                 callback = true;
                 StartCoroutine(Main());
                 actualWaitingTime = 0;
             }
-            else 
+            else
+            {
+                if (type == BehaviourType.Angry)
+                {
+                    callback = false;
+                    StartCoroutine(Main());
+                    yield break;
+                }
+                else 
                 StartCoroutine(WaitingFood());
+            }
         }
-
         else StartCoroutine(WaitingFood());
 
     }
@@ -479,11 +487,10 @@ public class Client : IBehaviour
         hasAte = true;
         if(foodRef != null)
         {
-
-             OrderManager.instance.RemoveRecipeInList(foodRef);
+            OrderManager.instance.RemoveRecipeInList(foodRef);
         }
 
-        if(actualWaitingTime == maxEatingTime)
+        if(actualWaitingTime >= maxEatingTime)
         {
             callback = true;
             StartCoroutine(Main());
@@ -498,6 +505,7 @@ public class Client : IBehaviour
     
     public override IEnumerator PayOrder()
     {
+        animator.SetInteger("Stage", 1);
         behaviourState = BehaviourState.PayOrder;
         moneyForRecipe = GetMoneyForRecipe();
         int irritation = angerManager.GetIrritation();
@@ -507,6 +515,8 @@ public class Client : IBehaviour
             Bank.instance.ChangeMoneyAmount(moneyForRecipe, false);
             yield return new WaitForSeconds(2);
             callback = false;
+            StartCoroutine(Main());
+            yield break;
         }
         else
         {
@@ -514,8 +524,9 @@ public class Client : IBehaviour
             StartCoroutine(PayFeedbackAnim(0, true, moneyForRecipe));
             yield return new WaitForSeconds(2);
             callback = true;
+            StartCoroutine(Main());
+            yield break;
         }
-        StartCoroutine(Main());
     }
 
     public override IEnumerator PayTip()
@@ -535,12 +546,16 @@ public class Client : IBehaviour
             yield return new WaitForSeconds(2);
             callback = true;
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_money");////////
+            StartCoroutine(Main());
+            yield break;
         }
-        else 
+        else
+        {
             callback = false;
+            StartCoroutine(Main());
+            yield break;
+        }
 
-
-        StartCoroutine(Main());
     }
 
     public override void StartExit()
