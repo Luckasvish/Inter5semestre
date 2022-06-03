@@ -28,6 +28,16 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         actualTimerNumber = startTimerNumber;
+        if ((actualTimerNumber % 60) >= 10)
+        {
+            timerMinutesText.text = (actualTimerNumber / 60).ToString() + ":";
+            timerSecondsText.text = (actualTimerNumber % 60).ToString();
+        }
+        else
+        {
+            timerMinutesText.text = (actualTimerNumber / 60).ToString() + ": ";
+            timerSecondsText.text = "0" + (actualTimerNumber % 60).ToString();
+        }
         StartCoroutine(Timer());
     }
 
@@ -69,6 +79,12 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator Timer()
     {
+        if (!SpawnManager.instance._TutorialEnded)
+        {
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Timer());
+            yield break;
+        }
         actualTimerNumber -= 1;
 
         if ((actualTimerNumber % 60) >= 10)
