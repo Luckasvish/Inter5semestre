@@ -71,15 +71,20 @@ public class Table : _InteractionOBJ
         {
             if(itenInHand != null) 
             {
+              
                 if(CheckIfIsFull() == false)    ReceiveItens(chef.GiveIten(itenInHand));   
-
                 else 
                 {
                     Debug.Log("A mesa está cheia!!!");
                     return;
                     }
                 }
-            else chef.ReceiveItens(this);  
+
+            else 
+            {
+                    
+                    chef.ReceiveItens(this);  
+            }
         }
     }
 
@@ -187,22 +192,60 @@ public class Table : _InteractionOBJ
     {
         _Item Buffer;
         
-        if(plates[0] != null && places[0].client == null)
-        {
-            Buffer = plates[0];
-            plates[0] = null;
-            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-            return Buffer;
-        }
 
-        else if (plates[1] != null && places[1].client == null )
+        if(plates[0] != null || plates[1] != null)
         {
-            Buffer = plates[1];
-            plates[1] = null;
-            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-            return Buffer;
-        }
 
+            if(plates[0] != null && places[0].client != null)
+            {
+                if(plates[0].itemName != places[0].client.clientOrder)
+                {
+                    Buffer = plates[0];
+                    plates[0] = null;
+                    RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                    return Buffer;
+                }
+                else
+                {
+                    Debug.Log("Ta tentando tirar o prato enquanto o cara come meu ???");///////////
+                    return null;
+                }
+            }
+            
+            else if (plates[1] != null && places[1].client != null )
+            {
+                if(plates[0].itemName != places[0].client.clientOrder)
+                {
+                    Buffer = plates[1];
+                    plates[1] = null;
+                    RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                    return Buffer;
+                }
+                else
+                {
+                    Debug.Log("Ta tentando tirar o prato enquanto o cara come meu ???");///////////
+                    return null;
+                }
+            } 
+            else if(plates[0] != null && places[0].client == null)
+            {
+                Buffer = plates[1];
+                plates[0] = null;
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                return Buffer;
+
+            }
+            
+            else if(plates[1] != null && places[1].client == null)
+            {
+                Buffer = plates[1];
+                plates[1] = null;
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                return Buffer;
+            }
+            else return null;
+
+        }
         else return null;
     }
     

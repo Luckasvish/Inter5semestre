@@ -14,6 +14,7 @@ public class Oven : _InteractionOBJ
 
     // PROPRIEDADES DE OVEN  
     internal Pan _Pan;
+    Vector3 panPostion;
 
 
 
@@ -31,6 +32,7 @@ public class Oven : _InteractionOBJ
         {
           hasItemOnIt = true;
           _Pan = GetComponentInChildren<Pan>();
+           panPostion = _Pan.transform.position;
           itenOnThis = _Pan;
         }
 
@@ -59,7 +61,7 @@ public class Oven : _InteractionOBJ
                 _Pan = Pan.GetComponent<Pan>();
                 itenOnThis = _Pan;
                 _Pan.onOven = true;
-                _Pan.Position();    // Posiciona a panela ao recebe-la.
+                _Pan.transform.position = panPostion;    // Posiciona a panela ao recebe-la.
                 itenOnThis.transform.SetParent(this.transform);
                 RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
                 hasItemOnIt = true;

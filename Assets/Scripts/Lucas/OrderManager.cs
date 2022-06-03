@@ -15,6 +15,7 @@ public class OrderManager : MonoBehaviour
     Image[] OrderImages = new Image[3];
     bool active;
 
+
     private void Awake()
     {
         instance = this;
@@ -27,7 +28,7 @@ public class OrderManager : MonoBehaviour
     }
     void HideHud()
     {
-        Debug.Log(active);
+        
         active = !active;
         hudOrderGrid.gameObject.SetActive(active);
         orderTextImage.gameObject.SetActive(active);

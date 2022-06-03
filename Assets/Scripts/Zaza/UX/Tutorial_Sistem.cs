@@ -7,6 +7,7 @@ using TMPro;
 public class Tutorial_Sistem : MonoBehaviour
 {
 
+    public GameObject[] HUDs;
     int counter = 0;
     public GameObject dialogueSistem;
     public GameObject[] dialogues;
@@ -36,9 +37,47 @@ public class Tutorial_Sistem : MonoBehaviour
         
         if(counter != sentences.Length)
         {
-            if(counter == 7 || counter == 11|| counter == 13 || counter == 15 || counter == 17 || counter == 24) ToogleDialgueCanvas(0, true);
-            
+            if(counter == 7 || counter == 11|| counter == 13 || counter == 15 || counter == 17 || counter == 19 || counter == 27) ToogleDialgueCanvas(0, true);
             else ToogleDialgueCanvas(1, true);
+            
+            if(counter == 4)
+            {
+                HUDs[0].SetActive(true);
+            } 
+            else if(counter == 5)
+            {
+                HUDs[1].SetActive(true);
+            }
+            else if(counter == 6)
+            {
+                HUDs[2].SetActive(true);
+            }
+             else if(counter == 8)
+            {
+                HUDs[3].SetActive(true);
+            }
+             else if(counter == 12)
+            {
+                HUDs[4].SetActive(true);
+            }
+            else if(counter == 13)
+            {
+                HUDs[5].SetActive(true);
+            }
+            else if(counter == 18)
+            {
+                HUDs[6].SetActive(true);
+            }
+            else if(counter == 20)
+            {
+                HUDs[7].SetActive(true);
+            }
+            else if(counter == 24)
+            {
+                HUDs[8].SetActive(true);
+            }
+            else DeactiveHUD();
+            
 
         }
         
@@ -58,6 +97,12 @@ public class Tutorial_Sistem : MonoBehaviour
 
     }
     
+    void DeactiveHUD()
+    {
+
+        foreach(GameObject obj in HUDs){ obj.SetActive(false);}
+
+    }
     
     void CD()
     {

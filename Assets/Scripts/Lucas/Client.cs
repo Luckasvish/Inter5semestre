@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
+using FMODUnity;
+using FMOD.Studio;
 
 public class Client : IBehaviour
 {
@@ -118,7 +120,6 @@ public class Client : IBehaviour
     internal int clientOrderIndex;
 
     Animator animator;
-
     ClientRandomizer clientRandom;
 
     private void Start()
@@ -362,6 +363,7 @@ public class Client : IBehaviour
         transform.forward = CheckDirectionToSit();
         //play animation
        // Debug.Log("sit");
+        RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_call");
         callback = true;
         StartCoroutine(Main());
     }
@@ -384,6 +386,7 @@ public class Client : IBehaviour
     {
         behaviourState = BehaviourState.WaitingForOrder;
         InteractionImage.SetActive(true);
+        
 
         if (actualWaitingTime == maxWaitingTime)
         {
@@ -541,10 +544,11 @@ public class Client : IBehaviour
             StartCoroutine(PayFeedbackAnim(1, true, moneyForTip));
             yield return new WaitForSeconds(2);
             callback = true;
-
+            RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_money");////////
         }
         else 
             callback = false;
+
 
         StartCoroutine(Main());
     }
@@ -739,9 +743,11 @@ public class Client : IBehaviour
         switch (type)
         {
             case BehaviourType.Calm:
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_angry");
                 type = BehaviourType.Impatient;  
                 break;
             case BehaviourType.Impatient:
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_angry");
                 type = BehaviourType.Angry;
                 break;
         }

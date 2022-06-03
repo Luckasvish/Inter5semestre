@@ -83,6 +83,9 @@ MonoBehaviour:
   itenInHand: {fileID: 0}
   itenPosition: {fileID: 3620288264317612137}
   characterOn: 1
+  thisRenderer: {fileID: 1612930838785460067}
+  blinkSpeed: 1
+  blinkTime: 2
 --- !u!114 &3620288263120598950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,5 +313,10 @@ GameObject:
 --- !u!4 &5207712385349493586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4963997d92a06134d88d941a6ae54e69, type: 3}
+  m_PrefabInstance: {fileID: 5750880875664753849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1612930838785460067 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2761423854629731366, guid: 4963997d92a06134d88d941a6ae54e69, type: 3}
   m_PrefabInstance: {fileID: 5750880875664753849}
   m_PrefabAsset: {fileID: 0}

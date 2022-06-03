@@ -8,18 +8,22 @@ public class Balcon : _InteractionOBJ
 
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
-    internal override Material material{get ; set;}  
-
-    
+    internal override Material material{get ; set;}      
     public Transform itemPosition;    
-    internal bool havePlate;
-
-
+    internal Plates plateOnThis;
+    internal bool gotPlate;
     
-        void Awake()
-    {
-       
 
+    bool GetPlate(){ return (hasItemOnIt && itenOnThis.type == ItemType._Plate)?true :false;}
+
+    Plates PlateInThis()
+    {
+        gotPlate = true;   
+        return itenOnThis.GetComponent<Plates>();
+    }
+    
+    void Awake()
+    {
         if(GetComponentInChildren<Plates>() == null)
         {
             itenOnThis = null;
@@ -37,6 +41,13 @@ public class Balcon : _InteractionOBJ
         material.SetFloat("_emission", 4);
     }
 
+    void Update()
+    {
+        if(gotPlate == false) plateOnThis =(GetPlate())? PlateInThis() : null;             
+        
+    }
+
+
 
     public override void ReceiveItens(_Item itenInHand)
     {
@@ -51,6 +62,7 @@ public class Balcon : _InteractionOBJ
         itenToGive = itenOnThis;
         itenOnThis = null;
         hasItemOnIt = false;
+        gotPlate = false;
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
         return itenToGive;
     }

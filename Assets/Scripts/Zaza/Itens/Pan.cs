@@ -36,13 +36,11 @@ public class Pan : _Item
     
     // PROPRIEDADES ADICIONAIS DE PAN       
     internal PanTimer Timer;    //  Referência pro timer. 
-    internal Vector3 panPosition;   //  posição passada pros fogões para ser colocada.
     ////////////////////////////////////////////////////
     
     void Awake()   
     {
-        panPosition = this.transform.position;     // Setando o valor da posição da panela (passa pra Oven posicionar).
-        
+ 
         if(GetComponentInParent<Oven>() != null) onOven = true; //  (se tiver um fogão em Parent) {a panela está no fogão}
         
         type = ItemType._Pan;  
@@ -128,7 +126,7 @@ public class Pan : _Item
         }
         else 
         {
-            Timer.ToogleTimer();
+            //Timer.ToogleTimer();
         }
         
         Timer.cookingSfxEvent.setParameterByName("fire_on", 0);
@@ -141,7 +139,10 @@ public class Pan : _Item
     //Método pra começar a cozinhar.
     public void StartCooking()
     {
-        Timer.ToogleTimer();       //   Liga o Timer.
+        if(currentTime == 0)
+        {
+            Timer.ToogleTimer();       //   Liga o Timer.
+        }
         Timer.cookingSfxEvent.start();
         Timer.cookingSfxEvent.setParameterByName("fire_on", 1);
         startedCooking = true;  // e começa a cozinhar.
@@ -163,7 +164,7 @@ public class Pan : _Item
         else 
         {
             Debug.Log($"PAROU SAPORRA {this}");////////////////////////////////////////////////
-            Timer.ToogleTimer();
+            //Timer.ToogleTimer();
             Timer.cookingSfxEvent.setParameterByName("fire_on", 0);
         }
 
@@ -188,30 +189,20 @@ public class Pan : _Item
         
             buffer = _ingreName;
             
-            if(onOven == true)
-            {
-                Timer.ToogleTimer();    
-            }
-
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-            
-         
+            Timer.cookingSfxEvent.setParameterByName("fire_on", 0);
             currentTime = 0;
             startedBurning = false;
             startedCooking = false;
-                
-            if(burned)
-            {
-                Timer.ToogleTimer();
-            }
-           
+         
             hasIngredient = false;
             burned = false;
+         
+            Timer.ToogleTimer();
             return buffer;
         
     }
 
-    public void Position(){ transform.position = panPosition;}  //  Método pra posicionar a panela.
     
 
 }

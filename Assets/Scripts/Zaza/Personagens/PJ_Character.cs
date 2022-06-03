@@ -25,6 +25,9 @@ public class PJ_Character : MonoBehaviour
 
     // PERSONAGEM SELECIONADO 
     public bool characterOn;
+
+    
+
     ///////////////////////////
 
     void Awake()    
@@ -70,9 +73,11 @@ public class PJ_Character : MonoBehaviour
         {
             movement_Manager.Move(input_Manager.moveInput);   
         }
-
+   
 
     }
+
+   
     
     // Método pra retornar se o player tem item ou não.
     public bool CheckItem(){if(this.itenInHand == null) return false;   else return true;}
@@ -89,8 +94,18 @@ public class PJ_Character : MonoBehaviour
     
 
     // Método para trocar de personagem.
-    internal void ToogleChar(){ if(TutorialOff == true)characterOn = !characterOn;}
-
+    internal void ToogleChar()
+    { 
+        if(TutorialOff == true)
+        {
+            if(characterOn == false)
+            {
+                characterOn = true;
+            }
+            else characterOn = false;
+           
+        }
+    }
     //Função de dar Item.
     internal _Item GiveIten(_Item Buffer)
     {   

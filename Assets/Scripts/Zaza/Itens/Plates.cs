@@ -107,6 +107,7 @@ using FMODUnity;
         foreach(GameObject obj in recipe.recipeIngre){   obj.SetActive(false);}
         recipe.InitiateRecipe();
         _hud.CleanPlate();
+        itemName = "";
         settle = false;
 
     }

@@ -19,7 +19,17 @@ public class Trash : _InteractionOBJ
             switch(itenInHand.type)
             {
 
-                case ItemType._Pan: itenInHand.GetComponent<Pan>().GiveItem("Jogando no lixo");break;
+                case ItemType._Pan: 
+                
+                    if(itenInHand.GetComponent<Pan>().currentTime != 0)
+                    {
+                        itenInHand.GetComponent<Pan>().GiveItem("Jogando no lixo");
+                    }
+                
+                
+                break;
+                
+                
 
                 case ItemType._Plate: itenInHand.GetComponent<Plates>().CleanPlate();break;
 
