@@ -45,18 +45,6 @@ public class PanTimer : MonoBehaviour
     }
 
     //Método para ligar e desligar o Timer.
-    public void ToogleTimer()
-    {
-        if(HUD.activeInHierarchy)
-        { 
-            HUD.SetActive(false);
-        }
-        else  
-        {
-            CheckImageToSet();
-            HUD.SetActive(true);   
-        }
-    }
 
     //Método para checar qual imagem ativar na HUD.
     public void CheckImageToSet()

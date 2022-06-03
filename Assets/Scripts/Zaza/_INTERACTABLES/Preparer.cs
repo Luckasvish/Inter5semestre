@@ -10,7 +10,8 @@ public class Preparer : _InteractionOBJ
      FeedBackManager feedback {get;set;}
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
-    internal override Material material{get ; set;}  
+    internal override bool blinking{get ; set;}  
+    internal override float blinkTimer {get; set;}
 
   
     public Transform ingredientPosition;
@@ -31,6 +32,28 @@ public class Preparer : _InteractionOBJ
     public PJ_Character chef;
 
 
+     public Renderer renderers;    
+  
+    public float blinkTime;
+
+     public void Blink()
+    {
+        blinkTimer += Time.deltaTime;
+        renderers.material.SetInt("_BlinkOn" , 1);
+
+        if(blinkTimer >= blinkTime)
+        {
+            StopBlinking();
+        }
+
+    }
+
+    public void StopBlinking()
+    {
+        renderers.material.SetInt("_BlinkOn" , 0);
+        blinking = false;
+        blinkTimer = 0;
+    }
 
     void Awake()
     {
@@ -43,8 +66,6 @@ public class Preparer : _InteractionOBJ
     void Start()
     {
         choppSfxEvent = RuntimeManager.CreateInstance("event:/SFX GAMEPLAY/sfx_chopp");
-        material = GetComponent<MeshRenderer>().material;
-        material.SetFloat("_emission", 4);
         knifeOriginialPosition = knife.transform.position;
 
     }
@@ -62,6 +83,7 @@ public class Preparer : _InteractionOBJ
 
 
         }
+        if(blinking == true) Blink();
 
     }
     public override void ReceiveItens(_Item itenInHand) // RECEBE O INGREDIENTE 

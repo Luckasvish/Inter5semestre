@@ -8,10 +8,16 @@ public class Balcon : _InteractionOBJ
 
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
-    internal override Material material{get ; set;}      
+    internal override bool blinking{get ; set;}     
+    internal override float blinkTimer {get; set;} 
     public Transform itemPosition;    
     internal Plates plateOnThis;
     internal bool gotPlate;
+
+    public Renderer renderers;    
+   
+   
+    public float blinkTime = 0.5f;
     
 
     bool GetPlate(){ return (hasItemOnIt && itenOnThis.type == ItemType._Plate)?true :false;}
@@ -22,6 +28,26 @@ public class Balcon : _InteractionOBJ
         return itenOnThis.GetComponent<Plates>();
     }
     
+
+
+    public void Blink()
+    {
+        blinkTimer += Time.deltaTime;
+        renderers.material.SetInt("_BlinkOn" , 1);
+
+        if(blinkTimer >= blinkTime)
+        {
+            StopBlinking();
+        }
+
+    }
+
+    public void StopBlinking()
+    {
+        renderers.material.SetInt("_BlinkOn" , 0);
+        blinking = false;
+        blinkTimer = 0;
+    }
     void Awake()
     {
         if(GetComponentInChildren<Plates>() == null)
@@ -35,15 +61,13 @@ public class Balcon : _InteractionOBJ
         }
       
     }
-    void Start()
-    {
-        material = GetComponent<MeshRenderer>().material;
-        material.SetFloat("_emission", 4);
-    }
+
 
     void Update()
     {
-        if(gotPlate == false) plateOnThis =(GetPlate())? PlateInThis() : null;             
+        if(gotPlate == false) plateOnThis =(GetPlate())? PlateInThis() : null;            
+
+        if(blinking) Blink(); 
         
     }
 

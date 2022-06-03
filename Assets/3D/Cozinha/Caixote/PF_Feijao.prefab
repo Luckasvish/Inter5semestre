@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 42df7b776b3421b4d95032da8042ba3f, type: 2}
+  - {fileID: 2100000, guid: 899d557bef117d54189472ae895673bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,3 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Feijao
+  renderers: {fileID: 457261417278221867}
+  blinkTime: 0.2

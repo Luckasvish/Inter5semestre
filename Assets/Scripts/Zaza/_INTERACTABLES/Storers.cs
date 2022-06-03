@@ -9,22 +9,45 @@ public class Storers : _InteractionOBJ
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
     public string ingredientName;
+    internal override bool blinking{get ; set;}  
+    internal override float blinkTimer {get; set;}
 
-    internal override Material material{get ; set;}  
+
+    public Renderer renderers;    
+   
+
+    public float blinkTime;
    void Awake()
    {   
 
        hasItemOnIt = true;
 
         
-       
    }
-    
-    void Start()
+   void Update()
+   {
+       if(blinking == true) Blink();
+   }
+    public void Blink()
     {
-        material = GetComponent<MeshRenderer>().material;
-        material.SetFloat("_emission", 4);
+        blinkTimer += Time.deltaTime;
+        renderers.material.SetInt("_BlinkOn" , 1);
+
+        if(blinkTimer >= blinkTime)
+        {
+            StopBlinking();
+        }
+
     }
+
+    public void StopBlinking()
+    {
+        renderers.material.SetInt("_BlinkOn" , 0);
+        blinking = false;
+        blinkTimer = 0;
+    }
+
+    
     public override _Item GiveItens(_Item Buffer)//Método para dar o item sobre ele ***precisa de um buffer parar tranfosmar itenOnIt em nulo***
     {
         itenOnThis = MacroSistema.sistema.SpawnIngredient();

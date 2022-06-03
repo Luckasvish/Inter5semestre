@@ -13,6 +13,8 @@ public class Detection_Manager : MonoBehaviour
     public Transform detectorPosition;  // Posição.y do detector.
     [SerializeField] internal float detectionDistance;  // Distancia de detecção.
     internal bool preparerInteract; //  booleana para interação com o preparador.
+
+    bool highlighted;
     ////////////////////////////
 
     //  PROPRIEDADES DO HIGHLIGHT
@@ -31,7 +33,10 @@ public class Detection_Manager : MonoBehaviour
         {
             CheckBalconForPlate(interactionOBJ,true);
 
-            
+            if(highlighted == false)
+            {  
+                BlinkDetection(interactionOBJ);
+            }
             preparerInteract = CheckPreparer(interactionOBJ);
             
             Glow(); // Highlight()
@@ -39,6 +44,15 @@ public class Detection_Manager : MonoBehaviour
 
         }
     }
+
+
+    void BlinkDetection(_InteractionOBJ interaction)
+    {
+        interaction.blinking = true;
+        interaction.blinkTimer = 0;
+        highlighted = true;
+    }
+
 
     // Função para atribuir uma detecção >>> chamada em InteractableDetector
     public void SetDetection(_InteractionOBJ interaction)
@@ -81,23 +95,7 @@ public class Detection_Manager : MonoBehaviour
     }
 
 
-    // Método para lidar com a HUD de pratos.
-    // void ToogleePlateHUD (_InteractionOBJ interaction)
-    // {
-    //     Plates p = interaction.itenOnThis.GetComponent<Plates>();    //  Tenta achar um prato.
-    //     if(p.recipe == null || p.recipe.ingreNeeded.Count > 0)
-    //     {
-    //         if(p.hud.activeInHierarchy)   // (se a hud estiver ativa)
-    //         {
-    //             p.hud.SetActive(false); //  Desativa a HUD()
-    //         }
-    //         else // (se a huda estiver desativada)
-    //         {
-    //             p.hud.SetActive(true);  //  Ativa a HUD()
-    //         }
-    //     }
-    // }
-
+  
 
     // Método para anular a detecção. >>> chamada em InteractableDetector
     public void ClearDetection()
@@ -105,10 +103,11 @@ public class Detection_Manager : MonoBehaviour
         if(interactionOBJ != null)
         {
             CheckBalconForPlate(interactionOBJ , false);
-            //            interactionOBJ.material.SetFloat("_emission", 4);   // Diminui o brilho do HighLight.
+            if(highlighted == true) highlighted = false;
+            
             interactionOBJ = null;    /// Anula a referência de interaagível;
-
         }
+
             canInteract = false;    // Tira a permição para interagir.
 
     }

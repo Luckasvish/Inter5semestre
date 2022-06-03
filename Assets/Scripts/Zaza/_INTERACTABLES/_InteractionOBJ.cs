@@ -7,7 +7,8 @@ public abstract class _InteractionOBJ : MonoBehaviour  // CLASSE MÃE DE INTERAG
     //Propriedades Nativas de interagíveis.
     public abstract _Item itenOnThis {get;set;}   //  Item no interagível.
     public abstract bool hasItemOnIt {get;set;}  //  Booleana para checar se o interagível tem um item nele ou não. 
-    internal abstract Material material {get ; set;}   //   Referência pro material com Shader de Highlight.
+    internal abstract bool blinking {get ; set;}   //   Referência pro material com Shader de Highlight.
+    internal abstract float blinkTimer {get; set;}
   
 
     /////////////////////////////////////////////////////////////////

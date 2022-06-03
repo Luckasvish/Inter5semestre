@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 30f78810e29121c4d99b378110cfb7c5, type: 2}
+  - {fileID: 2100000, guid: d3ee28641ffb6e74c942b42f0cd8203e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,3 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Arroz
+  renderers: {fileID: 5058967463223859252}
+  blinkTime: 0.2

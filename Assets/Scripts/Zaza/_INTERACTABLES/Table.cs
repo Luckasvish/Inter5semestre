@@ -8,7 +8,8 @@ public class Table : _InteractionOBJ
    // PROPRIEDADES DE INTERACTIONOBJ
     public override _Item itenOnThis {get;set;} = null;
     public override bool hasItemOnIt {get;set;} = false;
-    internal override Material material{get ; set;}  
+    internal override bool blinking{get ; set;}  
+    internal override float blinkTimer {get; set;}
     //////////////////////////////////////////////////////
     
     
@@ -17,6 +18,32 @@ public class Table : _InteractionOBJ
     internal _Item[] plates = new _Item[2];
     public Chair[] places;
 
+     public Renderer renderers;    
+      public float blinkTime;
+
+    void Update()
+    {
+        if(blinking == true) Blink();
+    }
+
+     public void Blink()
+    {
+        blinkTimer += Time.deltaTime;
+        renderers.material.SetInt("_BlinkOn" , 1);
+
+        if(blinkTimer >= blinkTime)
+        {
+            StopBlinking();
+        }
+
+    }
+
+    public void StopBlinking()
+    {
+        renderers.material.SetInt("_BlinkOn" , 0);
+        blinking = false;
+        blinkTimer = 0;
+    }
 
     //
     bool CheckBothPlates()

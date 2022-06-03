@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d18cdfbe069b6e4c9414658b53fa331, type: 2}
+  - {fileID: 2100000, guid: 6bbe377e331a3814caba1296d1b83c69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,3 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Carne
+  renderers: {fileID: 5941199614541774062}
+  blinkTime: 0.2

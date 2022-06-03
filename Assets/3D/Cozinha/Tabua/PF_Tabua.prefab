@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2153b27cf17b15f40885ec09195bda94, type: 2}
+  - {fileID: 2100000, guid: be3229cbd9044cb4a864475047ebb5fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,6 +118,8 @@ MonoBehaviour:
   knife: {fileID: 5326224885063259228}
   chefsHands: {fileID: 0}
   chef: {fileID: 0}
+  renderers: {fileID: 391176026689570949}
+  blinkTime: 0.2
 --- !u!114 &2192480019540126034
 MonoBehaviour:
   m_ObjectHideFlags: 0

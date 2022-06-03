@@ -8,13 +8,18 @@ public class Oven : _InteractionOBJ
     // PROPRIEDADES DE INTERACTABLE (_INTERACTIONOBJ)
     public override _Item itenOnThis { get; set; }
     public override bool hasItemOnIt {get; set;}
-    internal override Material material{get ; set;}  
+    internal override bool blinking{get ; set;}  
+    internal override float blinkTimer {get; set;}
     FeedBackManager feedback {get;set;} 
     /////////////////////////////////////////////////// 
 
     // PROPRIEDADES DE OVEN  
     internal Pan _Pan;
     Vector3 panPostion;
+
+    public Renderer renderers;    
+  
+    public float blinkTime;
 
 
 
@@ -36,10 +41,33 @@ public class Oven : _InteractionOBJ
           itenOnThis = _Pan;
         }
 
-        material = GetComponent<MeshRenderer>().material;
-        material.SetFloat("_emission", 4);
+
         
     }
+    void Update()
+    {
+        if(blinking == true) Blink();
+    }
+
+     public void Blink()
+    {
+        blinkTimer += Time.deltaTime;
+        renderers.material.SetInt("_BlinkOn" , 1);
+
+        if(blinkTimer >= blinkTime)
+        {
+            StopBlinking();
+        }
+
+    }
+
+    public void StopBlinking()
+    {
+        renderers.material.SetInt("_BlinkOn" , 0);
+        blinking = false;
+        blinkTimer = 0;
+    }
+
 
 
 

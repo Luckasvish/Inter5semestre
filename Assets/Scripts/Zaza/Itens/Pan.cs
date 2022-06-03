@@ -64,7 +64,15 @@ public class Pan : _Item
             }
 
         }
+
+        if(hasIngredient)   
+        {
+            Timer.HUD.SetActive(true);
+            Timer.CheckImageToSet();
+        }
         
+        else Timer.HUD.SetActive(false);
+
     
     }
 
@@ -104,7 +112,6 @@ public class Pan : _Item
         {
             Timer.cookingSfxEvent.start();
             Timer.cookingSfxEvent.setParameterByName("fire_on", 1);
-            Timer.ToogleTimer();
         }
         
         Timer.CheckImageToSet();
@@ -138,10 +145,6 @@ public class Pan : _Item
     //Método pra começar a cozinhar.
     public void StartCooking()
     {
-        if(currentTime == 0)
-        {
-            Timer.ToogleTimer();       //   Liga o Timer.
-        }
         Timer.cookingSfxEvent.start();
         Timer.cookingSfxEvent.setParameterByName("fire_on", 1);
         startedCooking = true;  // e começa a cozinhar.
@@ -197,7 +200,6 @@ public class Pan : _Item
             hasIngredient = false;
             burned = false;
          
-            Timer.ToogleTimer();
             return buffer;
         
     }
