@@ -432,6 +432,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 773967454}
     m_Modifications:
+    - target: {fileID: 586403000466631211, guid: a58963a9e590e0144a090452cdbe904f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d0b1695914493a488018cd4284237ed, type: 2}
+    - target: {fileID: 2421842842268237703, guid: a58963a9e590e0144a090452cdbe904f, type: 3}
+      propertyPath: blinkTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2421842842268237703, guid: a58963a9e590e0144a090452cdbe904f, type: 3}
       propertyPath: characterOn
       value: 1
@@ -5298,6 +5306,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 773967454}
     m_Modifications:
+    - target: {fileID: 1612930838785460067, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 234a7e7b9a8c5ba4d85e8a7c2f4b7000, type: 2}
+    - target: {fileID: 1612930838785460067, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 234a7e7b9a8c5ba4d85e8a7c2f4b7000, type: 2}
     - target: {fileID: 3620288263120598938, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: m_Name
       value: 'PF_Leleu '
@@ -5308,7 +5324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3620288263120598939, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.64
+      value: -2.54
       objectReference: {fileID: 0}
     - target: {fileID: 3620288263120598939, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5316,7 +5332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3620288263120598939, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.29000002
+      value: -0.56
       objectReference: {fileID: 0}
     - target: {fileID: 3620288263120598939, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5345,6 +5361,10 @@ PrefabInstance:
     - target: {fileID: 3620288263120598939, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3620288263120598951, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
+      propertyPath: blinkTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3620288263120598951, guid: 2616ec2daff03ba478a8dedd4cc0ffde, type: 3}
       propertyPath: characterOn

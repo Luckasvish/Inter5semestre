@@ -11,8 +11,6 @@ public class RecipeChoise : MonoBehaviour
     public GameObject branquin;
     public GameObject[] icones;
     int index = 0;
-    
-   
 
     void Awake()
     {
@@ -134,11 +132,11 @@ public class RecipeChoise : MonoBehaviour
                 
                 break;
             
-                case "PratoFeito":  icones[0].gameObject.SetActive(true);
+                case "PratoFeito":  icones[1].gameObject.SetActive(true);
                 
                 break;
             
-                case "Buchada": icones[0].gameObject.SetActive(true);
+                case "Buchada": icones[2].gameObject.SetActive(true);
                 
                 break;
             

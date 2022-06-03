@@ -10,7 +10,7 @@ public class TrilhaManager : MonoBehaviour
 {
 
     public static TrilhaManager sound_Manager;
-    EventInstance trilha;
+    internal EventInstance trilha;
 
     Scene   currentScene;
 

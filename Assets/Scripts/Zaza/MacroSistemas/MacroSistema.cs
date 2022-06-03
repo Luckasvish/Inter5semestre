@@ -18,6 +18,8 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
 
 
 
+    TrilhaManager trilha;
+
     void Awake()
     {
         if (sistema == null)
@@ -40,6 +42,7 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
 
         // counter = new int[x];
 
+        trilha = FindObjectOfType<TrilhaManager>();
 
     }
 
@@ -55,6 +58,10 @@ public class MacroSistema : MonoBehaviour   // GERENTE PRINCIPAL DO ZAZA.
         soundScape = RuntimeManager.CreateInstance("event:/SOUNDSCAPE/soudscape_restaurante");
         soundScape.start();
        // soundTrack.start();
+        if(trilha != null)
+        {
+            trilha.trilha.setParameterByName("menu",0); /////////////
+        }
 
     }
     

@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMOD.Studio;
+using FMODUnity;
 public class PJ_Character : MonoBehaviour
 {
     ///COMPONENTES DE PLAYER///
@@ -25,13 +26,16 @@ public class PJ_Character : MonoBehaviour
 
     // PERSONAGEM SELECIONADO 
     public bool characterOn;
-
-    
+    public Renderer[] renderers;    
+    bool blinking;
+    float blinkTimer;
+    public float blinkTime;
 
     ///////////////////////////
 
     void Awake()    
     {
+        renderers = GetComponentsInChildren<Renderer>();
         input_Manager = MacroSistema.sistema.input_Manager;
         movement_Manager = GetComponent<Movement_Manager>();
         detection_Manager = GetComponent<Detection_Manager>();
@@ -75,7 +79,13 @@ public class PJ_Character : MonoBehaviour
         }
    
 
+        if(blinking == true)
+        {
+            Blink();
+        }
+
     }
+
 
    
     
@@ -93,6 +103,31 @@ public class PJ_Character : MonoBehaviour
 
     
 
+
+    void Blink()
+    {
+        blinkTimer += Time.deltaTime;
+
+        foreach(Renderer r in renderers)
+        {
+            r.material.SetInt("_BlinkOn" ,1);
+        }
+
+
+        if(blinkTimer >= blinkTime)
+        {
+            foreach(Renderer r in renderers)
+            {
+                r.material.SetInt("_BlinkOn" ,0);
+            }
+            blinkTimer = 0;
+            blinking = false;
+        }
+
+
+
+    }
+
     // Método para trocar de personagem.
     internal void ToogleChar()
     { 
@@ -100,7 +135,10 @@ public class PJ_Character : MonoBehaviour
         {
             if(characterOn == false)
             {
+                blinking = true;
                 characterOn = true;
+                RuntimeManager.PlayOneShot("event:/SFX UX/Sfx_hover");
+                
             }
             else characterOn = false;
            

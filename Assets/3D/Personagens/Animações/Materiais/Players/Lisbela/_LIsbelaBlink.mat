@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _LIsbelaBlink
+  m_Shader: {fileID: -6465566751694194690, guid: 3e23bf8b7a37a2a448b4eb7240036f30, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_0b7e9c3f5acd4b558f6cdf56b3e2e504:
+        m_Texture: {fileID: 2800000, guid: 5e355b7836c54ba42bbbdbe847251938, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7bc4bf89afbe4ae9888e1b223c001ae4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_8cc537901e874f8e92e5316597837288:
+        m_Texture: {fileID: 2800000, guid: 6a7fc5bf9cccd5d49a2b77839d8dd12e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_99480caaa82a4ec68e16a43d7712f91b:
+        m_Texture: {fileID: 2800000, guid: fa03f5e18666aa54e8803a6e7222b39f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_a8197184863847cd97d94598937ca2c8:
+        m_Texture: {fileID: 2800000, guid: cdfae87d41e07d740ace69a726d60c65, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_360e6047d6e74215bc8cd465c7f05d5a: 1
+    - Vector1_61b7de58f6d54b72a02fb3e90849dfbd: 30
+    - _BlinkOn: 0
+    m_Colors: []
+  m_BuildTextureStacks: []

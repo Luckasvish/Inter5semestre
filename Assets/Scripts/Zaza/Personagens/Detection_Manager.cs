@@ -22,14 +22,16 @@ public class Detection_Manager : MonoBehaviour
     ////////////////////////////
 
     // HUD DE PLATES
-    bool toogledPlate;  // booleana para ajudar a lidar com a HUD do prato
+  
     ///////////////////////////
 
     void Update()
     {
         if(canInteract) //  (se puder interagir)
         {
-            CheckBalconForPlate(interactionOBJ,true);            
+            CheckBalconForPlate(interactionOBJ,true);
+
+            
             preparerInteract = CheckPreparer(interactionOBJ);
             
             Glow(); // Highlight()
@@ -102,10 +104,13 @@ public class Detection_Manager : MonoBehaviour
     {
         if(interactionOBJ != null)
         {
-            CheckBalconForPlate(interactionOBJ, false);
+            CheckBalconForPlate(interactionOBJ , false);
+            //            interactionOBJ.material.SetFloat("_emission", 4);   // Diminui o brilho do HighLight.
             interactionOBJ = null;    /// Anula a referência de interaagível;
+
         }
             canInteract = false;    // Tira a permição para interagir.
+
     }
 
 }

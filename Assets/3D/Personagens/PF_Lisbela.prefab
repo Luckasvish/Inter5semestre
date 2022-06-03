@@ -113,8 +113,7 @@ MonoBehaviour:
   itenInHand: {fileID: 0}
   itenPosition: {fileID: 2421842841069385801}
   characterOn: 0
-  thisRenderer: {fileID: 586403000466631211}
-  blinkSpeed: 1
+  renderers: []
   blinkTime: 2
 --- !u!114 &2421842842268237702
 MonoBehaviour:
@@ -294,7 +293,7 @@ PrefabInstance:
     - target: {fileID: -3393218995508360958, guid: 393f367ccdb886e4a9cac8d158c95c54, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 651870ef207b97549be53046ff6a26ff, type: 2}
+      objectReference: {fileID: 2100000, guid: 0d0b1695914493a488018cd4284237ed, type: 2}
     - target: {fileID: 919132149155446097, guid: 393f367ccdb886e4a9cac8d158c95c54, type: 3}
       propertyPath: m_Name
       value: lisbelaRIG
@@ -309,10 +308,5 @@ GameObject:
 --- !u!4 &6863827076981048514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 393f367ccdb886e4a9cac8d158c95c54, type: 3}
-  m_PrefabInstance: {fileID: 6398365068539765545}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &586403000466631211 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -3393218995508360958, guid: 393f367ccdb886e4a9cac8d158c95c54, type: 3}
   m_PrefabInstance: {fileID: 6398365068539765545}
   m_PrefabAsset: {fileID: 0}

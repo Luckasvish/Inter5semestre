@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 public static class SceneManage
 {
@@ -11,6 +12,11 @@ public static class SceneManage
     {
         currentSceneIndex = 0;
         SceneManager.LoadScene(nextScene);
+    }
+
+    public static void PlaySFX()
+    {
+        RuntimeManager.PlayOneShot("event:/SFX UX/sfx_click");
     }
 
     public static void GoToNextScene()
