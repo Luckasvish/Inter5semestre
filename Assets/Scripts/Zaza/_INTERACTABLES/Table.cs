@@ -45,16 +45,8 @@ public class Table : _InteractionOBJ
         blinkTimer = 0;
     }
 
-    //
-    bool CheckBothPlates()
-    {
-       bool hasPlate1;
-       bool hasPlate2;
-       hasPlate1 = (plates[0] != null)?  true : false; 
-       hasPlate2 = (plates[1] != null)?  true : false; 
-       return (hasPlate1 && hasPlate2)?  true : false; 
-    }
-    
+
+
     //Método para checar se tem clientes na mesa : retorna true caso haja pelo menos 1.
     bool CheckClients(){return (places[0].client != null || places[1].client != null) ? true : false;}
     
@@ -74,12 +66,13 @@ public class Table : _InteractionOBJ
 
     int CheckWhichPlace(){ return (places[0].client != null)?  0 : 1;}
 
-    int CheckWhichPlateToPut(string platename)
+    int CheckWhereToPutPlate(string platename)
     {
         int x = 0;
         for (int i = 0; i < places.Length ; i++)
         {
             if(places[i].clientOrder == platename) x = i;
+            
         }
 
         return x;
@@ -91,7 +84,7 @@ public class Table : _InteractionOBJ
         if(plates[1] != null) plates[1].transform.position = platePosition[1].position;
     }
 
-    void TreatClient(Client client , PJ_Character chef , _Item itenInHand)
+    void TreatClient(Client client , PJ_Character chef , _Item itenInHand)  ////////////////////////////////////////////////////---TREAT CLIENT---////////////////////////////////////////////////////////////////////////////
     {
         if(GetClientState(client)) TakeOrder(client);         
         else   
@@ -100,6 +93,7 @@ public class Table : _InteractionOBJ
             {
               
                 if(CheckIfIsFull() == false)    ReceiveItens(chef.GiveIten(itenInHand));   
+                
                 else 
                 {
                     Debug.Log("A mesa está cheia!!!");
@@ -109,11 +103,22 @@ public class Table : _InteractionOBJ
 
             else 
             {
-                    
-                    chef.ReceiveItens(this);  
+                chef.ReceiveItens(this);  
             }
         }
     }
+
+    bool CheckAnyPlates()
+    {
+        return (plates[0] != null || plates[1] != null)? true:false;
+    }
+
+    int CheckWhichPlate()
+    {
+        if(plates[0] != null) return 0;
+        else return 1;
+    }
+
 
     public bool CheckIfHasFood(Chair chair)
     {
@@ -154,7 +159,7 @@ public class Table : _InteractionOBJ
     }
 
 
-     public override void Interact(_Item itenInHand, PJ_Character chef)
+     public override void Interact(_Item itenInHand, PJ_Character chef)     ////////////////////////////////////////////////////---INTERACT---////////////////////////////////////////////////////////////////////////////
      {
         if(CheckClients())  
         {
@@ -194,19 +199,10 @@ public class Table : _InteractionOBJ
      }
 
 
-    public override void ReceiveItens(_Item item)
-    {   
-        if(CheckClients()) 
-        {
-            if (CheckBothPlaces())  plates[CheckWhichPlateToPut(item.itemName)] = item;
-            
-            else plates[CheckWhichPlace()] = item;
-        }
-        else 
-        {
-            if(Random.Range(0,11) > 5) plates[1] = item;
-            else plates[0] = item;
-        }
+        public override void ReceiveItens(_Item item)    ////////////////////////////////////////////////////---RECEIVE---////////////////////////////////////////////////////////////////////////////
+    {
+        
+        plates[CheckWhereToPutPlate(item.itemName)] = item;        
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_put");
         PositionPlate();
         item.transform.SetParent(this.transform);
@@ -215,65 +211,27 @@ public class Table : _InteractionOBJ
 
 
 
-    public override _Item GiveItens (_Item itenToGive)
+    public override _Item GiveItens (_Item itenToGive)  ////////////////////////////////////////////////////---GIVE ITEM---////////////////////////////////////////////////////////////////////////////
     {
         _Item Buffer;
         
 
-        if(plates[0] != null || plates[1] != null)
+        if(CheckAnyPlates())
         {
-
-            if(plates[0] != null && places[0].client != null)
-            {
-                if(plates[0].itemName != places[0].client.clientOrder)
+                if(plates[CheckWhichPlate()].itemName != places[CheckWhichPlate()].client.clientOrder)
                 {
-                    Buffer = plates[0];
+                    Buffer = plates[CheckWhichPlate()];
                     plates[0] = null;
                     RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
                     return Buffer;
                 }
-                else
-                {
-                    Debug.Log("Ta tentando tirar o prato enquanto o cara come meu ???");///////////
-                    return null;
-                }
-            }
-            
-            else if (plates[1] != null && places[1].client != null )
-            {
-                if(plates[0].itemName != places[0].client.clientOrder)
-                {
-                    Buffer = plates[1];
-                    plates[1] = null;
-                    RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-                    return Buffer;
-                }
-                else
-                {
-                    Debug.Log("Ta tentando tirar o prato enquanto o cara come meu ???");///////////
-                    return null;
-                }
-            } 
-            else if(plates[0] != null && places[0].client == null)
-            {
-                Buffer = plates[1];
-                plates[0] = null;
-                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-                return Buffer;
-
-            }
-            
-            else if(plates[1] != null && places[1].client == null)
-            {
-                Buffer = plates[1];
-                plates[1] = null;
-                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
-                return Buffer;
-            }
-            else return null;
-
+                else return null;
         }
-        else return null;
+        else
+        {
+            Debug.Log("Não tem nenhum prato aqui!");//////////
+            return null;
+        }
     }
     
     void TakeOrder(Client client){ client.Ordering(); }

@@ -84,7 +84,7 @@ MonoBehaviour:
   itenPosition: {fileID: 3620288264317612137}
   characterOn: 1
   renderers: []
-  blinkTime: 2
+  blinkTime: 0.2
 --- !u!114 &3620288263120598950
 MonoBehaviour:
   m_ObjectHideFlags: 0
