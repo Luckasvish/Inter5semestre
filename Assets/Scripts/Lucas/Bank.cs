@@ -17,9 +17,9 @@ public class Bank : MonoBehaviour
     Image goal;
 
     [SerializeField]
-    int goalNumber = 200;
+    float goalNumber = 200;
 
-    static int actualMoney;
+    static float actualMoney;
 
     private void Awake()
     {
@@ -33,12 +33,12 @@ public class Bank : MonoBehaviour
         UpdateMoneyUI();
     }
 
-    public int GetGoalNumber()
+    public float GetGoalNumber()
     {
         return goalNumber;
     }
     
-    public int GetaActualMoney()
+    public float GetaActualMoney()
     {
         return actualMoney;
     }
