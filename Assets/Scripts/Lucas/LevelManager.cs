@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class LevelManager : MonoBehaviour
@@ -16,25 +17,46 @@ public class LevelManager : MonoBehaviour
     int actualTimerNumber;
     int fakeActualTimerNumber =1;
     int secondsTimer = 0;
+    float alpha = 0;
+
+    [SerializeField]
+    GameObject DayIndicator;    
+    [SerializeField]
+    GameObject AnimStart;    
+    [SerializeField]
+    GameObject AnimEnd;    
+    [SerializeField]
+    GameObject BgAnim;        
+    [SerializeField]
+    GameObject AnimatedObject;    
+    [SerializeField]
+    GameObject[] SpriteAnim = new GameObject[2];
 
     [SerializeField]
     TextMeshProUGUI timerMinutesText;    
     [SerializeField]
     TextMeshProUGUI timerSecondsText;
+    [SerializeField]
+    TextMeshProUGUI faseText;
 
     public static bool isFinished = false;
     bool canChangeScene = false;
+    bool firstTime = true;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        faseText.text = SceneManage.SceneName();
+        AnimatedObject.transform.position = AnimStart.transform.position;
+        DayIndicator.GetComponent<Image>().sprite = SpriteAnim[0].GetComponent<Image>().sprite;
         isFinished = false;
         canChangeScene = false;
-        actualTimerNumber = startTimerNumber;
+        actualTimerNumber = endTimerNumber - 40;
         timerMinutesText.text = "0" + (((actualTimerNumber / 2) / 30) % 24).ToString() + ": ";
         timerSecondsText.text = " 0" + (actualTimerNumber % 30).ToString();
         StartCoroutine(Timer());
+        StartCoroutine(FinishAnim());
     }
 
     // Update is called once per frame
@@ -102,7 +124,7 @@ public class LevelManager : MonoBehaviour
                 timerSecondsText.text = " " + (timer_seconds % 60).ToString();
         }
 
-        if (actualTimerNumber >= endTimerNumber - 10)
+        if (actualTimerNumber >= endTimerNumber - 20)
         {
             timerSecondsText.fontSize = 80;
             timerSecondsText.color = Color.red;
@@ -150,51 +172,77 @@ public class LevelManager : MonoBehaviour
         else
         {
             isFinished = true;
+            DayIndicator.GetComponent<Image>().color = new Color(255, 255, 255, 1);
+            DayIndicator.GetComponent<Image>().sprite = SpriteAnim[1].GetComponent<Image>().sprite;
             StartCoroutine(FinishAnim());
         }
     }
-
+    int debug;
     IEnumerator FinishAnim()
     {
-        if(isFinished)
+        if(!firstTime)
         {
-        //    if (hudOrderGrid.transform.position.y < AnimStart.transform.position.y)
-        //    {
-        //        hudOrderGrid.transform.Translate(new Vector3(0, AnimStart.transform.position.y) * Time.deltaTime * 100f, Space.World);
-        //        orderTextImage.transform.Translate(new Vector3(0, AnimStart.transform.position.x) * Time.deltaTime * 100f, Space.World);
-        //        yield return new WaitForSeconds(0.03f);
-        //        StartCoroutine(FinishAnim());
-        //    }
-        //    else
-        //        canChangeScene = true;
-        //}
-        //else
-        //{
-        //        if (hudOrderGrid.transform.position.x > AnimEnd.transform.position.x)
-        //        {
-        //            hudOrderGrid.transform.Translate(new Vector3(AnimEnd.transform.position.x, 0) * Time.deltaTime * 100f, Space.World);
-        //            orderTextImage.transform.Translate(new Vector3(AnimEnd.transform.position.x, 0) * Time.deltaTime * 100f, Space.World);
-        //            yield return new WaitForSeconds(0.03f);
-        //            StartCoroutine(HudMove());
-        //        }
-        //        else
-        //        yield break;
-                    
-        }
-        if (canChangeScene)
-        { 
-            if (SceneManage.currentSceneIndex < 8)
+            if (canChangeScene)
             {
-                SceneManage.GoToNextScene();
+                if (SceneManage.currentSceneIndex < 8)
+                {
+                    SceneManage.GoToNextScene();
+                }
+                else
+                {
+                    if (Bank.instance.GetaActualMoney() >= Bank.instance.GetGoalNumber())
+                        SceneManage.GoToScene("Win");
+                    else
+                        SceneManage.GoToScene("Lose");
+                }
+            }
+
+            if (!isFinished)
+            {
+                if (AnimatedObject.transform.position.y < AnimEnd.transform.position.y)
+                {
+                    BgAnim.GetComponent<Image>().color = new Color(65, 65, 65, 0);
+                    AnimatedObject.GetComponent<Image>().sprite = SpriteAnim[0].GetComponent<Image>().sprite;
+                    AnimatedObject.transform.Translate(new Vector3(0, AnimEnd.transform.position.y) * Time.deltaTime * 4f, Space.World);
+                    yield return new WaitForSeconds(0.03f);
+                    StartCoroutine(FinishAnim());
+                }
+                else
+                {
+                    AnimatedObject.transform.position = AnimStart.transform.position;
+                    yield break;
+                }
+
             }
             else
             {
-                if (Bank.instance.GetaActualMoney() >= Bank.instance.GetGoalNumber())
-                    SceneManage.GoToScene("Win");
+                if (AnimatedObject.transform.position.y < AnimEnd.transform.position.y )
+                {
+                    debug++;
+                    Debug.Log(debug);
+                    AnimatedObject.GetComponent<Image>().sprite = SpriteAnim[1].GetComponent<Image>().sprite;
+                    AnimatedObject.transform.Translate(new Vector3(0, AnimEnd.transform.position.y) * Time.deltaTime * 6f, Space.World);
+                    if(alpha < 0.7f)
+                        alpha+= 0.1f;
+                    BgAnim.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+                    yield return new WaitForSeconds(0.03f);
+                    StartCoroutine(FinishAnim());
+                }
                 else
-                    SceneManage.GoToScene("Lose");
+                {
+                    canChangeScene = true;
+                    yield return new WaitForSeconds(3f);
+                    StartCoroutine(FinishAnim());
+                }
+
             }
         }
-        yield break;
+        else
+        {
+            yield return new WaitForSeconds(2f);
+            firstTime = false;
+            StartCoroutine(FinishAnim());
+        }
+
     }
 }

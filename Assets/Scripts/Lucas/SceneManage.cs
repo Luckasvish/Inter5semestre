@@ -18,6 +18,29 @@ public static class SceneManage
         }
         SceneManager.LoadScene(nextScene);
     }
+    public static string SceneName()
+    {
+        string sceneName;
+        switch (currentSceneIndex)
+        {
+            case 2:
+                sceneName = "Dia 1";
+                break;
+            case 4:
+                sceneName = "Dia 2";
+                break;
+            case 6:
+                sceneName = "Dia 3";
+                break;
+            case 8:
+                sceneName = "Dia 3";
+                break;
+            default:
+                sceneName = "Dia";
+                break;
+        }
+        return sceneName;
+    }
 
     public static void PlaySFX()
     {
