@@ -27,12 +27,12 @@ public class RecipeChoise : MonoBehaviour
         {
             if(thisPlate.settle == false)
             {
+                RunRecipeSelection();
                 if(MacroSistema.sistema.input_Manager.pressedQ)
                 {
                     ChangeRecipe();
                 }
 
-                RunRecipeSelection();
             }
 
             else if(thisPlate.recipe.ingreNeeded.Count <=0)

@@ -140,8 +140,11 @@ public class PJ_Character : MonoBehaviour
                 RuntimeManager.PlayOneShot("event:/SFX UX/Sfx_hover");
                 
             }
-            else characterOn = false;
-           
+            else 
+            {
+                characterOn = false;
+                anim_Manager.SetWalk(false);
+            }
         }
     }
     //Função de dar Item.

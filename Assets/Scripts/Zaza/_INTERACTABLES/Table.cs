@@ -218,14 +218,28 @@ public class Table : _InteractionOBJ
 
         if(CheckAnyPlates())
         {
-                if(plates[CheckWhichPlate()].itemName != places[CheckWhichPlate()].client.clientOrder)
+            if(places[CheckWhichPlate()].client != null)
+            {
+
+
+                if(places[CheckWhichPlate()].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingFood || places[CheckWhichPlate()].client.GetActualBehaviour() == IBehaviour.BehaviourState.WaitingForOrder)
                 {
                     Buffer = plates[CheckWhichPlate()];
-                    plates[0] = null;
+                    plates[CheckWhichPlate()] = null;
                     RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
                     return Buffer;
                 }
-                else return null;
+
+                else    return null;
+            }
+            else
+            {
+                Buffer = plates[CheckWhichPlate()];
+                plates[CheckWhichPlate()] = null;
+                RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_pick");
+                return Buffer;
+            }
+                
         }
         else
         {

@@ -184,7 +184,7 @@ MonoBehaviour:
   - {fileID: 6831113549126554698}
   - {fileID: 9079490331076687603}
   renderers: {fileID: 9140217682767480177}
-  blinkTime: 0.2
+  blinkTime: 0.02
 --- !u!1001 &3303475997326282545
 PrefabInstance:
   m_ObjectHideFlags: 0

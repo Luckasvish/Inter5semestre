@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lixo_HL
+  m_Name: Cadeira_HL
   m_Shader: {fileID: -6465566751694194690, guid: 3e23bf8b7a37a2a448b4eb7240036f30, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_0b7e9c3f5acd4b558f6cdf56b3e2e504:
-        m_Texture: {fileID: 2800000, guid: ccc822fe6c3011b498f3d43725a3b57b, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3527635319e91e42aa97e2b779ad80c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_7bc4bf89afbe4ae9888e1b223c001ae4:
@@ -28,15 +28,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8cc537901e874f8e92e5316597837288:
-        m_Texture: {fileID: 2800000, guid: 05767fb5cc2086d4dad3dd4b3ad9f42d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2d9c88376028a354bbed2dc557222bcb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_99480caaa82a4ec68e16a43d7712f91b:
-        m_Texture: {fileID: 2800000, guid: e19a8da977f75984c96f3851236c097d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4878279bf3c1273478aa0b233ef4a54c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_a8197184863847cd97d94598937ca2c8:
-        m_Texture: {fileID: 2800000, guid: f7871dc999457ce4294b4ddc093ac293, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2d9d3874c22476845ac81a48379e9c90, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:

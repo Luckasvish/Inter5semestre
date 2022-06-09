@@ -54,6 +54,7 @@ Material:
     m_Floats:
     - Vector1_360e6047d6e74215bc8cd465c7f05d5a: 1
     - Vector1_61b7de58f6d54b72a02fb3e90849dfbd: 30
+    - Vector1_e1d5866d5700459bb8b888ebc041a194: 0.5
     - _BlinkOn: 0
     m_Colors: []
   m_BuildTextureStacks: []
