@@ -8,6 +8,9 @@ public class OrderManager : MonoBehaviour
     public static OrderManager instance;
     public RectTransform hudOrderGrid;
     public GameObject orderTextImage;
+    public GameObject TabImage;
+    public Transform AnimStart;
+    public Transform AnimEnd;
 
     public List<Food> recipesToProduce = new List<Food>();
 
@@ -19,8 +22,9 @@ public class OrderManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        hudOrderGrid.gameObject.SetActive(active);
-        orderTextImage.gameObject.SetActive(active);
+        StartCoroutine(HudMove());
+        //hudOrderGrid.gameObject.SetActive(active);
+        //orderTextImage.gameObject.SetActive(active);
     }
 
     private void Update()
@@ -31,13 +35,39 @@ public class OrderManager : MonoBehaviour
     void HideHud()
     {
         active = !active;
-        hudOrderGrid.gameObject.SetActive(active);
-        orderTextImage.gameObject.SetActive(active);
+        StopCoroutine(HudMove());
+        StartCoroutine(HudMove());
+        //hudOrderGrid.gameObject.SetActive(active);
+        //orderTextImage.gameObject.SetActive(active);
+        TabImage.SetActive(!active);
     }
 
     IEnumerator HudMove()
     {
-        yield break;
+        if(active)
+        {
+            if(hudOrderGrid.transform.position.x < AnimStart.transform.position.x)
+            {
+                hudOrderGrid.transform.Translate(new Vector3(AnimStart.transform.position.x, 0) * Time.deltaTime * 100f, Space.World);
+                orderTextImage.transform.Translate(new Vector3(AnimStart.transform.position.x, 0) * Time.deltaTime * 100f, Space.World);
+                yield return new WaitForSeconds(0.03f);
+                StartCoroutine(HudMove());
+            }
+            else 
+                yield break;
+        }
+        else
+        {
+            if (hudOrderGrid.transform.position.x > AnimEnd.transform.position.x)
+            {
+                hudOrderGrid.transform.Translate(new Vector3(AnimEnd.transform.position.x, 0) * Time.deltaTime * 100f, Space.World);
+                orderTextImage.transform.Translate(new Vector3(AnimEnd.transform.position.x, 0) * Time.deltaTime * 100f, Space.World);
+                yield return new WaitForSeconds(0.03f);
+                StartCoroutine(HudMove());
+            }
+            else 
+                yield break;
+        }
     }
 
     public Food AddRecipeToList(Food recipeToAdd,Client client)
