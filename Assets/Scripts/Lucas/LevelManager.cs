@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
         DayIndicator.GetComponent<Image>().sprite = SpriteAnim[0].GetComponent<Image>().sprite;
         isFinished = false;
         canChangeScene = false;
-        actualTimerNumber = endTimerNumber - 40;
+        actualTimerNumber = startTimerNumber;
         timerMinutesText.text = "0" + (((actualTimerNumber / 2) / 30) % 24).ToString() + ": ";
         timerSecondsText.text = " 0" + (actualTimerNumber % 30).ToString();
         StartCoroutine(Timer());
