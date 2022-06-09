@@ -33,7 +33,7 @@ public static class SceneManage
                 sceneName = "Dia 3";
                 break;
             case 8:
-                sceneName = "Dia 3";
+                sceneName = "Dia 4";
                 break;
             default:
                 sceneName = "Dia";
