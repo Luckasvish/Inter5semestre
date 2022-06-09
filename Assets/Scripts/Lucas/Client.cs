@@ -322,7 +322,13 @@ public class Client : IBehaviour
 
         hasAvaiableChair = ChairManager.instance.CheckIfHasAvaiableChair();
         //Debug.Log("Wallking");///
-       
+        if (LevelManager.isFinished)
+        {
+            callback = false;
+            StartCoroutine(Main());
+            return;
+        }
+
         if (hasAvaiableChair)
         {   
             myChair = ChairManager.instance.GetChair();
@@ -340,6 +346,12 @@ public class Client : IBehaviour
 
     public override IEnumerator Walk()
     {
+        if (LevelManager.isFinished)
+        {
+            callback = false;
+            StartCoroutine(Main());
+            yield break;
+        }
         //Debug.Log("Walk");
         behaviourState = BehaviourState.Walk;
         Vector3 chairPos = myChair.transform.position;
@@ -370,13 +382,19 @@ public class Client : IBehaviour
         RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_call");
         callback = true;
         StartCoroutine(Main());
+
     }
 
     public override IEnumerator WaitingForOrder()
     {
         behaviourState = BehaviourState.WaitingForOrder;
         InteractionImage.SetActive(true);
-        
+        if (LevelManager.isFinished)
+        {
+            callback = false;
+            StartCoroutine(Main());
+            yield break;
+        }
 
         if (actualWaitingTime == maxWaitingTime)
         {
@@ -449,6 +467,13 @@ public class Client : IBehaviour
             yield return new WaitForSeconds(1);
         }
 
+        if (LevelManager.isFinished)
+        {
+            callback = false;
+            StartCoroutine(Main());
+            yield break;
+        }
+
         hasFood = thisChair.thisTable.CheckIfHasFood(thisChair);
 
         if (hasFood)
@@ -490,7 +515,14 @@ public class Client : IBehaviour
             OrderManager.instance.RemoveRecipeInList(foodRef);
         }
 
-        if(actualWaitingTime >= maxEatingTime)
+        if (LevelManager.isFinished)
+        {
+            callback = true;
+            StartCoroutine(Main());
+            yield break;
+        }
+
+        if (actualWaitingTime >= maxEatingTime)
         {
             callback = true;
             StartCoroutine(Main());
@@ -513,7 +545,8 @@ public class Client : IBehaviour
         if(type == BehaviourType.Angry && irritation > 25)
         {
             Bank.instance.ChangeMoneyAmount(moneyForRecipe, false);
-            yield return new WaitForSeconds(2);
+            if (!LevelManager.isFinished)
+                yield return new WaitForSeconds(2);
             callback = false;
             StartCoroutine(Main());
             yield break;
@@ -522,7 +555,8 @@ public class Client : IBehaviour
         {
             Bank.instance.ChangeMoneyAmount(moneyForRecipe, true);
             StartCoroutine(PayFeedbackAnim(0, true, moneyForRecipe));
-            yield return new WaitForSeconds(2);
+            if (!LevelManager.isFinished)
+                yield return new WaitForSeconds(2);
             callback = true;
             StartCoroutine(Main());
             yield break;
@@ -543,7 +577,8 @@ public class Client : IBehaviour
         {
             Bank.instance.ChangeMoneyAmount(moneyForTip, true);
             StartCoroutine(PayFeedbackAnim(1, true, moneyForTip));
-            yield return new WaitForSeconds(2);
+            if(!LevelManager.isFinished)
+                yield return new WaitForSeconds(2);
             callback = true;
             RuntimeManager.PlayOneShot("event:/SFX GAMEPLAY/sfx_money");////////
             StartCoroutine(Main());
